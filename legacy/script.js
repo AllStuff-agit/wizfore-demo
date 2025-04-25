@@ -1,3 +1,24 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyDmuAmLG4o-gH6X3jFI1o5FG6HGiqpDX6M",
+  authDomain: "wizfore-demo.firebaseapp.com",
+  projectId: "wizfore-demo",
+  storageBucket: "wizfore-demo.firebasestorage.app",
+  messagingSenderId: "12717939021",
+  appId: "1:12717939021:web:261ce55355dd0cfdddff04",
+  databaseURL: "https://wizfore-demo-default-rtdb.asia-southeast1.firebasedatabase.app/"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+
+
 // DOM 요소 선택
 const menuToggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('nav');
