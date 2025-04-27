@@ -12,10 +12,13 @@ export default function Dashboard() {
 
   // 인증 상태 확인
   useEffect(() => {
+    console.log('Dashboard - Checking auth state');
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
+        console.log('Dashboard - User is logged in:', user.email);
         setUser(user);
       } else {
+        console.log('Dashboard - No authenticated user, redirecting to login');
         router.push('/admin');
       }
       setLoading(false);

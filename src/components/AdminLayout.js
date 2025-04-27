@@ -1,12 +1,20 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase/firebase';
 import styles from '../styles/AdminLayout.module.css';
 
 export default function AdminLayout({ children, title = '관리자 페이지 - 위즈포레 사회서비스센터' }) {
   const router = useRouter();
+
+  // 현재 경로 디버그 로깅
+  useEffect(() => {
+    console.log('Current path:', router.pathname);
+    console.log('Router query:', router.query);
+    console.log('Router asPath:', router.asPath);
+  }, [router.pathname, router.query, router.asPath]);
 
   const handleLogout = async () => {
     try {
@@ -92,6 +100,11 @@ export default function AdminLayout({ children, title = '관리자 페이지 - �
               <Link 
                 href="/admin/history" 
                 className={router.pathname === '/admin/history' ? styles.active : ''}
+                onClick={(e) => {
+                  e.preventDefault();
+                  console.log('History link clicked');
+                  router.push('/admin/history');
+                }}
               >
                 <i className="fas fa-history"></i> 연혁 관리
               </Link>

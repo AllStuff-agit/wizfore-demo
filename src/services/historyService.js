@@ -38,21 +38,35 @@ export const getActiveHistory = async () => {
 // 관리자 페이지용 - 모든 연혁 가져오기
 export const getAllHistory = async () => {
   try {
+    console.log('getAllHistory: Starting to fetch all history items');
+    // 콜렉션이 존재하는지 확인
+    const collectionRef = collection(db, COLLECTION_NAME);
+    console.log('Collection reference created for:', COLLECTION_NAME);
+    
     const q = query(
-      collection(db, COLLECTION_NAME),
+      collectionRef,
       orderBy('year', 'asc'),
       orderBy('month', 'asc'),
       orderBy('day', 'asc')
     );
-    const querySnapshot = await getDocs(q);
+    console.log('Query constructed');
     
-    return querySnapshot.docs.map(doc => ({
+    const querySnapshot = await getDocs(q);
+    console.log(`Query executed, returned ${querySnapshot.docs.length} documents`);
+    
+    const resultData = querySnapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data()
     }));
+    
+    console.log('Mapped data:', resultData);
+    return resultData;
   } catch (error) {
     console.error('모든 연혁 데이터를 불러오는데 실패했습니다:', error);
-    throw error;
+    console.error('Error details:', error.message, error.code);
+    
+    // 에러가 없더라도 빈 배열 반환
+    return [];
   }
 };
 

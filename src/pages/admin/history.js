@@ -25,17 +25,20 @@ function AdminHistory() {
 
   // 연혁 데이터 불러오기
   useEffect(() => {
+    console.log('AdminHistory component mounted');
     fetchHistory();
   }, []);
 
   const fetchHistory = async () => {
     try {
+      console.log('Fetching history data...');
       setIsLoading(true);
       const data = await getAllHistory();
+      console.log('History data received:', data);
       setHistoryItems(data);
     } catch (err) {
+      console.error('Error fetching history:', err);
       setError('연혁 데이터를 불러오는데 실패했습니다.');
-      console.error(err);
     } finally {
       setIsLoading(false);
     }
