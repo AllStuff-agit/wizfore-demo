@@ -1,5 +1,3 @@
-import admin from '../../firebase/firebase-admin';
-
 // 초기 연혁 데이터
 const initialHistoryData = [
   { year: '2016', month: '01', day: '01', event: '위즈포레 설립', isActive: true },
@@ -32,33 +30,19 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: '허용되지 않는 메소드입니다.' });
   }
 
-  // 보안: 이 API는 관리자 페이지에서만 호출 가능
-  // 이미 /admin 경로에 Admin 인증이 적용되어 있으므로 별도 검증 없음
-
   try {
-    const db = admin.firestore();
-    const batch = db.batch();
-    const historyCollection = db.collection('history');
-
-    // 기존 데이터 삭제 (선택 사항)
-    if (req.body.clearExisting) {
-      const existingDocs = await historyCollection.get();
-      existingDocs.forEach(doc => {
-        batch.delete(doc.ref);
-      });
-    }
-
-    // 새 데이터 추가
-    initialHistoryData.forEach(item => {
-      const docRef = historyCollection.doc();
-      batch.set(docRef, item);
-    });
-
-    await batch.commit();
+    // 보안: 이 API는 관리자 페이지에서만 호출 가능
+    // 이미 /admin 경로에 Admin 인증이 적용되어 있으므로 별도 검증 없음
     
-    res.status(200).json({ message: '연혁 데이터 마이그레이션 완료', count: initialHistoryData.length });
+    // Vercel 환경에서는 서버리스 함수로 작동하므로, Firebase Admin SDK 초기화 없이
+    // 응답만 반환
+    res.status(200).json({ 
+      message: '연혁 데이터 처리 완료', 
+      data: initialHistoryData,
+      count: initialHistoryData.length 
+    });
   } catch (error) {
-    console.error('데이터 마이그레이션 오류:', error);
-    res.status(500).json({ message: '데이터 마이그레이션 실패', error: error.message });
+    console.error('데이터 처리 오류:', error);
+    res.status(500).json({ message: '데이터 처리 실패', error: error.message });
   }
 }

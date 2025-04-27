@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import AdminLayout from '../../components/AdminLayout';
-import { getAllHistory, addHistoryItem, updateHistoryItem, deleteHistoryItem, toggleHistoryActive } from '../../services/historyService';
+import { getAllHistory, addHistoryItem, updateHistoryItem, deleteHistoryItem, toggleHistoryActive, migrateInitialHistory } from '../../services/historyService';
 import { withAdminAuth } from '../../middlewares/withAdminAuth';
 import styles from '../../styles/AdminHistory.module.css';
 
@@ -132,20 +132,8 @@ function AdminHistory() {
 
     try {
       setIsMigrating(true);
-      const response = await fetch('/api/migrate-history', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ clearExisting: false }),
-      });
-
-      if (!response.ok) {
-        throw new Error('마이그레이션 실패');
-      }
-
-      const result = await response.json();
-      alert(`연혁 데이터 마이그레이션 완료: ${result.count}개 항목 추가`);
+      const count = await migrateInitialHistory();
+      alert(`연혁 데이터 마이그레이션 완료: ${count}개 항목 추가`);
       fetchHistory();
     } catch (err) {
       console.error('마이그레이션 에러:', err);

@@ -1,19 +1,9 @@
-import admin from '../firebase/firebase-admin';
+"use client";
+
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../firebase/firebase';
-
-// 서버 사이드에서 관리자 권한 확인
-export async function checkAdminRole(token) {
-  try {
-    const decodedToken = await admin.auth().verifyIdToken(token);
-    return decodedToken.admin === true; // 커스텀 클레임에서 admin 확인
-  } catch (error) {
-    console.error('Token verification failed:', error);
-    return false;
-  }
-}
 
 // 클라이언트 측에서 사용할 관리자 인증 컴포넌트 래퍼
 export function withAdminAuth(Component) {
@@ -29,6 +19,7 @@ export function withAdminAuth(Component) {
         } else {
           try {
             const idToken = await user.getIdTokenResult();
+            // 관리자 권한 확인 - 커스텀 클레임에서 admin 확인
             const hasAdminClaim = idToken.claims.admin === true;
             
             if (!hasAdminClaim) {

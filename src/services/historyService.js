@@ -106,3 +106,46 @@ export const toggleHistoryActive = async (id, currentStatus) => {
     throw error;
   }
 };
+
+// API를 통해 기본 연혁 데이터 가져오기
+export const getInitialHistoryData = async () => {
+  try {
+    const response = await fetch('/api/migrate-history', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({}),
+    });
+
+    if (!response.ok) {
+      throw new Error('기본 데이터 가져오기 실패');
+    }
+
+    const result = await response.json();
+    return result.data || [];
+  } catch (error) {
+    console.error('초기 데이터 가져오기 실패:', error);
+    throw error;
+  }
+};
+
+// 초기 데이터 마이그레이션
+export const migrateInitialHistory = async () => {
+  try {
+    // 기본 데이터 가져오기
+    const initialData = await getInitialHistoryData();
+    
+    // Firestore에 추가
+    const batch = [];
+    for (const item of initialData) {
+      batch.push(addHistoryItem(item));
+    }
+    
+    await Promise.all(batch);
+    return initialData.length;
+  } catch (error) {
+    console.error('데이터 마이그레이션 실패:', error);
+    throw error;
+  }
+};
