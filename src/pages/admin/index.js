@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { auth } from '../../firebase/firebase';
@@ -14,7 +14,7 @@ export default function AdminLogin() {
 
   // 이미 로그인한 사용자는 대시보드로 리디렉션
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = onAuthStateChanged(auth, user => {
       if (user) {
         router.push('/admin/dashboard');
       }
