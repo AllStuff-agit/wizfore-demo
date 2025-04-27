@@ -1,0 +1,398 @@
+/* 공통 스타일 */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.sectionHeader h2 {
+  font-size: 2.5rem;
+  color: var(--color-accent);
+  margin-bottom: 10px;
+  position: relative;
+  display: inline-block;
+}
+
+.sectionHeader h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background-color: var(--color-primary);
+  border-radius: 2px;
+}
+
+.sectionHeader p {
+  font-size: 1.2rem;
+  color: var(--color-text-light);
+  max-width: 700px;
+  margin: 20px auto 0;
+}
+
+/* 페이지 헤더 */
+.pageHeader {
+  background-color: var(--color-accent);
+  color: white;
+  padding: 60px 0;
+  text-align: center;
+}
+
+.pageHeader h1 {
+  font-size: 2.8rem;
+  margin-bottom: 10px;
+}
+
+.pageHeader p {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+
+/* 시설 소개 섹션 */
+.facilitiesIntro {
+  padding: 80px 0;
+  background-color: white;
+}
+
+.introContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.introText {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--color-text-dark);
+}
+
+.introText p {
+  margin-bottom: 30px;
+}
+
+.facilityStats {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 30px;
+}
+
+.facilityStats li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: var(--color-background-light);
+  border-radius: var(--border-radius-medium);
+  min-width: 120px;
+  flex: 1;
+}
+
+.statNumber {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin-bottom: 5px;
+}
+
+.statLabel {
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+}
+
+.introImage {
+  border-radius: var(--border-radius-large);
+  overflow: hidden;
+  box-shadow: var(--box-shadow-medium);
+}
+
+.introImage img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform var(--transition-normal);
+}
+
+.introImage:hover img {
+  transform: scale(1.03);
+}
+
+/* 시설 그리드 섹션 */
+.facilitiesGrid {
+  padding: 100px 0;
+  background-color: var(--color-background-light);
+}
+
+.gridHeader {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.gridHeader h2 {
+  font-size: 2.5rem;
+  color: var(--color-accent);
+  margin-bottom: 0;
+  position: relative;
+  display: inline-block;
+}
+
+.gridHeader h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background-color: var(--color-primary);
+  border-radius: 2px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
+  gap: 40px;
+}
+
+.facilityCard {
+  background-color: white;
+  border-radius: var(--border-radius-medium);
+  overflow: hidden;
+  box-shadow: var(--box-shadow-light);
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+}
+
+.facilityCard:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--box-shadow-medium);
+}
+
+.facilityImages {
+  height: 250px;
+  overflow: hidden;
+}
+
+.facilityImages img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-normal);
+}
+
+.facilityCard:hover .facilityImages img {
+  transform: scale(1.05);
+}
+
+.facilityContent {
+  padding: 30px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.facilityIcon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary-light);
+  border-radius: var(--border-radius-circle);
+  margin-bottom: 20px;
+}
+
+.facilityIcon i {
+  font-size: 1.5rem;
+  color: var(--color-primary-dark);
+}
+
+.facilityContent h3 {
+  font-size: 1.6rem;
+  color: var(--color-accent);
+  margin-bottom: 10px;
+}
+
+.facilityDescription {
+  color: var(--color-text-dark);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.facilityFeatures {
+  margin-top: auto;
+}
+
+.facilityFeatures h4 {
+  font-size: 1.2rem;
+  color: var(--color-primary-dark);
+  margin-bottom: 15px;
+  border-bottom: 2px solid var(--color-primary-light);
+  padding-bottom: 5px;
+  display: inline-block;
+}
+
+.facilityFeatures ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.facilityFeatures li {
+  position: relative;
+  padding-left: 20px;
+  line-height: 1.5;
+}
+
+.facilityFeatures li::before {
+  content: '\f00c';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  color: var(--color-primary);
+  position: absolute;
+  left: 0;
+}
+
+/* CTA 섹션 */
+.ctaSection {
+  padding: 80px 0;
+  background-color: var(--color-primary-light);
+}
+
+.ctaContent {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.ctaContent h2 {
+  font-size: 2.5rem;
+  color: var(--color-accent);
+  margin-bottom: 20px;
+}
+
+.ctaContent p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: var(--color-text-dark);
+}
+
+.ctaButton {
+  display: inline-block;
+  background-color: var(--color-primary);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all var(--transition-normal);
+  font-size: 1.1rem;
+}
+
+.ctaButton:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-3px);
+  box-shadow: var(--box-shadow-medium);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 992px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .facilityFeatures ul {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .introContent {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .introImage {
+    order: -1;
+  }
+  
+  .facilityStats {
+    gap: 15px;
+  }
+  
+  .facilityStats li {
+    padding: 15px;
+    min-width: 100px;
+  }
+  
+  .statNumber {
+    font-size: 2rem;
+  }
+  
+  .pageHeader {
+    padding: 40px 0;
+  }
+  
+  .pageHeader h1 {
+    font-size: 2.2rem;
+  }
+  
+  .pageHeader p {
+    font-size: 1.1rem;
+  }
+  
+  .sectionHeader h2, .gridHeader h2 {
+    font-size: 2rem;
+  }
+  
+  .facilitiesIntro, .facilitiesGrid {
+    padding: 60px 0;
+  }
+  
+  .facilityContent {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .facilityImages {
+    height: 200px;
+  }
+  
+  .facilityStats {
+    flex-wrap: wrap;
+  }
+  
+  .facilityStats li {
+    flex-basis: calc(50% - 15px);
+  }
+  
+  .facilityContent h3 {
+    font-size: 1.4rem;
+  }
+  
+  .ctaContent h2 {
+    font-size: 2rem;
+  }
+  
+  .ctaContent p {
+    font-size: 1.1rem;
+  }
+}

@@ -1,4 +1,4 @@
-/* 서비스 페이지 스타일 */
+/* 공통 스타일 */
 .container {
   width: 100%;
   max-width: 1200px;
@@ -6,308 +6,367 @@
   padding: 0 20px;
 }
 
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.sectionHeader h2 {
+  font-size: 2.5rem;
+  color: var(--color-accent);
+  margin-bottom: 10px;
+  position: relative;
+  display: inline-block;
+}
+
+.sectionHeader h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background-color: var(--color-primary);
+  border-radius: 2px;
+}
+
+.sectionHeader p {
+  font-size: 1.2rem;
+  color: var(--color-text-light);
+  max-width: 700px;
+  margin: 20px auto 0;
+}
+
 /* 페이지 헤더 */
 .pageHeader {
-  background-color: #3498db;
+  background-color: var(--color-accent);
   color: white;
   padding: 60px 0;
   text-align: center;
 }
 
 .pageHeader h1 {
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   margin-bottom: 10px;
 }
 
 .pageHeader p {
   font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto;
   opacity: 0.9;
-  margin: 0;
 }
 
-/* 프로그램 섹션 */
-.programsSection {
+/* 주요 서비스 섹션 */
+.mainServicesSection {
   padding: 80px 0;
-  background-color: #f8f9fa;
-}
-
-.programsSection h2, .servicesSection h2, .facilitySection h2 {
-  font-size: 2rem;
-  color: #2c3e50;
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.programCards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 30px;
-}
-
-.programCard {
-  background-color: white;
-  border-radius: 10px;
-  padding: 30px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
-}
-
-.programCard:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-}
-
-.programIcon {
-  width: 70px;
-  height: 70px;
-  background-color: rgba(52, 152, 219, 0.1);
-  color: #3498db;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.8rem;
-  margin-bottom: 20px;
-}
-
-.programCard h3 {
-  font-size: 1.5rem;
-  color: #2c3e50;
-  margin-bottom: 5px;
-}
-
-.subtitle {
-  color: #6c757d;
-  margin-bottom: 15px;
-  font-size: 0.9rem;
-}
-
-.programDetails {
-  margin: 20px 0;
-  padding-top: 20px;
-  border-top: 1px solid #eee;
-}
-
-.programDetails p {
-  margin-bottom: 10px;
-}
-
-.btnOutline {
-  display: inline-block;
-  padding: 10px 20px;
-  border: 2px solid #3498db;
-  border-radius: 5px;
-  color: #3498db;
-  font-weight: 600;
-  text-align: center;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  margin-top: auto;
-}
-
-.btnOutline:hover {
-  background-color: #3498db;
-  color: white;
-}
-
-/* 서비스 섹션 */
-.servicesSection {
-  padding: 80px 0;
+  background-color: var(--color-background-light);
 }
 
 .servicesGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
 .serviceCard {
   background-color: white;
-  border-radius: 10px;
+  border-radius: var(--border-radius-medium);
   padding: 30px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
-  overflow: hidden;
+  box-shadow: var(--box-shadow-light);
+  transition: all var(--transition-normal);
 }
 
 .serviceCard:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+  box-shadow: var(--box-shadow-medium);
+}
+
+.serviceHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .serviceIcon {
   width: 60px;
   height: 60px;
-  background-color: rgba(52, 152, 219, 0.1);
-  color: #3498db;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  margin-bottom: 20px;
+  background-color: var(--color-primary-light);
+  border-radius: var(--border-radius-circle);
+  margin-right: 20px;
+  flex-shrink: 0;
 }
 
-.serviceCard h3 {
-  font-size: 1.3rem;
-  color: #2c3e50;
-  margin-bottom: 15px;
+.serviceIcon i {
+  font-size: 1.8rem;
+  color: var(--color-primary-dark);
+}
+
+.serviceTitle {
+  flex: 1;
+}
+
+.serviceTitle h3 {
+  font-size: 1.8rem;
+  color: var(--color-accent);
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.serviceSubtitle {
+  font-size: 1rem;
+  color: var(--color-text-light);
+  margin: 0;
+}
+
+.serviceDescription {
+  margin-bottom: 30px;
+  border-bottom: 1px dashed var(--color-border);
+  padding-bottom: 20px;
+}
+
+.serviceDescription p {
+  color: var(--color-text-dark);
+  line-height: 1.6;
+  font-size: 1.1rem;
 }
 
 .serviceDetails {
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.serviceDetails h4 {
-  font-size: 1rem;
-  color: #2c3e50;
+.detailItem h4 {
+  font-size: 1.2rem;
   margin-bottom: 10px;
+  color: var(--color-primary-dark);
+  display: flex;
+  align-items: center;
 }
 
-.serviceDetails ul {
+.detailItem h4::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.serviceList {
   padding-left: 20px;
+  list-style-type: none;
+}
+
+.serviceList li {
+  position: relative;
+  padding-left: 15px;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.serviceList li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+}
+
+/* 치료 프로그램 섹션 */
+.therapySection {
+  padding: 100px 0;
+  background-color: white;
+}
+
+.therapyGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+.therapyCard {
+  background-color: var(--color-background-light);
+  border-radius: var(--border-radius-medium);
+  padding: 30px;
+  transition: all var(--transition-normal);
+}
+
+.therapyCard:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--box-shadow-medium);
+}
+
+.therapyIconWrapper {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius-circle);
   margin-bottom: 20px;
 }
 
-.serviceDetails li {
-  margin-bottom: 5px;
-  color: #6c757d;
+.therapyIcon {
+  font-size: 1.8rem;
+  color: white;
 }
 
-.serviceLink {
+.therapyCard h3 {
+  font-size: 1.6rem;
+  color: var(--color-accent);
+  margin-bottom: 15px;
+}
+
+.therapyDescription {
+  margin-bottom: 20px;
+  color: var(--color-text-dark);
+  line-height: 1.6;
+}
+
+.therapyDetails h4 {
+  font-size: 1.2rem;
+  color: var(--color-primary-dark);
+  margin-bottom: 15px;
+  border-bottom: 2px solid var(--color-primary-light);
+  padding-bottom: 5px;
   display: inline-block;
-  color: #3498db;
-  font-weight: 600;
-  text-decoration: none;
-  transition: color 0.3s ease;
 }
 
-.serviceLink i {
-  margin-left: 5px;
-  transition: transform 0.3s ease;
+.therapyDetails ul {
+  list-style-type: none;
+  padding-left: 10px;
 }
 
-.serviceLink:hover {
-  color: #2980b9;
+.therapyDetails li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 8px;
+  line-height: 1.5;
 }
 
-.serviceLink:hover i {
-  transform: translateX(5px);
+.therapyDetails li::before {
+  content: '\f054';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  color: var(--color-primary);
+  position: absolute;
+  left: 0;
+  font-size: 0.8rem;
 }
 
 /* CTA 섹션 */
 .ctaSection {
   padding: 80px 0;
-  background-color: #3498db;
-  color: white;
-  text-align: center;
+  background-color: var(--color-primary-light);
 }
 
 .ctaContent {
-  max-width: 700px;
+  text-align: center;
+  max-width: 800px;
   margin: 0 auto;
 }
 
 .ctaContent h2 {
-  font-size: 2rem;
+  font-size: 2.5rem;
+  color: var(--color-accent);
   margin-bottom: 20px;
 }
 
 .ctaContent p {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   margin-bottom: 30px;
-  opacity: 0.9;
+  color: var(--color-text-dark);
 }
 
-.btn {
+.ctaButton {
   display: inline-block;
-  background-color: white;
-  color: #3498db;
+  background-color: var(--color-primary);
+  color: white;
   padding: 15px 30px;
-  border-radius: 5px;
-  font-weight: 600;
+  border-radius: 50px;
   text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.btn:hover {
-  background-color: rgba(255, 255, 255, 0.9);
-  transform: translateY(-3px);
-}
-
-/* 시설 섹션 */
-.facilitySection {
-  padding: 80px 0;
-  background-color: #f8f9fa;
-}
-
-.facilityGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
-
-.facilityItem {
-  background-color: white;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.facilityItem:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-}
-
-.facilityImage {
-  height: 200px;
-  overflow: hidden;
-}
-
-.facilityImage img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.facilityItem:hover .facilityImage img {
-  transform: scale(1.1);
-}
-
-.facilityItem h3 {
+  font-weight: 600;
+  transition: all var(--transition-normal);
   font-size: 1.1rem;
-  color: #2c3e50;
-  padding: 15px;
-  text-align: center;
-  margin: 0;
+}
+
+.ctaButton:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-3px);
+  box-shadow: var(--box-shadow-medium);
 }
 
 /* 반응형 디자인 */
+@media (max-width: 992px) {
+  .therapyGrid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+
 @media (max-width: 768px) {
   .pageHeader {
     padding: 40px 0;
   }
   
   .pageHeader h1 {
+    font-size: 2.2rem;
+  }
+  
+  .sectionHeader h2 {
     font-size: 2rem;
   }
-
-  .programCards, .servicesGrid, .facilityGrid {
+  
+  .serviceHeader {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .serviceIcon {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+  
+  .therapyGrid {
     grid-template-columns: 1fr;
   }
   
-  .programsSection, .servicesSection, .facilitySection, .ctaSection {
-    padding: 50px 0;
+  .ctaContent h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pageHeader h1 {
+    font-size: 1.8rem;
   }
   
-  .programsSection h2, .servicesSection h2, .facilitySection h2 {
-    font-size: 1.8rem;
+  .pageHeader p {
+    font-size: 1rem;
+  }
+  
+  .serviceTitle h3 {
+    font-size: 1.5rem;
+  }
+  
+  .therapyCard {
+    padding: 20px;
+  }
+  
+  .therapyIconWrapper {
+    margin: 0 auto 20px;
+  }
+  
+  .therapyCard h3 {
+    text-align: center;
   }
 }

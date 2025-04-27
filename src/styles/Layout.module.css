@@ -19,17 +19,17 @@
 /* 헤더 스타일 */
 .header {
   background-color: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   position: sticky;
   top: 0;
   z-index: 1000;
+  padding: 15px 0;
 }
 
 .header .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
 }
 
 .logo a {
@@ -37,16 +37,39 @@
   color: inherit;
 }
 
-.logo h1 {
-  font-size: 2rem;
-  color: #3498db;
+.logoContent {
+  display: flex;
+  align-items: center;
+}
+
+.logoIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-primary);
+  border-radius: var(--border-radius-circle);
+  color: white;
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+}
+
+.logoText h1 {
+  font-size: 1.5rem;
   margin: 0;
+  color: var(--color-accent);
 }
 
 .tagline {
-  font-size: 0.9rem;
-  color: #6c757d;
+  font-size: 0.8rem;
   margin: 0;
+  color: var(--color-text-light);
 }
 
 .nav ul {
@@ -62,26 +85,68 @@
 
 .nav ul li a {
   text-decoration: none;
-  color: #2c3e50;
+  color: var(--color-text-dark);
   font-weight: 500;
-  transition: color 0.3s ease;
+  transition: color var(--transition-normal);
+  position: relative;
+  padding: 5px 0;
 }
 
 .nav ul li a:hover, .nav ul li a.active {
-  color: #3498db;
+  color: var(--color-primary-dark);
+}
+
+.nav ul li a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--color-primary);
+  border-radius: 2px;
+}
+
+.navRight {
+  display: flex;
+  align-items: center;
+}
+
+.contactBtn {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-primary);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 50px;
+  margin-right: 15px;
+  transition: all var(--transition-normal);
+}
+
+.contactBtn:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-2px);
+}
+
+.contactBtn i {
+  margin-right: 5px;
 }
 
 .menuToggle {
   display: none;
   font-size: 1.5rem;
   cursor: pointer;
+  color: var(--color-text-dark);
 }
 
 /* 푸터 스타일 */
 .footer {
-  background-color: #2c3e50;
+  background-color: var(--color-accent);
   color: white;
-  padding: 70px 0 20px;
+}
+
+.footerTop {
+  padding: 60px 0 40px;
 }
 
 .footerContent {
@@ -89,18 +154,19 @@
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 40px;
-  margin-bottom: 40px;
 }
 
 .footerLogo h2 {
   font-size: 1.8rem;
-  color: #3498db;
+  color: var(--color-primary);
   margin-bottom: 10px;
+  margin-top: 0;
 }
 
 .footerLogo p {
-  opacity: 0.8;
+  opacity: 0.9;
   margin: 0;
+  margin-bottom: 5px;
 }
 
 .footerLinks h3,
@@ -108,6 +174,7 @@
 .footerSocial h3 {
   font-size: 1.3rem;
   margin-bottom: 20px;
+  margin-top: 0;
   color: white;
 }
 
@@ -118,45 +185,61 @@
 }
 
 .footerLinks ul li {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .footerLinks ul li a {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color var(--transition-normal);
 }
 
 .footerLinks ul li a:hover {
-  color: #3498db;
+  color: var(--color-primary);
 }
 
 .footerContact p {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .footerContact p i {
-  margin-right: 10px;
-  color: #3498db;
+  margin-right: 12px;
+  color: var(--color-primary);
+  margin-top: 5px;
+}
+
+.footerContact p span {
+  flex: 1;
+}
+
+.socialIcons {
+  display: flex;
+  gap: 15px;
 }
 
 .socialIcons a {
-  display: inline-block;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 1.5rem;
-  margin-right: 15px;
-  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-circle);
+  color: white;
+  font-size: 1.2rem;
+  transition: all var(--transition-normal);
 }
 
 .socialIcons a:hover {
-  color: #3498db;
+  background-color: var(--color-primary);
+  transform: translateY(-3px);
 }
 
 .footerBottom {
   text-align: center;
-  padding-top: 20px;
+  padding: 20px 0;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -167,6 +250,16 @@
 }
 
 /* 반응형 디자인 */
+@media (max-width: 992px) {
+  .footerContent {
+    gap: 30px;
+  }
+  
+  .footerLogo, .footerLinks, .footerContact, .footerSocial {
+    flex-basis: 45%;
+  }
+}
+
 @media (max-width: 768px) {
   .nav {
     display: none;
@@ -175,7 +268,7 @@
     left: 0;
     width: 100%;
     background-color: white;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   }
   
   .nav.active {
@@ -192,14 +285,36 @@
     margin-bottom: 15px;
   }
   
+  .nav ul li a.active::after {
+    display: none;
+  }
+  
   .menuToggle {
     display: block;
   }
   
-  .footerLogo,
-  .footerLinks,
-  .footerContact,
-  .footerSocial {
-    flex: 100%;
+  .contactBtn span {
+    display: none;
+  }
+  
+  .contactBtn {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    justify-content: center;
+  }
+  
+  .contactBtn i {
+    margin-right: 0;
+  }
+  
+  .footerLogo, .footerLinks, .footerContact, .footerSocial {
+    flex-basis: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .footerTop {
+    padding: 40px 0 20px;
   }
 }
