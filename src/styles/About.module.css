@@ -197,16 +197,11 @@
   padding-right: 20px;
 }
 
-.year {
-  font-size: 1.2rem;
+.fullDate {
+  font-size: 1rem;
   font-weight: bold;
   color: #2c3e50;
   display: block;
-}
-
-.month {
-  font-size: 0.9rem;
-  color: #6c757d;
 }
 
 .timelineContent {
@@ -396,12 +391,8 @@
     width: 60px;
   }
   
-  .year {
-    font-size: 1rem;
-  }
-  
-  .month {
-    font-size: 0.8rem;
+  .fullDate {
+    font-size: 0.9rem;
   }
   
   .timelineContent::before {
