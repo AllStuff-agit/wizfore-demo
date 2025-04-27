@@ -1,4 +1,4 @@
-import { getAuth } from 'firebase-admin/auth';
+import admin from '../firebase/firebase-admin';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -7,7 +7,7 @@ import { auth } from '../firebase/firebase';
 // 서버 사이드에서 관리자 권한 확인
 export async function checkAdminRole(token) {
   try {
-    const decodedToken = await getAuth().verifyIdToken(token);
+    const decodedToken = await admin.auth().verifyIdToken(token);
     return decodedToken.admin === true; // 커스텀 클레임에서 admin 확인
   } catch (error) {
     console.error('Token verification failed:', error);
