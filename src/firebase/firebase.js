@@ -13,7 +13,7 @@ const {
 
 const firebaseConfig = {
   
-  apiKey: NEXT_PUBLIC_FIREBASE_API_KEY.replace(/\\n/g, '\n'),
+  apiKey: "AIzaSyDmuAmLG4o-gH6X3jFI1o5FG6HGiqpDX6M",
   authDomain: "wizfore-demo.firebaseapp.com",
   projectId: "wizfore-demo",
   storageBucket: "wizfore-demo.firebasestorage.app",
