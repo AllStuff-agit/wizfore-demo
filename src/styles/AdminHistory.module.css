@@ -1,0 +1,316 @@
+.adminHistoryPage {
+  padding: 30px;
+}
+
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.pageHeader h1 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.migrateButton {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.migrateButton:hover {
+  background-color: #5a6268;
+}
+
+.migrateButton.disabled {
+  background-color: #adb5bd;
+  cursor: not-allowed;
+}
+
+.contentGrid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
+}
+
+/* 에러 메시지 */
+.errorMessage {
+  background-color: #f8d7da;
+  color: #842029;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+/* 폼 섹션 */
+.formSection {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 25px;
+}
+
+.formSection h2 {
+  font-size: 1.4rem;
+  color: #3498db;
+  margin-bottom: 20px;
+}
+
+.historyForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 15px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.formGroup label {
+  font-size: 0.9rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.formGroup input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.checkboxLabel input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.formButtons {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.submitButton, .cancelButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submitButton {
+  background-color: #3498db;
+  color: white;
+}
+
+.submitButton:hover {
+  background-color: #2980b9;
+}
+
+.cancelButton {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.cancelButton:hover {
+  background-color: #d0d0d0;
+}
+
+/* 목록 섹션 */
+.listSection {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 25px;
+}
+
+.listSection h2 {
+  font-size: 1.4rem;
+  color: #3498db;
+  margin-bottom: 20px;
+}
+
+.loading, .emptyList {
+  padding: 40px;
+  text-align: center;
+  color: #6c757d;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+/* 테이블 스타일 */
+.historyTable {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 120px 1fr 80px 100px;
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+  padding: 12px 15px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: 120px 1fr 80px 100px;
+  padding: 12px 15px;
+  border-bottom: 1px solid #e0e0e0;
+  align-items: center;
+}
+
+.tableRow:last-child {
+  border-bottom: none;
+}
+
+.tableRow:hover {
+  background-color: #f5f9ff;
+}
+
+.inactiveRow {
+  background-color: #f8f9fa;
+  color: #6c757d;
+}
+
+.tableDate {
+  font-weight: 500;
+}
+
+.tableEvent {
+  color: #333;
+}
+
+.tableStatus {
+  text-align: center;
+}
+
+.activeStatus, .inactiveStatus {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.activeStatus {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.inactiveStatus {
+  background-color: #f5f5f5;
+  color: #757575;
+}
+
+.tableActions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.editButton, .deleteButton, .toggleButton {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  transition: background-color 0.2s;
+}
+
+.editButton {
+  background-color: #4caf50;
+}
+
+.editButton:hover {
+  background-color: #388e3c;
+}
+
+.deleteButton {
+  background-color: #f44336;
+}
+
+.deleteButton:hover {
+  background-color: #d32f2f;
+}
+
+.toggleButton {
+  background-color: #ff9800;
+}
+
+.toggleButton:hover {
+  background-color: #f57c00;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1024px) {
+  .contentGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .formGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .tableHeader, .tableRow {
+    grid-template-columns: 100px 1fr 70px 100px;
+  }
+}
+
+@media (max-width: 576px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tableHeader, .tableRow {
+    grid-template-columns: 100px 1fr 100px;
+  }
+  
+  .tableStatus {
+    display: none;
+  }
+  
+  .adminHistoryPage {
+    padding: 15px;
+  }
+}

@@ -168,6 +168,28 @@
   margin-bottom: 50px;
 }
 
+.loadingContainer, .errorContainer, .emptyContainer {
+  text-align: center;
+  padding: 30px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin: 20px auto;
+  max-width: 600px;
+}
+
+.loadingContainer {
+  color: #6c757d;
+}
+
+.errorContainer {
+  color: #dc3545;
+}
+
+.emptyContainer {
+  color: #6c757d;
+  font-style: italic;
+}
+
 .timeline {
   position: relative;
   max-width: 800px;

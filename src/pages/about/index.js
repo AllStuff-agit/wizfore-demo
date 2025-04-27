@@ -1,33 +1,31 @@
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import styles from '../../styles/About.module.css';
+import { getActiveHistory } from '../../services/historyService';
 
 export default function About() {
-  // 연혁 데이터
-  const history = [
-    { year: '2016', month: '01', day: '01', event: '위즈포레 설립' },
-    { year: '2016', month: '02', day: '03', event: '아동청소년 심리치유서비스 및 학부모코칭서비스 제공기관 등록' },
-    { year: '2020', month: '12', day: '03', event: '발달장애인 주간/방과후 활동서비스 제공기관 지정' },
-    { year: '2021', month: '07', day: '01', event: '특수교육대상자 치료지원서비스 제공기관 지정' },
-    { year: '2021', month: '10', day: '12', event: '사상구드림스타트센터 업무협약 (취약계층 아동 심리치료 전문기관)' },
-    { year: '2021', month: '10', day: '28', event: '부산시여성가족개발원 업무협약 (성인지 교육 협력기관)' },
-    { year: '2021', month: '11', day: '25', event: '장애아동 발달재활서비스 제공기관 지정' },
-    { year: '2022', month: '02', day: '18', event: '사상여성인력개발센터 업무협약 (청년 채용 지원사업)' },
-    { year: '2022', month: '06', day: '17', event: '부산가톨릭대학교 언어청각치료학과 산학협력' },
-    { year: '2022', month: '07', day: '19', event: '성평등 사례발굴 공모전 우수상 수상 (부산여성가족개발원)' },
-    { year: '2022', month: '11', day: '29', event: '춘해보건대학교 언어치료학과 산학협력' },
-    { year: '2023', month: '03', day: '10', event: '사상구장애인체육회 생활체육지원사업 업무협약' },
-    { year: '2023', month: '03', day: '14', event: '사상구장애인복지관 업무협약' },
-    { year: '2023', month: '04', day: '27', event: '한국사회복지상담학회(신라대 사회복지학과) 산학협력' },
-    { year: '2023', month: '11', day: '01', event: '고용부 청년일경험지원사업 (사)부산경영자총협회 업무협약' },
-    { year: '2023', month: '11', day: '22', event: '신라대학교 특수체육학과 산학협력' },
-    { year: '2023', month: '11', day: '25', event: '경남정보대학교 작업치료과 산학협력' },
-    { year: '2023', month: '11', day: '28', event: '장애인스포츠 및 일반스포츠 이용권 제공기관 지정' },
-    { year: '2024', month: '02', day: '07', event: '건양사이버대학교 심리운동치료학과 산학협력 (실습인증기관)' },
-    { year: '2024', month: '03', day: '08', event: '대구사이버대학교 산학협력 (언어치료·놀이치료학과)' },
-    { year: '2024', month: '05', day: '27', event: '부산과학기술대학교 산학협력 (사회복지상담과·스마트도시농업과)' },
-    { year: '2024', month: '06', day: '10', event: '사상구가족센터 업무협약' }
-  ];
+  const [history, setHistory] = useState([]);
+  const [isHistoryLoading, setIsHistoryLoading] = useState(true);
+  const [historyError, setHistoryError] = useState(null);
+
+  // 연혁 데이터 불러오기
+  useEffect(() => {
+    async function fetchHistory() {
+      try {
+        setIsHistoryLoading(true);
+        const historyData = await getActiveHistory();
+        setHistory(historyData);
+      } catch (error) {
+        console.error('연혁 데이터를 불러오는데 실패했습니다:', error);
+        setHistoryError('연혁 정보를 불러올 수 없습니다.');
+      } finally {
+        setIsHistoryLoading(false);
+      }
+    }
+
+    fetchHistory();
+  }, []);
 
   // 강점 데이터
   const strengths = [
@@ -146,18 +144,32 @@ export default function About() {
       <section className={styles.historySection}>
         <div className={styles.container}>
           <h2>연혁</h2>
-          <div className={styles.timeline}>
-            {history.map((item, index) => (
-              <div key={index} className={styles.timelineItem}>
-                <div className={styles.timelineDate}>
-                  <span className={styles.fullDate}>{item.year}.{item.month}.{item.day}.</span>
+          {isHistoryLoading ? (
+            <div className={styles.loadingContainer}>
+              <p>연혁 정보를 불러오는 중...</p>
+            </div>
+          ) : historyError ? (
+            <div className={styles.errorContainer}>
+              <p>{historyError}</p>
+            </div>
+          ) : history.length === 0 ? (
+            <div className={styles.emptyContainer}>
+              <p>등록된 연혁 정보가 없습니다.</p>
+            </div>
+          ) : (
+            <div className={styles.timeline}>
+              {history.map((item) => (
+                <div key={item.id} className={styles.timelineItem}>
+                  <div className={styles.timelineDate}>
+                    <span className={styles.fullDate}>{item.year}.{item.month}.{item.day}.</span>
+                  </div>
+                  <div className={styles.timelineContent}>
+                    <p>{item.event}</p>
+                  </div>
                 </div>
-                <div className={styles.timelineContent}>
-                  <p>{item.event}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

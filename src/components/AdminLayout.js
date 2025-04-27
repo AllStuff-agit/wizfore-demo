@@ -88,6 +88,14 @@ export default function AdminLayout({ children, title = '관리자 페이지 - �
                 <i className="fas fa-bullhorn"></i> 공지사항 관리
               </Link>
             </li>
+            <li>
+              <Link 
+                href="/admin/history" 
+                className={router.pathname === '/admin/history' ? styles.active : ''}
+              >
+                <i className="fas fa-history"></i> 연혁 관리
+              </Link>
+            </li>
           </ul>
         </nav>
         <div className={styles.sidebarFooter}>
