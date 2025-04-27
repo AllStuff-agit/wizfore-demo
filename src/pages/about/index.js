@@ -15,14 +15,24 @@ export default function About() {
   useEffect(() => {
     async function fetchHistory() {
       try {
+        console.log('About 페이지: 연혁 데이터 로딩 시작');
         setIsHistoryLoading(true);
         const historyData = await getActiveHistory();
+        console.log('About 페이지: 받은 연혁 데이터:', historyData);
+        
+        // 데이터가 비어있으면 로그 추가
+        if (!historyData || historyData.length === 0) {
+          console.log('About 페이지: 연혁 데이터가 비어있습니다');
+        }
+        
         setHistory(historyData);
       } catch (error) {
-        console.error('연혁 데이터를 불러오는데 실패했습니다:', error);
+        console.error('About 페이지: 연혁 데이터를 불러오는데 실패했습니다:', error);
+        console.error('오류 상세 정보:', error.message);
         setHistoryError('연혁 정보를 불러올 수 없습니다.');
       } finally {
         setIsHistoryLoading(false);
+        console.log('About 페이지: 연혁 데이터 로딩 완료');
       }
     }
 

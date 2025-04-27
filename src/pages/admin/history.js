@@ -31,14 +31,22 @@ function AdminHistory() {
 
   const fetchHistory = async () => {
     try {
-      console.log('Fetching history data...');
+      console.log('Admin History: 연혁 데이터 불러오기 시작');
       setIsLoading(true);
       const data = await getAllHistory();
-      console.log('History data received:', data);
+      console.log('Admin History: 데이터 수신됨, 항목 수:', data.length);
+      
+      if (data.length === 0) {
+        console.log('Admin History: 연혁 데이터가 비어있음');
+      } else {
+        console.log('Admin History: 첫 번째 항목 샘플:', data[0]);
+      }
+      
       setHistoryItems(data);
     } catch (err) {
-      console.error('Error fetching history:', err);
-      setError('연혁 데이터를 불러오는데 실패했습니다.');
+      console.error('Admin History: 데이터 불러오기 오류:', err);
+      console.error('오류 상세:', err.message);
+      setError('연혁 데이터를 불러오는데 실패했습니다. 콘솔을 확인해주세요.');
     } finally {
       setIsLoading(false);
     }
@@ -134,12 +142,21 @@ function AdminHistory() {
     }
 
     try {
+      console.log('Admin History: 초기 데이터 마이그레이션 시작');
       setIsMigrating(true);
       const count = await migrateInitialHistory();
+      console.log(`Admin History: 마이그레이션 완료, ${count}개 항목 추가됨`);
+      
       alert(`연혁 데이터 마이그레이션 완료: ${count}개 항목 추가`);
-      fetchHistory();
+      
+      // 약간의 지연을 두고 데이터 다시 로드
+      setTimeout(() => {
+        console.log('Admin History: 지연 후 데이터 다시 로드');
+        fetchHistory();
+      }, 1000);
     } catch (err) {
-      console.error('마이그레이션 에러:', err);
+      console.error('Admin History: 마이그레이션 에러:', err);
+      console.error('오류 상세:', err.message);
       setError('초기 데이터 마이그레이션에 실패했습니다.');
     } finally {
       setIsMigrating(false);
