@@ -40,7 +40,7 @@
 
 .contentGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 60% 40%;
   gap: 24px;
 }
 
@@ -222,6 +222,9 @@
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
+  max-width: 100%;
+  overflow-x: hidden;
+  word-wrap: break-word;
 }
 
 .detailSection h2 {
@@ -275,11 +278,14 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
+  width: 100%;
 }
 
 .infoItem {
   display: flex;
   align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .infoLabel {
@@ -302,6 +308,8 @@
   padding: 12px;
   white-space: pre-line;
   min-height: 80px;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .responseContent {
@@ -310,6 +318,8 @@
   padding: 12px;
   white-space: pre-line;
   min-height: 80px;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .responseForm {
@@ -351,6 +361,10 @@
   
   .tableHeader, .tableRow {
     grid-template-columns: 140px 100px 1fr 120px 80px 120px;
+  }
+  
+  .detailInfo {
+    grid-template-columns: 100%;
   }
 }
 
