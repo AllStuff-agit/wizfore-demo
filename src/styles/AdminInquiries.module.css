@@ -84,7 +84,7 @@
 
 .tableHeader {
   display: grid;
-  grid-template-columns: 120px 100px 1fr 100px 80px 80px;
+  grid-template-columns: 140px 100px 1fr 120px 80px 120px;
   gap: 8px;
   padding: 12px;
   background-color: #f5f5f5;
@@ -96,7 +96,7 @@
 
 .tableRow {
   display: grid;
-  grid-template-columns: 120px 100px 1fr 100px 80px 80px;
+  grid-template-columns: 140px 100px 1fr 120px 80px 120px;
   gap: 8px;
   padding: 12px;
   border-bottom: 1px solid #eee;
@@ -161,6 +161,11 @@
   justify-content: flex-end;
 }
 
+.statusButtons {
+  display: flex;
+  gap: 4px;
+}
+
 .actionButton {
   width: 28px;
   height: 28px;
@@ -179,6 +184,14 @@
   cursor: not-allowed;
 }
 
+.pendingButton {
+  color: #b7791f;
+}
+
+.pendingButton:hover:not(:disabled) {
+  background-color: #fff8e0;
+}
+
 .processButton {
   color: #0068a8;
 }
@@ -187,11 +200,19 @@
   background-color: #e6f6ff;
 }
 
+.resolveButton {
+  color: #218838;
+}
+
+.resolveButton:hover:not(:disabled) {
+  background-color: #e6ffec;
+}
+
 .deleteButton {
   color: #e53e3e;
 }
 
-.deleteButton:hover {
+.deleteButton:hover:not(:disabled) {
   background-color: #fff5f5;
 }
 
@@ -323,26 +344,32 @@
   background-color: var(--color-primary-dark);
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1200px) {
   .contentGrid {
     grid-template-columns: 1fr;
   }
   
   .tableHeader, .tableRow {
-    grid-template-columns: 120px 100px 1fr 80px 60px;
+    grid-template-columns: 140px 100px 1fr 120px 80px 120px;
+  }
+}
+
+@media (max-width: 992px) {
+  .tableHeader, .tableRow {
+    grid-template-columns: 140px 100px 1fr 120px 80px;
   }
   
-  .tableService {
+  .tableActions {
     display: none;
   }
 }
 
 @media (max-width: 768px) {
   .tableHeader, .tableRow {
-    grid-template-columns: 100px 1fr 60px 60px;
+    grid-template-columns: 140px 1fr 80px;
   }
   
-  .tableName {
+  .tableName, .tableService {
     display: none;
   }
 }

@@ -121,13 +121,13 @@ function AdminInquiries() {
     // Firestore 타임스탬프 처리
     const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
     
-    return new Intl.DateTimeFormat('ko-KR', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit'
-    }).format(date);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hour = String(date.getHours()).padStart(2, '0');
+    const minute = String(date.getMinutes()).padStart(2, '0');
+    
+    return `${year}-${month}-${day} ${hour}:${minute}`;
   };
 
   // 상태에 따른 레이블 및 색상
@@ -142,6 +142,28 @@ function AdminInquiries() {
       default:
         return { label: '알 수 없음', color: 'secondary' };
     }
+  };
+  
+  // 서비스 옵션 매핑
+  const serviceOptions = {
+    "": "미선택",
+    "language-therapy": "언어치료",
+    "art-therapy": "미술치료",
+    "music-therapy": "음악치료",
+    "sensory-integration": "감각통합",
+    "special-pe": "특수체육",
+    "play-therapy": "놀이치료",
+    "psychomotor": "심리운동",
+    "counseling": "심리상담",
+    "day-activity": "주간활동서비스",
+    "after-school": "방과후활동서비스",
+    "tour": "센터 견학 문의",
+    "other": "기타"
+  };
+  
+  // 서비스 코드를 한글 이름으로 변환
+  const getServiceName = (serviceCode) => {
+    return serviceOptions[serviceCode] || serviceCode || '-';
   };
 
   return (
@@ -202,7 +224,7 @@ function AdminInquiries() {
                       {inquiry.subject}
                     </div>
                     <div className={styles.tableService}>
-                      {inquiry.service || '-'}
+                      {getServiceName(inquiry.service)}
                     </div>
                     <div className={styles.tableStatus}>
                       <span className={`${styles.statusBadge} ${styles[getStatusLabel(inquiry.status).color]}`}>
@@ -210,17 +232,45 @@ function AdminInquiries() {
                       </span>
                     </div>
                     <div className={styles.tableActions}>
-                      <button 
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleStatusChange(inquiry.id, 'in_progress');
-                        }} 
-                        className={`${styles.actionButton} ${styles.processButton}`}
-                        disabled={inquiry.status === 'in_progress'}
-                        title="처리중으로 변경"
-                      >
-                        <i className="fas fa-tasks"></i>
-                      </button>
+                      <div className={styles.statusButtons}>
+                        <button 
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleStatusChange(inquiry.id, 'pending');
+                          }} 
+                          className={`${styles.actionButton} ${styles.pendingButton}`}
+                          disabled={inquiry.status === 'pending'}
+                          title="대기중으로 변경"
+                        >
+                          <i className="fas fa-clock"></i>
+                        </button>
+                        <button 
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleStatusChange(inquiry.id, 'in_progress');
+                          }} 
+                          className={`${styles.actionButton} ${styles.processButton}`}
+                          disabled={inquiry.status === 'in_progress'}
+                          title="처리중으로 변경"
+                        >
+                          <i className="fas fa-tasks"></i>
+                        </button>
+                        <button 
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (inquiry.status !== 'resolved') {
+                              if (window.confirm('응답 없이 해결됨으로 표시하시겠습니까?')) {
+                                handleStatusChange(inquiry.id, 'resolved');
+                              }
+                            }
+                          }} 
+                          className={`${styles.actionButton} ${styles.resolveButton}`}
+                          disabled={inquiry.status === 'resolved'}
+                          title="해결됨으로 변경"
+                        >
+                          <i className="fas fa-check-circle"></i>
+                        </button>
+                      </div>
                       <button 
                         onClick={(e) => {
                           e.stopPropagation();
@@ -277,7 +327,7 @@ function AdminInquiries() {
                   {selectedInquiry.service && (
                     <div className={styles.infoItem}>
                       <span className={styles.infoLabel}>문의 서비스:</span>
-                      <span className={styles.infoValue}>{selectedInquiry.service}</span>
+                      <span className={styles.infoValue}>{getServiceName(selectedInquiry.service)}</span>
                     </div>
                   )}
                 </div>
