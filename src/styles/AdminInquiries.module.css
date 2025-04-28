@@ -84,7 +84,7 @@
 
 .tableHeader {
   display: grid;
-  grid-template-columns: 140px 90px 3fr 100px 70px 120px;
+  grid-template-columns: 140px 90px 4fr 100px 70px 70px;
   gap: 8px;
   padding: 12px;
   background-color: #f5f5f5;
@@ -96,7 +96,7 @@
 
 .tableRow {
   display: grid;
-  grid-template-columns: 140px 90px 3fr 100px 70px 120px;
+  grid-template-columns: 140px 90px 4fr 100px 70px 70px;
   gap: 8px;
   padding: 12px;
   border-bottom: 1px solid #eee;
@@ -174,9 +174,16 @@
   justify-content: flex-end;
 }
 
-.statusButtons {
+.tableStatus {
   display: flex;
-  gap: 4px;
+  align-items: center;
+  justify-content: center;
+}
+
+.tableActions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .actionButton {
@@ -391,7 +398,7 @@
   }
   
   .tableHeader, .tableRow {
-    grid-template-columns: 140px 90px 3fr 100px 70px 120px;
+    grid-template-columns: 140px 90px 4fr 100px 70px 70px;
   }
   
   .detailInfo {
@@ -401,7 +408,7 @@
 
 @media (max-width: 1100px) {
   .tableHeader, .tableRow {
-    grid-template-columns: 140px 90px 3fr 100px 70px;
+    grid-template-columns: 140px 90px 4fr 100px 70px;
   }
   
   .tableActions {
@@ -411,7 +418,7 @@
 
 @media (max-width: 768px) {
   .tableHeader, .tableRow {
-    grid-template-columns: 120px 3fr 70px;
+    grid-template-columns: 120px 4fr 70px;
   }
   
   .tableName, .tableService {

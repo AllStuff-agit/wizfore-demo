@@ -205,7 +205,7 @@ function AdminInquiries() {
                   <div className={styles.tableSubject}>제목</div>
                   <div className={styles.tableService}>서비스</div>
                   <div className={styles.tableStatus}>상태</div>
-                  <div className={styles.tableActions}>관리</div>
+                  <div className={styles.tableActions}>삭제</div>
                 </div>
                 
                 {inquiries.map((inquiry) => (
@@ -231,46 +231,36 @@ function AdminInquiries() {
                         {getStatusLabel(inquiry.status).label}
                       </span>
                     </div>
-                    <div className={styles.tableActions}>
-                      <div className={styles.statusButtons}>
+                    <div className={styles.tableStatus}>
+                      {/* 상태 변경 버튼 */}
+                      {inquiry.status === 'resolved' ? (
                         <button 
                           onClick={(e) => {
                             e.stopPropagation();
                             handleStatusChange(inquiry.id, 'pending');
                           }} 
                           className={`${styles.actionButton} ${styles.pendingButton}`}
-                          disabled={inquiry.status === 'pending'}
                           title="대기중으로 변경"
                         >
                           <i className="fas fa-clock"></i>
                         </button>
+                      ) : (
                         <button 
                           onClick={(e) => {
                             e.stopPropagation();
-                            handleStatusChange(inquiry.id, 'in_progress');
-                          }} 
-                          className={`${styles.actionButton} ${styles.processButton}`}
-                          disabled={inquiry.status === 'in_progress'}
-                          title="대기중으로 변경"
-                        >
-                          <i className="fas fa-tasks"></i>
-                        </button>
-                        <button 
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            if (inquiry.status !== 'resolved') {
-                              if (window.confirm('응답 없이 해결됨으로 표시하시겠습니까?')) {
-                                handleStatusChange(inquiry.id, 'resolved');
-                              }
+                            if (window.confirm('완료 상태로 변경하시겠습니까?')) {
+                              handleStatusChange(inquiry.id, 'resolved');
                             }
                           }} 
                           className={`${styles.actionButton} ${styles.resolveButton}`}
-                          disabled={inquiry.status === 'resolved'}
                           title="완료로 변경"
                         >
                           <i className="fas fa-check-circle"></i>
                         </button>
-                      </div>
+                      )}
+                    </div>
+                    <div className={styles.tableActions}>
+                      {/* 삭제 버튼 */}
                       <button 
                         onClick={(e) => {
                           e.stopPropagation();
