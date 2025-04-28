@@ -88,199 +88,131 @@ export default function Contact() {
 
       <section className={styles.contactSection}>
         <div className={styles.container}>
-          <div className={styles.contactGrid}>
-            <div className={styles.contactInfo}>
-              <div className={styles.infoBox}>
-                <h2>연락처 정보</h2>
-                
-                <div className={styles.infoItem}>
-                  <div className={styles.infoIcon}>
-                    <i className="fas fa-map-marker-alt"></i>
-                  </div>
-                  <div className={styles.infoContent}>
-                    <h3>주소</h3>
-                    <p>부산시 사상구 모라로 110번길 25 3층, 4층</p>
-                  </div>
-                </div>
-                
-                <div className={styles.infoItem}>
-                  <div className={styles.infoIcon}>
-                    <i className="fas fa-phone"></i>
-                  </div>
-                  <div className={styles.infoContent}>
-                    <h3>전화</h3>
-                    <p>051-324-0940</p>
-                  </div>
-                </div>
-                
-                <div className={styles.infoItem}>
-                  <div className={styles.infoIcon}>
-                    <i className="fas fa-fax"></i>
-                  </div>
-                  <div className={styles.infoContent}>
-                    <h3>팩스</h3>
-                    <p>051-313-0322</p>
-                  </div>
-                </div>
-                
-                <div className={styles.infoItem}>
-                  <div className={styles.infoIcon}>
-                    <i className="fas fa-envelope"></i>
-                  </div>
-                  <div className={styles.infoContent}>
-                    <h3>이메일</h3>
-                    <p>wizfore@daum.net</p>
-                  </div>
-                </div>
-                
-                <div className={styles.infoItem}>
-                  <div className={styles.infoIcon}>
-                    <i className="fas fa-clock"></i>
-                  </div>
-                  <div className={styles.infoContent}>
-                    <h3>운영시간</h3>
-                    <p>월-금: 오전 9시 - 오후 6시</p>
-                    <p>토요일: 오전 9시 - 오후 1시</p>
-                    <p>일요일 및 공휴일: 휴무</p>
-                  </div>
-                </div>
-              </div>
+          <div className={styles.contactForm}>
+            <div className={styles.formBox}>
+              <h2>문의 및 상담 신청</h2>
               
-              <div className={styles.mapWrapper}>
-                <h3>위치</h3>
-                <div className={styles.map}>
-                  {/* 실제로는 여기에 네이버 지도 또는 카카오맵 API를 사용합니다 */}
-                  <img src="/images/map.jpg" alt="위즈포레 지도" />
+              {isSubmitted ? (
+                <div className={styles.successMessage}>
+                  <div className={styles.successIcon}>
+                    <i className="fas fa-check-circle"></i>
+                  </div>
+                  <h3>문의가 성공적으로 제출되었습니다!</h3>
+                  <p>빠른 시일 내에 연락드리겠습니다. 감사합니다.</p>
+                  <p className={styles.contactInfo}>문의사항은 <strong>051-324-0940</strong> 으로도 연락 가능합니다.</p>
+                  <button 
+                    className={styles.btn}
+                    onClick={() => setIsSubmitted(false)}
+                  >
+                    새로운 문의하기
+                  </button>
                 </div>
-              </div>
-            </div>
-            
-            <div className={styles.contactForm}>
-              <div className={styles.formBox}>
-                <h2>문의 및 상담 신청</h2>
-                
-                {isSubmitted ? (
-                  <div className={styles.successMessage}>
-                    <div className={styles.successIcon}>
-                      <i className="fas fa-check-circle"></i>
+              ) : (
+                <form onSubmit={handleSubmit}>
+                  {error && <div className={styles.errorMessage}>{error}</div>}
+                  
+                  <div className={styles.formGroup}>
+                    <label htmlFor="name">이름 <span className={styles.required}>*</span></label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      disabled={isSubmitting}
+                      placeholder="이름을 입력해주세요"
+                    />
+                  </div>
+                  
+                  <div className={styles.formRow}>
+                    <div className={styles.formGroup}>
+                      <label htmlFor="phone">연락처 <span className={styles.required}>*</span></label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        required
+                        disabled={isSubmitting}
+                        placeholder="연락처를 입력해주세요"
+                      />
                     </div>
-                    <h3>문의가 성공적으로 제출되었습니다!</h3>
-                    <p>빠른 시일 내에 연락드리겠습니다. 감사합니다.</p>
-                    <p className={styles.contactInfo}>문의사항은 <strong>051-324-0940</strong> 으로도 연락 가능합니다.</p>
-                    <button 
-                      className={styles.btn}
-                      onClick={() => setIsSubmitted(false)}
+                    <div className={styles.formGroup}>
+                      <label htmlFor="email">이메일</label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        disabled={isSubmitting}
+                        placeholder="이메일을 입력해주세요"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className={styles.formGroup}>
+                    <label htmlFor="service">문의 서비스</label>
+                    <select
+                      id="service"
+                      name="service"
+                      value={formData.service}
+                      onChange={handleChange}
+                      disabled={isSubmitting}
                     >
-                      새로운 문의하기
+                      {serviceOptions.map(option => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  
+                  <div className={styles.formGroup}>
+                    <label htmlFor="subject">제목 <span className={styles.required}>*</span></label>
+                    <input
+                      type="text"
+                      id="subject"
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      required
+                      disabled={isSubmitting}
+                      placeholder="문의 제목을 입력해주세요"
+                    />
+                  </div>
+                  
+                  <div className={styles.formGroup}>
+                    <label htmlFor="message">메시지 <span className={styles.required}>*</span></label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows="5"
+                      value={formData.message}
+                      onChange={handleChange}
+                      required
+                      disabled={isSubmitting}
+                      placeholder="문의 내용을 입력해주세요"
+                    ></textarea>
+                  </div>
+                  
+                  <div className={styles.formNotice}>
+                    <p><span className={styles.required}>*</span> 필수 입력 항목입니다.</p>
+                  </div>
+                  
+                  <div className={styles.formActions}>
+                    <button 
+                      type="submit" 
+                      className={styles.submitBtn}
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? '제출 중...' : '문의하기'}
                     </button>
                   </div>
-                ) : (
-                  <form onSubmit={handleSubmit}>
-                    {error && <div className={styles.errorMessage}>{error}</div>}
-                    
-                    <div className={styles.formGroup}>
-                      <label htmlFor="name">이름 <span className={styles.required}>*</span></label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        disabled={isSubmitting}
-                        placeholder="이름을 입력해주세요"
-                      />
-                    </div>
-                    
-                    <div className={styles.formRow}>
-                      <div className={styles.formGroup}>
-                        <label htmlFor="phone">연락처 <span className={styles.required}>*</span></label>
-                        <input
-                          type="tel"
-                          id="phone"
-                          name="phone"
-                          value={formData.phone}
-                          onChange={handleChange}
-                          required
-                          disabled={isSubmitting}
-                          placeholder="연락처를 입력해주세요"
-                        />
-                      </div>
-                      <div className={styles.formGroup}>
-                        <label htmlFor="email">이메일</label>
-                        <input
-                          type="email"
-                          id="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          disabled={isSubmitting}
-                          placeholder="이메일을 입력해주세요"
-                        />
-                      </div>
-                    </div>
-                    
-                    <div className={styles.formGroup}>
-                      <label htmlFor="service">문의 서비스</label>
-                      <select
-                        id="service"
-                        name="service"
-                        value={formData.service}
-                        onChange={handleChange}
-                        disabled={isSubmitting}
-                      >
-                        {serviceOptions.map(option => (
-                          <option key={option.value} value={option.value}>
-                            {option.label}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                    
-                    <div className={styles.formGroup}>
-                      <label htmlFor="subject">제목 <span className={styles.required}>*</span></label>
-                      <input
-                        type="text"
-                        id="subject"
-                        name="subject"
-                        value={formData.subject}
-                        onChange={handleChange}
-                        required
-                        disabled={isSubmitting}
-                        placeholder="문의 제목을 입력해주세요"
-                      />
-                    </div>
-                    
-                    <div className={styles.formGroup}>
-                      <label htmlFor="message">메시지 <span className={styles.required}>*</span></label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        rows="5"
-                        value={formData.message}
-                        onChange={handleChange}
-                        required
-                        disabled={isSubmitting}
-                        placeholder="문의 내용을 입력해주세요"
-                      ></textarea>
-                    </div>
-                    
-                    <div className={styles.formNotice}>
-                      <p><span className={styles.required}>*</span> 필수 입력 항목입니다.</p>
-                    </div>
-                    
-                    <div className={styles.formActions}>
-                      <button 
-                        type="submit" 
-                        className={styles.submitBtn}
-                        disabled={isSubmitting}
-                      >
-                        {isSubmitting ? '제출 중...' : '문의하기'}
-                      </button>
-                    </div>
-                  </form>
-                )}
-              </div>
+                </form>
+              )}
             </div>
           </div>
         </div>

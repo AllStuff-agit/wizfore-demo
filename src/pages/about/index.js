@@ -224,6 +224,76 @@ export default function About() {
         </div>
       </section>
 
+      {/* 연락처 및 위치 정보 섹션 추가 */}
+      <section className={styles.contactSection}>
+        <div className={styles.container}>
+          <h2>연락처 및 위치</h2>
+          <div className={styles.contactGrid}>
+            <div className={styles.contactInfo}>
+              <div className={styles.infoBox}>
+                <div className={styles.infoItem}>
+                  <div className={styles.infoIcon}>
+                    <i className="fas fa-map-marker-alt"></i>
+                  </div>
+                  <div className={styles.infoContent}>
+                    <h3>주소</h3>
+                    <p>부산시 사상구 모라로 110번길 25 3층, 4층</p>
+                  </div>
+                </div>
+                
+                <div className={styles.infoItem}>
+                  <div className={styles.infoIcon}>
+                    <i className="fas fa-phone"></i>
+                  </div>
+                  <div className={styles.infoContent}>
+                    <h3>전화</h3>
+                    <p>051-324-0940</p>
+                  </div>
+                </div>
+                
+                <div className={styles.infoItem}>
+                  <div className={styles.infoIcon}>
+                    <i className="fas fa-fax"></i>
+                  </div>
+                  <div className={styles.infoContent}>
+                    <h3>팩스</h3>
+                    <p>051-313-0322</p>
+                  </div>
+                </div>
+                
+                <div className={styles.infoItem}>
+                  <div className={styles.infoIcon}>
+                    <i className="fas fa-envelope"></i>
+                  </div>
+                  <div className={styles.infoContent}>
+                    <h3>이메일</h3>
+                    <p>wizfore@daum.net</p>
+                  </div>
+                </div>
+                
+                <div className={styles.infoItem}>
+                  <div className={styles.infoIcon}>
+                    <i className="fas fa-clock"></i>
+                  </div>
+                  <div className={styles.infoContent}>
+                    <h3>운영시간</h3>
+                    <p>월-금: 오전 9시 - 오후 6시</p>
+                    <p>토요일: 오전 9시 - 오후 1시</p>
+                    <p>일요일 및 공휴일: 휴무</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className={styles.mapWrapper}>
+              <div className={styles.map}>
+                <img src="/images/map.jpg" alt="위즈포레 지도" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className={styles.ctaSection}>
         <div className={styles.container}>
           <div className={styles.ctaContent}>
