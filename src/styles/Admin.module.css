@@ -102,8 +102,14 @@
   }
 }
 
-.adminContent {
-  padding: 20px;
-  background-color: #f8f9fa;
+.adminContainer {
+  display: flex;
   min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.adminContent {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
 } 
