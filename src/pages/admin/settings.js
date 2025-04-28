@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { getSettings, updateSettings } from '../../services/settingsService';
-import AdminSidebar from '../../components/AdminLayout';
+import AdminLayout from '../../components/AdminLayout';
+import { withAdminAuth } from '../../middlewares/withAdminAuth';
 import styles from '../../styles/Admin.module.css';
 
-export default function Settings() {
+function Settings() {
   const [settings, setSettings] = useState({
     siteName: '',
     phone: '',
@@ -72,7 +73,7 @@ export default function Settings() {
   if (isLoading) {
     return (
       <div className={styles.adminContainer}>
-        <AdminSidebar />
+        <AdminLayout />
         <div className={styles.adminContent}>
           <div className={styles.loading}>로딩 중...</div>
         </div>
@@ -82,7 +83,7 @@ export default function Settings() {
 
   return (
     <div className={styles.adminContainer}>
-      <AdminSidebar />
+      <AdminLayout />
       <div className={styles.adminContent}>
         <div className={styles.pageHeader}>
           <h1>센터 기본 정보 설정</h1>
@@ -204,4 +205,12 @@ export default function Settings() {
       </div>
     </div>
   );
-} 
+}
+
+// 관리자 인증으로 컴포넌트 래핑
+const WrappedComponent = withAdminAuth(Settings);
+
+// 관리자 페이지 레이아웃 적용
+WrappedComponent.getLayout = (page) => page;
+
+export default WrappedComponent; 
