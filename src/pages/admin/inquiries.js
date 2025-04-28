@@ -342,4 +342,9 @@ function AdminInquiries() {
 }
 
 // 관리자 인증으로 컴포넌트 래핑
-export default withAdminAuth(AdminInquiries);
+const WrappedComponent = withAdminAuth(AdminInquiries);
+
+// 관리자 페이지 레이아웃 적용
+WrappedComponent.getLayout = (page) => page;
+
+export default WrappedComponent;

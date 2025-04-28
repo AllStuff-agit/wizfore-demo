@@ -348,4 +348,9 @@ function AdminHistory() {
 }
 
 // 관리자 인증으로 컴포넌트 래핑
-export default withAdminAuth(AdminHistory);
+const WrappedComponent = withAdminAuth(AdminHistory);
+
+// 관리자 페이지 레이아웃 적용
+WrappedComponent.getLayout = (page) => page;
+
+export default WrappedComponent;
