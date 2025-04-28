@@ -6,6 +6,7 @@
 - Firebase 초기화 및 연결 코드 (`/src/firebase/firebase.js`)
 - Firebase Admin 연결 코드 (`/src/firebase/firebase-admin.js`)
 - 연혁(history) 데이터 관리 기능 (`/src/services/historyService.js`)
+- 프로그램(programs) 데이터 관리 기능 (`/src/services/programService.js`)
 - 관리자 인증 및 로그인 기능
 
 ### 1.2 사용 중인 Firebase 서비스
@@ -40,13 +41,15 @@ FIRESTORE_DATA_STRUCTURE.md 파일에서 정의된 주요 컬렉션:
 
 ### 3.2 프로그램 데이터 관리 (Firestore)
 - **관련 파일**:
+  - `/src/services/programService.js`
   - `/src/pages/services/index.js`
   - `/src/pages/index.js`
 - **구현 사항**:
-  - `programs` 컬렉션 서비스 구현
-  - 하드코딩된 프로그램 데이터를 Firestore에서 동적으로 가져오도록 변경
-  - 프로그램별 상세 페이지 구현
-- **우선순위**: 중간
+  - `programs` 컬렉션 서비스 구현 (✅ 구현 완료)
+  - 프로그램 CRUD 기능 구현 (✅ 구현 완료)
+  - 초기 프로그램 데이터 마이그레이션 구현 (✅ 구현 완료)
+  - 프로그램 활성화/비활성화 기능 구현 (✅ 구현 완료)
+- **우선순위**: 높음 (사용자에게 보여지는 핵심 기능)
 
 ### 3.3 시설 정보 관리 (Firestore)
 - **관련 파일**:
@@ -126,10 +129,9 @@ FIRESTORE_DATA_STRUCTURE.md 파일에서 정의된 주요 컬렉션:
 
 ## 6. 다음 구현 단계
 
-1. **프로그램 데이터 관리 구현**: Firestore의 `programs` 컬렉션과 연결
-2. **시설 정보 데이터 연결**: Firestore의 `facilities` 컬렉션과 연결
-3. **관리자 페이지 CRUD 기능 확장**: 내담자, 세션, 치료사 관리
-4. **보안 규칙 설정**: 데이터 접근 권한 관리
+1. **시설 정보 데이터 연결**: Firestore의 `facilities` 컬렉션과 연결
+2. **관리자 페이지 CRUD 기능 확장**: 내담자, 세션, 치료사 관리
+3. **보안 규칙 설정**: 데이터 접근 권한 관리
 
 ## 7. 성능 및 보안 고려사항
 
