@@ -226,11 +226,6 @@ function AdminInquiries() {
                     <div className={styles.tableService}>
                       {getServiceName(inquiry.service)}
                     </div>
-                    <div className={styles.tableStatus}>
-                      <span className={`${styles.statusBadge} ${styles[getStatusLabel(inquiry.status).color]}`}>
-                        {getStatusLabel(inquiry.status).label}
-                      </span>
-                    </div>
                     <div 
                       className={`${styles.tableStatus} ${inquiry.status === 'resolved' ? styles.completedStatus : styles.pendingStatus}`}
                       onClick={(e) => {
