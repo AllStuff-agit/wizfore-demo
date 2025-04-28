@@ -2,6 +2,13 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
+import { db } from '../../../../firebase/firebase';
+import { 
+  getServiceByCategory, 
+  checkServiceExists, 
+  setServiceData,
+  serviceDefaultData
+} from '../../../../services/serviceDataService';
 import AdminLayout from '../../../../components/AdminLayout';
 import styles from '../../../../styles/AdminProgramManagement.module.css';
 
@@ -10,68 +17,82 @@ export default function AfterSchoolServices() {
   const [programs, setPrograms] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
+  const [isAddingData, setIsAddingData] = useState(false);
+  const [addDataMessage, setAddDataMessage] = useState(null);
 
-  // 방과후활동 프로그램 데이터 (나중에 Firebase에서 가져올 예정)
-  const dummyPrograms = [
-    {
-      id: 'social-saturday',
-      name: '토요방과후(사회성교실)',
-      category: '방과후활동',
-      description: '사회지각/인지, 의사소통, 사회감성(배려,질서 등), 사회적기술훈련, 문화예술체험 등의 사회성 향상 프로그램',
-      icon: 'users',
-      status: 'active',
-      sessions: 32,
-      clients: 18
-    },
-    {
-      id: 'basic-learning',
-      name: '평일방과후(기초학습교실)',
-      category: '방과후활동',
-      description: '생활/학습, 기초인지, 진로적성/직업체험 등의 기초학습 향상 프로그램',
-      icon: 'book',
-      status: 'active',
-      sessions: 45,
-      clients: 24
-    },
-    {
-      id: 'art-culture',
-      name: '예술문화활동',
-      category: '방과후활동',
-      description: '음악, 미술, 공예, 댄스 등의 예술 및 문화 체험 활동 프로그램',
-      icon: 'paint-brush',
-      status: 'active',
-      sessions: 28,
-      clients: 15
-    },
-    {
-      id: 'self-independence',
-      name: '자립준비활동',
-      category: '방과후활동',
-      description: '일상생활 기술, 지역사회 이용, 자기결정기술 등의 자립 준비 프로그램',
-      icon: 'hands-helping',
-      status: 'active',
-      sessions: 26,
-      clients: 14
-    },
-    {
-      id: 'career-experience',
-      name: '진로체험활동',
-      category: '방과후활동',
-      description: '직업 탐색, 직업체험, 현장 견학 등의 진로 체험 프로그램',
-      icon: 'briefcase',
-      status: 'active',
-      sessions: 20,
-      clients: 12
-    }
-  ];
-
-  // 컴포넌트 마운트 시 데이터 로드
+  // Firestore에서 데이터 로드
   useEffect(() => {
-    // 실제 구현에서는 Firebase에서 데이터를 가져옴
-    // 현재는 더미 데이터 사용
-    setPrograms(dummyPrograms);
-    setLoading(false);
+    const fetchPrograms = async () => {
+      try {
+        // 방과후활동 카테고리의 데이터 가져오기
+        const serviceData = await getServiceByCategory("방과후활동");
+        
+        if (serviceData && serviceData.programs && serviceData.programs.length > 0) {
+          setPrograms(serviceData.programs);
+        } else {
+          // Firestore에 데이터가 없으면 기본 데이터 사용
+          setPrograms(serviceDefaultData.방과후활동.programs);
+        }
+      } catch (error) {
+        console.error("프로그램 데이터 로드 오류:", error);
+        // 에러가 발생하면 기본 데이터 사용
+        setPrograms(serviceDefaultData.방과후활동.programs);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPrograms();
   }, []);
+
+  // 기존 데이터를 Firestore에 추가하는 함수
+  const addDataToFirestore = async () => {
+    try {
+      setIsAddingData(true);
+      setAddDataMessage({ type: 'info', text: '데이터를 Firestore에 추가하는 중...' });
+      
+      // 이미 데이터가 있는지 확인
+      const dataExists = await checkServiceExists("방과후활동");
+      
+      if (dataExists) {
+        setAddDataMessage({ 
+          type: 'warning', 
+          text: '이미 Firestore에 방과후활동 서비스 데이터가 존재합니다. 중복 추가를 방지하기 위해 작업이 취소되었습니다.' 
+        });
+        setIsAddingData(false);
+        return;
+      }
+      
+      // 서비스 데이터 추가
+      await setServiceData("방과후활동", serviceDefaultData.방과후활동);
+      
+      // 성공 메시지 설정
+      setAddDataMessage({ 
+        type: 'success', 
+        text: '기존 방과후활동 데이터가 Firestore에 성공적으로 추가되었습니다.' 
+      });
+      
+      // 업데이트된 데이터 다시 로드
+      const updatedServiceData = await getServiceByCategory("방과후활동");
+      if (updatedServiceData && updatedServiceData.programs) {
+        setPrograms(updatedServiceData.programs);
+      }
+      
+    } catch (error) {
+      console.error("Firestore 데이터 추가 오류:", error);
+      setAddDataMessage({ 
+        type: 'error', 
+        text: `데이터 추가 중 오류가 발생했습니다: ${error.message}` 
+      });
+    } finally {
+      setIsAddingData(false);
+      
+      // 5초 후 메시지 숨기기
+      setTimeout(() => {
+        setAddDataMessage(null);
+      }, 5000);
+    }
+  };
 
   // 필터링 처리
   const filteredPrograms = filter === 'all' 
@@ -100,10 +121,28 @@ export default function AfterSchoolServices() {
               <p>만 6세 이상 만 18세 미만의 발달장애 학생을 위한 방과후활동 프로그램을 관리합니다.</p>
             </div>
           </div>
-          <button className={styles.addButton}>
-            <i className="fas fa-plus"></i> 새 프로그램 추가
-          </button>
+          <div className={styles.buttonGroup}>
+            <button 
+              className={`${styles.importButton} ${isAddingData ? styles.disabled : ''}`}
+              onClick={addDataToFirestore}
+              disabled={isAddingData}
+            >
+              <i className="fas fa-database"></i> 기존 방과후활동 데이터 추가
+            </button>
+          </div>
         </div>
+
+        {addDataMessage && (
+          <div className={`${styles.messageBox} ${styles[addDataMessage.type]}`}>
+            <i className={`fas ${
+              addDataMessage.type === 'success' ? 'fa-check-circle' : 
+              addDataMessage.type === 'error' ? 'fa-exclamation-circle' :
+              addDataMessage.type === 'warning' ? 'fa-exclamation-triangle' : 
+              'fa-info-circle'
+            }`}></i>
+            <span>{addDataMessage.text}</span>
+          </div>
+        )}
 
         <div className={styles.serviceInfo}>
           <div className={styles.infoCard}>
@@ -155,7 +194,7 @@ export default function AfterSchoolServices() {
                 </div>
                 
                 <h2 className={styles.programName}>{program.name}</h2>
-                <p className={styles.programCategory}>{program.category}</p>
+                <p className={styles.programCategory}>방과후활동</p>
                 <p className={styles.programDescription}>{program.description}</p>
                 
                 <div className={styles.programStats}>
