@@ -89,9 +89,14 @@
   padding: 12px;
   background-color: #f5f5f5;
   border-radius: 4px;
-  font-weight: 600;
+  font-weight: 500;
   color: #333;
   margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.tableHeader > div {
+  text-align: center;
 }
 
 .tableRow {
@@ -118,23 +123,26 @@
   background-color: #eef7fd;
 }
 
-.tableDate, .tableName, .tableService, .tableStatus, .tableActions {
+.tableDate, .tableName, .tableSubject, .tableService, .tableStatus, .tableActions {
   display: flex;
   align-items: center;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.tableDate, .tableName, .tableService, .tableStatus, .tableActions {
   white-space: nowrap;
+  justify-content: center;
 }
 
 .tableSubject {
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
   white-space: normal;
   word-break: break-word;
   line-height: 1.2;
   min-height: 100%;
+  padding: 0 5px;
 }
 
 .tableSubject {
@@ -181,8 +189,8 @@
   padding: 4px 8px;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 0.85rem;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 400;
   text-align: center;
   transition: background-color 0.2s;
 }
@@ -222,6 +230,7 @@
   align-items: center;
   justify-content: center;
   transition: background-color 0.2s;
+  font-size: 14px;
 }
 
 .actionButton:disabled {
@@ -407,7 +416,8 @@
   color: white;
   border: none;
   border-radius: 4px;
-  font-weight: 600;
+  font-weight: 400;
+  font-size: 14px;
   cursor: pointer;
   transition: background-color 0.2s;
   align-self: flex-end;
