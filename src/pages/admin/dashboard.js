@@ -130,9 +130,9 @@ export default function Dashboard() {
               <i className="fas fa-user-md"></i>
               <span>치료사 추가</span>
             </a>
-            <a href="/admin/programs/add" className={styles.quickLink}>
-              <i className="fas fa-plus-circle"></i>
-              <span>프로그램 추가</span>
+            <a href="/admin/programs" className={styles.quickLink}>
+              <i className="fas fa-clipboard-list"></i>
+              <span>프로그램 관리</span>
             </a>
             <a href="/admin/reports" className={styles.quickLink}>
               <i className="fas fa-chart-bar"></i>
