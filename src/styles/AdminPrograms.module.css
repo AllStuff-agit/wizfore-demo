@@ -1,130 +1,191 @@
 .adminProgramsPage {
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 30px;
 }
 
 .pageHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .pageHeader h1 {
-  font-size: 2rem;
-  color: #333;
+  font-size: 1.8rem;
+  color: #2c3e50;
   margin: 0;
 }
 
 .migrateButton {
-  padding: 0.5rem 1rem;
-  background-color: #4CAF50;
+  background-color: #6c757d;
   color: white;
   border: none;
   border-radius: 4px;
-  cursor: pointer;
+  padding: 8px 16px;
   font-size: 0.9rem;
-  transition: background-color 0.3s;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 .migrateButton:hover {
-  background-color: #45a049;
+  background-color: #5a6268;
 }
 
 .migrateButton.disabled {
-  background-color: #cccccc;
+  background-color: #adb5bd;
   cursor: not-allowed;
 }
 
 .errorMessage {
-  background-color: #ffebee;
-  color: #c62828;
-  padding: 1rem;
+  background-color: #f8d7da;
+  color: #842029;
+  padding: 12px;
   border-radius: 4px;
-  margin-bottom: 1rem;
+  margin-bottom: 20px;
 }
 
 .contentGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  grid-template-columns: 60% 40%;
+  gap: 30px;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .listSection, .formSection {
   background-color: white;
-  padding: 1.5rem;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 25px;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .listSection h2, .formSection h2 {
-  font-size: 1.5rem;
-  color: #333;
-  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+  color: #3498db;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.programTable {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 10px;
+  table-layout: fixed;
 }
 
 .tableHeader {
   display: grid;
   grid-template-columns: 80px 1fr 2fr 100px 120px;
-  gap: 1rem;
-  padding: 0.5rem 0;
-  border-bottom: 2px solid #eee;
-  font-weight: bold;
-  color: #666;
-}
-
-.programTable {
-  margin-top: 1rem;
+  background-color: #f8f9fa;
+  font-weight: 500;
+  font-size: 14px;
+  color: #333;
+  padding: 12px 15px;
+  border-bottom: 2px solid #e0e0e0;
+  text-align: center;
+  width: 100%;
 }
 
 .tableRow {
   display: grid;
   grid-template-columns: 80px 1fr 2fr 100px 120px;
-  gap: 1rem;
-  padding: 1rem 0;
-  border-bottom: 1px solid #eee;
+  padding: 12px 15px;
+  border-bottom: 1px solid #e0e0e0;
   align-items: center;
+  font-size: 14px;
+  width: 100%;
 }
 
-.tableRow.inactiveRow {
-  opacity: 0.6;
+.tableRow:last-child {
+  border-bottom: none;
 }
 
-.tableOrder, .tableName, .tableDescription, .tableStatus, .tableActions {
-  padding: 0 0.5rem;
+.tableRow:hover {
+  background-color: #f5f9ff;
+}
+
+.inactiveRow {
+  background-color: #f8f9fa;
+  color: #6c757d;
+}
+
+.tableOrder {
+  font-weight: 500;
+  text-align: center;
+}
+
+.tableName {
+  color: #333;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 .tableDescription {
-  font-size: 0.9rem;
   color: #666;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.tableStatus {
+  text-align: center;
+}
+
+.activeStatus, .inactiveStatus {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.activeStatus {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.inactiveStatus {
+  background-color: #f5f5f5;
+  color: #757575;
 }
 
 .tableActions {
   display: flex;
-  gap: 0.5rem;
+  gap: 8px;
+  justify-content: center;
 }
 
 .editButton, .deleteButton, .toggleButton {
-  padding: 0.5rem;
+  width: 30px;
+  height: 30px;
   border: none;
   border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  transition: background-color 0.3s;
+  color: white;
+  transition: background-color 0.2s;
 }
 
 .editButton {
-  background-color: #2196F3;
-  color: white;
+  background-color: #4caf50;
 }
 
 .editButton:hover {
-  background-color: #1976D2;
+  background-color: #388e3c;
 }
 
 .deleteButton {
   background-color: #f44336;
-  color: white;
 }
 
 .deleteButton:hover {
@@ -132,60 +193,46 @@
 }
 
 .toggleButton {
-  background-color: #9E9E9E;
-  color: white;
+  background-color: #ff9800;
 }
 
 .toggleButton:hover {
-  background-color: #757575;
-}
-
-.activeStatus, .inactiveStatus {
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  font-size: 0.8rem;
-}
-
-.activeStatus {
-  background-color: #E8F5E9;
-  color: #2E7D32;
-}
-
-.inactiveStatus {
-  background-color: #FFEBEE;
-  color: #C62828;
+  background-color: #f57c00;
 }
 
 .loading, .emptyList {
-  padding: 2rem;
+  padding: 40px;
   text-align: center;
-  color: #666;
+  color: #6c757d;
+  background-color: #f8f9fa;
+  border-radius: 4px;
 }
 
 .programForm {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 15px;
 }
 
 .formGroup {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 6px;
 }
 
 .formGroup label {
+  font-size: 0.9rem;
+  color: #555;
   font-weight: 500;
-  color: #333;
 }
 
 .formGroup input[type="text"],
 .formGroup input[type="number"],
 .formGroup textarea {
-  padding: 0.5rem;
+  padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  font-size: 1rem;
+  font-size: 0.95rem;
 }
 
 .formGroup textarea {
@@ -196,48 +243,91 @@
 .checkboxLabel {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.checkboxLabel input {
+  width: 16px;
+  height: 16px;
   cursor: pointer;
 }
 
 .submitButton, .cancelButton {
-  padding: 0.75rem 1rem;
+  padding: 10px 20px;
   border: none;
   border-radius: 4px;
+  font-weight: 500;
   cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s;
+  transition: background-color 0.2s;
 }
 
 .submitButton {
-  background-color: #2196F3;
+  background-color: #3498db;
   color: white;
+  width: 100%;
+  margin-top: 10px;
 }
 
 .submitButton:hover {
-  background-color: #1976D2;
+  background-color: #2980b9;
 }
 
 .cancelButton {
-  background-color: #9E9E9E;
-  color: white;
-  margin-top: 0.5rem;
+  background-color: #e0e0e0;
+  color: #333;
 }
 
 .cancelButton:hover {
-  background-color: #757575;
+  background-color: #d0d0d0;
+}
+
+@media (max-width: 1200px) {
+  .contentGrid {
+    grid-template-columns: 55% 45%;
+  }
+}
+
+@media (max-width: 992px) {
+  .contentGrid {
+    grid-template-columns: 100%;
+  }
+  
+  .listSection {
+    order: 1;
+  }
+  
+  .formSection {
+    order: 2;
+  }
+  
+  .formSection, .listSection {
+    width: 100%;
+    margin-bottom: 20px;
+  }
 }
 
 @media (max-width: 768px) {
-  .contentGrid {
-    grid-template-columns: 1fr;
-  }
-  
   .tableHeader, .tableRow {
     grid-template-columns: 60px 1fr 1fr 80px 100px;
   }
   
   .tableDescription {
     display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .tableHeader, .tableRow {
+    grid-template-columns: 60px 1fr 100px;
+  }
+  
+  .tableStatus {
+    display: none;
+  }
+  
+  .adminProgramsPage {
+    padding: 15px;
   }
 } 
