@@ -186,6 +186,69 @@ function AdminHistory() {
         {error && <div className={styles.errorMessage}>{error}</div>}
         
         <div className={styles.contentGrid}>
+          {/* 연혁 목록 섹션 */}
+          <section className={styles.listSection}>
+            <h2>연혁 목록</h2>
+            
+            <div className={styles.tableHeader}>
+              <div className={styles.tableDate}>날짜</div>
+              <div className={styles.tableEvent}>내용</div>
+              <div className={styles.tableStatus}>상태</div>
+              <div className={styles.tableActions}>관리</div>
+            </div>
+            
+            {isLoading ? (
+              <div className={styles.loading}>로딩 중...</div>
+            ) : historyItems.length === 0 ? (
+              <div className={styles.emptyList}>등록된 연혁이 없습니다.</div>
+            ) : (
+              <div className={styles.historyTable}>
+                {/* 연혁 목록 테이블 내용 */}
+                {historyItems.map((item) => (
+                  <div 
+                    key={item.id} 
+                    className={`${styles.tableRow} ${!item.isActive ? styles.inactiveRow : ''}`}
+                  >
+                    <div className={styles.tableDate}>
+                      {item.year}.{item.month}.{item.day}.
+                    </div>
+                    <div className={styles.tableEvent}>
+                      {item.event}
+                    </div>
+                    <div className={styles.tableStatus}>
+                      <span className={item.isActive ? styles.activeStatus : styles.inactiveStatus}>
+                        {item.isActive ? '활성' : '비활성'}
+                      </span>
+                    </div>
+                    <div className={styles.tableActions}>
+                      <button 
+                        onClick={() => handleEdit(item)} 
+                        className={styles.editButton}
+                      >
+                        <i className="fas fa-edit"></i>
+                      </button>
+                      <button 
+                        onClick={() => handleDelete(item.id)} 
+                        className={styles.deleteButton}
+                      >
+                        <i className="fas fa-trash"></i>
+                      </button>
+                      <button 
+                        onClick={() => handleToggleActive(item.id, item.isActive)} 
+                        className={styles.toggleButton}
+                      >
+                        {item.isActive ? 
+                          <i className="fas fa-eye-slash"></i> : 
+                          <i className="fas fa-eye"></i>
+                        }
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </section>
+          
           {/* 입력 폼 섹션 */}
           <section className={styles.formSection}>
             <h2>새 연혁 추가</h2>
@@ -276,68 +339,6 @@ function AdminHistory() {
                 </button>
               )}
             </form>
-          </section>
-          
-          {/* 연혁 목록 섹션 */}
-          <section className={styles.listSection}>
-            <h2>연혁 목록</h2>
-            
-            {isLoading ? (
-              <div className={styles.loading}>로딩 중...</div>
-            ) : historyItems.length === 0 ? (
-              <div className={styles.emptyList}>등록된 연혁이 없습니다.</div>
-            ) : (
-              <div className={styles.historyTable}>
-                <div className={styles.tableHeader}>
-                  <div className={styles.tableDate}>날짜</div>
-                  <div className={styles.tableEvent}>내용</div>
-                  <div className={styles.tableStatus}>상태</div>
-                  <div className={styles.tableActions}>관리</div>
-                </div>
-                
-                {historyItems.map((item) => (
-                  <div 
-                    key={item.id} 
-                    className={`${styles.tableRow} ${!item.isActive ? styles.inactiveRow : ''}`}
-                  >
-                    <div className={styles.tableDate}>
-                      {item.year}.{item.month}.{item.day}.
-                    </div>
-                    <div className={styles.tableEvent}>
-                      {item.event}
-                    </div>
-                    <div className={styles.tableStatus}>
-                      <span className={item.isActive ? styles.activeStatus : styles.inactiveStatus}>
-                        {item.isActive ? '활성' : '비활성'}
-                      </span>
-                    </div>
-                    <div className={styles.tableActions}>
-                      <button 
-                        onClick={() => handleEdit(item)} 
-                        className={styles.editButton}
-                      >
-                        <i className="fas fa-edit"></i>
-                      </button>
-                      <button 
-                        onClick={() => handleDelete(item.id)} 
-                        className={styles.deleteButton}
-                      >
-                        <i className="fas fa-trash"></i>
-                      </button>
-                      <button 
-                        onClick={() => handleToggleActive(item.id, item.isActive)} 
-                        className={styles.toggleButton}
-                      >
-                        {item.isActive ? 
-                          <i className="fas fa-eye-slash"></i> : 
-                          <i className="fas fa-eye"></i>
-                        }
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
           </section>
         </div>
       </div>
