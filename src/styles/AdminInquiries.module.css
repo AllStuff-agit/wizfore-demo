@@ -84,7 +84,7 @@
 
 .tableHeader {
   display: grid;
-  grid-template-columns: 140px 100px 2fr 120px 80px 120px;
+  grid-template-columns: 140px 90px 3fr 100px 70px 120px;
   gap: 8px;
   padding: 12px;
   background-color: #f5f5f5;
@@ -96,7 +96,7 @@
 
 .tableRow {
   display: grid;
-  grid-template-columns: 140px 100px 2fr 120px 80px 120px;
+  grid-template-columns: 140px 90px 3fr 100px 70px 120px;
   gap: 8px;
   padding: 12px;
   border-bottom: 1px solid #eee;
@@ -391,7 +391,7 @@
   }
   
   .tableHeader, .tableRow {
-    grid-template-columns: 140px 100px 2fr 120px 80px 120px;
+    grid-template-columns: 140px 90px 3fr 100px 70px 120px;
   }
   
   .detailInfo {
@@ -401,7 +401,7 @@
 
 @media (max-width: 1100px) {
   .tableHeader, .tableRow {
-    grid-template-columns: 140px 100px 2fr 120px 80px;
+    grid-template-columns: 140px 90px 3fr 100px 70px;
   }
   
   .tableActions {
@@ -411,7 +411,7 @@
 
 @media (max-width: 768px) {
   .tableHeader, .tableRow {
-    grid-template-columns: 140px 2fr 80px;
+    grid-template-columns: 120px 3fr 70px;
   }
   
   .tableName, .tableService {

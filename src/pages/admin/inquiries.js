@@ -136,11 +136,11 @@ function AdminInquiries() {
       case 'pending':
         return { label: '대기중', color: 'warning' };
       case 'in_progress':
-        return { label: '처리중', color: 'info' };
+        return { label: '대기중', color: 'warning' };  // 처리중도 대기중으로 표시
       case 'resolved':
-        return { label: '해결됨', color: 'success' };
+        return { label: '완료', color: 'success' };
       default:
-        return { label: '알 수 없음', color: 'secondary' };
+        return { label: '대기중', color: 'warning' };
     }
   };
   
@@ -251,7 +251,7 @@ function AdminInquiries() {
                           }} 
                           className={`${styles.actionButton} ${styles.processButton}`}
                           disabled={inquiry.status === 'in_progress'}
-                          title="처리중으로 변경"
+                          title="대기중으로 변경"
                         >
                           <i className="fas fa-tasks"></i>
                         </button>
@@ -266,7 +266,7 @@ function AdminInquiries() {
                           }} 
                           className={`${styles.actionButton} ${styles.resolveButton}`}
                           disabled={inquiry.status === 'resolved'}
-                          title="해결됨으로 변경"
+                          title="완료로 변경"
                         >
                           <i className="fas fa-check-circle"></i>
                         </button>
