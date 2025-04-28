@@ -232,32 +232,21 @@ function AdminInquiries() {
                       </span>
                     </div>
                     <div className={styles.tableStatus}>
-                      {/* 상태 변경 버튼 */}
-                      {inquiry.status === 'resolved' ? (
-                        <button 
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleStatusChange(inquiry.id, 'pending');
-                          }} 
-                          className={`${styles.actionButton} ${styles.pendingButton}`}
-                          title="대기중으로 변경"
-                        >
-                          <i className="fas fa-clock"></i>
-                        </button>
-                      ) : (
-                        <button 
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            if (window.confirm('완료 상태로 변경하시겠습니까?')) {
-                              handleStatusChange(inquiry.id, 'resolved');
-                            }
-                          }} 
-                          className={`${styles.actionButton} ${styles.resolveButton}`}
-                          title="완료로 변경"
-                        >
-                          <i className="fas fa-check-circle"></i>
-                        </button>
-                      )}
+                      <button 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          const newStatus = inquiry.status === 'resolved' ? 'pending' : 'resolved';
+                          const confirmMessage = newStatus === 'resolved' ? '완료 상태로 변경하시겠습니까?' : '대기중 상태로 변경하시겠습니까?';
+                          
+                          if(window.confirm(confirmMessage)) {
+                            handleStatusChange(inquiry.id, newStatus);
+                          }
+                        }}
+                        className={`${styles.statusButton} ${inquiry.status === 'resolved' ? styles.completedStatus : styles.pendingStatus}`}
+                        title={inquiry.status === 'resolved' ? '대기중으로 변경' : '완료로 변경'}
+                      >
+                        {inquiry.status === 'resolved' ? '완료' : '대기중'}
+                      </button>
                     </div>
                     <div className={styles.tableActions}>
                       {/* 삭제 버튼 */}

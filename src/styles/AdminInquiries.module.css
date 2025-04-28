@@ -180,6 +180,35 @@
   justify-content: center;
 }
 
+.statusButton {
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  min-width: 60px;
+  text-align: center;
+}
+
+.pendingStatus {
+  background-color: #fff8e0;
+  color: #b7791f;
+}
+
+.pendingStatus:hover {
+  background-color: #ffeeba;
+}
+
+.completedStatus {
+  background-color: #e6ffec;
+  color: #218838;
+}
+
+.completedStatus:hover {
+  background-color: #c3e6cb;
+}
+
 .tableActions {
   display: flex;
   align-items: center;
@@ -407,6 +436,12 @@
 }
 
 @media (max-width: 1100px) {
+  .tableHeader, .tableRow {
+    grid-template-columns: 140px 90px 4fr 100px 70px 70px;
+  }
+}
+
+@media (max-width: 900px) {
   .tableHeader, .tableRow {
     grid-template-columns: 140px 90px 4fr 100px 70px;
   }
