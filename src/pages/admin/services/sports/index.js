@@ -23,20 +23,31 @@ export default function SportsServices() {
   // Firestore에서 데이터 로드
   useEffect(() => {
     const fetchPrograms = async () => {
+      setLoading(true);
       try {
         // 특수스포츠교실 카테고리의 데이터 가져오기
         const serviceData = await getServiceByCategory("특수스포츠교실");
         
-        if (serviceData && serviceData.programs && serviceData.programs.length > 0) {
+        if (serviceData && serviceData.programs) {
           setPrograms(serviceData.programs);
         } else {
-          // Firestore에 데이터가 없으면 기본 데이터 사용
-          setPrograms(serviceDefaultData.특수스포츠교실.programs);
+          // 데이터가 없는 경우 빈 배열로 설정
+          setPrograms([]);
+          // 데이터 없음 메시지 표시
+          setAddDataMessage({ 
+            type: 'info', 
+            text: 'Firestore에 특수스포츠교실 서비스 데이터가 없습니다. "기존 특수스포츠교실 데이터 추가" 버튼을 클릭하여 데이터를 추가해 주세요.' 
+          });
         }
       } catch (error) {
         console.error("프로그램 데이터 로드 오류:", error);
-        // 에러가 발생하면 기본 데이터 사용
-        setPrograms(serviceDefaultData.특수스포츠교실.programs);
+        // 에러 발생 시 빈 배열 설정
+        setPrograms([]);
+        // 오류 메시지 표시
+        setAddDataMessage({ 
+          type: 'error', 
+          text: `데이터 로드 중 오류가 발생했습니다: ${error.message}` 
+        });
       } finally {
         setLoading(false);
       }

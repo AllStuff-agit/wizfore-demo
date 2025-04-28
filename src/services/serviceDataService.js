@@ -43,6 +43,7 @@ export const getServiceByCategory = async (category) => {
         ...serviceDoc.data()
       };
     } else {
+      console.log(`${category} 데이터가 존재하지 않습니다.`);
       return null;
     }
   } catch (error) {
