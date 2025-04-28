@@ -102,7 +102,7 @@
 }
 
 .formGroup input[type="text"] {
-  padding: 10px;
+  padding: 10px 15px;
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 0.95rem;
@@ -112,13 +112,14 @@
 }
 
 .formGroup textarea {
-  padding: 12px;
+  padding: 12px 15px;
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 0.95rem;
   min-height: 150px;
   resize: vertical;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .checkboxLabel {
