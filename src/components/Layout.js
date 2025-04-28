@@ -69,6 +69,11 @@ export default function Layout({ children, title = '위즈포레 사회서비스
                 </Link>
               </li>
               <li>
+                <Link href="/location" className={router.pathname.startsWith('/location') ? styles.active : ''}>
+                  오시는 길
+                </Link>
+              </li>
+              <li>
                 <Link href="/contact" className={router.pathname.startsWith('/contact') ? styles.active : ''}>
                   문의하기
                 </Link>
