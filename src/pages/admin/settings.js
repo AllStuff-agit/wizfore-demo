@@ -22,6 +22,8 @@ function Settings() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedSettings, setEditedSettings] = useState({});
 
   useEffect(() => {
     loadSettings();
@@ -32,6 +34,7 @@ function Settings() {
       const data = await getSettings();
       if (data) {
         setSettings(data);
+        setEditedSettings(data);
       }
       setIsLoading(false);
     } catch (error) {
@@ -44,7 +47,7 @@ function Settings() {
     const { name, value } = e.target;
     if (name.includes('.')) {
       const [parent, child] = name.split('.');
-      setSettings(prev => ({
+      setEditedSettings(prev => ({
         ...prev,
         [parent]: {
           ...prev[parent],
@@ -52,7 +55,7 @@ function Settings() {
         }
       }));
     } else {
-      setSettings(prev => ({
+      setEditedSettings(prev => ({
         ...prev,
         [name]: value
       }));
@@ -62,12 +65,25 @@ function Settings() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await updateSettings(settings);
+      await updateSettings(editedSettings);
+      setSettings(editedSettings);
       setSuccess('설정이 성공적으로 저장되었습니다.');
+      setIsEditing(false);
       setTimeout(() => setSuccess(null), 3000);
     } catch (error) {
       setError('설정을 저장하는 중 오류가 발생했습니다.');
     }
+  };
+
+  const handleEdit = () => {
+    setIsEditing(true);
+    setEditedSettings(settings);
+  };
+
+  const handleCancel = () => {
+    setIsEditing(false);
+    setEditedSettings(settings);
+    setError(null);
   };
 
   if (isLoading) {
@@ -86,121 +102,164 @@ function Settings() {
       <AdminLayout />
       <div className={styles.adminContent}>
         <div className={styles.pageHeader}>
-          <h1>센터 기본 정보 설정</h1>
+          <div className={styles.headerContent}>
+            <h1>센터 기본 정보</h1>
+            {!isEditing ? (
+              <button onClick={handleEdit} className={styles.editButton}>
+                <i className="fas fa-edit"></i> 수정
+              </button>
+            ) : (
+              <div className={styles.editActions}>
+                <button onClick={handleCancel} className={styles.cancelButton}>
+                  취소
+                </button>
+                <button onClick={handleSubmit} className={styles.saveButton}>
+                  저장
+                </button>
+              </div>
+            )}
+          </div>
         </div>
         
         {error && <div className={styles.error}>{error}</div>}
         {success && <div className={styles.success}>{success}</div>}
 
         <div className={styles.card}>
-          <form onSubmit={handleSubmit} className={styles.form}>
-            <div className={styles.formGroup}>
-              <label htmlFor="siteName">센터명</label>
-              <input
-                type="text"
-                id="siteName"
-                name="siteName"
-                value={settings.siteName}
-                onChange={handleChange}
-                required
-              />
-            </div>
+          <div className={styles.settingsContent}>
+            <div className={styles.settingsGroup}>
+              <h2>기본 정보</h2>
+              <div className={styles.settingsItem}>
+                <label>센터명</label>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    name="siteName"
+                    value={editedSettings.siteName}
+                    onChange={handleChange}
+                    required
+                  />
+                ) : (
+                  <span>{settings.siteName}</span>
+                )}
+              </div>
 
-            <div className={styles.formGroup}>
-              <label htmlFor="phone">대표 전화번호</label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                value={settings.phone}
-                onChange={handleChange}
-                required
-              />
-            </div>
+              <div className={styles.settingsItem}>
+                <label>대표 전화번호</label>
+                {isEditing ? (
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={editedSettings.phone}
+                    onChange={handleChange}
+                    required
+                  />
+                ) : (
+                  <span>{settings.phone}</span>
+                )}
+              </div>
 
-            <div className={styles.formGroup}>
-              <label htmlFor="fax">팩스번호</label>
-              <input
-                type="tel"
-                id="fax"
-                name="fax"
-                value={settings.fax}
-                onChange={handleChange}
-              />
-            </div>
+              <div className={styles.settingsItem}>
+                <label>팩스번호</label>
+                {isEditing ? (
+                  <input
+                    type="tel"
+                    name="fax"
+                    value={editedSettings.fax}
+                    onChange={handleChange}
+                  />
+                ) : (
+                  <span>{settings.fax}</span>
+                )}
+              </div>
 
-            <div className={styles.formGroup}>
-              <label htmlFor="email">이메일</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={settings.email}
-                onChange={handleChange}
-                required
-              />
-            </div>
+              <div className={styles.settingsItem}>
+                <label>이메일</label>
+                {isEditing ? (
+                  <input
+                    type="email"
+                    name="email"
+                    value={editedSettings.email}
+                    onChange={handleChange}
+                    required
+                  />
+                ) : (
+                  <span>{settings.email}</span>
+                )}
+              </div>
 
-            <div className={styles.formGroup}>
-              <label htmlFor="address">주소</label>
-              <input
-                type="text"
-                id="address"
-                name="address"
-                value={settings.address}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
-            <h2>운영시간</h2>
-            
-            <div className={styles.formGroup}>
-              <label>평일</label>
-              <div className={styles.timeInputs}>
-                <input
-                  type="time"
-                  name="operatingHours.weekday.start"
-                  value={settings.operatingHours.weekday.start}
-                  onChange={handleChange}
-                  required
-                />
-                <span>~</span>
-                <input
-                  type="time"
-                  name="operatingHours.weekday.end"
-                  value={settings.operatingHours.weekday.end}
-                  onChange={handleChange}
-                  required
-                />
+              <div className={styles.settingsItem}>
+                <label>주소</label>
+                {isEditing ? (
+                  <input
+                    type="text"
+                    name="address"
+                    value={editedSettings.address}
+                    onChange={handleChange}
+                    required
+                  />
+                ) : (
+                  <span>{settings.address}</span>
+                )}
               </div>
             </div>
 
-            <div className={styles.formGroup}>
-              <label>토요일</label>
-              <div className={styles.timeInputs}>
-                <input
-                  type="time"
-                  name="operatingHours.saturday.start"
-                  value={settings.operatingHours.saturday.start}
-                  onChange={handleChange}
-                  required
-                />
-                <span>~</span>
-                <input
-                  type="time"
-                  name="operatingHours.saturday.end"
-                  value={settings.operatingHours.saturday.end}
-                  onChange={handleChange}
-                  required
-                />
+            <div className={styles.settingsGroup}>
+              <h2>운영시간</h2>
+              <div className={styles.settingsItem}>
+                <label>평일</label>
+                {isEditing ? (
+                  <div className={styles.timeInputs}>
+                    <input
+                      type="time"
+                      name="operatingHours.weekday.start"
+                      value={editedSettings.operatingHours.weekday.start}
+                      onChange={handleChange}
+                      required
+                    />
+                    <span>~</span>
+                    <input
+                      type="time"
+                      name="operatingHours.weekday.end"
+                      value={editedSettings.operatingHours.weekday.end}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                ) : (
+                  <span>
+                    {settings.operatingHours.weekday.start} ~ {settings.operatingHours.weekday.end}
+                  </span>
+                )}
+              </div>
+
+              <div className={styles.settingsItem}>
+                <label>토요일</label>
+                {isEditing ? (
+                  <div className={styles.timeInputs}>
+                    <input
+                      type="time"
+                      name="operatingHours.saturday.start"
+                      value={editedSettings.operatingHours.saturday.start}
+                      onChange={handleChange}
+                      required
+                    />
+                    <span>~</span>
+                    <input
+                      type="time"
+                      name="operatingHours.saturday.end"
+                      value={editedSettings.operatingHours.saturday.end}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                ) : (
+                  <span>
+                    {settings.operatingHours.saturday.start} ~ {settings.operatingHours.saturday.end}
+                  </span>
+                )}
               </div>
             </div>
-
-            <button type="submit" className={styles.submitButton}>
-              저장하기
-            </button>
-          </form>
+          </div>
         </div>
       </div>
     </div>
