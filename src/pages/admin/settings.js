@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { getSettings, updateSettings } from '../../services/settingsService';
-import AdminLayout from '../../components/AdminLayout';
 import styles from '../../styles/Admin.module.css';
 
 export default function Settings() {
@@ -70,15 +69,11 @@ export default function Settings() {
   };
 
   if (isLoading) {
-    return (
-      <AdminLayout>
-        <div className={styles.loading}>로딩 중...</div>
-      </AdminLayout>
-    );
+    return <div className={styles.loading}>로딩 중...</div>;
   }
 
   return (
-    <AdminLayout>
+    <div className={styles.adminContent}>
       <div className={styles.pageHeader}>
         <h1>센터 기본 정보 설정</h1>
       </div>
@@ -196,6 +191,6 @@ export default function Settings() {
           </button>
         </form>
       </div>
-    </AdminLayout>
+    </div>
   );
 } 
