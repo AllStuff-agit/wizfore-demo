@@ -80,6 +80,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 15px;
+  margin-bottom: 15px;
 }
 
 .formGroup {
@@ -100,6 +101,17 @@
   border-radius: 4px;
   font-size: 0.95rem;
   text-align: center;
+  width: 100%;
+}
+
+.formGroup textarea {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  min-height: 150px;
+  resize: vertical;
+  width: 100%;
 }
 
 .checkboxLabel {
