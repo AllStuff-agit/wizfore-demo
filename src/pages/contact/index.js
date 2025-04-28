@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import styles from '../../styles/Contact.module.css';
+import { addInquiry } from '../../services/inquiriesService';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -25,10 +26,18 @@ export default function Contact() {
     setIsSubmitting(true);
     setError(null);
     
-    // 여기에서 실제로는 Firebase나 다른 백엔드로 데이터를 보내는 코드를 작성합니다.
-    // 현재는 예시로 1초 후에 성공으로 처리하겠습니다.
+    // 폼 데이터 유효성 검사
+    if (!formData.name || !formData.phone || !formData.subject || !formData.message) {
+      setError('필수 입력 항목을 모두 작성해주세요.');
+      setIsSubmitting(false);
+      return;
+    }
+    
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Firestore에 문의 데이터 저장
+      await addInquiry(formData);
+      console.log('문의가 성공적으로 제출되었습니다.');
+      
       setIsSubmitted(true);
       setFormData({
         name: '',
@@ -39,6 +48,7 @@ export default function Contact() {
         service: '',
       });
     } catch (error) {
+      console.error('문의 제출 오류:', error);
       setError('문의 제출 중 오류가 발생했습니다. 다시 시도해주세요.');
     } finally {
       setIsSubmitting(false);
@@ -155,7 +165,8 @@ export default function Contact() {
                       <i className="fas fa-check-circle"></i>
                     </div>
                     <h3>문의가 성공적으로 제출되었습니다!</h3>
-                    <p>빠른 시일 내에 답변 드리겠습니다. 감사합니다.</p>
+                    <p>빠른 시일 내에 연락드리겠습니다. 감사합니다.</p>
+                    <p className={styles.contactInfo}>문의사항은 <strong>051-324-0940</strong> 으로도 연락 가능합니다.</p>
                     <button 
                       className={styles.btn}
                       onClick={() => setIsSubmitted(false)}
