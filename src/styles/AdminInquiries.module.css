@@ -178,17 +178,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.statusButton {
   padding: 4px 8px;
-  border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 0.85rem;
   font-weight: 500;
-  min-width: 60px;
   text-align: center;
+  transition: background-color 0.2s;
 }
 
 .pendingStatus {

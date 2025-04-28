@@ -231,22 +231,16 @@ function AdminInquiries() {
                         {getStatusLabel(inquiry.status).label}
                       </span>
                     </div>
-                    <div className={styles.tableStatus}>
-                      <button 
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          const newStatus = inquiry.status === 'resolved' ? 'pending' : 'resolved';
-                          const confirmMessage = newStatus === 'resolved' ? '완료 상태로 변경하시겠습니까?' : '대기중 상태로 변경하시겠습니까?';
-                          
-                          if(window.confirm(confirmMessage)) {
-                            handleStatusChange(inquiry.id, newStatus);
-                          }
-                        }}
-                        className={`${styles.statusButton} ${inquiry.status === 'resolved' ? styles.completedStatus : styles.pendingStatus}`}
-                        title={inquiry.status === 'resolved' ? '대기중으로 변경' : '완료로 변경'}
-                      >
-                        {inquiry.status === 'resolved' ? '완료' : '대기중'}
-                      </button>
+                    <div 
+                      className={`${styles.tableStatus} ${inquiry.status === 'resolved' ? styles.completedStatus : styles.pendingStatus}`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const newStatus = inquiry.status === 'resolved' ? 'pending' : 'resolved';
+                        handleStatusChange(inquiry.id, newStatus);
+                      }}
+                      title={inquiry.status === 'resolved' ? '대기중으로 변경' : '완료로 변경'}
+                    >
+                      {inquiry.status === 'resolved' ? '완료' : '대기중'}
                     </div>
                     <div className={styles.tableActions}>
                       {/* 삭제 버튼 */}
