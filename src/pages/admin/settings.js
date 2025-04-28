@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { getSettings, updateSettings } from '../../services/settingsService';
-import AdminSidebar from '../../components/AdminSidebar';
+import AdminSidebar from '../../components/AdminLayout';
 import styles from '../../styles/Admin.module.css';
 
 export default function Settings() {
