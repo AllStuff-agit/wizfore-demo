@@ -80,7 +80,7 @@ export default function Location() {
             <div className={styles.mapWrapper}>
               <div className={styles.map}>
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3261.1234567890123!2d128.9917!3d35.1796!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDEwJzQ2LjYiTiAxMjDCsDU5JzM0LjEiRQ!5e0!3m2!1sko!2skr!4v1234567890!5m2!1sko!2skr"
+                  src="https://www.google.co.kr/maps/place/%EB%B6%80%EC%82%B0%EA%B4%91%EC%97%AD%EC%8B%9C+%EC%82%AC%EC%83%81%EA%B5%AC+%EB%AA%A8%EB%9D%BC%EB%A1%9C110%EB%B2%88%EA%B8%B8+25/data=!4m6!3m5!1s0x3568ea9ea90ac5a9:0x170fb73b2e0fe64c!8m2!3d35.1853147!4d128.9924509!16s%2Fg%2F11bzkfjl_r?entry=ttu&g_ep=EgoyMDI1MDQyMy4wIKXMDSoASAFQAw%3D%3D"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}

@@ -109,6 +109,12 @@ export default function AdminLayout({ children, title = '관리자 페이지 - �
                 <i className="fas fa-history"></i> 연혁 관리
               </Link>
             </li>
+            <li>
+              <Link href="/admin/settings">
+                <i className="fas fa-cog"></i>
+                <span>센터 설정</span>
+              </Link>
+            </li>
           </ul>
         </nav>
         <div className={styles.sidebarFooter}>
