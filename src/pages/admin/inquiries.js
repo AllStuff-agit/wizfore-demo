@@ -220,7 +220,7 @@ function AdminInquiries() {
                     <div className={styles.tableName}>
                       {inquiry.name}
                     </div>
-                    <div className={styles.tableSubject}>
+                    <div className={styles.tableSubject} title={inquiry.subject}>
                       {inquiry.subject}
                     </div>
                     <div className={styles.tableService}>
@@ -296,7 +296,7 @@ function AdminInquiries() {
               <div className={styles.inquiryDetail}>
                 <div className={styles.detailHeader}>
                   <div className={styles.detailTitle}>
-                    <h3>{selectedInquiry.subject}</h3>
+                    <h3 title={selectedInquiry.subject}>{selectedInquiry.subject}</h3>
                     <span className={`${styles.statusBadge} ${styles[getStatusLabel(selectedInquiry.status).color]}`}>
                       {getStatusLabel(selectedInquiry.status).label}
                     </span>
@@ -334,7 +334,7 @@ function AdminInquiries() {
                 
                 <div className={styles.messageSection}>
                   <h4>문의 내용</h4>
-                  <div className={styles.messageContent}>
+                  <div className={styles.messageContent} title={selectedInquiry.message}>
                     {selectedInquiry.message}
                   </div>
                 </div>
@@ -342,7 +342,7 @@ function AdminInquiries() {
                 <div className={styles.responseSection}>
                   <h4>응답</h4>
                   {selectedInquiry.status === 'resolved' && selectedInquiry.response ? (
-                    <div className={styles.responseContent}>
+                    <div className={styles.responseContent} title={selectedInquiry.response}>
                       {selectedInquiry.response}
                     </div>
                   ) : (

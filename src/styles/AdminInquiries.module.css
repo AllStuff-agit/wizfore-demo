@@ -84,7 +84,7 @@
 
 .tableHeader {
   display: grid;
-  grid-template-columns: 140px 100px 1fr 120px 80px 120px;
+  grid-template-columns: 140px 100px 2fr 120px 80px 120px;
   gap: 8px;
   padding: 12px;
   background-color: #f5f5f5;
@@ -96,12 +96,14 @@
 
 .tableRow {
   display: grid;
-  grid-template-columns: 140px 100px 1fr 120px 80px 120px;
+  grid-template-columns: 140px 100px 2fr 120px 80px 120px;
   gap: 8px;
   padding: 12px;
   border-bottom: 1px solid #eee;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  min-height: 56px;
+  align-items: center;
 }
 
 .tableRow:hover {
@@ -116,12 +118,23 @@
   background-color: #eef7fd;
 }
 
-.tableDate, .tableName, .tableSubject, .tableService, .tableStatus, .tableActions {
+.tableDate, .tableName, .tableService, .tableStatus, .tableActions {
   display: flex;
   align-items: center;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.tableSubject {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.2;
+  min-height: 100%;
 }
 
 .tableSubject {
@@ -258,7 +271,7 @@
 .detailTitle {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 8px;
 }
 
@@ -266,6 +279,10 @@
   margin: 0;
   font-size: 1.2rem;
   color: #333;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  padding-right: 10px;
+  flex: 1;
 }
 
 .detailDate p {
@@ -279,27 +296,41 @@
   grid-template-columns: 1fr 1fr;
   gap: 12px;
   width: 100%;
+  margin-bottom: 12px;
 }
 
 .infoItem {
   display: flex;
-  align-items: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  align-items: flex-start;
+  width: 100%;
+  padding: 4px 0;
 }
 
 .infoLabel {
   font-weight: 600;
   margin-right: 8px;
   color: #666;
-  min-width: 60px;
+  min-width: 70px;
+  flex-shrink: 0;
+}
+
+.infoValue {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  flex: 1;
+}
+
+
+.messageSection, .responseSection {
+  margin-bottom: 16px;
 }
 
 .messageSection h4, .responseSection h4 {
   margin-top: 0;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   font-size: 1rem;
   color: #444;
+  font-weight: 600;
 }
 
 .messageContent {
@@ -354,13 +385,13 @@
   background-color: var(--color-primary-dark);
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1400px) {
   .contentGrid {
     grid-template-columns: 1fr;
   }
   
   .tableHeader, .tableRow {
-    grid-template-columns: 140px 100px 1fr 120px 80px 120px;
+    grid-template-columns: 140px 100px 2fr 120px 80px 120px;
   }
   
   .detailInfo {
@@ -368,9 +399,9 @@
   }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1100px) {
   .tableHeader, .tableRow {
-    grid-template-columns: 140px 100px 1fr 120px 80px;
+    grid-template-columns: 140px 100px 2fr 120px 80px;
   }
   
   .tableActions {
@@ -380,7 +411,7 @@
 
 @media (max-width: 768px) {
   .tableHeader, .tableRow {
-    grid-template-columns: 140px 1fr 80px;
+    grid-template-columns: 140px 2fr 80px;
   }
   
   .tableName, .tableService {
