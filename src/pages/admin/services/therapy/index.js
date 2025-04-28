@@ -2,6 +2,13 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
+import { writeBatch } from 'firebase/firestore';
+import { db } from '../../../../firebase/firebase';
+import { 
+  getServicesByCategory, 
+  checkServiceExistsByCategory, 
+  addServicesBatch 
+} from '../../../../services/serviceDataService';
 import AdminLayout from '../../../../components/AdminLayout';
 import styles from '../../../../styles/AdminProgramManagement.module.css';
 
@@ -10,8 +17,10 @@ export default function TherapyServices() {
   const [programs, setPrograms] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
+  const [isAddingData, setIsAddingData] = useState(false);
+  const [addDataMessage, setAddDataMessage] = useState(null);
 
-  // 치료·상담 프로그램 데이터 (나중에 Firebase에서 가져올 예정)
+  // 치료·상담 프로그램 기본 데이터
   const dummyPrograms = [
     {
       id: 'lang-therapy',
@@ -95,13 +104,83 @@ export default function TherapyServices() {
     }
   ];
 
-  // 컴포넌트 마운트 시 데이터 로드
+  // Firestore에서 데이터 로드
   useEffect(() => {
-    // 실제 구현에서는 Firebase에서 데이터를 가져옴
-    // 현재는 더미 데이터 사용
-    setPrograms(dummyPrograms);
-    setLoading(false);
+    const fetchPrograms = async () => {
+      try {
+        // 발달재활서비스 카테고리의 데이터 가져오기
+        const fetchedPrograms = await getServicesByCategory("발달재활서비스");
+        
+        if (fetchedPrograms.length > 0) {
+          setPrograms(fetchedPrograms);
+        } else {
+          // Firestore에 데이터가 없으면 더미 데이터 사용
+          setPrograms(dummyPrograms);
+        }
+      } catch (error) {
+        console.error("프로그램 데이터 로드 오류:", error);
+        // 에러가 발생하면 더미 데이터 사용
+        setPrograms(dummyPrograms);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPrograms();
   }, []);
+
+  // 기존 데이터를 Firestore에 추가하는 함수
+  const addDataToFirestore = async () => {
+    try {
+      setIsAddingData(true);
+      setAddDataMessage({ type: 'info', text: '데이터를 Firestore에 추가하는 중...' });
+      
+      // 이미 데이터가 있는지 확인
+      const dataExists = await checkServiceExistsByCategory("발달재활서비스");
+      
+      if (dataExists) {
+        setAddDataMessage({ 
+          type: 'warning', 
+          text: '이미 Firestore에 치료·상담 서비스 데이터가 존재합니다. 중복 추가를 방지하기 위해 작업이 취소되었습니다.' 
+        });
+        setIsAddingData(false);
+        return;
+      }
+      
+      // 배치 작업으로 여러 문서를 한번에 추가
+      const batch = writeBatch(db);
+      
+      // 데이터 준비 및 배치 설정
+      addServicesBatch(dummyPrograms, batch);
+      
+      // 배치 작업 커밋
+      await batch.commit();
+      
+      // 성공 메시지 설정
+      setAddDataMessage({ 
+        type: 'success', 
+        text: '기존 치료·상담 데이터가 Firestore에 성공적으로 추가되었습니다.' 
+      });
+      
+      // 업데이트된 데이터 다시 로드
+      const updatedPrograms = await getServicesByCategory("발달재활서비스");
+      setPrograms(updatedPrograms);
+      
+    } catch (error) {
+      console.error("Firestore 데이터 추가 오류:", error);
+      setAddDataMessage({ 
+        type: 'error', 
+        text: `데이터 추가 중 오류가 발생했습니다: ${error.message}` 
+      });
+    } finally {
+      setIsAddingData(false);
+      
+      // 5초 후 메시지 숨기기
+      setTimeout(() => {
+        setAddDataMessage(null);
+      }, 5000);
+    }
+  };
 
   // 필터링 처리
   const filteredPrograms = filter === 'all' 
@@ -130,10 +209,34 @@ export default function TherapyServices() {
               <p>발달재활서비스 및 상담 프로그램을 관리합니다.</p>
             </div>
           </div>
-          <button className={styles.addButton}>
-            <i className="fas fa-plus"></i> 새 프로그램 추가
-          </button>
+          <div className={styles.buttonGroup}>
+            <button 
+              className={styles.addButton}
+              onClick={() => router.push('/admin/services/therapy/new')}
+            >
+              <i className="fas fa-plus"></i> 새 프로그램 추가
+            </button>
+            <button 
+              className={`${styles.importButton} ${isAddingData ? styles.disabled : ''}`}
+              onClick={addDataToFirestore}
+              disabled={isAddingData}
+            >
+              <i className="fas fa-database"></i> 기존 치료·상담 데이터 추가
+            </button>
+          </div>
         </div>
+
+        {addDataMessage && (
+          <div className={`${styles.messageBox} ${styles[addDataMessage.type]}`}>
+            <i className={`fas ${
+              addDataMessage.type === 'success' ? 'fa-check-circle' : 
+              addDataMessage.type === 'error' ? 'fa-exclamation-circle' :
+              addDataMessage.type === 'warning' ? 'fa-exclamation-triangle' : 
+              'fa-info-circle'
+            }`}></i>
+            <span>{addDataMessage.text}</span>
+          </div>
+        )}
 
         <div className={styles.filterTabs}>
           <button 

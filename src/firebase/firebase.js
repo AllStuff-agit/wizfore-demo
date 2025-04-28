@@ -1,6 +1,22 @@
 import { initializeApp, getApps } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
+import { 
+  getFirestore, 
+  connectFirestoreEmulator, 
+  collection, 
+  doc, 
+  addDoc, 
+  setDoc, 
+  updateDoc, 
+  deleteDoc, 
+  getDoc,
+  getDocs,
+  query,
+  where,
+  orderBy,
+  limit,
+  serverTimestamp 
+} from 'firebase/firestore';
 import { enableIndexedDbPersistence } from 'firebase/firestore';
 
 const {
