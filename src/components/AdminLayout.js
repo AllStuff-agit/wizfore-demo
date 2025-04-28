@@ -74,6 +74,14 @@ export default function AdminLayout({ children, title = '관리자 페이지 - �
             </li>
             <li>
               <Link 
+                href="/admin/services" 
+                className={router.pathname.startsWith('/admin/services') ? styles.active : ''}
+              >
+                <i className="fas fa-hands-helping"></i> 서비스 관리
+              </Link>
+            </li>
+            <li>
+              <Link 
                 href="/admin/programs" 
                 className={router.pathname === '/admin/programs' ? styles.active : ''}
               >
