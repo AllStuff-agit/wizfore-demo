@@ -188,7 +188,7 @@ function AdminHistory() {
         <div className={styles.contentGrid}>
           {/* 입력 폼 섹션 */}
           <section className={styles.formSection}>
-            <h2>{editMode ? '연혁 수정' : '새 연혁 추가'}</h2>
+            <h2>새 연혁 추가</h2>
             
             <form onSubmit={handleSubmit} className={styles.historyForm}>
               <div className={styles.formGrid}>
@@ -263,20 +263,18 @@ function AdminHistory() {
                 </label>
               </div>
               
-              <div className={styles.formButtons}>
-                <button type="submit" className={styles.submitButton}>
-                  {editMode ? '수정하기' : '추가하기'}
+              <button type="submit" className={styles.submitButton}>
+                {editMode ? '수정하기' : '추가하기'}
+              </button>
+              {editMode && (
+                <button 
+                  type="button" 
+                  className={styles.cancelButton} 
+                  onClick={resetForm}
+                >
+                  취소
                 </button>
-                {editMode && (
-                  <button 
-                    type="button" 
-                    className={styles.cancelButton} 
-                    onClick={resetForm}
-                  >
-                    취소
-                  </button>
-                )}
-              </div>
+              )}
             </form>
           </section>
           
