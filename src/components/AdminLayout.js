@@ -82,23 +82,18 @@ export default function AdminLayout({ children, title = '관리자 페이지 - �
             </li>
             <li>
               <Link 
-                href="/admin/notices" 
-                className={router.pathname === '/admin/notices' ? styles.active : ''}
+                href="/admin/posts" 
+                className={router.pathname.startsWith('/admin/posts') ? styles.active : ''}
               >
-                <i className="fas fa-bullhorn"></i> 공지사항 관리
+                <i className="fas fa-newspaper"></i> 게시글 관리
               </Link>
             </li>
             <li>
               <Link 
-                href="/admin/history" 
-                className={router.pathname === '/admin/history' ? styles.active : ''}
-                onClick={(e) => {
-                  e.preventDefault();
-                  console.log('History link clicked');
-                  router.push('/admin/history');
-                }}
+                href="/admin/center" 
+                className={router.pathname.startsWith('/admin/center') ? styles.active : ''}
               >
-                <i className="fas fa-history"></i> 연혁 관리
+                <i className="fas fa-building"></i> 센터 정보 관리
               </Link>
             </li>
             <li>
@@ -107,6 +102,14 @@ export default function AdminLayout({ children, title = '관리자 페이지 - �
                 className={router.pathname.startsWith('/admin/facilities') ? styles.active : ''}
               >
                 <i className="fas fa-building"></i> 시설 관리
+              </Link>
+            </li>
+            <li>
+              <Link 
+                href="/admin/main_page" 
+                className={router.pathname === '/admin/main_page' ? styles.active : ''}
+              >
+                <i className="fas fa-home"></i> 메인 페이지 설정
               </Link>
             </li>
             <li>
