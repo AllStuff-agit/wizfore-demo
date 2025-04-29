@@ -50,26 +50,10 @@ export default function AdminLayout({ children, title = '관리자 페이지 - �
             </li>
             <li>
               <Link 
-                href="/admin/clients" 
-                className={router.pathname === '/admin/clients' ? styles.active : ''}
+                href="/admin/experts" 
+                className={router.pathname.startsWith('/admin/experts') ? styles.active : ''}
               >
-                <i className="fas fa-users"></i> 내담자 관리
-              </Link>
-            </li>
-            <li>
-              <Link 
-                href="/admin/sessions" 
-                className={router.pathname === '/admin/sessions' ? styles.active : ''}
-              >
-                <i className="fas fa-calendar-alt"></i> 세션 관리
-              </Link>
-            </li>
-            <li>
-              <Link 
-                href="/admin/therapists" 
-                className={router.pathname === '/admin/therapists' ? styles.active : ''}
-              >
-                <i className="fas fa-user-md"></i> 치료사 관리
+                <i className="fas fa-user-md"></i> 전문가 관리
               </Link>
             </li>
             <li>
@@ -115,6 +99,14 @@ export default function AdminLayout({ children, title = '관리자 페이지 - �
                 }}
               >
                 <i className="fas fa-history"></i> 연혁 관리
+              </Link>
+            </li>
+            <li>
+              <Link 
+                href="/admin/facilities" 
+                className={router.pathname.startsWith('/admin/facilities') ? styles.active : ''}
+              >
+                <i className="fas fa-building"></i> 시설 관리
               </Link>
             </li>
             <li>
