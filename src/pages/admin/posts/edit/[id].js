@@ -7,10 +7,7 @@ import { auth, db, storage } from '../../../../firebase/firebase';
 import AdminLayout from '../../../../components/AdminLayout';
 import styles from '../../../../styles/AdminPostForm.module.css';
 
-// 리치 텍스트 에디터 사용 (선택적)
-import dynamic from 'next/dynamic';
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
-import 'react-quill/dist/quill.snow.css';
+// 리치 텍스트 에디터 대신 일반 textarea 사용
 
 export default function EditPost() {
   const [formData, setFormData] = useState({
@@ -38,17 +35,6 @@ export default function EditPost() {
   // 카테고리 옵션
   const categoryOptions = ['공지사항', '센터소식', '행사안내', 'SNS연동'];
 
-  // 리치 텍스트 에디터 모듈
-  const quillModules = {
-    toolbar: [
-      [{ 'header': [1, 2, 3, false] }],
-      ['bold', 'italic', 'underline', 'strike'],
-      [{ 'color': [] }, { 'background': [] }],
-      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-      ['link', 'image'],
-      ['clean']
-    ],
-  };
 
   // 인증 상태 확인
   useEffect(() => {
@@ -106,9 +92,6 @@ export default function EditPost() {
     }
   };
 
-  const handleEditorChange = (content) => {
-    setFormData({ ...formData, 내용: content });
-  };
 
   const handleThumbnailChange = (e) => {
     const file = e.target.files[0];
@@ -245,15 +228,16 @@ export default function EditPost() {
 
         <div className={styles.formGroup}>
           <label htmlFor="내용">내용 *</label>
-          <div className={styles.editorContainer}>
-            <ReactQuill
-              theme="snow"
-              value={formData.내용}
-              onChange={handleEditorChange}
-              modules={quillModules}
-              placeholder="게시글 내용을 입력하세요"
-            />
-          </div>
+          <textarea
+            id="내용"
+            name="내용"
+            value={formData.내용}
+            onChange={handleInputChange}
+            rows="10"
+            className={styles.textArea}
+            placeholder="게시글 내용을 입력하세요"
+            required
+          ></textarea>
         </div>
 
         <div className={styles.formGroup}>
