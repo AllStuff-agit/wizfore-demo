@@ -10,7 +10,7 @@ import {
   serviceDefaultData
 } from '../../../../services/serviceDataService';
 import AdminLayout from '../../../../components/AdminLayout';
-import styles from '../../../../styles/AdminProgramManagement.module.css';
+import styles from '../../../../styles/admin/services/ProgramManagement.module.css';
 
 export default function SportsServices() {
   const router = useRouter();

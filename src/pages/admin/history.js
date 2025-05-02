@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import AdminLayout from '../../components/AdminLayout';
 import { getAllHistory, addHistoryItem, updateHistoryItem, deleteHistoryItem, toggleHistoryActive, migrateInitialHistory } from '../../services/historyService';
 import { withAdminAuth } from '../../middlewares/withAdminAuth';
-import styles from '../../styles/AdminHistory.module.css';
+import styles from '../../styles/admin/about/history/History.module.css';
 
 function AdminHistory() {
   const [historyItems, setHistoryItems] = useState([]);

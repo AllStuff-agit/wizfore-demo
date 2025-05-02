@@ -12,7 +12,7 @@ import {
   migrateInitialPrograms 
 } from '../../services/programService';
 import { withAdminAuth } from '../../middlewares/withAdminAuth';
-import styles from '../../styles/AdminPrograms.module.css';
+import styles from '../../styles/admin/services/Programs.module.css';
 
 function AdminPrograms() {
   const [programs, setPrograms] = useState([]);
