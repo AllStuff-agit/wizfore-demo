@@ -5,7 +5,7 @@ import { collection, addDoc, getDocs, serverTimestamp } from 'firebase/firestore
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { auth, db, storage } from '../../../firebase/firebase';
 import AdminLayout from '../../../components/AdminLayout';
-import styles from '../../../styles/AdminExpertForm.module.css';
+import styles from '../../../styles/admin/experts/Form.module.css';
 
 export default function AddExpert() {
   const [formData, setFormData] = useState({

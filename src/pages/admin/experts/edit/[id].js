@@ -5,7 +5,7 @@ import { doc, getDoc, collection, getDocs, updateDoc, serverTimestamp } from 'fi
 import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 import { auth, db, storage } from '../../../../firebase/firebase';
 import AdminLayout from '../../../../components/AdminLayout';
-import styles from '../../../../styles/AdminExpertForm.module.css';
+import styles from '../../../../styles/admin/experts/Form.module.css';
 
 export default function EditExpert() {
   const [formData, setFormData] = useState({

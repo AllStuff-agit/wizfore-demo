@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../../firebase/firebase';
 import AdminLayout from '../../../components/AdminLayout';
-import styles from '../../../styles/AdminCenterIndex.module.css';
+import styles from '../../../styles/admin/center/Index.module.css';
 
 export default function CenterIndex() {
   const [loading, setLoading] = useState(true);

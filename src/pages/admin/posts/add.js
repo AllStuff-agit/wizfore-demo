@@ -5,7 +5,7 @@ import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { auth, db, storage } from '../../../firebase/firebase';
 import AdminLayout from '../../../components/AdminLayout';
-import styles from '../../../styles/AdminPostForm.module.css';
+import styles from '../../../styles/admin/posts/Form.module.css';
 
 // 리치 텍스트 에디터 대신 일반 textarea 사용
 

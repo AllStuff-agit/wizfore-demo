@@ -5,7 +5,7 @@ import { doc, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 import { auth, db, storage } from '../../../../firebase/firebase';
 import AdminLayout from '../../../../components/AdminLayout';
-import styles from '../../../../styles/AdminFacilityForm.module.css';
+import styles from '../../../../styles/admin/facilities/Form.module.css';
 
 export default function EditFacility() {
   const [formData, setFormData] = useState({
