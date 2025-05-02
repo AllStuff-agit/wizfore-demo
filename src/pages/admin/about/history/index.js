@@ -214,7 +214,7 @@ export default function HistoryPage() {
     return value.toString().padStart(2, '0');
   };
 
-  if (loading) {
+  if (isLoading) {
     return (
       <AdminLayout title="센터 발자취 - 위즈포레 관리자">
         <div className="loading">
