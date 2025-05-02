@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
 import AdminLayout from '../../../components/AdminLayout';
-import styles from '../../../styles/AdminServices.module.css';
+import styles from '../../../styles/admin/services/Index.module.css';
 
 export default function AdminServices() {
   const router = useRouter();

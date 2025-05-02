@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../firebase/firebase';
 import AdminLayout from '../../components/AdminLayout';
-import styles from '../../styles/AdminDashboard.module.css';
+import styles from '../../styles/admin/Dashboard.module.css';
 
 export default function Dashboard() {
   const [user, setUser] = useState(null);

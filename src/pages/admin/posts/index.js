@@ -4,7 +4,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { collection, getDocs, doc, deleteDoc, updateDoc, query, orderBy } from 'firebase/firestore';
 import { auth, db } from '../../../firebase/firebase';
 import AdminLayout from '../../../components/AdminLayout';
-import styles from '../../../styles/AdminPosts.module.css';
+import styles from '../../../styles/admin/posts/Index.module.css';
 
 export default function Posts() {
   const [posts, setPosts] = useState([]);

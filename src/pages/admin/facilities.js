@@ -4,7 +4,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { collection, getDocs, doc, deleteDoc, updateDoc } from 'firebase/firestore';
 import { auth, db } from '../../firebase/firebase';
 import AdminLayout from '../../components/AdminLayout';
-import styles from '../../styles/AdminFacilities.module.css';
+import styles from '../../styles/admin/facilities/Index.module.css';
 
 export default function Facilities() {
   const [facilities, setFacilities] = useState([]);

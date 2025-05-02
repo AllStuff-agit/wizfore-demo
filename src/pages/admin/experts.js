@@ -4,7 +4,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { collection, getDocs, doc, deleteDoc, updateDoc } from 'firebase/firestore';
 import { auth, db } from '../../firebase/firebase';
 import AdminLayout from '../../components/AdminLayout';
-import styles from '../../styles/AdminExperts.module.css';
+import styles from '../../styles/admin/experts/Index.module.css';
 
 export default function Experts() {
   const [experts, setExperts] = useState([]);

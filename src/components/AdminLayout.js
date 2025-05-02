@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase/firebase';
-import styles from '../styles/AdminLayout.module.css';
+import styles from '../styles/admin/common/Layout.module.css';
 
 export default function AdminLayout({ children, title = '관리자 페이지 - 위즈포레 사회서비스센터' }) {
   const router = useRouter();

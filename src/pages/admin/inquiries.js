@@ -9,7 +9,7 @@ import {
   updateInquiryAssignment, 
   deleteInquiry 
 } from '../../services/inquiriesService';
-import styles from '../../styles/AdminInquiries.module.css';
+import styles from '../../styles/admin/Inquiries.module.css';
 
 function AdminInquiries() {
   const [inquiries, setInquiries] = useState([]);

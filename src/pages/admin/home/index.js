@@ -5,7 +5,7 @@ import { doc, getDoc, setDoc, updateDoc, serverTimestamp } from 'firebase/firest
 import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 import { auth, db, storage } from '../../../firebase/firebase';
 import AdminLayout from '../../../components/AdminLayout';
-import styles from '../../../styles/AdminHomeIndex.module.css';
+import styles from '../../../styles/admin/home/Index.module.css';
 
 export default function HomePage() {
   const [formData, setFormData] = useState({

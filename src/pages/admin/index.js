@@ -3,7 +3,7 @@ import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { auth } from '../../firebase/firebase';
-import styles from '../../styles/AdminLogin.module.css';
+import styles from '../../styles/admin/Login.module.css';
 
 export default function AdminLogin() {
   const [email, setEmail] = useState('');
