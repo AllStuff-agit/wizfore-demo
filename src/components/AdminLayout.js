@@ -50,6 +50,14 @@ export default function AdminLayout({ children, title = '관리자 페이지 - �
             </li>
             <li>
               <Link 
+                href="/admin/about" 
+                className={router.pathname === '/admin/about' || router.pathname.startsWith('/admin/about/') ? styles.active : ''}
+              >
+                <i className="fas fa-info-circle"></i> 센터 소개(About Us)
+              </Link>
+            </li>
+            <li>
+              <Link 
                 href="/admin/dashboard" 
                 className={router.pathname === '/admin/dashboard' ? styles.active : ''}
               >
