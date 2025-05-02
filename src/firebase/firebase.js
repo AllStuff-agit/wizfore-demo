@@ -1,5 +1,6 @@
 import { initializeApp, getApps } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
+import { getStorage } from 'firebase/storage';
 import { 
   getFirestore, 
   connectFirestoreEmulator, 
@@ -43,6 +44,7 @@ const firebaseConfig = {
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];
 const auth = getAuth(app);
 const db = getFirestore(app);
+const storage = getStorage(app);
 
 // 디버깅 정보 출력
 console.log('Firebase 초기화됨');
@@ -66,4 +68,4 @@ if (typeof window !== 'undefined') {
     });
 }
 
-export { app, auth, db };
+export { app, auth, db, storage };
