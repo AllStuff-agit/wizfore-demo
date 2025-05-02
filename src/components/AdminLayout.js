@@ -42,6 +42,14 @@ export default function AdminLayout({ children, title = '관리자 페이지 - �
           <ul>
             <li>
               <Link 
+                href="/admin/home" 
+                className={router.pathname === '/admin/home' || router.pathname.startsWith('/admin/home/') ? styles.active : ''}
+              >
+                <i className="fas fa-home"></i> 홈
+              </Link>
+            </li>
+            <li>
+              <Link 
                 href="/admin/dashboard" 
                 className={router.pathname === '/admin/dashboard' ? styles.active : ''}
               >
@@ -102,14 +110,6 @@ export default function AdminLayout({ children, title = '관리자 페이지 - �
                 className={router.pathname.startsWith('/admin/facilities') ? styles.active : ''}
               >
                 <i className="fas fa-building"></i> 시설 관리
-              </Link>
-            </li>
-            <li>
-              <Link 
-                href="/admin/main_page" 
-                className={router.pathname === '/admin/main_page' ? styles.active : ''}
-              >
-                <i className="fas fa-home"></i> 메인 페이지 설정
               </Link>
             </li>
             <li>
