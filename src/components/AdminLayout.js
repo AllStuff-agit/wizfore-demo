@@ -38,24 +38,61 @@ export default function AdminLayout({ children, title = '관리자 페이지 - �
         <div className={styles.logo}>
           <h2>WizFore Admin</h2>
         </div>
+        
         <nav className={styles.navbar}>
           <ul>
-            <li>
+            <li className={styles.hasDropdown}>
               <Link 
                 href="/admin/home" 
                 className={router.pathname === '/admin/home' || router.pathname.startsWith('/admin/home/') ? styles.active : ''}
               >
                 <i className="fas fa-home"></i> 홈
               </Link>
+              <ul className={styles.dropdown}>
+                <li>
+                  <Link href="/admin/home">
+                    홈 대시보드
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/admin/home/stats">
+                    통계 정보
+                  </Link>
+                </li>
+              </ul>
             </li>
-            <li>
+            
+            <li className={styles.hasDropdown}>
               <Link 
                 href="/admin/about" 
                 className={router.pathname === '/admin/about' || router.pathname.startsWith('/admin/about/') ? styles.active : ''}
               >
                 <i className="fas fa-info-circle"></i> 센터 소개
               </Link>
+              <ul className={styles.dropdown}>
+                <li>
+                  <Link href="/admin/about">
+                    소개 관리
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/admin/about/history">
+                    연혁 관리
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/admin/about/director">
+                    원장 소개 관리
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/admin/about/advisors">
+                    자문위원 관리
+                  </Link>
+                </li>
+              </ul>
             </li>
+            
             <li className={styles.hasDropdown}>
               <Link 
                 href="/admin/programs" 
@@ -98,13 +135,14 @@ export default function AdminLayout({ children, title = '관리자 페이지 - �
                 </li>
               </ul>
             </li>
-            <li className={styles.logoutItem}>
-              <button onClick={handleLogout} className={styles.logoutBtn}>
-                <i className="fas fa-sign-out-alt"></i> 로그아웃
-              </button>
-            </li>
           </ul>
         </nav>
+        
+        <div className={styles.logoutWrapper}>
+          <button onClick={handleLogout} className={styles.logoutBtn}>
+            <i className="fas fa-sign-out-alt"></i> 로그아웃
+          </button>
+        </div>
       </header>
 
       <main className={styles.content}>
