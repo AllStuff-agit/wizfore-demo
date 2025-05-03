@@ -61,18 +61,10 @@ export default function AdminLayout({ children, title = '관리자 페이지 - �
                 <ul className={styles.dropdown}>
                   <li>
                     <Link 
-                      href="/admin/about" 
-                      className={router.pathname === '/admin/about' && !router.pathname.includes('/admin/about/') ? styles.activeSubmenu : ''}
+                      href="/admin/about/vision" 
+                      className={router.pathname === '/admin/about/vision' ? styles.activeSubmenu : ''}
                     >
-                      소개 관리
-                    </Link>
-                  </li>
-                  <li>
-                    <Link 
-                      href="/admin/about/history" 
-                      className={router.pathname === '/admin/about/history' ? styles.activeSubmenu : ''}
-                    >
-                      연혁 관리
+                      비전 · 인사말
                     </Link>
                   </li>
                   <li>
@@ -80,7 +72,15 @@ export default function AdminLayout({ children, title = '관리자 페이지 - �
                       href="/admin/about/director" 
                       className={router.pathname === '/admin/about/director' ? styles.activeSubmenu : ''}
                     >
-                      원장 소개 관리
+                      센터장 소개
+                    </Link>
+                  </li>
+                  <li>
+                    <Link 
+                      href="/admin/about/history" 
+                      className={router.pathname === '/admin/about/history' ? styles.activeSubmenu : ''}
+                    >
+                      센터 발자취
                     </Link>
                   </li>
                   <li>
@@ -88,7 +88,23 @@ export default function AdminLayout({ children, title = '관리자 페이지 - �
                       href="/admin/about/advisors" 
                       className={router.pathname === '/admin/about/advisors' ? styles.activeSubmenu : ''}
                     >
-                      자문위원 관리
+                      전문 자문단
+                    </Link>
+                  </li>
+                  <li>
+                    <Link 
+                      href="/admin/about/facilities" 
+                      className={router.pathname === '/admin/about/facilities' ? styles.activeSubmenu : ''}
+                    >
+                      시설 안내
+                    </Link>
+                  </li>
+                  <li>
+                    <Link 
+                      href="/admin/about/location" 
+                      className={router.pathname === '/admin/about/location' ? styles.activeSubmenu : ''}
+                    >
+                      오시는 길
                     </Link>
                   </li>
                 </ul>
@@ -140,34 +156,6 @@ export default function AdminLayout({ children, title = '관리자 페이지 - �
               </div>
             </li>
             
-            <li className={styles.hasDropdown}>
-              <Link 
-                href="/admin/facilities" 
-                className={router.pathname === '/admin/facilities' || router.pathname.startsWith('/admin/facilities/') ? styles.active : ''}
-              >
-                <i className="fas fa-building"></i> 시설 안내
-              </Link>
-              <div className={styles.dropdownContainer}>
-                <ul className={styles.dropdown}>
-                  <li>
-                    <Link 
-                      href="/admin/facilities" 
-                      className={router.pathname === '/admin/facilities' && !router.pathname.includes('/admin/facilities/') ? styles.activeSubmenu : ''}
-                    >
-                      시설 목록 관리
-                    </Link>
-                  </li>
-                  <li>
-                    <Link 
-                      href="/admin/facilities/gallery" 
-                      className={router.pathname === '/admin/facilities/gallery' ? styles.activeSubmenu : ''}
-                    >
-                      시설 갤러리 관리
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </li>
             
             <li className={styles.hasDropdown}>
               <Link 
