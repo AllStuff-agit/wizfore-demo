@@ -7,12 +7,14 @@ import AdminLayout from '../../../components/AdminLayout';
 import styles from '../../../styles/admin/business/Index.module.css';
 
 export default function BusinessPage() {
+  // 상태 변수들
   const [businesses, setBusinesses] = useState([]);
   const [filteredBusinesses, setFilteredBusinesses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [status, setStatus] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const [saving, setSaving] = useState(false);
   const router = useRouter();
 
   // 인증 상태 확인
@@ -80,7 +82,14 @@ export default function BusinessPage() {
 
   // 사업 추가 페이지로 이동
   const handleAddBusiness = () => {
-    router.push('/admin/business/add');
+    setSaving(true);
+    try {
+      router.push('/admin/business/add');
+    } catch (error) {
+      console.error('페이지 이동 오류:', error);
+      setError('페이지 이동 중 오류가 발생했습니다.');
+      setSaving(false);
+    }
   };
 
   // 사업 상세보기 페이지로 이동
@@ -135,6 +144,17 @@ export default function BusinessPage() {
     }
   };
 
+  if (loading) {
+    return (
+      <AdminLayout title="사업 안내 - 위즈포레 관리자">
+        <div className={styles.loading}>
+          <div className={styles.spinner}></div>
+          <p>로딩 중...</p>
+        </div>
+      </AdminLayout>
+    );
+  }
+
   return (
     <AdminLayout title="사업 안내 - 위즈포레 관리자">
       <div className={styles.pageHeader}>
@@ -142,19 +162,15 @@ export default function BusinessPage() {
         <button 
           onClick={handleAddBusiness} 
           className={styles.addButton}
+          disabled={saving}
         >
-          <i className="fas fa-plus"></i> 새 사업 추가
+          <i className="fas fa-plus"></i> {saving ? '이동 중...' : '새 사업 추가'}
         </button>
       </div>
 
       {error && <div className={styles.error}>{error}</div>}
 
-      {loading ? (
-        <div className={styles.loading}>
-          <div className={styles.spinner}></div>
-          <p>사업 목록을 불러오는 중입니다...</p>
-        </div>
-      ) : businesses.length === 0 ? (
+      {businesses.length === 0 ? (
         <div className={styles.emptyState}>
           <div className={styles.emptyIcon}>
             <i className="fas fa-briefcase"></i>
@@ -317,3 +333,6 @@ export default function BusinessPage() {
     </AdminLayout>
   );
 }
+
+// 관리자 페이지 레이아웃 적용
+BusinessPage.getLayout = (page) => page;
