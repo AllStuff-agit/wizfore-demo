@@ -56,6 +56,50 @@ export default function AdminLayout({ children, title = '관리자 페이지 - �
                 <i className="fas fa-info-circle"></i> 센터 소개(About Us)
               </Link>
             </li>
+            <li>
+              <Link 
+                href="/admin/programs" 
+                className={router.pathname === '/admin/programs' || router.pathname.startsWith('/admin/programs/') ? styles.active : ''}
+              >
+                <i className="fas fa-book"></i> 프로그램 안내(Programs)
+                {router.pathname.startsWith('/admin/programs') && (
+                  <ul className={styles.submenu}>
+                    <li>
+                      <Link 
+                        href="/admin/programs/therapy" 
+                        className={router.pathname === '/admin/programs/therapy' ? styles.activeSubmenu : ''}
+                      >
+                        치료 프로그램
+                      </Link>
+                    </li>
+                    <li>
+                      <Link 
+                        href="/admin/programs/counseling" 
+                        className={router.pathname === '/admin/programs/counseling' ? styles.activeSubmenu : ''}
+                      >
+                        상담 프로그램
+                      </Link>
+                    </li>
+                    <li>
+                      <Link 
+                        href="/admin/programs/after-school" 
+                        className={router.pathname === '/admin/programs/after-school' ? styles.activeSubmenu : ''}
+                      >
+                        방과 후 프로그램
+                      </Link>
+                    </li>
+                    <li>
+                      <Link 
+                        href="/admin/programs/sports" 
+                        className={router.pathname === '/admin/programs/sports' ? styles.activeSubmenu : ''}
+                      >
+                        특수 스포츠
+                      </Link>
+                    </li>
+                  </ul>
+                )}
+              </Link>
+            </li>
           </ul>
         </nav>
         <div className={styles.sidebarFooter}>

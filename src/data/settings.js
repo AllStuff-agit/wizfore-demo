@@ -112,7 +112,8 @@ export const settings = {
     dashboardTitle: '위즈포레 관리자 대시보드',
     menuItems: [
       { name: '홈', path: '/admin/home', icon: 'home', order: 1 },
-      { name: '센터 소개', path: '/admin/about', icon: 'info-circle', order: 2 }
+      { name: '센터 소개', path: '/admin/about', icon: 'info-circle', order: 2 },
+      { name: '프로그램 안내', path: '/admin/programs', icon: 'book', order: 3 }
     ]
   }
 };

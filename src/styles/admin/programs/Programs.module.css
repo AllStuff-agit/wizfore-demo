@@ -1,0 +1,222 @@
+.container {
+  padding: 2rem;
+}
+
+.header {
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.header p {
+  color: #666;
+  font-size: 1rem;
+}
+
+.programCategories {
+  margin-bottom: 3rem;
+}
+
+.programCategories h2 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #444;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.cardIcon {
+  font-size: 2rem;
+  color: #2563EB;
+  margin-bottom: 1rem;
+}
+
+.cardContent {
+  flex-grow: 1;
+}
+
+.cardContent h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.cardContent p {
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.cardAction {
+  margin-top: 1rem;
+  text-align: right;
+}
+
+.viewButton {
+  display: inline-block;
+  color: #2563EB;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Program List Page Styles */
+.breadcrumb {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.breadcrumb a {
+  color: #2563EB;
+  text-decoration: none;
+}
+
+.programHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.addButton {
+  background-color: #2563EB;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s;
+}
+
+.addButton:hover {
+  background-color: #1e56c9;
+}
+
+.tableContainer {
+  overflow-x: auto;
+}
+
+.programTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.programTable th, 
+.programTable td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.programTable th {
+  background-color: #f8f9fa;
+  font-weight: 500;
+  color: #444;
+}
+
+.programTable tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.descriptionCell {
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.activeStatus, 
+.inactiveStatus {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.activeStatus {
+  background-color: #e6f7e6;
+  color: #18981d;
+}
+
+.inactiveStatus {
+  background-color: #f7e6e6;
+  color: #981818;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.editButton, 
+.toggleButton {
+  padding: 0.25rem 0.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.editButton {
+  background-color: #f0f0f0;
+  color: #444;
+}
+
+.editButton:hover {
+  background-color: #e0e0e0;
+}
+
+.toggleButton {
+  background-color: #f0f7ff;
+  color: #2563EB;
+}
+
+.toggleButton:hover {
+  background-color: #e0f0ff;
+}
+
+.noData {
+  text-align: center;
+  color: #888;
+  padding: 2rem 0;
+}
