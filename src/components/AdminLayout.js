@@ -156,6 +156,15 @@ export default function AdminLayout({ children, title = '관리자 페이지 - �
               </div>
             </li>
             
+            <li>
+              <Link 
+                href="/admin/business" 
+                className={router.pathname === '/admin/business' || router.pathname.startsWith('/admin/business/') ? styles.active : ''}
+              >
+                <i className="fas fa-briefcase"></i> 사업 안내
+              </Link>
+            </li>
+            
             
             <li className={styles.hasDropdown}>
               <Link 
