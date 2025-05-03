@@ -12,11 +12,11 @@ export default function AdminLogin() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  // 이미 로그인한 사용자는 대시보드로 리디렉션
+  // 이미 로그인한 사용자는 홈으로 리디렉션
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, user => {
       if (user) {
-        router.push('/admin/dashboard');
+        router.push('/admin/home');
       }
     });
 
@@ -30,7 +30,7 @@ export default function AdminLogin() {
     
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      router.push('/admin/dashboard');
+      router.push('/admin/home');
     } catch (error) {
       console.error('로그인 에러:', error);
       setError('로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.');
