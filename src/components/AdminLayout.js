@@ -189,6 +189,35 @@ export default function AdminLayout({ children, title = '관리자 페이지 - �
             
             <li className={styles.hasDropdown}>
               <Link 
+                href="/admin/community" 
+                className={router.pathname === '/admin/community' || router.pathname.startsWith('/admin/community/') ? styles.active : ''}
+              >
+                <i className="fas fa-newspaper"></i> 커뮤니티
+              </Link>
+              <div className={styles.dropdownContainer}>
+                <ul className={styles.dropdown}>
+                  <li>
+                    <Link 
+                      href="/admin/community/center-news" 
+                      className={router.pathname === '/admin/community/center-news' ? styles.activeSubmenu : ''}
+                    >
+                      센터 소식
+                    </Link>
+                  </li>
+                  <li>
+                    <Link 
+                      href="/admin/community/sns-news" 
+                      className={router.pathname === '/admin/community/sns-news' ? styles.activeSubmenu : ''}
+                    >
+                      SNS 소식
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            
+            <li className={styles.hasDropdown}>
+              <Link 
                 href="/admin/inquiries" 
                 className={router.pathname === '/admin/inquiries' || router.pathname.startsWith('/admin/inquiries/') ? styles.active : ''}
               >

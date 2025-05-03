@@ -1,0 +1,464 @@
+/* SNS 소식 페이지 스타일 */
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.pageHeader h1 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin: 0;
+  font-weight: 600;
+}
+
+.addButton {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.addButton i {
+  margin-right: 8px;
+}
+
+.addButton:hover {
+  background-color: #2980b9;
+}
+
+.addButton:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+/* 필터 스타일 */
+.filterContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.filterTabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filterTab {
+  background-color: #f1f3f4;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  color: #5f6368;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.filterTab i {
+  font-size: 0.9rem;
+}
+
+.filterTab:hover,
+.filterTab.active {
+  background-color: #e8eaed;
+  color: #1a73e8;
+}
+
+.searchBox {
+  display: flex;
+  align-items: center;
+  background-color: #f1f3f4;
+  border-radius: 24px;
+  padding: 0 10px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.searchInput {
+  background: transparent;
+  border: none;
+  padding: 10px 12px;
+  font-size: 0.9rem;
+  width: 100%;
+  outline: none;
+}
+
+.searchButton {
+  background: transparent;
+  border: none;
+  color: #5f6368;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.searchButton:hover {
+  color: #1a73e8;
+}
+
+.totalCount {
+  font-size: 0.95rem;
+  color: #5f6368;
+  margin-bottom: 15px;
+}
+
+/* 로딩 상태 */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 0;
+  color: #6c757d;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 에러 메시지 */
+.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+/* 비어있는 상태 */
+.emptyState {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  color: #6c757d;
+}
+
+.emptyIcon {
+  font-size: 3rem;
+  color: #dee2e6;
+  margin-bottom: 15px;
+}
+
+.emptyState h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #495057;
+}
+
+.emptyState p {
+  font-size: 1rem;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* 게시물 그리드 */
+.postsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.postCard {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+
+.postCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.postPlatform {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.8rem;
+  z-index: 1;
+}
+
+.postPlatform i {
+  font-size: 1rem;
+}
+
+.postPlatform i.fa-instagram {
+  color: #c13584;
+}
+
+.postPlatform i.fa-facebook {
+  color: #3b5998;
+}
+
+.postPlatform i.fa-youtube {
+  color: #ff0000;
+}
+
+.postPlatform i.fa-blogger {
+  color: #f57d00;
+}
+
+.postPlatform i.fa-newspaper {
+  color: #0066cc;
+}
+
+.postImage {
+  height: 180px;
+  overflow: hidden;
+}
+
+.postImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.postCard:hover .postImage img {
+  transform: scale(1.05);
+}
+
+.noImage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa;
+  color: #adb5bd;
+}
+
+.noImage i {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.noImage span {
+  font-size: 0.9rem;
+}
+
+.postContent {
+  padding: 15px;
+}
+
+.postTitle {
+  font-size: 1.1rem;
+  margin: 0 0 10px 0;
+  color: #2c3e50;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 2.8rem;
+}
+
+.postDate {
+  font-size: 0.85rem;
+  color: #6c757d;
+  margin: 0 0 10px 0;
+}
+
+.postLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #3498db;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.postLink:hover {
+  color: #2980b9;
+  text-decoration: underline;
+}
+
+.postLink i {
+  font-size: 0.8rem;
+}
+
+.postActions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 15px 15px;
+  gap: 10px;
+}
+
+.editButton, .deleteButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.editButton {
+  background-color: #e3f2fd;
+  color: #0d6efd;
+}
+
+.editButton:hover {
+  background-color: #d3e9fc;
+}
+
+.deleteButton {
+  background-color: #f8d7da;
+  color: #dc3545;
+}
+
+.deleteButton:hover {
+  background-color: #f5c2c7;
+}
+
+/* 페이지네이션 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.pageButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f1f3f4;
+  color: #5f6368;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.pageButton:hover:not(:disabled) {
+  background-color: #e8eaed;
+}
+
+.pageButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pageNumbers {
+  display: flex;
+  gap: 8px;
+}
+
+.pageNumber {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f1f3f4;
+  color: #5f6368;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pageNumber:hover {
+  background-color: #e8eaed;
+}
+
+.pageNumber.activePage {
+  background-color: #3498db;
+  color: white;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 992px) {
+  .postsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .pageHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .addButton {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .filterTabs {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .searchBox {
+    max-width: 100%;
+  }
+  
+  .postsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+
+@media (max-width: 576px) {
+  .postsGrid {
+    grid-template-columns: 1fr;
+  }
+}
