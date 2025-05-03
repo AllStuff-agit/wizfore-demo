@@ -5,7 +5,7 @@ import { collection, getDocs, doc, deleteDoc, query, orderBy, serverTimestamp, a
 import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 import { auth, db, storage } from '../../../../firebase/firebase';
 import AdminLayout from '../../../../components/AdminLayout';
-import styles from '../../../../styles/admin/community/CenterNews.module.css';
+import styles from '../../../../styles/admin/community/centerNews.module.css';
 
 export default function CenterNewsPage() {
   const [news, setNews] = useState([]);
