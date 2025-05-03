@@ -19,8 +19,6 @@ export default function AfterSchoolProgramsPage() {
         <div className={styles.breadcrumb}>
           <Link href="/admin/programs">프로그램 안내</Link> &gt; 방과 후 프로그램
         </div>
-        <h1>방과 후 프로그램 관리</h1>
-        <p>위즈포레 사회서비스센터에서 제공하는 방과 후 프로그램을 관리합니다.</p>
       </header>
 
       <section className={styles.programList}>

@@ -19,8 +19,6 @@ export default function SportsProgramsPage() {
         <div className={styles.breadcrumb}>
           <Link href="/admin/programs">프로그램 안내</Link> &gt; 특수 스포츠
         </div>
-        <h1>특수 스포츠 관리</h1>
-        <p>위즈포레 사회서비스센터에서 제공하는 특수 스포츠 프로그램을 관리합니다.</p>
       </header>
 
       <section className={styles.programList}>
