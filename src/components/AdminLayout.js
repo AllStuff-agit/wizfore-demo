@@ -59,22 +59,34 @@ export default function AdminLayout({ children, title = '관리자 페이지 - �
               </Link>
               <ul className={styles.dropdown}>
                 <li>
-                  <Link href="/admin/about">
+                  <Link 
+                    href="/admin/about" 
+                    className={router.pathname === '/admin/about' && !router.pathname.includes('/admin/about/') ? styles.activeSubmenu : ''}
+                  >
                     소개 관리
                   </Link>
                 </li>
                 <li>
-                  <Link href="/admin/about/history">
+                  <Link 
+                    href="/admin/about/history" 
+                    className={router.pathname === '/admin/about/history' ? styles.activeSubmenu : ''}
+                  >
                     연혁 관리
                   </Link>
                 </li>
                 <li>
-                  <Link href="/admin/about/director">
+                  <Link 
+                    href="/admin/about/director" 
+                    className={router.pathname === '/admin/about/director' ? styles.activeSubmenu : ''}
+                  >
                     원장 소개 관리
                   </Link>
                 </li>
                 <li>
-                  <Link href="/admin/about/advisors">
+                  <Link 
+                    href="/admin/about/advisors" 
+                    className={router.pathname === '/admin/about/advisors' ? styles.activeSubmenu : ''}
+                  >
                     자문위원 관리
                   </Link>
                 </li>
