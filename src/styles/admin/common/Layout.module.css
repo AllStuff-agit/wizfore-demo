@@ -60,12 +60,13 @@
 .navbar ul li a {
   display: flex;
   align-items: center;
-  padding: 0 25px;
+  padding: 0 35px; /* 좌우 패딩 증가 */
   color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
   transition: all 0.3s ease;
   height: 100%;
   font-weight: 500;
+  font-size: 1.05rem; /* 폰트 크기 증가 */
 }
 
 .navbar ul li a i {
@@ -87,22 +88,24 @@
 .dropdown {
   position: absolute;
   top: 100%;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
   background-color: #2c3e50;
-  min-width: 200px;
+  min-width: 300px; /* 최소 너비 추가 증가 */
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-10px);
   transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
   z-index: 1;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px 0; /* 패딩 추가 */
+  border-radius: 0 0 4px 4px; /* 모서리 둥글게 */
 }
 
 .hasDropdown:hover .dropdown {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  transform: translateX(-50%) translateY(0);
 }
 
 .dropdown li {
@@ -111,12 +114,19 @@
 }
 
 .dropdown li a {
-  padding: 12px 20px;
+  padding: 14px 25px; /* 패딩 증가 */
   width: 100%;
-  font-size: 0.9rem;
+  font-size: 0.95rem; /* 폰트 크기 증가 */
   display: block;
   color: rgba(255, 255, 255, 0.7);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  white-space: nowrap; /* 텍스트가 한 줄에 표시되도록 */
+  text-overflow: ellipsis; /* 넘치는 텍스트 처리 */
+  overflow: hidden; /* 넘치는 텍스트 숨김 */
+}
+
+.dropdown li:last-child a {
+  border-bottom: none; /* 마지막 항목의 밑줄 제거 */
 }
 
 .dropdown li a:hover, .dropdown li a.activeSubmenu {
@@ -204,14 +214,20 @@
     box-shadow: none;
     border-top: none;
     display: none;
+    transform: none;
+    padding: 0;
+    min-width: 100%;
   }
   
   .hasDropdown:hover .dropdown {
     display: block;
+    transform: none;
   }
   
   .dropdown li a {
-    padding-left: 40px;
+    padding: 12px 40px;
+    white-space: normal; /* 모바일에서는 텍스트 줄바꿈 허용 */
+    text-align: left;
   }
   
   .logoutWrapper {
