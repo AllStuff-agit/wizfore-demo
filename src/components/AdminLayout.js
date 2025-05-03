@@ -177,26 +177,10 @@ export default function AdminLayout({ children, title = '관리자 페이지 - �
                 <ul className={styles.dropdown}>
                   <li>
                     <Link 
-                      href="/admin/team/therapists" 
-                      className={router.pathname === '/admin/team/therapists' ? styles.activeSubmenu : ''}
+                      href="/admin/team/therapist-counselor" 
+                      className={router.pathname === '/admin/team/therapist-counselor' ? styles.activeSubmenu : ''}
                     >
-                      치료사 관리
-                    </Link>
-                  </li>
-                  <li>
-                    <Link 
-                      href="/admin/team/counselors" 
-                      className={router.pathname === '/admin/team/counselors' ? styles.activeSubmenu : ''}
-                    >
-                      상담사 관리
-                    </Link>
-                  </li>
-                  <li>
-                    <Link 
-                      href="/admin/team/teachers" 
-                      className={router.pathname === '/admin/team/teachers' ? styles.activeSubmenu : ''}
-                    >
-                      교사 관리
+                      치료 · 상담사
                     </Link>
                   </li>
                 </ul>
