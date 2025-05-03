@@ -41,25 +41,13 @@ export default function AdminLayout({ children, title = '관리자 페이지 - �
         
         <nav className={styles.navbar}>
           <ul>
-            <li className={styles.hasDropdown}>
+            <li>
               <Link 
                 href="/admin/home" 
                 className={router.pathname === '/admin/home' || router.pathname.startsWith('/admin/home/') ? styles.active : ''}
               >
                 <i className="fas fa-home"></i> 홈
               </Link>
-              <ul className={styles.dropdown}>
-                <li>
-                  <Link href="/admin/home">
-                    홈 대시보드
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/admin/home/stats">
-                    통계 정보
-                  </Link>
-                </li>
-              </ul>
             </li>
             
             <li className={styles.hasDropdown}>
