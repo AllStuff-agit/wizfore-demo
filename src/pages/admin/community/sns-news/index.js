@@ -4,7 +4,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { collection, getDocs, doc, deleteDoc, query, orderBy, serverTimestamp, addDoc } from 'firebase/firestore';
 import { auth, db } from '../../../../firebase/firebase';
 import AdminLayout from '../../../../components/AdminLayout';
-import styles from '../../../../styles/admin/community/snsNews.module.css';
+import styles from '../../../../styles/admin/community/SnsNews.module.css';
 
 export default function SnsNewsPage() {
   const [snsPosts, setSnsPosts] = useState([]);
