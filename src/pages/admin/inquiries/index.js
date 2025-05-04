@@ -2,14 +2,18 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { onAuthStateChanged } from 'firebase/auth';
-import { ref, get, query, orderByChild, limitToLast } from 'firebase/database';
-import { auth, db as firestoreDb } from '../../../firebase/firebase';
-import { getDatabase } from 'firebase/database';
+import { 
+  collection, 
+  query, 
+  orderBy, 
+  getDocs,
+  where,
+  limit,
+  startAfter 
+} from 'firebase/firestore';
+import { auth, db } from '../../../firebase/firebase';
 import AdminLayout from '../../../components/AdminLayout';
 import styles from '../../../styles/admin/inquiries/Inquiries.module.css';
-
-// Realtime Database의 인스턴스를 가져옵니다
-const realtimeDb = getDatabase();
 
 export default function InquiriesPage() {
   const [inquiries, setInquiries] = useState([]);
@@ -42,29 +46,25 @@ export default function InquiriesPage() {
       try {
         setLoading(true);
         
-        // Realtime Database에서 문의 데이터 가져오기
-        const inquiriesRef = ref(realtimeDb, 'inquiries');
-        const inquiriesQuery = query(inquiriesRef, orderByChild('createdAt'));
-        const snapshot = await get(inquiriesQuery);
+        // Firestore에서 문의 데이터 가져오기
+        const inquiriesRef = collection(db, 'inquiries');
+        const inquiriesQuery = query(
+          inquiriesRef, 
+          orderBy('createdAt', 'desc') // 생성일 기준 내림차순 (최신순)
+        );
         
-        if (snapshot.exists()) {
-          const inquiriesData = [];
-          snapshot.forEach((childSnapshot) => {
-            inquiriesData.push({
-              id: childSnapshot.key,
-              ...childSnapshot.val()
-            });
+        const querySnapshot = await getDocs(inquiriesQuery);
+        
+        const inquiriesData = [];
+        querySnapshot.forEach((doc) => {
+          inquiriesData.push({
+            id: doc.id,
+            ...doc.data()
           });
-          
-          // 최신순으로 정렬
-          inquiriesData.reverse();
-          
-          setInquiries(inquiriesData);
-          setLoading(false);
-        } else {
-          setInquiries([]);
-          setLoading(false);
-        }
+        });
+        
+        setInquiries(inquiriesData);
+        setLoading(false);
       } catch (err) {
         console.error('문의 데이터 불러오기 오류:', err);
         setError('문의 데이터를 불러오는 중 오류가 발생했습니다.');

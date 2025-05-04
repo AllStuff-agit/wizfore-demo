@@ -2,14 +2,15 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { onAuthStateChanged } from 'firebase/auth';
-import { ref, get, update } from 'firebase/database';
-import { auth } from '../../../firebase/firebase';
-import { getDatabase } from 'firebase/database';
+import { 
+  doc, 
+  getDoc, 
+  updateDoc, 
+  serverTimestamp 
+} from 'firebase/firestore';
+import { auth, db } from '../../../firebase/firebase';
 import AdminLayout from '../../../components/AdminLayout';
 import styles from '../../../styles/admin/inquiries/Inquiries.module.css';
-
-// Realtime Database의 인스턴스를 가져옵니다
-const realtimeDb = getDatabase();
 
 export default function InquiryDetailPage() {
   const [inquiry, setInquiry] = useState(null);
@@ -42,12 +43,12 @@ export default function InquiryDetailPage() {
       try {
         setLoading(true);
         
-        // Realtime Database에서 해당 문의 데이터 가져오기
-        const inquiryRef = ref(realtimeDb, `inquiries/${id}`);
-        const snapshot = await get(inquiryRef);
+        // Firestore에서 해당 문의 데이터 가져오기
+        const inquiryRef = doc(db, 'inquiries', id);
+        const inquirySnapshot = await getDoc(inquiryRef);
         
-        if (snapshot.exists()) {
-          const inquiryData = snapshot.val();
+        if (inquirySnapshot.exists()) {
+          const inquiryData = inquirySnapshot.data();
           setInquiry({
             id: id,
             ...inquiryData
@@ -99,23 +100,21 @@ export default function InquiryDetailPage() {
     try {
       setIsSubmitting(true);
       
-      // 현재 시간을 응답 시간으로 기록
-      const now = Date.now();
-      
-      // 응답 데이터 업데이트
-      const inquiryRef = ref(realtimeDb, `inquiries/${id}`);
-      await update(inquiryRef, {
+      // Firestore 문서 업데이트
+      const inquiryRef = doc(db, 'inquiries', id);
+      await updateDoc(inquiryRef, {
         isResponded: true,
         response: response,
-        responseDate: now
+        responseDate: serverTimestamp()
       });
       
       // 상태 업데이트
+      const now = new Date();
       setInquiry({
         ...inquiry,
         isResponded: true,
         response: response,
-        responseDate: now
+        responseDate: now.getTime()
       });
       
       // 편집 모드 종료
