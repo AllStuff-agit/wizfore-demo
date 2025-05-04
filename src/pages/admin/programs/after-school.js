@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import AdminLayout from '../../../../components/AdminLayout';
-import { programs } from '../../../../data';
-import styles from '../../../../styles/admin/programs/Programs.module.css';
+import AdminLayout from '../../../components/AdminLayout';
+import { programs } from '../../../data';
+import styles from '../../../styles/admin/programs/Programs.module.css';
 
 export default function AfterSchoolProgramsPage() {
   const [afterSchoolPrograms, setAfterSchoolPrograms] = useState([]);

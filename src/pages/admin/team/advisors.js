@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { onAuthStateChanged } from 'firebase/auth';
 import { collection, getDocs, doc, setDoc, updateDoc, deleteDoc, serverTimestamp, query, orderBy } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
-import { auth, db, storage } from '../../../../firebase/firebase';
-import AdminLayout from '../../../../components/AdminLayout';
-import styles from '../../../../styles/admin/team/Advisors.module.css';
+import { auth, db, storage } from '../../../firebase/firebase';
+import AdminLayout from '../../../components/AdminLayout';
+import styles from '../../../styles/admin/team/Advisors.module.css';
 
 export default function AdvisorsPage() {
   const [advisors, setAdvisors] = useState([]);

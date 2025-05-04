@@ -3,9 +3,9 @@ import { useRouter } from 'next/router';
 import { onAuthStateChanged } from 'firebase/auth';
 import { collection, getDocs, doc, deleteDoc, query, orderBy, where } from 'firebase/firestore';
 import { ref, deleteObject } from 'firebase/storage';
-import { auth, db, storage } from '../../../../firebase/firebase';
-import AdminLayout from '../../../../components/AdminLayout';
-import styles from '../../../../styles/admin/team/TherapistCounselor.module.css';
+import { auth, db, storage } from '../../../firebase/firebase';
+import AdminLayout from '../../../components/AdminLayout';
+import styles from '../../../styles/admin/team/TherapistCounselor.module.css';
 
 export default function TherapistCounselorPage() {
   const [experts, setExperts] = useState([]);

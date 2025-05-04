@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc, setDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
-import { auth, db, storage } from '../../../../firebase/firebase';
-import AdminLayout from '../../../../components/AdminLayout';
+import { auth, db, storage } from '../../../firebase/firebase';
+import AdminLayout from '../../../components/AdminLayout';
 
 export default function DirectorPage() {
   const [formData, setFormData] = useState({

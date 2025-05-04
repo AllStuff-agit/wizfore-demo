@@ -1,29 +1,29 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import AdminLayout from '../../../../components/AdminLayout';
-import { programs } from '../../../../data';
-import styles from '../../../../styles/admin/programs/Programs.module.css';
+import AdminLayout from '../../../components/AdminLayout';
+import { programs } from '../../../data';
+import styles from '../../../styles/admin/programs/Programs.module.css';
 
-export default function SportsProgramsPage() {
-  const [sportsPrograms, setSportsPrograms] = useState([]);
+export default function TherapyProgramsPage() {
+  const [therapyPrograms, setTherapyPrograms] = useState([]);
   
   useEffect(() => {
-    // 데이터에서 특수 스포츠 카테고리에 해당하는 프로그램만 필터링
-    const filtered = programs.filter(program => program.category === '특수 스포츠');
-    setSportsPrograms(filtered);
+    // 데이터에서 치료 프로그램 카테고리에 해당하는 프로그램만 필터링
+    const filtered = programs.filter(program => program.category === '치료 프로그램');
+    setTherapyPrograms(filtered);
   }, []);
 
   return (
     <div className={styles.container}>
       <header className={styles.header}>
         <div className={styles.breadcrumb}>
-          <Link href="/admin/programs">프로그램 안내</Link> &gt; 특수 스포츠
+          <Link href="/admin/programs">프로그램 안내</Link> &gt; 치료 프로그램
         </div>
       </header>
 
       <section className={styles.programList}>
         <div className={styles.programHeader}>
-          <h2>특수 스포츠 목록</h2>
+          <h2>치료 프로그램 목록</h2>
           <button className={styles.addButton} onClick={() => alert('프로그램 추가 기능은 개발 중입니다.')}>
             <i className="fas fa-plus"></i> 프로그램 추가
           </button>
@@ -41,7 +41,7 @@ export default function SportsProgramsPage() {
               </tr>
             </thead>
             <tbody>
-              {sportsPrograms.map((program, index) => (
+              {therapyPrograms.map((program, index) => (
                 <tr key={program.id}>
                   <td>{index + 1}</td>
                   <td>{program.name}</td>
@@ -73,7 +73,7 @@ export default function SportsProgramsPage() {
                   </td>
                 </tr>
               ))}
-              {sportsPrograms.length === 0 && (
+              {therapyPrograms.length === 0 && (
                 <tr>
                   <td colSpan="5" className={styles.noData}>등록된 프로그램이 없습니다.</td>
                 </tr>
@@ -86,9 +86,9 @@ export default function SportsProgramsPage() {
   );
 }
 
-SportsProgramsPage.getLayout = function getLayout(page) {
+TherapyProgramsPage.getLayout = function getLayout(page) {
   return (
-    <AdminLayout title="특수 스포츠 관리 - 위즈포레 사회서비스센터">
+    <AdminLayout title="치료 프로그램 관리 - 위즈포레 사회서비스센터">
       {page}
     </AdminLayout>
   );

@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { onAuthStateChanged } from 'firebase/auth';
 import { collection, getDocs, doc, setDoc, updateDoc, deleteDoc, serverTimestamp, query, orderBy } from 'firebase/firestore';
-import { auth, db } from '../../../../firebase/firebase';
-import AdminLayout from '../../../../components/AdminLayout';
+import { auth, db } from '../../../firebase/firebase';
+import AdminLayout from '../../../components/AdminLayout';
 
 export default function HistoryPage() {
   const [historyItems, setHistoryItems] = useState([]);
