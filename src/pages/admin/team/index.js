@@ -69,7 +69,6 @@ export default function TeamPage() {
     const counts = {
       therapist: 0,
       counselor: 0,
-      teacher: 0,
       all: 0
     };
     
@@ -131,7 +130,7 @@ export default function TeamPage() {
           </div>
           <div className={styles.statContent}>
             <h3>전체 인원</h3>
-            <p className={styles.statValue}>{expertCounts.all}</p>
+            <p className={styles.statValue}>{expertCounts.all + advisors.length}</p>
           </div>
         </div>
         
@@ -157,11 +156,11 @@ export default function TeamPage() {
         
         <div className={styles.statCard}>
           <div className={styles.statIcon}>
-            <i className="fas fa-chalkboard-teacher"></i>
+            <i className="fas fa-user-tie"></i>
           </div>
           <div className={styles.statContent}>
-            <h3>교사</h3>
-            <p className={styles.statValue}>{expertCounts.teacher || 0}</p>
+            <h3>자문위원</h3>
+            <p className={styles.statValue}>{advisors.length}</p>
           </div>
         </div>
       </div>
@@ -186,21 +185,6 @@ export default function TeamPage() {
             <div className={styles.categoryAction}>
               <span className={styles.viewButton}>관리하기</span>
               <i className="fas fa-arrow-right"></i>
-            </div>
-          </div>
-          
-          <div className={styles.categoryCard}>
-            <div className={styles.categoryIcon}>
-              <i className="fas fa-chalkboard-teacher"></i>
-            </div>
-            <h3>교사</h3>
-            <p>주간활동 및 방과후활동 교사 관리</p>
-            <div className={styles.categoryCount}>
-              {expertCounts.teacher || 0}명
-            </div>
-            <div className={styles.categoryAction}>
-              <span className={styles.viewButton}>준비 중</span>
-              <i className="fas fa-hourglass-half"></i>
             </div>
           </div>
           
