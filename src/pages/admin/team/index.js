@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { onAuthStateChanged } from 'firebase/auth';
-import { collection, getDocs, query, orderBy } from 'firebase/firestore';
+import { collection, getDocs, query, orderBy, where } from 'firebase/firestore';
 import { auth, db } from '../../../firebase/firebase';
 import AdminLayout from '../../../components/AdminLayout';
 import styles from '../../../styles/admin/team/Index.module.css';
 
 export default function TeamPage() {
   const [experts, setExperts] = useState([]);
+  const [advisors, setAdvisors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const router = useRouter();
@@ -25,29 +26,42 @@ export default function TeamPage() {
 
   // 전문가 데이터 가져오기
   useEffect(() => {
-    const fetchExperts = async () => {
+    const fetchData = async () => {
       try {
+        // 전문가 데이터 가져오기
         const expertsQuery = query(
           collection(db, 'experts'), 
           orderBy('order', 'asc')
         );
-        const querySnapshot = await getDocs(expertsQuery);
+        const expertsSnapshot = await getDocs(expertsQuery);
         
-        const expertsList = querySnapshot.docs.map(doc => ({
+        const expertsList = expertsSnapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data()
         }));
         
         setExperts(expertsList);
+        
+        // 자문위원 데이터 가져오기
+        const advisorsCollection = collection(db, '센터정보', 'advisors', 'items');
+        const advisorsQuery = query(advisorsCollection, where('isActive', '==', true));
+        const advisorsSnapshot = await getDocs(advisorsQuery);
+        
+        const advisorsList = advisorsSnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        
+        setAdvisors(advisorsList);
         setLoading(false);
       } catch (error) {
-        console.error('전문가 데이터 불러오기 오류:', error);
-        setError('전문가 데이터를 불러오는 중 오류가 발생했습니다.');
+        console.error('데이터 불러오기 오류:', error);
+        setError('데이터를 불러오는 중 오류가 발생했습니다.');
         setLoading(false);
       }
     };
 
-    fetchExperts();
+    fetchData();
   }, []);
 
   // 전문가 유형 카운트
@@ -74,6 +88,10 @@ export default function TeamPage() {
   // 페이지 이동 핸들러
   const navigateToTherapistCounselor = () => {
     router.push('/admin/team/therapist-counselor');
+  };
+
+  const navigateToAdvisors = () => {
+    router.push('/admin/team/advisors');
   };
 
   const navigateToAddExpert = () => {
@@ -186,18 +204,21 @@ export default function TeamPage() {
             </div>
           </div>
           
-          <div className={styles.categoryCard}>
+          <div 
+            className={styles.categoryCard}
+            onClick={navigateToAdvisors}
+          >
             <div className={styles.categoryIcon}>
               <i className="fas fa-user-tie"></i>
             </div>
             <h3>자문위원</h3>
             <p>전문 자문위원 관리</p>
             <div className={styles.categoryCount}>
-              0명
+              {advisors.length}명
             </div>
             <div className={styles.categoryAction}>
-              <span className={styles.viewButton}>준비 중</span>
-              <i className="fas fa-hourglass-half"></i>
+              <span className={styles.viewButton}>관리하기</span>
+              <i className="fas fa-arrow-right"></i>
             </div>
           </div>
         </div>
