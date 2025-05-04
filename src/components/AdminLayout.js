@@ -85,14 +85,6 @@ export default function AdminLayout({ children, title = '관리자 페이지 - �
                   </li>
                   <li>
                     <Link 
-                      href="/admin/about/advisors" 
-                      className={router.pathname === '/admin/about/advisors' ? styles.activeSubmenu : ''}
-                    >
-                      전문 자문단
-                    </Link>
-                  </li>
-                  <li>
-                    <Link 
                       href="/admin/about/facilities" 
                       className={router.pathname === '/admin/about/facilities' ? styles.activeSubmenu : ''}
                     >
@@ -181,6 +173,14 @@ export default function AdminLayout({ children, title = '관리자 페이지 - �
                       className={router.pathname === '/admin/team/therapist-counselor' ? styles.activeSubmenu : ''}
                     >
                       치료 · 상담사
+                    </Link>
+                  </li>
+                  <li>
+                    <Link 
+                      href="/admin/team/advisors" 
+                      className={router.pathname === '/admin/team/advisors' ? styles.activeSubmenu : ''}
+                    >
+                      전문 자문단
                     </Link>
                   </li>
                 </ul>
