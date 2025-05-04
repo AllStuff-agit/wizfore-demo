@@ -46,13 +46,6 @@ export default function AboutPage() {
       path: '/admin/about/history'
     },
     {
-      id: 'advisors',
-      name: '전문 자문단',
-      description: '센터의 전문 자문위원 정보를 관리합니다.',
-      icon: 'users',
-      path: '/admin/about/advisors'
-    },
-    {
       id: 'facilities',
       name: '시설 안내',
       description: '센터의 다양한 치료실, 상담실, 활동공간 등의 정보를 관리합니다.',
