@@ -1,8 +1,37 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import { getHomeSettings } from '../services/settingsService';
 import styles from '../styles/Home.module.css';
 
-export default function Home() {
+export default function Home({ initialHomeConfig }) {
+  const [homeConfig, setHomeConfig] = useState(initialHomeConfig || {
+    hero: {
+      title: '아이와 가족의 건강과 행복!',
+      subtitle: '아동 발달재활 및 심리상담 전문기관',
+      description: '위즈포레(WIZ FORE)는 \'함께 어우러지는 지혜의 숲\'이라는 의미를 담고 있으며, 장애인을 포함한 모든 사람들이 어우러져 더불어 살아가는 힘을 키우는데 필요한 사회서비스를 제공하는 전문기관입니다.',
+      buttonText: '서비스 알아보기',
+      buttonLink: '/services',
+      enabled: true
+    }
+  });
+
+  useEffect(() => {
+    const fetchHomeConfig = async () => {
+      try {
+        const config = await getHomeSettings();
+        if (config) {
+          setHomeConfig(config);
+        }
+      } catch (error) {
+        console.error('홈 설정 가져오기 오류:', error);
+      }
+    };
+
+    if (!initialHomeConfig) {
+      fetchHomeConfig();
+    }
+  }, [initialHomeConfig]);
   return (
     <div className={styles.container}>
       <Head>
@@ -13,45 +42,55 @@ export default function Home() {
 
       <main>
         {/* 히어로 섹션 */}
-        <section className={styles.hero}>
-          <div className={`${styles.heroCircle} ${styles.circle1}`}></div>
-          <div className={`${styles.heroCircle} ${styles.circle2}`}></div>
-          <div className={styles.container}>
-            <div className={styles.heroContent}>
-              <h1>아이와 가족의 건강과 행복!</h1>
-              <p className={styles.subtitle}>아동 발달재활 및 심리상담 전문기관</p>
-              <p className={styles.description}>
-                위즈포레(WIZ FORE)는 '함께 어우러지는 지혜의 숲'이라는 의미를 담고 있으며, 장애인을 포함한 모든 사람들이 어우러져 더불어 살아가는 힘을 키우는데 필요한 사회서비스를 제공하는 전문기관입니다.
-              </p>
-              <div className={styles.heroCta}>
-                <Link href="/services" className={`${styles.btn} ${styles.btnPrimary}`}>
-                  서비스 알아보기
-                </Link>
-                <Link href="/contact" className={`${styles.btn} ${styles.btnOutline}`}>
-                  문의하기
-                </Link>
+        {homeConfig.hero?.enabled !== false && (
+          <section 
+            className={styles.hero}
+            style={homeConfig.hero?.backgroundImageURL ? {
+              backgroundImage: `url(${homeConfig.hero.backgroundImageURL})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center'
+            } : {}}
+          >
+            <div className={`${styles.heroCircle} ${styles.circle1}`}></div>
+            <div className={`${styles.heroCircle} ${styles.circle2}`}></div>
+            <div className={styles.container}>
+              <div className={styles.heroContent}>
+                <h1>{homeConfig.hero?.title || '아이와 가족의 건강과 행복!'}</h1>
+                <p className={styles.subtitle}>{homeConfig.hero?.subtitle || '아동 발달재활 및 심리상담 전문기관'}</p>
+                <p className={styles.description}>
+                  {homeConfig.hero?.description || '위즈포레(WIZ FORE)는 \'함께 어우러지는 지혜의 숲\'이라는 의미를 담고 있으며, 장애인을 포함한 모든 사람들이 어우러져 더불어 살아가는 힘을 키우는데 필요한 사회서비스를 제공하는 전문기관입니다.'}
+                </p>
+                <div className={styles.heroCta}>
+                  <Link href={homeConfig.hero?.buttonLink || '/services'} className={`${styles.btn} ${styles.btnPrimary}`}>
+                    {homeConfig.hero?.buttonText || '서비스 알아보기'}
+                  </Link>
+                  <Link href="/contact" className={`${styles.btn} ${styles.btnOutline}`}>
+                    문의하기
+                  </Link>
+                </div>
+              </div>
+              
+              <div className={styles.heroImage}>
+                <img 
+                  src="/images/hero-children.png" 
+                  alt="위즈포레 아이들"
+                  className={styles.childrenImage}
+                />
               </div>
             </div>
-            
-            <div className={styles.heroImage}>
-              <img 
-                src="/images/hero-children.png" 
-                alt="위즈포레 아이들"
-                className={styles.childrenImage}
-              />
-            </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* 주요 서비스 섹션 */}
-        <section className={styles.mainServices}>
-          <div className={styles.container}>
-            <div className={styles.sectionHeader}>
-              <h2>주요 서비스</h2>
-              <p>위즈포레 사회서비스센터에서 제공하는 주요 서비스입니다</p>
-            </div>
-            
-            <div className={styles.serviceCards}>
+        {homeConfig.programs?.enabled !== false && (
+          <section className={styles.mainServices}>
+            <div className={styles.container}>
+              <div className={styles.sectionHeader}>
+                <h2>{homeConfig.programs?.title || "주요 서비스"}</h2>
+                <p>{homeConfig.programs?.subtitle || "위즈포레 사회서비스센터에서 제공하는 주요 서비스입니다"}</p>
+              </div>
+              
+              <div className={styles.serviceCards}>
               <div className={styles.dashedCard}>
                 <div className={styles.cardIcon}>
                   <i className="fas fa-child"></i>
@@ -90,16 +129,18 @@ export default function Home() {
                 <Link href="/services#therapy" className={styles.cardLink}>자세히 보기</Link>
               </div>
             </div>
-          </div>
-        </section>
+            </div>
+          </section>
+        )}
 
         {/* 치료 프로그램 섹션 */}
-        <section className={styles.therapyPrograms}>
-          <div className={styles.container}>
-            <div className={styles.sectionHeader}>
-              <h2>치료 프로그램</h2>
-              <p>위즈포레 사회서비스센터에서 제공하는 다양한 치료 프로그램을 소개합니다</p>
-            </div>
+        {homeConfig.experts?.enabled !== false && (
+          <section className={styles.therapyPrograms}>
+            <div className={styles.container}>
+              <div className={styles.sectionHeader}>
+                <h2>{homeConfig.experts?.title || "치료 프로그램"}</h2>
+                <p>{homeConfig.experts?.subtitle || "위즈포레 사회서비스센터에서 제공하는 다양한 치료 프로그램을 소개합니다"}</p>
+              </div>
             
             <div className={styles.programGrid}>
               <div className={styles.programCard}>
@@ -146,22 +187,27 @@ export default function Home() {
             </div>
           </div>
         </section>
+        )}
 
         {/* 소개 섹션 */}
-        <section className={styles.about}>
-          <div className={styles.container}>
-            <div className={styles.aboutGrid}>
-              <div className={styles.aboutImage}>
-                <div className={styles.imageBorder}>
-                  <img src="/images/center-photo.jpg" alt="위즈포레 센터" />
+        {homeConfig.about?.enabled !== false && (
+          <section className={styles.about}>
+            <div className={styles.container}>
+              <div className={styles.aboutGrid}>
+                <div className={styles.aboutImage}>
+                  <div className={styles.imageBorder}>
+                    <img 
+                      src={homeConfig.about?.image || "/images/center-photo.jpg"} 
+                      alt="위즈포레 센터" 
+                    />
+                  </div>
                 </div>
-              </div>
-              
-              <div className={styles.aboutContent}>
-                <h2>위즈포레 소개</h2>
-                <p className={styles.aboutSubtitle}>
-                  안심되고, 즐겁고, 유익하고, 희망차고, 성장하는 공간
-                </p>
+                
+                <div className={styles.aboutContent}>
+                  <h2>{homeConfig.about?.title || "위즈포레 소개"}</h2>
+                  <p className={styles.aboutSubtitle}>
+                    {homeConfig.about?.subtitle || "안심되고, 즐겁고, 유익하고, 희망차고, 성장하는 공간"}
+                  </p>
                 <p>
                   2016년에 설립된 위즈포레 사회서비스센터는 부산시 사상구에 위치하고 있으며, 
                   발달 지연 아동과 발달장애인을 위한 다양한 치료와 활동 프로그램을 제공하고 있습니다.
@@ -189,14 +235,16 @@ export default function Home() {
             </div>
           </div>
         </section>
+        )}
 
         {/* 시설 섹션 */}
-        <section className={styles.facilities}>
-          <div className={styles.container}>
-            <div className={styles.sectionHeader}>
-              <h2>시설 안내</h2>
-              <p>위즈포레 사회서비스센터의 다양한 치료실을 소개합니다</p>
-            </div>
+        {homeConfig.facilities?.enabled !== false && (
+          <section className={styles.facilities}>
+            <div className={styles.container}>
+              <div className={styles.sectionHeader}>
+                <h2>{homeConfig.facilities?.title || "시설 안내"}</h2>
+                <p>{homeConfig.facilities?.subtitle || "위즈포레 사회서비스센터의 다양한 치료실을 소개합니다"}</p>
+              </div>
             
             <div className={styles.facilitiesGrid}>
               <div className={styles.facilityItem}>
@@ -235,9 +283,11 @@ export default function Home() {
             </div>
           </div>
         </section>
+        )}
 
         {/* 위치 섹션 */}
-        <section className={styles.location}>
+        {homeConfig.contact?.enabled !== false && (
+          <section className={styles.location}>
           <div className={styles.container}>
             <div className={styles.locationGrid}>
               <div className={styles.locationInfo}>
@@ -280,6 +330,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+        )}
 
         {/* CTA 섹션 */}
         <section className={styles.cta}>
@@ -294,4 +345,37 @@ export default function Home() {
       </main>
     </div>
   );
+}
+
+// 서버 사이드에서 초기 데이터 가져오기
+export async function getStaticProps() {
+  try {
+    // Firebase Admin SDK 임포트 (서버 측에서만 임포트됨)
+    const admin = require('../firebase/firebase-admin').default;
+    const db = admin.firestore();
+    
+    // settings 컬렉션에서 homeConfig 문서 가져오기
+    const homeConfigDoc = await db.collection('settings').doc('homeConfig').get();
+    
+    let homeConfig = null;
+    if (homeConfigDoc.exists) {
+      homeConfig = homeConfigDoc.data();
+    }
+    
+    return {
+      props: {
+        initialHomeConfig: homeConfig || null,
+      },
+      // 10분마다 페이지 재생성
+      revalidate: 600,
+    };
+  } catch (error) {
+    console.error('getStaticProps 오류:', error);
+    return {
+      props: {
+        initialHomeConfig: null,
+      },
+      revalidate: 60,
+    };
+  }
 }

@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { onAuthStateChanged } from 'firebase/auth';
-import { doc, getDoc, setDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
-import { auth, db, storage } from '../../../firebase/firebase';
+import { auth, storage } from '../../../firebase/firebase';
+import { getHomeSettings, updateHomeSettings } from '../../../services/settingsService';
 import AdminLayout from '../../../components/AdminLayout';
 import styles from '../../../styles/admin/home/Index.module.css';
 
@@ -50,37 +50,39 @@ export default function HomePage() {
     return () => unsubscribe();
   }, [router]);
 
-  // 메인 페이지 설정 가져오기
+  // 홈 페이지 설정 가져오기
   useEffect(() => {
-    const fetchMainPageSettings = async () => {
+    const fetchSettings = async () => {
       try {
-        const mainPageDoc = await getDoc(doc(db, '센터정보', 'main_page'));
+        const homeConfig = await getHomeSettings();
         
-        if (mainPageDoc.exists()) {
-          const data = mainPageDoc.data();
-          setFormData({
+        if (homeConfig) {
+          // 기존 한국어 데이터 구조와 호환성 유지를 위한 변환
+          const koreanData = {
             히어로: {
-              헤드라인: data.히어로?.헤드라인 || '',
-              서브헤드라인: data.히어로?.서브헤드라인 || '',
-              배경이미지URL: data.히어로?.배경이미지URL || '',
-              버튼텍스트: data.히어로?.버튼텍스트 || '',
-              버튼링크: data.히어로?.버튼링크 || ''
+              헤드라인: homeConfig.hero?.title || '',
+              서브헤드라인: homeConfig.hero?.subtitle || '',
+              배경이미지URL: homeConfig.hero?.backgroundImageURL || '',
+              버튼텍스트: homeConfig.hero?.buttonText || '',
+              버튼링크: homeConfig.hero?.buttonLink || ''
             },
             주요프로그램: {
-              활성화: data.주요프로그램?.활성화 !== false
+              활성화: homeConfig.programs?.enabled !== false
             },
             전문가하이라이트: {
-              활성화: data.전문가하이라이트?.활성화 !== false
+              활성화: homeConfig.experts?.enabled !== false
             },
             센터소개: {
-              활성화: data.센터소개?.활성화 !== false
+              활성화: homeConfig.about?.enabled !== false
             },
             커뮤니티업데이트: {
-              활성화: data.커뮤니티업데이트?.활성화 !== false
+              활성화: homeConfig.news?.enabled !== false
             }
-          });
-          setOriginalData(data);
-          setImagePreview(data.히어로?.배경이미지URL);
+          };
+          
+          setFormData(koreanData);
+          setOriginalData(homeConfig);
+          setImagePreview(homeConfig.hero?.backgroundImageURL);
         }
       } catch (error) {
         console.error('홈 설정 가져오기 오류:', error);
@@ -90,7 +92,7 @@ export default function HomePage() {
       }
     };
 
-    fetchMainPageSettings();
+    fetchSettings();
   }, []);
 
   const handleInputChange = (e) => {
@@ -164,9 +166,9 @@ export default function HomePage() {
         backgroundImageURL = await uploadBackgroundImage(backgroundImage);
 
         // 기존 이미지 URL이 storage의 URL이면 삭제 시도
-        if (originalData?.히어로?.배경이미지URL && originalData.히어로.배경이미지URL.includes('firebasestorage.googleapis.com')) {
+        if (originalData?.hero?.backgroundImageURL && originalData.hero.backgroundImageURL.includes('firebasestorage.googleapis.com')) {
           try {
-            const oldImageRef = ref(storage, originalData.히어로.배경이미지URL);
+            const oldImageRef = ref(storage, originalData.hero.backgroundImageURL);
             await deleteObject(oldImageRef);
           } catch (error) {
             console.warn('기존 이미지 삭제 실패:', error);
@@ -174,30 +176,81 @@ export default function HomePage() {
         }
       }
 
-      // 히어로 섹션 배경 이미지 URL 업데이트
-      const updatedFormData = {
-        ...formData,
-        히어로: {
-          ...formData.히어로,
-          배경이미지URL: backgroundImageURL
+      // 한국어 formData에서 영어 데이터 구조로 변환
+      const homeConfigData = {
+        hero: {
+          title: formData.히어로.헤드라인,
+          subtitle: formData.히어로.서브헤드라인,
+          backgroundImageURL: backgroundImageURL,
+          buttonText: formData.히어로.버튼텍스트,
+          buttonLink: formData.히어로.버튼링크,
+          enabled: true
+        },
+        programs: {
+          title: '전문 프로그램',
+          subtitle: '전문가와 함께하는 맞춤형 프로그램',
+          description: '위즈포레의 전문가들이 제공하는 다양한 프로그램을 소개합니다.',
+          enabled: formData.주요프로그램.활성화
+        },
+        experts: {
+          title: '전문가 소개',
+          subtitle: '최고의 전문가와 함께하세요',
+          description: '위즈포레의 전문가들을 소개합니다.',
+          enabled: formData.전문가하이라이트.활성화
+        },
+        about: {
+          title: '센터 소개',
+          subtitle: '위즈포레는 아이들의 미래를 함께 만들어갑니다',
+          description: '위즈포레 사회서비스센터는 아동과 가족의 건강과 행복을 위해 다양한 서비스를 제공합니다.',
+          image: originalData?.about?.image || '',
+          enabled: formData.센터소개.활성화
+        },
+        news: {
+          title: '센터 소식',
+          subtitle: '위즈포레의 최신 소식을 만나보세요',
+          description: '위즈포레의 다양한 소식과 활동을 알려드립니다.',
+          enabled: formData.커뮤니티업데이트.활성화
+        },
+        facilities: {
+          title: '시설 안내',
+          subtitle: '최적의 환경에서 최고의 서비스를',
+          description: '위즈포레의 다양한 시설을 소개합니다.',
+          enabled: true
+        },
+        contact: {
+          title: '문의하기',
+          subtitle: '궁금한 점이 있으신가요?',
+          description: '언제든지 문의해주세요. 빠르게 답변해드리겠습니다.',
+          image: originalData?.contact?.image || '',
+          enabled: true
         }
       };
 
-      const mainPageRef = doc(db, '센터정보', 'main_page');
-      const data = {
-        ...updatedFormData,
-        수정일: serverTimestamp()
-      };
-
-      // 문서가 존재하면 업데이트, 없으면 새로 생성
+      // 기존 설정이 있으면 병합
       if (originalData) {
-        await updateDoc(mainPageRef, data);
-      } else {
-        data.생성일 = serverTimestamp();
-        await setDoc(mainPageRef, data);
+        // 기존 설정의 섹션별 필드 유지
+        Object.keys(homeConfigData).forEach(section => {
+          if (originalData[section]) {
+            // title, subtitle, description 등은 기존 값 유지
+            ['title', 'subtitle', 'description'].forEach(field => {
+              if (originalData[section][field] && section !== 'hero') {
+                homeConfigData[section][field] = originalData[section][field];
+              }
+            });
+            
+            // enabled 값은 formData 기준으로 업데이트
+            if (section === 'hero') {
+              // hero 섹션은 항상 활성화
+              homeConfigData.hero.enabled = true;
+            }
+          }
+        });
       }
 
-      setOriginalData(data);
+      // Firestore에 저장
+      await updateHomeSettings(homeConfigData);
+      
+      setOriginalData(homeConfigData);
       alert('홈 설정이 저장되었습니다.');
       setSaving(false);
     } catch (error) {
