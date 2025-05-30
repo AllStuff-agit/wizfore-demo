@@ -1,23 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
   images: {
-    domains: ['firebasestorage.googleapis.com']
+    domains: [
+      'firebasestorage.googleapis.com',
+      'lh3.googleusercontent.com'
+    ],
   },
-  webpack: (config, { isServer }) => {
-    // 서버리스 함수에서 fs, firebase-admin 등의 모듈 사용하지 않도록 설정
-    if (!isServer) {
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        fs: false,
-        'firebase-admin': false,
-        'child_process': false,
-        'net': false,
-        'tls': false,
-      };
-    }
-    return config;
-  }
+  typescript: {
+    // 빌드 시 타입 에러가 있어도 빌드를 계속 진행 (개발 초기에만 사용)
+    ignoreBuildErrors: false,
+  },
+  eslint: {
+    // 빌드 시 ESLint 에러가 있어도 빌드를 계속 진행 (개발 초기에만 사용)
+    ignoreDuringBuilds: false,
+  },
 }
 
 module.exports = nextConfig
