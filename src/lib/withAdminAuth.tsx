@@ -3,24 +3,26 @@
 import type { ComponentType } from 'react';
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react';
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, type User, type IdTokenResult } from 'firebase/auth';
 import { auth } from './firebase';
 
 // 클라이언트 측에서 사용할 관리자 인증 컴포넌트 래퍼
-export function withAdminAuth<P>(Component: ComponentType<P>) {
-  return function AdminProtectedComponent(props: P) {
+export function withAdminAuth<P extends Record<string, unknown>>(
+  Component: ComponentType<P>
+): ComponentType<P> {
+  return function AdminProtectedComponent(props: P): JSX.Element {
     const [authChecked, setAuthChecked] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
-      const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      const unsubscribe = onAuthStateChanged(auth, async (user: User | null) => {
         if (!user) {
           router.push('/admin');
         } else {
           try {
             console.log('Checking user auth status:', user.email);
-            const idToken = await user.getIdTokenResult();
+            const idToken: IdTokenResult = await user.getIdTokenResult();
             console.log('Token claims:', JSON.stringify(idToken.claims));
             
             // 임시: 모든 인증된 사용자에게 관리자 권한 부여
@@ -37,9 +39,11 @@ export function withAdminAuth<P>(Component: ComponentType<P>) {
               console.log('User has admin claim, allowing access');
               setIsAdmin(true);
             }
-          } catch (error: any) {
+          } catch (error: unknown) {
             console.error('Admin claim check failed:', error);
-            console.error('Error details:', error.message);
+            if (error instanceof Error) {
+              console.error('Error details:', error.message);
+            }
             router.push('/admin');
           }
         }
