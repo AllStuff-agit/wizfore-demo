@@ -1,122 +1,87 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Users, Heart, Brain, MessageCircle, Book, Gamepad2, Target, Monitor, Palette, TestTube, UserPlus, Headphones } from 'lucide-react'
+import { Users, Heart, Brain, MessageCircle, Book, TestTube } from 'lucide-react'
 
+// 6개의 주요 프로그램 + 둥글둥글한 오목한 모양
 const programs = [
   {
-    id: 'adult-counseling',
-    title: '성인 심리상담',
-    description: '우울증, 공황장애, 강박증, 대인관계, 직무스트레스, 가족관계, 자존감, 의사소통 등',
+    id: 'child-counseling',
+    title: '아동상담',
+    description: '놀이를 통해 아이와 소통하는 아동상담',
     icon: Users,
-    bgColor: 'bg-blue-50',
-    iconColor: 'text-mindstory-blue',
-    borderColor: 'border-blue-100'
+    bgColor: 'bg-cyan-600',
+    shadowColor: 'bg-cyan-300',
+    // 아동상담 - 둥근 오목 모양 (좌상단)
+    borderRadius: '60% 40% 30% 70% / 68% 25% 75% 32%',
+    shadowBorderRadius: '65% 35% 25% 75% / 70% 30% 70% 35%',
+    rotation: '3deg'
+  },
+  {
+    id: 'teen-learning',
+    title: '청소년 학습상담',
+    description: '청소년 마음을 알아주는 학습 문제를 해결하는 학습상담',
+    icon: Book,
+    bgColor: 'bg-lime-600', 
+    shadowColor: 'bg-lime-300',
+    // 청소년 학습상담 - 둥근 타원형 (우하단 살짝 오목)
+    borderRadius: '45% 55% 70% 30% / 55% 45% 55% 45%',
+    shadowBorderRadius: '50% 50% 75% 25% / 60% 40% 60% 40%',
+    rotation: '-2deg'
   },
   {
     id: 'teen-counseling',
     title: '청소년 심리상담',
-    description: '학교부적응, 또래관계, 불안장애, 비행행동, 학습 및 진로문제, 학교폭력, 성문제 등',
+    description: '청소년 마음을 알아주는 심리 문제를 해결하는 심리상담',
     icon: Heart,
-    bgColor: 'bg-green-50',
-    iconColor: 'text-mindstory-green',
-    borderColor: 'border-green-100'
+    bgColor: 'bg-pink-600',
+    shadowColor: 'bg-pink-300',
+    // 청소년 심리상담 - 하트 같은 둥근 모양
+    borderRadius: '54% 46% 38% 62% / 49% 60% 40% 51%',
+    shadowBorderRadius: '59% 41% 33% 67% / 54% 65% 35% 46%',
+    rotation: '1deg'
   },
   {
-    id: 'child-play-therapy',
-    title: '아동 놀이치료',
-    description: '분리불안, 등교거부, 애착문제, 틱, ADHD, 반항행동, 불안, 우울, 야뇨증, 유분증 등',
-    icon: Gamepad2,
-    bgColor: 'bg-purple-50',
-    iconColor: 'text-mindstory-purple',
-    borderColor: 'border-purple-100'
-  },
-  {
-    id: 'language-therapy',
-    title: '언어치료',
-    description: '수용언어, 표현언어, 화용언어, 발음교정, 어휘력 및 문장구성, 성인조음치료 등',
-    icon: MessageCircle,
-    bgColor: 'bg-orange-50',
-    iconColor: 'text-mindstory-orange',
-    borderColor: 'border-orange-100'
-  },
-  {
-    id: 'cognitive-therapy',
-    title: '인지 학습치료',
-    description: '읽기, 쓰기, 수학의 학습 부진, 난독증, ADHD의 학습능력 향상, 학습방법 습득 등',
+    id: 'adult-counseling',
+    title: '성인상담',
+    description: '힘이 되어주고 어려움을 풀어가는 상담',
     icon: Brain,
-    bgColor: 'bg-indigo-50',
-    iconColor: 'text-indigo-600',
-    borderColor: 'border-indigo-100'
-  },
-  {
-    id: 'art-therapy',
-    title: '미술치료',
-    description: '우울증, 외상 후 스트레스 증후군, 불안, 적응상의 어려움을 경험하는 아동이나 청소년, 성인 등',
-    icon: Palette,
-    bgColor: 'bg-pink-50',
-    iconColor: 'text-mindstory-pink',
-    borderColor: 'border-pink-100'
-  },
-  {
-    id: 'neurofeedback',
-    title: '뇌파치료(주의집중력훈련)',
-    description: '주의집중력 훈련, 불안감소, 정서안정, 숙면, 우울감소, 치매예방, 건강한 뇌 만들기 등',
-    icon: Monitor,
-    bgColor: 'bg-teal-50',
-    iconColor: 'text-mindstory-teal',
-    borderColor: 'border-teal-100'
-  },
-  {
-    id: 'reading-therapy',
-    title: '독서치료',
-    description: '독서를 통해 유연하고 폭 넓게 사고하면서 성장하고 싶은 모든 사람.',
-    icon: Book,
-    bgColor: 'bg-yellow-50',
-    iconColor: 'text-yellow-600',
-    borderColor: 'border-yellow-100'
-  },
-  {
-    id: 'social-training',
-    title: '사회성훈련',
-    description: '친구 사귀기, 감정 표현, 감정 이해, 의사소통, 숨은 의도 파악, 사회적 상황 이해, 정서조절 등',
-    icon: UserPlus,
-    bgColor: 'bg-red-50',
-    iconColor: 'text-red-500',
-    borderColor: 'border-red-100'
+    bgColor: 'bg-yellow-600',
+    shadowColor: 'bg-yellow-300',
+    // 성인상담 - 좌측이 둥글게 오목한 모양
+    borderRadius: '35% 65% 70% 30% / 55% 40% 60% 45%',
+    shadowBorderRadius: '40% 60% 75% 25% / 60% 35% 65% 40%',
+    rotation: '-4deg'
   },
   {
     id: 'psychological-test',
     title: '심리검사',
-    description: '종합심리검사, 진로탐색검사, 학습유형검사, 부모양육태도검사, 뇌파검사, 성격유형검사등 표준화된 심리검사',
+    description: '전문 심리연구원이 제공하는 다면적인 심리검사 및 해석',
     icon: TestTube,
-    bgColor: 'bg-cyan-50',
-    iconColor: 'text-cyan-600',
-    borderColor: 'border-cyan-100'
+    bgColor: 'bg-blue-600',
+    shadowColor: 'bg-blue-300',
+    // 심리검사 - 구름 같은 둥근 복잡한 모양
+    borderRadius: '39% 61% 70% 30% / 56% 23% 77% 44%',
+    shadowBorderRadius: '44% 56% 75% 25% / 61% 18% 82% 39%',
+    rotation: '2deg'
   },
   {
-    id: 'pair-therapy',
-    title: '아동 짝 치료',
-    description: '사회성이 부족한 아동들을 위한 2:1의 짝치료. 의사소통, 자기주장, 규칙 지키기, 행동교정 등',
-    icon: Target,
-    bgColor: 'bg-lime-50',
-    iconColor: 'text-lime-600',
-    borderColor: 'border-lime-100'
-  },
-  {
-    id: 'online-counseling',
-    title: '비대면 상담',
-    description: '전화상담, 영상통화상담, 화상상담(ZOOM), 카톡상담',
-    icon: Headphones,
-    bgColor: 'bg-gray-50',
-    iconColor: 'text-gray-600',
-    borderColor: 'border-gray-100'
+    id: 'counseling-review',
+    title: '상담후기',
+    description: '마음의 공식의 생생한 후기를 확인하실 수 있습니다.',
+    icon: MessageCircle,
+    bgColor: 'bg-emerald-600',
+    shadowColor: 'bg-emerald-300',
+    // 상담후기 - 물방울 같은 부드러운 모양
+    borderRadius: '58% 42% 28% 72% / 35% 66% 34% 65%',
+    shadowBorderRadius: '63% 37% 23% 77% / 40% 71% 29% 60%',
+    rotation: '-1deg'
   }
 ]
 
 const ProgramGrid = () => {
   return (
-    <section className="py-16 bg-light-peach">
+    <section className="py-16 bg-gray-50">
       <div className="container-custom mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -125,7 +90,7 @@ const ProgramGrid = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-mindstory-gray-text mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
             전문 치료 프로그램
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -133,33 +98,140 @@ const ProgramGrid = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
           {programs.map((program, index) => {
             const IconComponent = program.icon
             return (
               <motion.div
                 key={program.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.05 }}
+                initial={{ opacity: 0, y: 30, scale: 0.8 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                whileHover={{ y: -3 }}
-                className={`${program.bgColor} rounded-xl shadow-sm hover:shadow-md transition-all duration-300 p-6 border-2 ${program.borderColor} group cursor-pointer`}
+                className="relative group cursor-pointer"
+                style={{ height: '280px' }}
               >
-                {/* 아이콘 */}
-                <div className="w-14 h-14 bg-white rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-sm">
-                  <IconComponent size={24} className={program.iconColor} />
-                </div>
-                
-                {/* 제목 */}
-                <h3 className="text-lg font-bold text-mindstory-gray-text mb-3 group-hover:text-opacity-80 transition-colors">
-                  {program.title}
-                </h3>
-                
-                {/* 설명 */}
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  {program.description}
-                </p>
+                {/* 뒷배경 그림자 레이어 - 둥글둥글한 모양 */}
+                <div 
+                  className={`absolute inset-0 ${program.shadowColor} opacity-35 transform translate-x-3 translate-y-3 group-hover:translate-x-4 group-hover:translate-y-4 transition-all duration-300 ease-out`}
+                  style={{
+                    borderRadius: program.shadowBorderRadius,
+                    transform: `rotate(${program.rotation}) translate(12px, 12px) scale(1.05)`,
+                  }}
+                ></div>
+
+                {/* 중간 레이어 - 둥글둥글한 모양 */}
+                <div 
+                  className={`absolute inset-0 ${program.shadowColor} opacity-25 transform translate-x-1.5 translate-y-1.5 group-hover:translate-x-2 group-hover:translate-y-2 transition-all duration-300 ease-out`}
+                  style={{
+                    borderRadius: program.shadowBorderRadius,
+                    transform: `rotate(calc(${program.rotation} * 0.5)) translate(6px, 6px) scale(1.02)`,
+                  }}
+                ></div>
+
+                {/* 메인 카드 - 둥글둥글한 오목한 모양 */}
+                <motion.div
+                  whileHover={{ 
+                    scale: 1.08, 
+                    rotate: parseFloat(program.rotation) * 1.5,
+                    y: -8
+                  }}
+                  transition={{ 
+                    duration: 0.4, 
+                    ease: "easeOut",
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 20
+                  }}
+                  className={`relative ${program.bgColor} text-white p-8 h-full flex flex-col justify-center items-center text-center shadow-lg group-hover:shadow-xl transition-all duration-300 overflow-hidden`}
+                  style={{
+                    borderRadius: program.borderRadius,
+                    transform: `rotate(${program.rotation})`,
+                  }}
+                >
+                  {/* 추가적인 부드러운 내부 효과 */}
+                  <div 
+                    className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-black/10"
+                    style={{
+                      borderRadius: program.borderRadius,
+                    }}
+                  ></div>
+
+                  {/* 제목 */}
+                  <h3 className="text-xl md:text-2xl font-bold mb-4 leading-tight z-10 relative text-white">
+                    {program.title}
+                  </h3>
+                  
+                  {/* 설명 */}
+                  <p className="text-sm md:text-base opacity-90 leading-relaxed mb-8 px-2 z-10 relative text-white">
+                    {program.description}
+                  </p>
+
+                  {/* 하단 화살표 버튼 */}
+                  <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+                    <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm group-hover:bg-white/30 group-hover:scale-110 transition-all duration-300">
+                      <svg 
+                        className="w-5 h-5 text-white transform group-hover:translate-x-1 transition-transform duration-300" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round" 
+                          strokeWidth={2} 
+                          d="M9 5l7 7-7 7" 
+                        />
+                      </svg>
+                    </div>
+                  </div>
+
+                  {/* 장식용 원들 - 부드러운 블러 효과 */}
+                  <div 
+                    className="absolute w-6 h-6 bg-white/10 rounded-full blur-sm"
+                    style={{
+                      top: `${15 + (index * 5)}%`,
+                      right: `${10 + (index % 3) * 12}%`
+                    }}
+                  ></div>
+                  <div 
+                    className="absolute w-4 h-4 bg-white/15 rounded-full blur-sm"
+                    style={{
+                      top: `${25 + (index * 3)}%`,
+                      right: `${20 + (index % 2) * 18}%`
+                    }}
+                  ></div>
+                  <div 
+                    className="absolute w-3 h-3 bg-white/8 rounded-full blur-sm"
+                    style={{
+                      bottom: `${15 + (index * 4)}%`,
+                      left: `${8 + (index % 4) * 10}%`
+                    }}
+                  ></div>
+                  <div 
+                    className="absolute w-8 h-8 bg-white/5 rounded-full blur-md"
+                    style={{
+                      bottom: `${30 + (index * 2)}%`,
+                      left: `${15 + (index % 3) * 15}%`
+                    }}
+                  ></div>
+
+                  {/* 중앙 하이라이트 효과 */}
+                  <div 
+                    className="absolute top-6 left-6 w-20 h-20 bg-white/8 blur-2xl"
+                    style={{
+                      borderRadius: '60% 40% 30% 70%',
+                    }}
+                  ></div>
+
+                  {/* 하단 그림자 효과 */}
+                  <div 
+                    className="absolute bottom-4 right-4 w-16 h-16 bg-black/10 blur-xl"
+                    style={{
+                      borderRadius: '40% 60% 70% 30%',
+                    }}
+                  ></div>
+                </motion.div>
               </motion.div>
             )
           })}

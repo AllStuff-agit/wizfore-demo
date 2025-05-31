@@ -1,13 +1,14 @@
 "use client";
 
-import { useRouter } from 'next/router';
+import type { ComponentType } from 'react';
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../firebase/firebase';
+import { auth } from './firebase';
 
 // 클라이언트 측에서 사용할 관리자 인증 컴포넌트 래퍼
-export function withAdminAuth(Component) {
-  return function AdminProtectedComponent(props) {
+export function withAdminAuth<P>(Component: ComponentType<P>) {
+  return function AdminProtectedComponent(props: P) {
     const [authChecked, setAuthChecked] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
     const router = useRouter();
@@ -36,7 +37,7 @@ export function withAdminAuth(Component) {
               console.log('User has admin claim, allowing access');
               setIsAdmin(true);
             }
-          } catch (error) {
+          } catch (error: any) {
             console.error('Admin claim check failed:', error);
             console.error('Error details:', error.message);
             router.push('/admin');
