@@ -1,13 +1,18 @@
 'use client'
 
 import { useState } from 'react'
-import { Database, Plus, Trash2, RefreshCw, AlertTriangle } from 'lucide-react'
+import { Database, Plus, Trash2, RefreshCw, AlertTriangle, Users, Key } from 'lucide-react'
 import { 
   addAllSampleData, 
   addSamplePrograms, 
   addSampleInquiries, 
   addSampleNews 
 } from '@/lib/utils/sampleData'
+import {
+  createAllDefaultAccounts,
+  createDefaultAdminAccount,
+  createDefaultStaffAccount
+} from '@/lib/utils/createDefaultAccounts'
 
 export default function DevToolsPage() {
   const [loading, setLoading] = useState<string | null>(null)
@@ -51,6 +56,32 @@ export default function DevToolsPage() {
     }
   }
 
+  const handleCreateAccounts = async (type: 'all' | 'admin' | 'staff') => {
+    try {
+      setLoading(`account-${type}`)
+      
+      switch (type) {
+        case 'all':
+          await createAllDefaultAccounts()
+          addResult('✅ 모든 기본 계정이 성공적으로 생성되었습니다.')
+          break
+        case 'admin':
+          await createDefaultAdminAccount()
+          addResult('✅ 관리자 계정이 생성되었습니다. (admin@wizfore.com / wizfore123)')
+          break
+        case 'staff':
+          await createDefaultStaffAccount()
+          addResult('✅ 직원 계정이 생성되었습니다. (staff@wizfore.com / wizfore123)')
+          break
+      }
+    } catch (error) {
+      console.error('계정 생성 오류:', error)
+      addResult(`❌ 계정 생성 오류: ${error}`)
+    } finally {
+      setLoading(null)
+    }
+  }
+
   return (
     <div className="space-y-6">
       {/* 페이지 헤더 */}
@@ -58,7 +89,7 @@ export default function DevToolsPage() {
         <Database className="w-8 h-8 text-blue-600" />
         <div>
           <h1 className="text-2xl font-bold text-gray-900">개발자 도구</h1>
-          <p className="text-gray-600">Firebase 데이터베이스 관리 및 샘플 데이터 추가</p>
+          <p className="text-gray-600">Firebase 데이터베이스 관리 및 계정 설정</p>
         </div>
       </div>
 
@@ -77,9 +108,79 @@ export default function DevToolsPage() {
         </div>
       </div>
 
+      {/* 계정 관리 도구 */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <div className="flex items-center space-x-2 mb-6">
+          <Key className="w-5 h-5 text-green-600" />
+          <h2 className="text-lg font-semibold text-gray-900">테스트 계정 생성</h2>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+          {/* 모든 계정 생성 */}
+          <button
+            onClick={() => handleCreateAccounts('all')}
+            disabled={loading !== null}
+            className="flex items-center justify-center space-x-2 p-4 border-2 border-green-200 rounded-lg hover:bg-green-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {loading === 'account-all' ? (
+              <RefreshCw className="w-5 h-5 animate-spin" />
+            ) : (
+              <Users className="w-5 h-5 text-green-600" />
+            )}
+            <span className="font-medium text-green-700">모든 계정 생성</span>
+          </button>
+
+          {/* 관리자 계정 생성 */}
+          <button
+            onClick={() => handleCreateAccounts('admin')}
+            disabled={loading !== null}
+            className="flex items-center justify-center space-x-2 p-4 border-2 border-red-200 rounded-lg hover:bg-red-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {loading === 'account-admin' ? (
+              <RefreshCw className="w-5 h-5 animate-spin" />
+            ) : (
+              <Key className="w-5 h-5 text-red-600" />
+            )}
+            <span className="font-medium text-red-700">관리자 계정</span>
+          </button>
+
+          {/* 직원 계정 생성 */}
+          <button
+            onClick={() => handleCreateAccounts('staff')}
+            disabled={loading !== null}
+            className="flex items-center justify-center space-x-2 p-4 border-2 border-blue-200 rounded-lg hover:bg-blue-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {loading === 'account-staff' ? (
+              <RefreshCw className="w-5 h-5 animate-spin" />
+            ) : (
+              <Users className="w-5 h-5 text-blue-600" />
+            )}
+            <span className="font-medium text-blue-700">직원 계정</span>
+          </button>
+        </div>
+
+        {/* 계정 정보 안내 */}
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <h3 className="text-sm font-medium text-blue-800 mb-2">생성될 계정 정보</h3>
+          <div className="text-xs text-blue-700 space-y-2">
+            <div>
+              <p className="font-medium">관리자 계정:</p>
+              <p>이메일: admin@wizfore.com | 비밀번호: wizfore123</p>
+            </div>
+            <div>
+              <p className="font-medium">직원 계정:</p>
+              <p>이메일: staff@wizfore.com | 비밀번호: wizfore123</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* 샘플 데이터 추가 도구 */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-6">샘플 데이터 추가</h2>
+        <div className="flex items-center space-x-2 mb-6">
+          <Database className="w-5 h-5 text-blue-600" />
+          <h2 className="text-lg font-semibold text-gray-900">샘플 데이터 추가</h2>
+        </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* 모든 샘플 데이터 추가 */}
@@ -163,6 +264,8 @@ export default function DevToolsPage() {
                     ? 'bg-green-50 text-green-800 border border-green-200'
                     : result.startsWith('❌')
                     ? 'bg-red-50 text-red-800 border border-red-200'
+                    : result.startsWith('ℹ️')
+                    ? 'bg-blue-50 text-blue-800 border border-blue-200'
                     : 'bg-gray-50 text-gray-800 border border-gray-200'
                 }`}
               >
@@ -176,12 +279,18 @@ export default function DevToolsPage() {
       {/* Firebase 연결 상태 */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
         <h2 className="text-lg font-semibold text-gray-900 mb-4">Firebase 연결 상태</h2>
-        <div className="flex items-center space-x-2">
-          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-          <span className="text-sm text-gray-600">Firebase에 연결됨</span>
-        </div>
-        <div className="mt-2 text-xs text-gray-500">
-          Project ID: wizfore-demo
+        <div className="space-y-2">
+          <div className="flex items-center space-x-2">
+            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+            <span className="text-sm text-gray-600">Firestore 연결됨</span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+            <span className="text-sm text-gray-600">Firebase Auth 연결됨</span>
+          </div>
+          <div className="mt-2 text-xs text-gray-500">
+            Project ID: wizfore-demo
+          </div>
         </div>
       </div>
     </div>
