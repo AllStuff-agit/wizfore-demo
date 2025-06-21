@@ -15,7 +15,8 @@ import {
   BarChart3,
   MapPin,
   Calendar,
-  Database
+  Database,
+  Home
 } from 'lucide-react'
 
 const menuItems = [
@@ -25,17 +26,28 @@ const menuItems = [
     icon: LayoutDashboard
   },
   {
-    title: '센터 관리',
-    href: '/admin/center',
+    title: '홈페이지 관리',
+    href: '/admin/home',
+    icon: Home,
+    subItems: [
+      { title: '히어로 섹션', href: '/admin/home/hero' },
+      { title: '프로그램 미리보기', href: '/admin/home/program-preview' },
+      { title: '전문가 하이라이트', href: '/admin/home/expert-highlight' },
+      { title: '센터 소식', href: '/admin/home/news' },
+      { title: '문의 버튼 설정', href: '/admin/home/contact-button' }
+    ]
+  },
+  {
+    title: '센터 소개 관리',
+    href: '/admin/about',
     icon: Building2,
     subItems: [
-      { title: '기본 정보', href: '/admin/center/info' },
-      { title: '비전 & 인사말', href: '/admin/center/vision' },
-      { title: '센터장 소개', href: '/admin/center/director' },
-      { title: '센터 연혁', href: '/admin/center/history' },
-      { title: '전문 자문단', href: '/admin/center/advisors' },
-      { title: '시설 안내', href: '/admin/center/facilities' },
-      { title: '오시는 길', href: '/admin/center/location' }
+      { title: '센터 개요', href: '/admin/about/overview' },
+      { title: '센터장 소개', href: '/admin/about/director' },
+      { title: '센터 발자취', href: '/admin/about/history' },
+      { title: '전문 자문위원', href: '/admin/about/advisors' },
+      { title: '시설 둘러보기', href: '/admin/about/facilities' },
+      { title: '오시는 길', href: '/admin/about/directions' }
     ]
   },
   {
@@ -43,39 +55,42 @@ const menuItems = [
     href: '/admin/programs',
     icon: BookOpen,
     subItems: [
-      { title: '치료 프로그램', href: '/admin/programs/therapy' },
-      { title: '상담 프로그램', href: '/admin/programs/counseling' },
+      { title: '개별 치료 프로그램', href: '/admin/programs/individual' },
+      { title: '평가 및 상담 서비스', href: '/admin/programs/evaluation' },
       { title: '방과후 프로그램', href: '/admin/programs/afterschool' },
-      { title: '특수 스포츠', href: '/admin/programs/sports' }
+      { title: '특수 스포츠 프로그램', href: '/admin/programs/sports' },
+      { title: '성인 주간활동', href: '/admin/programs/adult-activities' }
     ]
   },
   {
-    title: '팀 관리',
+    title: '전문가 소개 관리',
     href: '/admin/team',
     icon: Users,
     subItems: [
-      { title: '치료사', href: '/admin/team/therapists' },
-      { title: '상담사', href: '/admin/team/counselors' },
-      { title: '기타 직원', href: '/admin/team/staff' }
+      { title: '치료·상담사', href: '/admin/team/therapists' },
+      { title: '주간·방과후 교사', href: '/admin/team/teachers' },
+      { title: '직원 현황', href: '/admin/team/staff-status' }
     ]
   },
   {
-    title: '콘텐츠 관리',
-    href: '/admin/content',
-    icon: FileText,
-    subItems: [
-      { title: '센터 소식', href: '/admin/content/news' },
-      { title: '이벤트', href: '/admin/content/events' },
-      { title: '사진 갤러리', href: '/admin/content/gallery' }
-    ]
-  },
-  {
-    title: '고객 관리',
-    href: '/admin/customers',
+    title: '커뮤니티 관리',
+    href: '/admin/community',
     icon: MessageSquare,
     subItems: [
-      { title: '1:1 문의', href: '/admin/customers/inquiries' },
-      { title: '문의 통계', href: '/admin/customers/statistics' }
+      { title: '센터 소식(공지사항)', href: '/admin/community/news' },
+      { title: 'SNS 소식', href: '/admin/community/sns' },
+      { title: '이벤트 관리', href: '/admin/community/events' }
+    ]
+  },
+  {
+    title: '1:1 문의 관리',
+    href: '/admin/contact',
+    icon: HelpCircle,
+    subItems: [
+      { title: '상담 예약 관리', href: '/admin/contact/reservations' },
+      { title: '문의 관리', href: '/admin/contact/inquiries' },
+      { title: '연락처 정보', href: '/admin/contact/info' },
+      { title: '문의 통계', href: '/admin/contact/statistics' }
     ]
   },
   {
@@ -83,9 +98,20 @@ const menuItems = [
     href: '/admin/settings',
     icon: Settings,
     subItems: [
-      { title: '홈페이지 설정', href: '/admin/settings/homepage' },
+      { title: '기관 기본정보', href: '/admin/settings/organization' },
       { title: 'SEO 설정', href: '/admin/settings/seo' },
-      { title: '관리자 계정', href: '/admin/settings/accounts' }
+      { title: '관리자 계정', href: '/admin/settings/accounts' },
+      { title: '백업 관리', href: '/admin/settings/backup' }
+    ]
+  },
+  {
+    title: '통계 및 분석',
+    href: '/admin/analytics',
+    icon: BarChart3,
+    subItems: [
+      { title: '방문자 통계', href: '/admin/analytics/visitors' },
+      { title: '프로그램 신청 현황', href: '/admin/analytics/programs' },
+      { title: '문의 분석', href: '/admin/analytics/inquiries' }
     ]
   },
   {

@@ -37,3 +37,5 @@ Thumbs.db
 
 # 9) Vercel CLI 로컬 설정 (생성된다면)
 /.vercel/
+
+CLAUDE.md/
