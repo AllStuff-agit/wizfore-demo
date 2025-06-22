@@ -47,7 +47,7 @@ const ExpertsHighlight = () => {
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            전문가 팀
+            전문가 소개
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             풍부한 경험과 전문성을 갖춘 치료사들이<br />

@@ -4,64 +4,56 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Play } from 'lucide-react'
 import Link from 'next/link'
-
-interface Slide {
-  id: number
-  title: string
-  subtitle: string
-  description: string
-  buttonText: string
-  buttonLink: string
-  backgroundImage: string
-  backgroundColor: string
-}
-
-const slides: Slide[] = [
-  {
-    id: 1,
-    title: '한국상담심리학회 상담심리전문가가 운영하는',
-    subtitle: '공인된 사회서비스센터',
-    description: '오랜 임상 경험, 엄격한 수련과정을 거친 각 분야의 전문가가 함께 합니다.',
-    buttonText: '전문가 소개 보기',
-    buttonLink: '/team',
-    backgroundImage: '/images/hero/slide1.jpg',
-    backgroundColor: 'from-amber-100 via-orange-50 to-yellow-50'
-  },
-  {
-    id: 2,
-    title: 'Wizfore Social Service Center',
-    subtitle: '위즈포레 사회서비스센터',
-    description: '체계적이고 전문적인 아동 발달 지원 서비스를 제공합니다.',
-    buttonText: '센터 소개 보기',
-    buttonLink: '/about',
-    backgroundImage: '/images/hero/slide2.jpg',
-    backgroundColor: 'from-blue-50 via-sky-50 to-cyan-50'
-  },
-  {
-    id: 3,
-    title: '모든 아이가 건강하게 성장하는',
-    subtitle: '세상을 만듭니다',
-    description: '위즈포레와 함께 아이들의 밝은 미래를 만들어갑니다.',
-    buttonText: '프로그램 보기',
-    buttonLink: '/programs',
-    backgroundImage: '/images/hero/slide3.jpg',
-    backgroundColor: 'from-green-50 via-emerald-50 to-teal-50'
-  }
-]
+import { doc, getDoc } from 'firebase/firestore'
+import { db } from '@/lib/firebase'
+import type { HeroSlide } from '@/types'
 
 const HeroSection: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState<number>(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState<boolean>(true)
+  const [slides, setSlides] = useState<HeroSlide[]>([])
+  const [loading, setLoading] = useState(true)
+
+  // Firebase에서 슬라이드 데이터 가져오기
+  useEffect(() => {
+    const fetchSlides = async () => {
+      try {
+        const docRef = doc(db, 'homeConfig', 'main')
+        const docSnap = await getDoc(docRef)
+        
+        if (docSnap.exists()) {
+          const data = docSnap.data()
+          const heroSlides = data.hero?.slides || []
+          
+          // 활성화된 슬라이드만 필터링하고 순서대로 정렬
+          const enabledSlides = heroSlides
+            .filter((slide: HeroSlide) => slide.enabled)
+            .sort((a: HeroSlide, b: HeroSlide) => a.order - b.order)
+          
+          setSlides(enabledSlides)
+          setIsAutoPlaying(data.hero?.autoPlay ?? true)
+        }
+      } catch (error) {
+        console.error('Error fetching hero slides:', error)
+        // 에러 시 기본 슬라이드 사용
+        setSlides([])
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchSlides()
+  }, [])
 
   useEffect(() => {
-    if (!isAutoPlaying) return
+    if (!isAutoPlaying || slides.length === 0) return
 
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length)
     }, 5000)
 
     return () => clearInterval(interval)
-  }, [isAutoPlaying])
+  }, [isAutoPlaying, slides.length])
 
   const nextSlide = (): void => {
     setCurrentSlide((prev) => (prev + 1) % slides.length)
@@ -75,6 +67,40 @@ const HeroSection: React.FC = () => {
     setCurrentSlide(index)
   }
 
+  if (loading) {
+    return (
+      <section className="relative h-screen overflow-hidden bg-gray-100 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-mindstory-lime mx-auto mb-4"></div>
+          <p className="text-gray-600">슬라이드를 불러오는 중...</p>
+        </div>
+      </section>
+    )
+  }
+
+  if (slides.length === 0) {
+    return (
+      <section className="relative h-screen overflow-hidden bg-gradient-to-br from-blue-50 via-sky-50 to-cyan-50 flex items-center justify-center">
+        <div className="container-custom mx-auto px-4 text-center">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-gray-800">
+            위즈포레 사회서비스센터
+          </h1>
+          <p className="text-lg md:text-xl mb-8 text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            함께 어우러지는 지혜의 숲에서 전문적인 사회서비스를 제공합니다.
+          </p>
+          <Link
+            href="/about"
+            className="inline-flex items-center bg-mindstory-lime hover:bg-mindstory-lime-dark text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+          >
+            센터 소개 보기
+          </Link>
+        </div>
+      </section>
+    )
+  }
+
+  const currentSlideData = slides[currentSlide] || slides[0]
+
   return (
     <section className="relative h-screen overflow-hidden">
       <AnimatePresence mode="wait">
@@ -87,7 +113,7 @@ const HeroSection: React.FC = () => {
           className="absolute inset-0"
         >
           {/* 마인드스토리 스타일 배경 - 따뜻한 그라데이션 */}
-          <div className={`absolute inset-0 bg-gradient-to-br ${slides[currentSlide].backgroundColor}`} />
+          <div className={`absolute inset-0 bg-gradient-to-br ${currentSlideData.backgroundColor}`} />
           
           {/* 배경 이미지 오버레이 (실제 사진처럼) */}
           <div 
@@ -106,19 +132,19 @@ const HeroSection: React.FC = () => {
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 <h2 className="text-2xl md:text-3xl mb-4 text-mindstory-gray-text font-medium">
-                  {slides[currentSlide].title}
+                  {currentSlideData.title}
                 </h2>
                 <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-gray-800">
-                  {slides[currentSlide].subtitle}
+                  {currentSlideData.subtitle}
                 </h1>
                 <p className="text-lg md:text-xl mb-8 text-mindstory-gray-text max-w-3xl mx-auto leading-relaxed">
-                  {slides[currentSlide].description}
+                  {currentSlideData.description}
                 </p>
                 <Link
-                  href={slides[currentSlide].buttonLink}
+                  href={currentSlideData.buttonLink}
                   className="inline-flex items-center bg-mindstory-lime hover:bg-mindstory-lime-dark text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                 >
-                  {slides[currentSlide].buttonText}
+                  {currentSlideData.buttonText}
                 </Link>
               </motion.div>
             </div>
