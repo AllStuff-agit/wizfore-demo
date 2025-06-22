@@ -2,7 +2,7 @@ import HeroSection from '@/components/home/HeroSection'
 import CategoryCards from '@/components/home/CategoryCards'
 import AboutSection from '@/components/home/AboutSection'
 import ProgramGrid from '@/components/home/ProgramGrid'
-import VoucherSection from '@/components/home/VoucherSection'
+import MainServicesSection from '@/components/home/MainServicesSection'
 
 export default function HomePage() {
   return (
@@ -19,8 +19,8 @@ export default function HomePage() {
       {/* 프로그램 그리드 - 3x4 레이아웃 */}
       <ProgramGrid />
       
-      {/* 바우처 이용 안내 */}
-      <VoucherSection />
+      {/* 주요 사업 분야 */}
+      <MainServicesSection />
     </div>
   )
 }
