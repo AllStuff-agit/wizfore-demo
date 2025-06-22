@@ -178,14 +178,24 @@ export interface SiteConfig {
   }
 }
 
+export interface HeroSlide {
+  id: number
+  title: string
+  subtitle: string
+  description: string
+  buttonText: string
+  buttonLink: string
+  backgroundImage: string
+  backgroundColor: string
+  order: number
+  enabled: boolean
+}
+
 export interface HomeConfig {
   hero: {
-    title: string
-    subtitle: string
-    backgroundImageURL: string
-    buttonText: string
-    buttonLink: string
     enabled: boolean
+    autoPlay: boolean
+    slides: HeroSlide[]
   }
   programs: {
     title: string
@@ -375,6 +385,17 @@ export interface MainService {
   order: number
 }
 
+export interface SiteAsset {
+  id: string
+  name: string
+  category: 'hero' | 'program' | 'icon' | 'background' | 'other'
+  url: string
+  alt: string
+  description?: string
+  order: number
+  enabled: boolean
+}
+
 // 전체 기본 사이트 데이터 구조
 export interface DefaultSiteData {
   siteInfo: {
@@ -403,4 +424,6 @@ export interface DefaultSiteData {
       blog?: string
     }
   }
+  homeConfig: HomeConfig
+  siteAssets: SiteAsset[]
 }

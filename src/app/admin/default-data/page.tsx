@@ -12,7 +12,9 @@ import {
   Phone,
   Settings,
   Trash2,
-  Download
+  Download,
+  Home,
+  Image
 } from 'lucide-react'
 
 import { 
@@ -61,7 +63,7 @@ const dataCategories: DataCategory[] = [
   },
   {
     id: 'team',
-    title: '전문가 정보',
+    title: '전문가 소개',
     description: '치료사 및 교사 정보를 추가합니다.',
     icon: Users,
     collections: ['team'],
@@ -74,6 +76,22 @@ const dataCategories: DataCategory[] = [
     icon: MessageSquare,
     collections: ['community'],
     color: 'pink'
+  },
+  {
+    id: 'home-config',
+    title: '홈페이지 설정',
+    description: '히어로 슬라이드, 섹션 활성화 설정을 추가합니다.',
+    icon: Home,
+    collections: ['homeConfig'],
+    color: 'indigo'
+  },
+  {
+    id: 'site-assets',
+    title: '사이트 에셋',
+    description: '이미지 URL과 메타데이터를 추가합니다.',
+    icon: Image,
+    collections: ['siteAssets'],
+    color: 'teal'
   }
 ]
 
@@ -90,7 +108,9 @@ function DataCategoryCard({ category, hasData, isLoading, onAddData }: DataCateg
     green: 'bg-green-50 border-green-200 text-green-900',
     purple: 'bg-purple-50 border-purple-200 text-purple-900',
     orange: 'bg-orange-50 border-orange-200 text-orange-900',
-    pink: 'bg-pink-50 border-pink-200 text-pink-900'
+    pink: 'bg-pink-50 border-pink-200 text-pink-900',
+    indigo: 'bg-indigo-50 border-indigo-200 text-indigo-900',
+    teal: 'bg-teal-50 border-teal-200 text-teal-900'
   }
 
   const iconColorClasses = {
@@ -98,7 +118,9 @@ function DataCategoryCard({ category, hasData, isLoading, onAddData }: DataCateg
     green: 'text-green-600',
     purple: 'text-purple-600',
     orange: 'text-orange-600',
-    pink: 'text-pink-600'
+    pink: 'text-pink-600',
+    indigo: 'text-indigo-600',
+    teal: 'text-teal-600'
   }
 
   const buttonColorClasses = {
@@ -106,7 +128,9 @@ function DataCategoryCard({ category, hasData, isLoading, onAddData }: DataCateg
     green: 'bg-green-600 hover:bg-green-700',
     purple: 'bg-purple-600 hover:bg-purple-700',
     orange: 'bg-orange-600 hover:bg-orange-700',
-    pink: 'bg-pink-600 hover:bg-pink-700'
+    pink: 'bg-pink-600 hover:bg-pink-700',
+    indigo: 'bg-indigo-600 hover:bg-indigo-700',
+    teal: 'bg-teal-600 hover:bg-teal-700'
   }
 
   return (
@@ -263,7 +287,7 @@ export default function DefaultDataPage() {
         title: '모든 데이터 추가 중...',
         current: '시작 중...',
         completed: 0,
-        total: 5,
+        total: 7,
         isCompleted: false
       })
       setShowProgress(true)
@@ -405,7 +429,7 @@ export default function DefaultDataPage() {
           onClose={() => setShowDeleteConfirm(false)}
           onConfirm={handleDeleteAll}
           title="모든 데이터 삭제"
-          message={`정말로 모든 기본 데이터를 삭제하시겠습니까?\n\n이 작업은 되돌릴 수 없으며, 다음 컬렉션의 모든 데이터가 삭제됩니다:\n• 사이트 기본 정보 (siteInfo)\n• 센터 소개 (aboutInfo)\n• 프로그램 정보 (programs)\n• 전문가 정보 (team)\n• 커뮤니티 (community)\n\n신중하게 결정해주세요.`}
+          message={`정말로 모든 기본 데이터를 삭제하시겠습니까?\n\n이 작업은 되돌릴 수 없으며, 다음 컬렉션의 모든 데이터가 삭제됩니다:\n• 사이트 기본 정보 (siteInfo)\n• 센터 소개 (aboutInfo)\n• 프로그램 정보 (programs)\n• 전문가 소개 (team)\n• 커뮤니티 (community)\n• 홈페이지 설정 (homeConfig)\n• 사이트 에셋 (siteAssets)\n\n신중하게 결정해주세요.`}
           confirmText="모든 데이터 삭제"
           cancelText="취소"
           type="danger"
@@ -417,7 +441,7 @@ export default function DefaultDataPage() {
           onClose={() => setShowAddConfirm(false)}
           onConfirm={handleAddAll}
           title="모든 데이터 추가"
-          message={`wizfore_archive.md의 모든 기본 데이터를 Firebase에 추가하시겠습니까?\n\n다음 카테고리의 데이터가 추가됩니다:\n• 사이트 기본 정보\n• 센터 소개\n• 프로그램 정보\n• 전문가 정보\n• 커뮤니티\n\n이미 존재하는 데이터가 있는 카테고리는 건너뛰어집니다.`}
+          message={`wizfore_archive.md의 모든 기본 데이터를 Firebase에 추가하시겠습니까?\n\n다음 카테고리의 데이터가 추가됩니다:\n• 사이트 기본 정보\n• 센터 소개\n• 프로그램 정보\n• 전문가 소개\n• 커뮤니티\n• 홈페이지 설정\n• 사이트 에셋\n\n이미 존재하는 데이터가 있는 카테고리는 건너뛰어집니다.`}
           confirmText="모든 데이터 추가"
           cancelText="취소"
           type="info"

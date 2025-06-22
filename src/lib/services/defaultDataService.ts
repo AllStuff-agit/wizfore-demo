@@ -61,6 +61,10 @@ function getCategoryCollections(categoryId: string): string[] {
       return ['team']
     case 'community':
       return ['community']
+    case 'home-config':
+      return ['homeConfig']
+    case 'site-assets':
+      return ['siteAssets']
     default:
       return []
   }
@@ -137,6 +141,34 @@ async function addCommunityData() {
 }
 
 /**
+ * 홈 설정 데이터 추가
+ */
+async function addHomeConfigData() {
+  const { homeConfig } = defaultSiteData
+  
+  // 홈 설정 데이터 추가
+  await setDoc(doc(db, 'homeConfig', 'main'), {
+    ...homeConfig,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  })
+}
+
+/**
+ * 사이트 에셋 데이터 추가
+ */
+async function addSiteAssetsData() {
+  const { siteAssets } = defaultSiteData
+  
+  // 사이트 에셋 데이터 추가
+  await setDoc(doc(db, 'siteAssets', 'main'), {
+    assets: siteAssets,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  })
+}
+
+/**
  * 카테고리별 기본 데이터 추가 메인 함수
  */
 export async function addDefaultDataByCategory(categoryId: string): Promise<void> {
@@ -159,6 +191,12 @@ export async function addDefaultDataByCategory(categoryId: string): Promise<void
       case 'community':
         await addCommunityData()
         break
+      case 'home-config':
+        await addHomeConfigData()
+        break
+      case 'site-assets':
+        await addSiteAssetsData()
+        break
       default:
         throw new Error(`Unknown category: ${categoryId}`)
     }
@@ -174,7 +212,7 @@ export async function addDefaultDataByCategory(categoryId: string): Promise<void
  * 모든 카테고리의 데이터 존재 여부 확인
  */
 export async function checkAllCategoriesDataStatus(): Promise<Record<string, boolean>> {
-  const categories = ['site-info', 'about-info', 'programs', 'team', 'community']
+  const categories = ['site-info', 'about-info', 'programs', 'team', 'community', 'home-config', 'site-assets']
   const results: Record<string, boolean> = {}
   
   for (const categoryId of categories) {
@@ -229,7 +267,7 @@ export async function deleteAllDefaultData(): Promise<void> {
     console.log('Starting to delete all default data')
     
     const allCollections = [
-      'siteInfo', 'aboutInfo', 'programs', 'team', 'community'
+      'siteInfo', 'aboutInfo', 'programs', 'team', 'community', 'homeConfig', 'siteAssets'
     ]
     
     // 배치 처리로 성능 향상
@@ -255,7 +293,9 @@ export async function addAllDefaultData(onProgress?: (completed: number, total: 
       { id: 'about-info', name: '센터 소개' },
       { id: 'programs', name: '프로그램 정보' },
       { id: 'team', name: '전문가 정보' },
-      { id: 'community', name: '커뮤니티' }
+      { id: 'community', name: '커뮤니티' },
+      { id: 'home-config', name: '홈페이지 설정' },
+      { id: 'site-assets', name: '사이트 에셋' }
     ]
     
     for (let i = 0; i < categories.length; i++) {
