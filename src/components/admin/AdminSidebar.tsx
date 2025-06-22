@@ -56,8 +56,8 @@ const menuItems = [
     href: '/admin/programs',
     icon: BookOpen,
     subItems: [
-      { title: '개별 치료 프로그램', href: '/admin/programs/individual' },
-      { title: '평가 및 상담 서비스', href: '/admin/programs/evaluation' },
+      { title: '치료 프로그램', href: '/admin/programs/individual' },
+      { title: '상담 서비스', href: '/admin/programs/evaluation' },
       { title: '방과후 프로그램', href: '/admin/programs/afterschool' },
       { title: '특수 스포츠 프로그램', href: '/admin/programs/sports' },
       { title: '성인 주간활동', href: '/admin/programs/adult-activities' }

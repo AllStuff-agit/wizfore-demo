@@ -7,9 +7,9 @@ export default function ProgramsPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* 개별 치료 프로그램 */}
+        {/* 치료 프로그램 */}
         <div className="bg-white p-6 rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">개별 치료 프로그램</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">치료 프로그램</h3>
           <p className="text-gray-600 mb-4">8개 치료 영역의 프로그램을 관리합니다.</p>
           <div className="text-sm text-gray-500 mb-4">
             • 언어치료, 인지치료<br/>
@@ -22,9 +22,9 @@ export default function ProgramsPage() {
           </button>
         </div>
 
-        {/* 평가 및 상담 서비스 */}
+        {/* 상담 서비스 */}
         <div className="bg-white p-6 rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">평가 및 상담 서비스</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">상담 서비스</h3>
           <p className="text-gray-600 mb-4">진단 평가와 상담 서비스를 관리합니다.</p>
           <div className="text-sm text-gray-500 mb-4">
             • 발달/심리검사<br/>
