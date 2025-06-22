@@ -16,7 +16,8 @@ import {
   MapPin,
   Calendar,
   Database,
-  Home
+  Home,
+  Upload
 } from 'lucide-react'
 
 const menuItems = [
@@ -113,6 +114,11 @@ const menuItems = [
       { title: '프로그램 신청 현황', href: '/admin/analytics/programs' },
       { title: '문의 분석', href: '/admin/analytics/inquiries' }
     ]
+  },
+  {
+    title: '기본 데이터 추가',
+    href: '/admin/default-data',
+    icon: Upload
   },
   {
     title: '개발자 도구',

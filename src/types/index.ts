@@ -268,3 +268,129 @@ export interface LocationImage {
   title: string
   imageUrl: string
 }
+
+// 기본 사이트 데이터 구조를 위한 새로운 타입들
+export interface DirectorInfo {
+  name: string
+  position: string
+  education: string[]
+  career: string[]
+  committees: string[]
+  certifications: string[]
+  imageUrl?: string
+}
+
+export interface AdvisorInfo {
+  id: string
+  name: string
+  position: string
+  education: string
+  career: string[]
+  imageUrl?: string
+  order: number
+}
+
+export interface OrganizationInfo {
+  totalStaff: number
+  staffComposition: {
+    category: string
+    count: number
+  }[]
+  totalClients: number
+  clientComposition: {
+    category: string
+    count: number
+  }[]
+}
+
+export interface CoreValues {
+  diverse: string
+  together: string
+  restful: string
+  dreaming: string
+  growing: string
+  caring: string
+  healing: string
+}
+
+export interface ProgramCategory {
+  id: string
+  title: string
+  description: string
+  programs: ProgramDetail[]
+  order: number
+}
+
+export interface ProgramDetail {
+  id: string
+  title: string
+  target?: string
+  goal: string
+  content?: string[]
+  types?: string[]
+  order: number
+}
+
+export interface StaffMember {
+  id: string
+  name: string
+  category: 'therapist' | 'teacher'
+  specialization: string[]
+  education: string
+  certifications: string[]
+  imageUrl?: string
+  order: number
+}
+
+export interface NewsItem {
+  id: string
+  title: string
+  content: string
+  date: string
+  category: 'news' | 'partnership' | 'award' | 'event'
+  imageUrl?: string
+  order: number
+}
+
+export interface ContactInfo {
+  address: string
+  phone: string
+  fax: string
+  email: string
+  website: string
+  operatingHours: {
+    weekday: string
+    weekend: string
+  }
+  parking: string
+  transportation: TransportationInfo[]
+}
+
+// 전체 기본 사이트 데이터 구조
+export interface DefaultSiteData {
+  siteInfo: {
+    name: string
+    establishedDate: string
+    purpose: string
+    coreValues: CoreValues
+    organization: OrganizationInfo
+    contact: ContactInfo
+  }
+  aboutInfo: {
+    director: DirectorInfo
+    milestones: Milestone[]
+    advisors: AdvisorInfo[]
+    facilities: string[]
+  }
+  programs: ProgramCategory[]
+  team: StaffMember[]
+  community: {
+    news: NewsItem[]
+    snsLinks: {
+      youtube?: string
+      instagram?: string
+      facebook?: string
+      blog?: string
+    }
+  }
+}
