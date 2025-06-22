@@ -54,7 +54,41 @@ export const defaultSiteData: DefaultSiteData = {
           description: "모라주공아파트 정류장 하차"
         }
       ]
-    }
+    },
+    mainServices: [
+      {
+        id: "developmental-intervention",
+        title: "발달중재서비스",
+        description: "발달/심리검사, 언어/인지/미술/놀이/감각통합/심리운동/사회성 치료 서비스",
+        details: [
+          "복지부 발달재활서비스(2022년~) & 교육부 치료지원서비스(2021년~)",
+          "복지부 지역사회서비스 아동청소년 심리치유서비스(2016년~)"
+        ],
+        startYear: "2016",
+        order: 1
+      },
+      {
+        id: "family-support",
+        title: "부모/가족지원서비스",
+        description: "가족이음(학부모코칭)서비스",
+        startYear: "2016",
+        order: 2
+      },
+      {
+        id: "disability-day-afterschool",
+        title: "발달장애인 주간활동 및 발달장애학생 방과후활동서비스",
+        description: "발달장애인 평생교육프로그램(일상생활훈련/지역사회적응/문화예술체험 등)",
+        startYear: "2020",
+        order: 3
+      },
+      {
+        id: "sports-voucher",
+        title: "문체부 장애인 스포츠이용권 서비스 제공기관",
+        description: "장애인 스포츠 활동 지원 서비스",
+        startYear: "2024",
+        order: 4
+      }
+    ]
   },
   
   aboutInfo: {

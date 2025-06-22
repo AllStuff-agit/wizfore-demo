@@ -366,6 +366,15 @@ export interface ContactInfo {
   transportation: TransportationInfo[]
 }
 
+export interface MainService {
+  id: string
+  title: string
+  description: string
+  details?: string[]
+  startYear: string
+  order: number
+}
+
 // 전체 기본 사이트 데이터 구조
 export interface DefaultSiteData {
   siteInfo: {
@@ -375,6 +384,7 @@ export interface DefaultSiteData {
     coreValues: CoreValues
     organization: OrganizationInfo
     contact: ContactInfo
+    mainServices: MainService[]
   }
   aboutInfo: {
     director: DirectorInfo
