@@ -7,10 +7,12 @@ import {
   query, 
   limit,
   deleteDoc,
-  writeBatch
+  writeBatch,
+  getDoc
 } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import { defaultSiteData } from '@/lib/data/defaultSiteData'
+import type { DefaultSiteData } from '@/types'
 
 /**
  * Firebase 컬렉션에 데이터가 존재하는지 확인
@@ -316,5 +318,139 @@ export async function addAllDefaultData(onProgress?: (completed: number, total: 
   } catch (error) {
     console.error('Error adding all default data:', error)
     throw error
+  }
+}
+
+/**
+ * 사이트 기본 정보 조회
+ */
+export async function getSiteInfo() {
+  try {
+    const docRef = doc(db, 'siteInfo', 'main')
+    const docSnap = await getDoc(docRef)
+    
+    if (docSnap.exists()) {
+      return docSnap.data()
+    } else {
+      console.warn('Site info not found, returning default data')
+      return defaultSiteData.siteInfo
+    }
+  } catch (error) {
+    console.error('Error fetching site info:', error)
+    return defaultSiteData.siteInfo
+  }
+}
+
+/**
+ * 센터 소개 정보 조회
+ */
+export async function getAboutInfo() {
+  try {
+    const docRef = doc(db, 'aboutInfo', 'main')
+    const docSnap = await getDoc(docRef)
+    
+    if (docSnap.exists()) {
+      return docSnap.data()
+    } else {
+      console.warn('About info not found, returning default data')
+      return defaultSiteData.aboutInfo
+    }
+  } catch (error) {
+    console.error('Error fetching about info:', error)
+    return defaultSiteData.aboutInfo
+  }
+}
+
+/**
+ * AboutSection용 기본 사이트 데이터 조회 (사이트명 + 원장 정보)
+ */
+export async function getAboutSectionData(): Promise<{
+  siteName: string
+  director: DefaultSiteData['aboutInfo']['director']
+}> {
+  try {
+    const [siteInfo, aboutInfo] = await Promise.all([
+      getSiteInfo(),
+      getAboutInfo()
+    ])
+    
+    return {
+      siteName: siteInfo.name || defaultSiteData.siteInfo.name,
+      director: aboutInfo.director || defaultSiteData.aboutInfo.director
+    }
+  } catch (error) {
+    console.error('Error fetching AboutSection data:', error)
+    return {
+      siteName: defaultSiteData.siteInfo.name,
+      director: defaultSiteData.aboutInfo.director
+    }
+  }
+}
+
+/**
+ * 프로그램 정보 조회
+ */
+export async function getPrograms() {
+  try {
+    const docRef = doc(db, 'programs', 'main')
+    const docSnap = await getDoc(docRef)
+    
+    if (docSnap.exists()) {
+      const data = docSnap.data()
+      return data.categories || defaultSiteData.programs
+    } else {
+      console.warn('Programs not found, returning default data')
+      return defaultSiteData.programs
+    }
+  } catch (error) {
+    console.error('Error fetching programs:', error)
+    return defaultSiteData.programs
+  }
+}
+
+/**
+ * ProgramGrid용 모든 프로그램 데이터 조회 (모든 카테고리의 프로그램들을 플랫화)
+ */
+export async function getAllProgramsFlattened() {
+  try {
+    const categories = await getPrograms()
+    const allPrograms: Array<{
+      id: string
+      title: string
+      description: string
+      categoryTitle: string
+      categoryId: string
+      order: number
+    }> = []
+
+    categories.forEach((category: any) => {
+      if (category.programs && category.programs.length > 0) {
+        category.programs.forEach((program: any) => {
+          allPrograms.push({
+            id: program.id,
+            title: program.title,
+            description: program.goal || category.description,
+            categoryTitle: category.title,
+            categoryId: category.id,
+            order: program.order || 0
+          })
+        })
+      }
+    })
+
+    // 카테고리 순서, 그 다음 프로그램 순서로 정렬
+    return allPrograms.sort((a, b) => {
+      const categoryA = categories.find((c: any) => c.id === a.categoryId)
+      const categoryB = categories.find((c: any) => c.id === b.categoryId)
+      
+      if (categoryA?.order !== categoryB?.order) {
+        return (categoryA?.order || 0) - (categoryB?.order || 0)
+      }
+      
+      return a.order - b.order
+    })
+  } catch (error) {
+    console.error('Error fetching flattened programs:', error)
+    return []
   }
 }

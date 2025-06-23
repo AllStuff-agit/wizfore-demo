@@ -288,6 +288,10 @@ export interface DirectorInfo {
   committees: string[]
   certifications: string[]
   imageUrl?: string
+  aboutMessage?: {
+    title: string
+    messages: string[]
+  }
 }
 
 export interface AdvisorInfo {

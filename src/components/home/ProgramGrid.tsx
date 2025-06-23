@@ -1,85 +1,83 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Users, Heart, Brain, MessageCircle, Book, TestTube } from 'lucide-react'
+import { getAllProgramsFlattened } from '@/lib/services/defaultDataService'
+import Marquee from '@/components/ui/marquee'
+import { 
+  Brain, 
+  Heart, 
+  Users, 
+  Target, 
+  Lightbulb, 
+  Star,
+  MessageCircle,
+  Activity
+} from 'lucide-react'
 
-// 6개의 주요 프로그램 + 둥글둥글한 오목한 모양
-const programs = [
-  {
-    id: 'child-counseling',
-    title: '아동상담',
-    description: '놀이를 통해 아이와 소통하는 아동상담',
-    icon: Users,
-    bgColor: 'bg-cyan-600',
-    shadowColor: 'bg-cyan-300',
-    // 아동상담 - 둥근 오목 모양 (좌상단)
-    borderRadius: '60% 40% 30% 70% / 68% 25% 75% 32%',
-    shadowBorderRadius: '65% 35% 25% 75% / 70% 30% 70% 35%',
-    rotation: '3deg'
-  },
-  {
-    id: 'teen-learning',
-    title: '청소년 학습상담',
-    description: '청소년 마음을 알아주는 학습 문제를 해결하는 학습상담',
-    icon: Book,
-    bgColor: 'bg-lime-600', 
-    shadowColor: 'bg-lime-300',
-    // 청소년 학습상담 - 둥근 타원형 (우하단 살짝 오목)
-    borderRadius: '45% 55% 70% 30% / 55% 45% 55% 45%',
-    shadowBorderRadius: '50% 50% 75% 25% / 60% 40% 60% 40%',
-    rotation: '-2deg'
-  },
-  {
-    id: 'teen-counseling',
-    title: '청소년 심리상담',
-    description: '청소년 마음을 알아주는 심리 문제를 해결하는 심리상담',
-    icon: Heart,
-    bgColor: 'bg-pink-600',
-    shadowColor: 'bg-pink-300',
-    // 청소년 심리상담 - 하트 같은 둥근 모양
-    borderRadius: '54% 46% 38% 62% / 49% 60% 40% 51%',
-    shadowBorderRadius: '59% 41% 33% 67% / 54% 65% 35% 46%',
-    rotation: '1deg'
-  },
-  {
-    id: 'adult-counseling',
-    title: '성인상담',
-    description: '힘이 되어주고 어려움을 풀어가는 상담',
-    icon: Brain,
-    bgColor: 'bg-yellow-600',
-    shadowColor: 'bg-yellow-300',
-    // 성인상담 - 좌측이 둥글게 오목한 모양
-    borderRadius: '35% 65% 70% 30% / 55% 40% 60% 45%',
-    shadowBorderRadius: '40% 60% 75% 25% / 60% 35% 65% 40%',
-    rotation: '-4deg'
-  },
-  {
-    id: 'psychological-test',
-    title: '심리검사',
-    description: '전문 심리연구원이 제공하는 다면적인 심리검사 및 해석',
-    icon: TestTube,
-    bgColor: 'bg-blue-600',
-    shadowColor: 'bg-blue-300',
-    // 심리검사 - 구름 같은 둥근 복잡한 모양
-    borderRadius: '39% 61% 70% 30% / 56% 23% 77% 44%',
-    shadowBorderRadius: '44% 56% 75% 25% / 61% 18% 82% 39%',
-    rotation: '2deg'
-  },
-  {
-    id: 'counseling-review',
-    title: '상담후기',
-    description: '마음의 공식의 생생한 후기를 확인하실 수 있습니다.',
-    icon: MessageCircle,
-    bgColor: 'bg-emerald-600',
-    shadowColor: 'bg-emerald-300',
-    // 상담후기 - 물방울 같은 부드러운 모양
-    borderRadius: '58% 42% 28% 72% / 35% 66% 34% 65%',
-    shadowBorderRadius: '63% 37% 23% 77% / 40% 71% 29% 60%',
-    rotation: '-1deg'
-  }
+// 프로그램 아이콘 및 색상 매핑
+const programIconsAndColors = [
+  { icon: Brain, bgColor: 'bg-blue-500', hoverColor: 'bg-blue-600' },      // 인지/학습
+  { icon: Heart, bgColor: 'bg-pink-500', hoverColor: 'bg-pink-600' },      // 정서/심리
+  { icon: Users, bgColor: 'bg-green-500', hoverColor: 'bg-green-600' },    // 사회성
+  { icon: Target, bgColor: 'bg-orange-500', hoverColor: 'bg-orange-600' }, // 목표달성
+  { icon: Lightbulb, bgColor: 'bg-yellow-500', hoverColor: 'bg-yellow-600' }, // 창의성
+  { icon: Star, bgColor: 'bg-purple-500', hoverColor: 'bg-purple-600' },   // 특성화
+  { icon: MessageCircle, bgColor: 'bg-teal-500', hoverColor: 'bg-teal-600' }, // 상담
+  { icon: Activity, bgColor: 'bg-red-500', hoverColor: 'bg-red-600' }      // 활동
 ]
 
+interface Program {
+  id: string
+  title: string
+  description: string
+  categoryTitle: string
+  categoryId: string
+  order: number
+}
+
 const ProgramGrid = () => {
+  const [programs, setPrograms] = useState<Program[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchPrograms = async () => {
+      try {
+        const programData = await getAllProgramsFlattened()
+        setPrograms(programData)
+      } catch (error) {
+        console.error('Error fetching programs:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchPrograms()
+  }, [])
+
+  if (loading) {
+    return (
+      <section className="py-16 bg-gray-50">
+        <div className="container-custom mx-auto px-4">
+          <div className="text-center mb-12">
+            <div className="h-8 bg-gray-300 rounded w-64 mx-auto mb-4 animate-pulse"></div>
+            <div className="h-4 bg-gray-200 rounded w-96 mx-auto animate-pulse"></div>
+          </div>
+          <div className="w-full max-w-6xl mx-auto">
+            <Marquee pauseOnHover className="[--duration:30s]">
+              {[...Array(8)].map((_, index) => (
+                <div 
+                  key={index} 
+                  className="w-80 h-24 bg-white border border-gray-200 rounded-lg mx-3 animate-pulse"
+                ></div>
+              ))}
+            </Marquee>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
   return (
     <section className="py-16 bg-gray-50">
       <div className="container-custom mx-auto px-4">
@@ -98,143 +96,144 @@ const ProgramGrid = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
-          {programs.map((program, index) => {
-            const IconComponent = program.icon
-            return (
-              <motion.div
-                key={program.id}
-                initial={{ opacity: 0, y: 30, scale: 0.8 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="relative group cursor-pointer"
-                style={{ height: '280px' }}
-              >
-                {/* 뒷배경 그림자 레이어 - 둥글둥글한 모양 */}
-                <div 
-                  className={`absolute inset-0 ${program.shadowColor} opacity-35 transform translate-x-3 translate-y-3 group-hover:translate-x-4 group-hover:translate-y-4 transition-all duration-300 ease-out`}
-                  style={{
-                    borderRadius: program.shadowBorderRadius,
-                    transform: `rotate(${program.rotation}) translate(12px, 12px) scale(1.05)`,
-                  }}
-                ></div>
-
-                {/* 중간 레이어 - 둥글둥글한 모양 */}
-                <div 
-                  className={`absolute inset-0 ${program.shadowColor} opacity-25 transform translate-x-1.5 translate-y-1.5 group-hover:translate-x-2 group-hover:translate-y-2 transition-all duration-300 ease-out`}
-                  style={{
-                    borderRadius: program.shadowBorderRadius,
-                    transform: `rotate(calc(${program.rotation} * 0.5)) translate(6px, 6px) scale(1.02)`,
-                  }}
-                ></div>
-
-                {/* 메인 카드 - 둥글둥글한 오목한 모양 */}
+        {/* 프로그램 마키 레이아웃 */}
+        <div className="relative w-full px-4 space-y-6 overflow-hidden">
+          {/* 그라데이션 마스크 - 왼쪽과 오른쪽 가장자리 */}
+          <div className="absolute left-0 top-0 w-20 h-full bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute right-0 top-0 w-20 h-full bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none"></div>
+          {/* 첫 번째 마키 - 정방향 */}
+          <motion.div
+            drag="x"
+            dragConstraints={{ left: -200, right: 200 }}
+            dragElastic={0.1}
+            whileDrag={{ scale: 1.02 }}
+            className="cursor-grab active:cursor-grabbing"
+          >
+            <Marquee pauseOnHover className="[--duration:60s]">
+            {programs.slice(0, Math.ceil(programs.length / 2)).map((program, index) => {
+              const iconData = programIconsAndColors[index % programIconsAndColors.length]
+              const IconComponent = iconData.icon
+            
+              // 설명 텍스트를 더 짧게 제한
+              const truncatedDescription = program.description.length > 80 
+                ? program.description.substring(0, 80) + '...'
+                : program.description
+              
+              return (
                 <motion.div
-                  whileHover={{ 
-                    scale: 1.08, 
-                    rotate: parseFloat(program.rotation) * 1.5,
-                    y: -8
-                  }}
+                  key={program.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   transition={{ 
-                    duration: 0.4, 
-                    ease: "easeOut",
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 20
+                    duration: 0.5, 
+                    delay: index * 0.1
                   }}
-                  className={`relative ${program.bgColor} text-white p-8 h-full flex flex-col justify-center items-center text-center shadow-lg group-hover:shadow-xl transition-all duration-300 overflow-hidden`}
-                  style={{
-                    borderRadius: program.borderRadius,
-                    transform: `rotate(${program.rotation})`,
-                  }}
+                  viewport={{ once: true }}
+                  className="group cursor-pointer mx-3"
+                  style={{ flexShrink: 0 }}
                 >
-                  {/* 추가적인 부드러운 내부 효과 */}
-                  <div 
-                    className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-black/10"
-                    style={{
-                      borderRadius: program.borderRadius,
+                  {/* 메인 카드 */}
+                  <motion.div
+                    whileHover={{ 
+                      scale: 1.02,
+                      y: -4
                     }}
-                  ></div>
-
-                  {/* 제목 */}
-                  <h3 className="text-xl md:text-2xl font-bold mb-4 leading-tight z-10 relative text-white">
-                    {program.title}
-                  </h3>
-                  
-                  {/* 설명 */}
-                  <p className="text-sm md:text-base opacity-90 leading-relaxed mb-8 px-2 z-10 relative text-white">
-                    {program.description}
-                  </p>
-
-                  {/* 하단 화살표 버튼 */}
-                  <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
-                    <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm group-hover:bg-white/30 group-hover:scale-110 transition-all duration-300">
-                      <svg 
-                        className="w-5 h-5 text-white transform group-hover:translate-x-1 transition-transform duration-300" 
-                        fill="none" 
-                        stroke="currentColor" 
-                        viewBox="0 0 24 24"
-                      >
-                        <path 
-                          strokeLinecap="round" 
-                          strokeLinejoin="round" 
-                          strokeWidth={2} 
-                          d="M9 5l7 7-7 7" 
-                        />
-                      </svg>
+                    transition={{ 
+                      duration: 0.2, 
+                      ease: "easeOut"
+                    }}
+                    className="bg-white border border-gray-200 rounded-lg p-6 w-80 h-24 flex items-center gap-4 shadow-sm hover:shadow-md transition-all duration-300 select-none"
+                  >
+                    {/* 왼쪽 아이콘 영역 */}
+                    <div className={`flex-shrink-0 w-12 h-12 ${iconData.bgColor} group-hover:${iconData.hoverColor} rounded-lg flex items-center justify-center transition-colors duration-300`}>
+                      <IconComponent className="w-6 h-6 text-white" />
                     </div>
-                  </div>
 
-                  {/* 장식용 원들 - 부드러운 블러 효과 */}
-                  <div 
-                    className="absolute w-6 h-6 bg-white/10 rounded-full blur-sm"
-                    style={{
-                      top: `${15 + (index * 5)}%`,
-                      right: `${10 + (index % 3) * 12}%`
-                    }}
-                  ></div>
-                  <div 
-                    className="absolute w-4 h-4 bg-white/15 rounded-full blur-sm"
-                    style={{
-                      top: `${25 + (index * 3)}%`,
-                      right: `${20 + (index % 2) * 18}%`
-                    }}
-                  ></div>
-                  <div 
-                    className="absolute w-3 h-3 bg-white/8 rounded-full blur-sm"
-                    style={{
-                      bottom: `${15 + (index * 4)}%`,
-                      left: `${8 + (index % 4) * 10}%`
-                    }}
-                  ></div>
-                  <div 
-                    className="absolute w-8 h-8 bg-white/5 rounded-full blur-md"
-                    style={{
-                      bottom: `${30 + (index * 2)}%`,
-                      left: `${15 + (index % 3) * 15}%`
-                    }}
-                  ></div>
-
-                  {/* 중앙 하이라이트 효과 */}
-                  <div 
-                    className="absolute top-6 left-6 w-20 h-20 bg-white/8 blur-2xl"
-                    style={{
-                      borderRadius: '60% 40% 30% 70%',
-                    }}
-                  ></div>
-
-                  {/* 하단 그림자 효과 */}
-                  <div 
-                    className="absolute bottom-4 right-4 w-16 h-16 bg-black/10 blur-xl"
-                    style={{
-                      borderRadius: '40% 60% 70% 30%',
-                    }}
-                  ></div>
+                    {/* 오른쪽 텍스트 영역 */}
+                    <div className="flex-1 min-w-0">
+                      {/* 프로그램 제목 */}
+                      <h3 className="text-base font-semibold text-gray-900 group-hover:text-gray-800 transition-colors duration-300 mb-1 truncate">
+                        {program.title}
+                      </h3>
+                      
+                      {/* 프로그램 설명 */}
+                      <p className="text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300 line-clamp-1">
+                        {truncatedDescription}
+                      </p>
+                    </div>
+                  </motion.div>
                 </motion.div>
-              </motion.div>
-            )
-          })}
+              )
+            })}
+            </Marquee>
+          </motion.div>
+          
+          {/* 두 번째 마키 - 역방향 */}
+          <motion.div
+            drag="x"
+            dragConstraints={{ left: -200, right: 200 }}
+            dragElastic={0.1}
+            whileDrag={{ scale: 1.02 }}
+            className="cursor-grab active:cursor-grabbing"
+          >
+            <Marquee reverse pauseOnHover className="[--duration:70s]">
+            {programs.slice(Math.ceil(programs.length / 2)).map((program, index) => {
+              const iconData = programIconsAndColors[(index + Math.ceil(programs.length / 2)) % programIconsAndColors.length]
+              const IconComponent = iconData.icon
+            
+              // 설명 텍스트를 더 짧게 제한
+              const truncatedDescription = program.description.length > 80 
+                ? program.description.substring(0, 80) + '...'
+                : program.description
+              
+              return (
+                <motion.div
+                  key={program.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ 
+                    duration: 0.5, 
+                    delay: index * 0.1
+                  }}
+                  viewport={{ once: true }}
+                  className="group cursor-pointer mx-3"
+                  style={{ flexShrink: 0 }}
+                >
+                  {/* 메인 카드 */}
+                  <motion.div
+                    whileHover={{ 
+                      scale: 1.02,
+                      y: -4
+                    }}
+                    transition={{ 
+                      duration: 0.2, 
+                      ease: "easeOut"
+                    }}
+                    className="bg-white border border-gray-200 rounded-lg p-6 w-80 h-24 flex items-center gap-4 shadow-sm hover:shadow-md transition-all duration-300 select-none"
+                  >
+                    {/* 왼쪽 아이콘 영역 */}
+                    <div className={`flex-shrink-0 w-12 h-12 ${iconData.bgColor} group-hover:${iconData.hoverColor} rounded-lg flex items-center justify-center transition-colors duration-300`}>
+                      <IconComponent className="w-6 h-6 text-white" />
+                    </div>
+
+                    {/* 오른쪽 텍스트 영역 */}
+                    <div className="flex-1 min-w-0">
+                      {/* 프로그램 제목 */}
+                      <h3 className="text-base font-semibold text-gray-900 group-hover:text-gray-800 transition-colors duration-300 mb-1 truncate">
+                        {program.title}
+                      </h3>
+                      
+                      {/* 프로그램 설명 */}
+                      <p className="text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300 line-clamp-1">
+                        {truncatedDescription}
+                      </p>
+                    </div>
+                  </motion.div>
+                </motion.div>
+              )
+            })}
+            </Marquee>
+          </motion.div>
         </div>
       </div>
     </section>
