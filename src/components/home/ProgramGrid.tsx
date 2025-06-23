@@ -189,7 +189,7 @@ const ProgramGrid = () => {
       if (resumeTimer.row1) clearTimeout(resumeTimer.row1)
       if (resumeTimer.row2) clearTimeout(resumeTimer.row2)
     }
-  }, [])
+  }, [resumeTimer.row1, resumeTimer.row2])
 
   if (loading) {
     return (

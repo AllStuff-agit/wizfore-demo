@@ -127,7 +127,6 @@ const CategoryCards = () => {
       <div className="container-custom mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {programCategories.map((category, index) => {
-            const IconComponent = iconMap[category.id as keyof typeof iconMap] || BookOpen
             const fallbackGradient = fallbackGradients[category.id as keyof typeof fallbackGradients] || fallbackGradients['individual-therapy']
             
             return (
