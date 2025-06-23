@@ -272,6 +272,7 @@ export const defaultSiteData: DefaultSiteData = {
       id: "individual-therapy",
       title: "치료 프로그램",
       description: "개별적인 특성과 필요에 맞춘 전문적인 치료 서비스를 제공합니다.",
+      imageUrl: "",
       programs: [
         {
           id: "speech-therapy",
@@ -337,6 +338,7 @@ export const defaultSiteData: DefaultSiteData = {
       id: "evaluation-counseling",
       title: "상담 프로그램",
       description: "정확한 진단과 개별화된 상담을 통해 최적의 치료 계획을 제공합니다.",
+      imageUrl: "",
       programs: [
         {
           id: "developmental-assessment",
@@ -367,6 +369,7 @@ export const defaultSiteData: DefaultSiteData = {
       id: "afterschool-program",
       title: "방과후 프로그램",
       description: "학령기 아동의 발달과 사회성 향상을 위한 집단 프로그램입니다.",
+      imageUrl: "",
       programs: [
         {
           id: "saturday-social",
@@ -413,6 +416,7 @@ export const defaultSiteData: DefaultSiteData = {
       id: "adult-day-program",
       title: "성인 주간활동 프로그램",
       description: "성인 발달장애인의 자립생활과 사회통합을 위한 종합적인 서비스를 제공합니다.",
+      imageUrl: "",
       programs: [
         {
           id: "daily-living",

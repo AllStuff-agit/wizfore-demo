@@ -333,6 +333,7 @@ export interface ProgramCategory {
   description: string
   programs: ProgramDetail[]
   order: number
+  imageUrl?: string
 }
 
 export interface ProgramDetail {

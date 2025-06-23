@@ -119,9 +119,10 @@ async function addAboutInfoData() {
 async function addProgramsData() {
   const { programs } = defaultSiteData
   
-  // 통합된 프로그램 데이터 추가
+  // 통합된 프로그램 데이터 추가 (defaultImageUrl 포함)
   await setDoc(doc(db, 'programs', 'main'), {
     categories: programs,
+    defaultImageUrl: '/images/programs/defaultImage.jpg',
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString()
   })
