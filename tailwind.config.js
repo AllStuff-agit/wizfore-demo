@@ -52,34 +52,36 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // 위즈포레 브랜드 컬러 팔레트
+        // 위즈포레 브랜드 컬러 팔레트 (코랄/핑크 계열)
         wizfore: {
           // Primary Colors
           white: '#FFFFFF',
-          'warm-beige': 'rgb(254, 243, 239)',
+          'warm-beige': '#FFF8F0',
           
-          // Brand Colors
-          'warm-brown': 'rgb(139, 69, 19)',
-          'medium-brown': 'rgb(160, 82, 45)',
-          'sandy-brown': 'rgb(205, 133, 63)',
+          // Brand Colors (코랄/핑크 계열)
+          'coral-primary': '#FF6B6B',
+          'coral-secondary': '#FF8A80',
+          'coral-light': '#FFAA9D',
+          'coral-accent': '#FF9999',
           
-          // Background Colors
-          'light-beige': 'rgb(245, 235, 220)',
-          'ivory-beige': 'rgb(250, 240, 230)',
+          // Background Colors (핑크톤 베이지/크림)
+          'soft-pink': '#FFE0E0',
+          'cream-pink': '#FFFAF0',
+          'light-coral': '#FFCCCB',
           
           // Text Colors (안전한 그레이 계열)
           'text-primary': '#333333',
           'text-secondary': '#666666',
           'text-light': '#888888',
-          'text-brand': 'rgb(139, 69, 19)',
+          'text-brand': '#FF6B6B',
         },
         
-        // 기존 마인드스토리 컬러 (하위 호환성)
+        // 기존 마인드스토리 컬러 (하위 호환성 - 새 브랜드 컬러로 매핑)
         mindstory: {
-          // 메인 라임 그린 (버튼 색상) - 위즈포레 브랜드 색상으로 교체 예정
-          lime: 'rgb(139, 69, 19)', // warm-brown으로 변경
-          'lime-dark': 'rgb(160, 82, 45)', // medium-brown으로 변경
-          'lime-light': 'rgb(205, 133, 63)', // sandy-brown으로 변경
+          // 메인 버튼 색상 - 코랄 계열로 변경
+          lime: '#FF6B6B', // coral-primary로 변경
+          'lime-dark': '#FF8A80', // coral-secondary로 변경
+          'lime-light': '#FFAA9D', // coral-light로 변경
           // 로고 컬러들
           blue: '#2196F3',
           green: '#4CAF50',
@@ -87,10 +89,10 @@ module.exports = {
           pink: '#E91E63',
           purple: '#9C27B0',
           teal: '#009688',
-          // 중성 컬러
-          'gray-warm': 'rgb(245, 235, 220)', // light-beige로 변경
-          'gray-text': '#333333', // text-primary로 변경
-          'gray-light': 'rgb(250, 240, 230)', // ivory-beige로 변경
+          // 중성 컬러 - 새 배경 색상으로 매핑
+          'gray-warm': '#FFE0E0', // soft-pink로 변경
+          'gray-text': '#333333', // text-primary 유지
+          'gray-light': '#FFFAF0', // cream-pink로 변경
         }
       },
       borderRadius: {

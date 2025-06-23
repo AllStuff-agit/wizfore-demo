@@ -34,18 +34,20 @@
  
     --radius: 0.5rem;
 
-    /* 위즈포레 브랜드 색상 변수 */
+    /* 위즈포레 브랜드 색상 변수 (코랄/핑크 계열) */
     --wizfore-white: #FFFFFF;
-    --wizfore-warm-beige: rgb(254, 243, 239);
-    --wizfore-warm-brown: rgb(139, 69, 19);
-    --wizfore-medium-brown: rgb(160, 82, 45);
-    --wizfore-sandy-brown: rgb(205, 133, 63);
-    --wizfore-light-beige: rgb(245, 235, 220);
-    --wizfore-ivory-beige: rgb(250, 240, 230);
+    --wizfore-warm-beige: #FFF8F0;
+    --wizfore-coral-primary: #FF6B6B;
+    --wizfore-coral-secondary: #FF8A80;
+    --wizfore-coral-light: #FFAA9D;
+    --wizfore-coral-accent: #FF9999;
+    --wizfore-soft-pink: #FFE0E0;
+    --wizfore-cream-pink: #FFFAF0;
+    --wizfore-light-coral: #FFCCCB;
     --wizfore-text-primary: #333333;
     --wizfore-text-secondary: #666666;
     --wizfore-text-light: #888888;
-    --wizfore-text-brand: rgb(139, 69, 19);
+    --wizfore-text-brand: #FF6B6B;
   }
  
   .dark {
@@ -89,9 +91,9 @@
   }
 }
 
-/* 마인드스토리 스타일 커스텀 */
+/* 위즈포레 스타일 커스텀 */
 .hero-gradient {
-  background: linear-gradient(135deg, #1e40af 0%, #059669 50%, #7c3aed 100%);
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF8A80 50%, #FFAA9D 100%);
 }
 
 .section-padding {
@@ -163,29 +165,29 @@ html {
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
-/* 마인드스토리 스타일 그라데이션 버튼 */
+/* 위즈포레 스타일 그라데이션 버튼 */
 .btn-gradient {
-  background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF8A80 100%);
   transition: all 0.3s ease;
 }
 
 .btn-gradient:hover {
-  background: linear-gradient(135deg, #2563eb 0%, #059669 100%);
+  background: linear-gradient(135deg, #FF8A80 0%, #FFAA9D 100%);
   transform: translateY(-1px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
 }
 
 /* 커스텀 텍스트 스타일 */
 .text-gradient {
-  background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF8A80 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* 마인드스토리 스타일 형광펜 효과 */
+/* 위즈포레 스타일 형광펜 효과 */
 .highlight {
-  background: linear-gradient(104deg, transparent 0%, transparent 35%, #fbbf24 35%, #fbbf24 85%, transparent 85%, transparent 100%);
+  background: linear-gradient(104deg, transparent 0%, transparent 35%, #FFCCCB 35%, #FFCCCB 85%, transparent 85%, transparent 100%);
   padding: 0 4px;
 }
 
@@ -257,8 +259,8 @@ html {
 
 .form-input:focus {
   outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  border-color: #FF6B6B;
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
 }
 
 /* 반응형 텍스트 크기 */
