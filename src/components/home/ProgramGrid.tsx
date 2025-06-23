@@ -40,7 +40,6 @@ const ProgramGrid = () => {
   const [programs, setPrograms] = useState<Program[]>([])
   const [loading, setLoading] = useState(true)
   const [isDragging, setIsDragging] = useState({ row1: false, row2: false })
-  const [scrollPosition, setScrollPosition] = useState({ row1: 0, row2: 0 })
   const [startX, setStartX] = useState({ row1: 0, row2: 0 })
   const [startScrollLeft, setStartScrollLeft] = useState({ row1: 0, row2: 0 })
   const [dragStarted, setDragStarted] = useState({ row1: false, row2: false })
@@ -121,7 +120,6 @@ const ProgramGrid = () => {
       }
       
       containerRef.current.scrollLeft = newScrollLeft
-      setScrollPosition(prev => ({ ...prev, [row]: containerRef.current!.scrollLeft }))
     }
   }
 
@@ -173,7 +171,6 @@ const ProgramGrid = () => {
       }
       
       containerRef.current.scrollLeft = newScrollLeft
-      setScrollPosition(prev => ({ ...prev, [row]: containerRef.current!.scrollLeft }))
     }
   }
 
@@ -189,8 +186,8 @@ const ProgramGrid = () => {
   // 컴포넌트 언마운트 시 타이머 정리
   useEffect(() => {
     return () => {
-      clearResumeTimer('row1')
-      clearResumeTimer('row2')
+      if (resumeTimer.row1) clearTimeout(resumeTimer.row1)
+      if (resumeTimer.row2) clearTimeout(resumeTimer.row2)
     }
   }, [])
 
