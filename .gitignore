@@ -51,4 +51,5 @@ Thumbs.db
 
 # 13) Claude AI 설정 파일
 CLAUDE.md
+CLAUDE.local.md
 .claude/
