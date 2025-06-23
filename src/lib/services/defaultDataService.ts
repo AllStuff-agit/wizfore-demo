@@ -12,6 +12,21 @@ import { db } from '@/lib/firebase'
 import { defaultSiteData } from '@/lib/data/defaultSiteData'
 import type { DefaultSiteData } from '@/types'
 
+type ProgramType = {
+  id: string
+  title: string
+  goal?: string
+  order?: number
+}
+
+type CategoryType = {
+  id: string
+  title: string
+  description: string
+  order?: number
+  programs?: ProgramType[]
+}
+
 /**
  * Firebase 컬렉션에 데이터가 존재하는지 확인
  */
@@ -421,9 +436,9 @@ export async function getAllProgramsFlattened() {
       order: number
     }> = []
 
-    categories.forEach((category: any) => {
+    categories.forEach((category: CategoryType) => {
       if (category.programs && category.programs.length > 0) {
-        category.programs.forEach((program: any) => {
+        category.programs.forEach((program: ProgramType) => {
           allPrograms.push({
             id: program.id,
             title: program.title,
@@ -438,8 +453,8 @@ export async function getAllProgramsFlattened() {
 
     // 카테고리 순서, 그 다음 프로그램 순서로 정렬
     return allPrograms.sort((a, b) => {
-      const categoryA = categories.find((c: any) => c.id === a.categoryId)
-      const categoryB = categories.find((c: any) => c.id === b.categoryId)
+      const categoryA = categories.find((c: CategoryType) => c.id === a.categoryId)
+      const categoryB = categories.find((c: CategoryType) => c.id === b.categoryId)
       
       if (categoryA?.order !== categoryB?.order) {
         return (categoryA?.order || 0) - (categoryB?.order || 0)
