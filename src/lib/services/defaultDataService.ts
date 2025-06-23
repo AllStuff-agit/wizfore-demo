@@ -423,9 +423,9 @@ export async function getAllProgramsFlattened() {
       order: number
     }> = []
 
-    categories.forEach((category: any) => {
+    categories.forEach((category) => {
       if (category.programs && category.programs.length > 0) {
-        category.programs.forEach((program: any) => {
+        category.programs.forEach((program) => {
           allPrograms.push({
             id: program.id,
             title: program.title,
@@ -440,8 +440,8 @@ export async function getAllProgramsFlattened() {
 
     // 카테고리 순서, 그 다음 프로그램 순서로 정렬
     return allPrograms.sort((a, b) => {
-      const categoryA = categories.find((c: any) => c.id === a.categoryId)
-      const categoryB = categories.find((c: any) => c.id === b.categoryId)
+      const categoryA = categories.find((c) => c.id === a.categoryId)
+      const categoryB = categories.find((c) => c.id === b.categoryId)
       
       if (categoryA?.order !== categoryB?.order) {
         return (categoryA?.order || 0) - (categoryB?.order || 0)

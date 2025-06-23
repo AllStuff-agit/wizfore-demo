@@ -8,13 +8,10 @@ import {
   BookOpen, 
   Users, 
   MessageSquare, 
-  FileText,
   Settings,
   HelpCircle,
   LogOut,
   BarChart3,
-  MapPin,
-  Calendar,
   Database,
   Home,
   Upload

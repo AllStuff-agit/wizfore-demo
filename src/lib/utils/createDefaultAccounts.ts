@@ -24,9 +24,9 @@ export async function createDefaultAdminAccount() {
     const userProfile = await createAdminUser(defaultAdminAccount)
     console.log(`✅ 관리자 계정 생성 완료: ${userProfile.email}`)
     return userProfile
-  } catch (error: any) {
+  } catch (error: unknown) {
     // 이미 계정이 존재하는 경우의 에러는 무시
-    if (error.message.includes('이미 사용 중인 이메일')) {
+    if (error instanceof Error && error.message.includes('이미 사용 중인 이메일')) {
       console.log('ℹ️ 관리자 계정이 이미 존재합니다.')
       return null
     }
@@ -44,9 +44,9 @@ export async function createDefaultStaffAccount() {
     const userProfile = await createAdminUser(defaultStaffAccount)
     console.log(`✅ 직원 계정 생성 완료: ${userProfile.email}`)
     return userProfile
-  } catch (error: any) {
+  } catch (error: unknown) {
     // 이미 계정이 존재하는 경우의 에러는 무시
-    if (error.message.includes('이미 사용 중인 이메일')) {
+    if (error instanceof Error && error.message.includes('이미 사용 중인 이메일')) {
       console.log('ℹ️ 직원 계정이 이미 존재합니다.')
       return null
     }

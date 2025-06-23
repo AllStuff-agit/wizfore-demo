@@ -69,7 +69,7 @@ const AboutSection = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl font-bold text-mindstory-gray-text mb-8">
-              "{title}"
+              &ldquo;{title}&rdquo;
             </h2>
             
             <div className="space-y-6 text-lg text-gray-700 leading-relaxed">

@@ -82,7 +82,7 @@ const MainServicesSection = () => {
           className="text-center mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-            "주요 사업 분야"
+            &ldquo;주요 사업 분야&rdquo;
           </h2>
           
           <div className="max-w-4xl mx-auto space-y-4 text-lg text-gray-700">

@@ -43,9 +43,9 @@ export default function LoginPage() {
       
       // 관리자 대시보드로 리다이렉트
       router.push('/admin/dashboard')
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('로그인 실패:', err)
-      setError(err.message || '로그인에 실패했습니다.')
+      setError(err instanceof Error ? err.message : '로그인에 실패했습니다.')
     } finally {
       setLoading(false)
     }

@@ -9,7 +9,6 @@ import {
   Building2, 
   BookOpen, 
   MessageSquare,
-  Phone,
   Settings,
   Trash2,
   Download,
@@ -18,7 +17,6 @@ import {
 } from 'lucide-react'
 
 import { 
-  checkCategoryDataExists, 
   addDefaultDataByCategory, 
   checkAllCategoriesDataStatus,
   deleteAllDefaultData,

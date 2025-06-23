@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Users, Heart, UserCheck, Building, BookOpen, Stethoscope, GraduationCap, Activity } from 'lucide-react'
+import { BookOpen, Stethoscope, GraduationCap, Activity } from 'lucide-react'
 import Link from 'next/link'
 import { doc, getDoc } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
