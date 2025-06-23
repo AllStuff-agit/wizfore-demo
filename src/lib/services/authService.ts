@@ -23,8 +23,8 @@ export interface UserProfile {
   email: string
   displayName: string
   role: UserRole
-  createdAt?: any
-  lastLogin?: any
+  createdAt?: Date | null | object
+  lastLogin?: Date | null | object
   isActive: boolean
 }
 
