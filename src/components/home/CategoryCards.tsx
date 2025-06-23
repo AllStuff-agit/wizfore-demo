@@ -2,18 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { BookOpen, Stethoscope, GraduationCap, Activity } from 'lucide-react'
 import Link from 'next/link'
 import { doc, getDoc } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import type { ProgramCategory } from '@/types'
-
-const iconMap = {
-  'individual-therapy': BookOpen,
-  'evaluation-counseling': Stethoscope,
-  'afterschool-program': GraduationCap,
-  'adult-day-program': Activity
-}
 
 // 각 카테고리별 fallback 그라데이션 매핑
 const fallbackGradients = {
