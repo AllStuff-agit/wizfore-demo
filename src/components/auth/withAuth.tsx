@@ -38,7 +38,7 @@ export function withAuth<P extends object>(
         // 인증 성공
         setRedirecting(false)
       }
-    }, [loading, isAuthenticated, isAdmin, router, requireAdmin])
+    }, [loading, isAuthenticated, isAdmin, router])
 
     // 로딩 중일 때
     if (loading) {

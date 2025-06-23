@@ -1,12 +1,10 @@
 import { 
   collection, 
   getDocs, 
-  addDoc, 
   setDoc, 
   doc, 
   query, 
   limit,
-  deleteDoc,
   writeBatch,
   getDoc
 } from 'firebase/firestore'

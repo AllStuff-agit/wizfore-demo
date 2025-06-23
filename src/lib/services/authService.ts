@@ -23,8 +23,8 @@ export interface UserProfile {
   email: string
   displayName: string
   role: UserRole
-  createdAt?: Date | null
-  lastLogin?: Date | null
+  createdAt?: any
+  lastLogin?: any
   isActive: boolean
 }
 
@@ -68,7 +68,7 @@ export async function loginWithEmail({ email, password }: LoginRequest): Promise
     console.error('로그인 오류:', error)
     
     // Firebase 에러 메시지를 한국어로 변환
-    const errorCode = error instanceof Error && 'code' in error ? (error as any).code : 'unknown'
+    const errorCode = error instanceof Error && 'code' in error ? (error as { code: string }).code : 'unknown'
     const errorMessage = getKoreanErrorMessage(errorCode)
     throw new Error(errorMessage)
   }
@@ -114,7 +114,7 @@ export async function createAdminUser({ email, password, displayName, role }: Si
   } catch (error: unknown) {
     console.error('계정 생성 오류:', error)
     
-    const errorCode = error instanceof Error && 'code' in error ? (error as any).code : 'unknown'
+    const errorCode = error instanceof Error && 'code' in error ? (error as { code: string }).code : 'unknown'
     const errorMessage = getKoreanErrorMessage(errorCode)
     throw new Error(errorMessage)
   }
