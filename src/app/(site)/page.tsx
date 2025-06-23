@@ -13,7 +13,7 @@ export default function HomePage() {
       {/* 4개 카테고리 카드 */}
       <CategoryCards />
       
-      {/* 센터 소개 - "내 이야기가 있는 곳" */}
+      {/* 센터 소개 - "함께 걷는 성장의 길" */}
       <AboutSection />
       
       {/* 프로그램 그리드 - 3x4 레이아웃 */}

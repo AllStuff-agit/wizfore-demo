@@ -66,22 +66,22 @@ const Header = () => {
           <Link href="/" className="flex items-center space-x-3">
             <div className="flex space-x-1">
               {/* 로고 이미지들 - 마인드스토리처럼 여러 개 */}
-              <div className="w-10 h-10 bg-mindstory-blue rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-wizfore-warm-brown rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">W</span>
               </div>
-              <div className="w-10 h-10 bg-mindstory-green rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-wizfore-medium-brown rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">I</span>
               </div>
-              <div className="w-10 h-10 bg-mindstory-purple rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-wizfore-sandy-brown rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">Z</span>
               </div>
-              <div className="w-10 h-10 bg-mindstory-orange rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-wizfore-warm-brown rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-lg">F</span>
               </div>
             </div>
             <div className="hidden md:block">
-              <div className="text-xl font-bold text-mindstory-gray-text">위즈포레</div>
-              <div className="text-xs text-gray-600">사회서비스센터</div>
+              <div className="text-xl font-bold text-wizfore-text-primary">위즈포레</div>
+              <div className="text-xs text-wizfore-text-secondary">사회서비스센터</div>
             </div>
           </Link>
 
@@ -96,7 +96,7 @@ const Header = () => {
             </a>
             <a 
               href="#" 
-              className="w-8 h-8 bg-mindstory-green rounded flex items-center justify-center hover:bg-green-600 transition-colors"
+              className="w-8 h-8 bg-wizfore-warm-brown rounded flex items-center justify-center hover:bg-wizfore-medium-brown transition-colors"
               aria-label="네이버 블로그"
             >
               <span className="text-white font-bold text-xs">N</span>
@@ -125,7 +125,7 @@ const Header = () => {
               <li key={item.name} className="relative">
                 <Link
                   href={item.href}
-                  className="block px-4 py-2 md:px-0 md:py-4 text-mindstory-gray-text hover:text-mindstory-lime font-medium transition-colors border-b-2 border-transparent hover:border-mindstory-lime"
+                  className="block px-4 py-2 md:px-0 md:py-4 text-wizfore-text-primary hover:text-wizfore-text-brand font-medium transition-colors border-b-2 border-transparent hover:border-wizfore-warm-brown"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
@@ -146,7 +146,7 @@ const Header = () => {
               <div className="grid grid-cols-5 gap-8">
                 {navigation.map((item) => (
                   <div key={item.name} className="space-y-3">
-                    <h3 className="font-semibold text-mindstory-gray-text text-sm border-b border-mindstory-lime pb-2">
+                    <h3 className="font-semibold text-wizfore-text-primary text-sm border-b border-wizfore-warm-brown pb-2">
                       {item.name}
                     </h3>
                     {item.submenu && (
@@ -155,7 +155,7 @@ const Header = () => {
                           <li key={subItem.name}>
                             <Link
                               href={subItem.href}
-                              className="text-sm text-gray-600 hover:text-mindstory-lime transition-colors block py-1"
+                              className="text-sm text-wizfore-text-secondary hover:text-wizfore-text-brand transition-colors block py-1"
                               onClick={() => {
                                 setIsMenuOpen(false)
                                 setIsNavExpanded(false)
@@ -178,7 +178,7 @@ const Header = () => {
             {isMenuOpen && navigation.map((item) => (
               <div key={`mobile-${item.name}`} className="border-t border-gray-100 py-3">
                 <div className="px-4">
-                  <h3 className="font-semibold text-mindstory-gray-text text-sm mb-2">
+                  <h3 className="font-semibold text-wizfore-text-primary text-sm mb-2">
                     {item.name}
                   </h3>
                   {item.submenu && (
@@ -187,7 +187,7 @@ const Header = () => {
                         <li key={subItem.name}>
                           <Link
                             href={subItem.href}
-                            className="text-sm text-gray-600 hover:text-mindstory-lime transition-colors block py-1"
+                            className="text-sm text-wizfore-text-secondary hover:text-wizfore-text-brand transition-colors block py-1"
                             onClick={() => setIsMenuOpen(false)}
                           >
                             {subItem.name}

@@ -193,7 +193,7 @@ const ProgramGrid = () => {
 
   if (loading) {
     return (
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-wizfore-light-beige">
         <div className="container-custom mx-auto px-4">
           <div className="text-center mb-12">
             <div className="h-8 bg-gray-300 rounded w-64 mx-auto mb-4 animate-pulse"></div>
@@ -215,7 +215,7 @@ const ProgramGrid = () => {
   }
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-wizfore-light-beige">
       <div className="container-custom mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -224,10 +224,10 @@ const ProgramGrid = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-wizfore-text-primary mb-4">
             전문 치료 프로그램
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-wizfore-text-secondary max-w-2xl mx-auto">
             개별적 특성과 발달 단계에 맞춘 체계적이고 전문적인 치료 프로그램을 제공합니다
           </p>
         </motion.div>
@@ -235,8 +235,8 @@ const ProgramGrid = () => {
         {/* 프로그램 마키 레이아웃 */}
         <div className="relative w-full px-4 space-y-6 overflow-hidden">
           {/* 그라데이션 마스크 - 왼쪽과 오른쪽 가장자리 */}
-          <div className="absolute left-0 top-4 w-20 h-full bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none"></div>
-          <div className="absolute right-0 top-4 w-20 h-full bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute left-0 top-4 w-20 h-full bg-gradient-to-r from-wizfore-light-beige to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute right-0 top-4 w-20 h-full bg-gradient-to-l from-wizfore-light-beige to-transparent z-10 pointer-events-none"></div>
           {/* 첫 번째 마키 - 정방향 */}
           <div 
             ref={row1Ref}
@@ -306,12 +306,12 @@ const ProgramGrid = () => {
                       {/* 오른쪽 텍스트 영역 */}
                       <div className="flex-1 min-w-0">
                         {/* 프로그램 제목 */}
-                        <h3 className="text-base font-semibold text-gray-900 group-hover:text-gray-800 transition-colors duration-300 mb-1 truncate">
+                        <h3 className="text-base font-semibold text-wizfore-text-primary group-hover:text-wizfore-text-brand transition-colors duration-300 mb-1 truncate">
                           {program.title}
                         </h3>
                         
                         {/* 프로그램 설명 */}
-                        <p className="text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300 line-clamp-1">
+                        <p className="text-sm text-wizfore-text-secondary group-hover:text-wizfore-text-primary transition-colors duration-300 line-clamp-1">
                           {truncatedDescription}
                         </p>
                       </div>
@@ -392,12 +392,12 @@ const ProgramGrid = () => {
                       {/* 오른쪽 텍스트 영역 */}
                       <div className="flex-1 min-w-0">
                         {/* 프로그램 제목 */}
-                        <h3 className="text-base font-semibold text-gray-900 group-hover:text-gray-800 transition-colors duration-300 mb-1 truncate">
+                        <h3 className="text-base font-semibold text-wizfore-text-primary group-hover:text-wizfore-text-brand transition-colors duration-300 mb-1 truncate">
                           {program.title}
                         </h3>
                         
                         {/* 프로그램 설명 */}
-                        <p className="text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300 line-clamp-1">
+                        <p className="text-sm text-wizfore-text-secondary group-hover:text-wizfore-text-primary transition-colors duration-300 line-clamp-1">
                           {truncatedDescription}
                         </p>
                       </div>

@@ -49,11 +49,11 @@ const AboutSection = () => {
     )
   }
 
-  const title = data?.director?.aboutMessage?.title || "내 이야기가 있는 곳"
+  const title = data?.director?.aboutMessage?.title || "함께 걷는 성장의 길"
   const messages = data?.director?.aboutMessage?.messages || [
-    "유아부터 성인까지 함께 하는 종합사회서비스센터로 내담자에게 맞는 치료계획을 수립하여 체계적이고 전문적인 치료를 제공합니다.",
-    "상담 및 심리치료는 전문가의 역량이 중요한 만큼, 전문성과 진실성을 겸비한 각 영역의 전문가 선생님이 함께 합니다.",
-    "그래서 진정한 회복과 성장의 길을 함께 만들어 갑니다."
+    "영유아부터 성인까지 온 가족이 함께하는 종합사회서비스센터로 개인별 특성을 고려한 맞춤형 치료서비스를 제공하고 있습니다.",
+    "건강한 발달과 성장의 핵심은 전문가의 경험과 진심입니다. 각 치료영역의 깊은 전문성과 따뜻한 애정을 가진 선생님들이 동행합니다.",
+    "이렇게 아이와 가족 모두의 행복한 일상을 함께 만들어갑니다."
   ]
   const directorName = data?.director?.name || "원장"
   const siteName = data?.siteName || "위즈포레 사회서비스센터"

@@ -4,14 +4,14 @@ const Footer = () => {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-white text-mindstory-gray-text border-t border-gray-200">
+    <footer className="bg-white text-wizfore-text-primary border-t border-gray-200">
       <div className="container-custom mx-auto px-4 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
           {/* Company Info */}
           <div>
-            <h3 className="text-lg font-bold mb-4 text-mindstory-lime">Company Info</h3>
-            <div className="space-y-2 text-sm text-gray-600">
+            <h3 className="text-lg font-bold mb-4 text-wizfore-text-brand">Company Info</h3>
+            <div className="space-y-2 text-sm text-wizfore-text-secondary">
               <p>
                 <strong>회사명:</strong> 위즈포레 사회서비스센터<br />
                 <strong>대표:</strong> 홍길동<br />
@@ -28,8 +28,8 @@ const Footer = () => {
 
           {/* Working Hours */}
           <div>
-            <h3 className="text-lg font-bold mb-4 text-mindstory-lime">Working Hour (예약제)</h3>
-            <div className="space-y-2 text-sm text-gray-600">
+            <h3 className="text-lg font-bold mb-4 text-wizfore-text-brand">Working Hour (예약제)</h3>
+            <div className="space-y-2 text-sm text-wizfore-text-secondary">
               <div className="flex items-center space-x-2">
                 <Clock size={16} />
                 <span>월: 낮 12시 ~ 저녁 7시</span>
@@ -42,25 +42,25 @@ const Footer = () => {
                 <Clock size={16} />
                 <span>토: 오전 10시 ~ 오후 4시</span>
               </div>
-              <p className="mt-4 font-semibold text-mindstory-lime">
+              <p className="mt-4 font-semibold text-wizfore-text-brand">
                 예약 시 야간 및 휴일 상담 가능
               </p>
             </div>
 
             {/* Social Links */}
             <div className="mt-6">
-              <h4 className="font-semibold mb-3 text-mindstory-gray-text">소셜 미디어</h4>
+              <h4 className="font-semibold mb-3 text-wizfore-text-primary">소셜 미디어</h4>
               <div className="flex space-x-3">
                 <a 
                   href="#" 
-                  className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center hover:bg-mindstory-blue hover:text-white transition-colors"
+                  className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center hover:bg-wizfore-warm-brown hover:text-white transition-colors"
                   aria-label="Facebook"
                 >
                   <Facebook size={16} />
                 </a>
                 <a 
                   href="#" 
-                  className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center hover:bg-mindstory-pink hover:text-white transition-colors"
+                  className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center hover:bg-wizfore-medium-brown hover:text-white transition-colors"
                   aria-label="Instagram"
                 >
                   <Instagram size={16} />
@@ -78,13 +78,13 @@ const Footer = () => {
 
           {/* Contact Form - 마인드스토리 스타일 */}
           <div>
-            <h3 className="text-lg font-bold mb-4 text-mindstory-lime">Contact Us</h3>
+            <h3 className="text-lg font-bold mb-4 text-wizfore-text-brand">Contact Us</h3>
             <form className="space-y-4">
               <div>
                 <input
                   type="text"
                   placeholder="이름"
-                  className="w-full px-4 py-2 rounded-lg bg-gray-50 border border-gray-300 text-mindstory-gray-text placeholder-gray-500 focus:border-mindstory-lime focus:outline-none transition-colors"
+                  className="w-full px-4 py-2 rounded-lg bg-gray-50 border border-gray-300 text-wizfore-text-primary placeholder-gray-500 focus:border-wizfore-warm-brown focus:outline-none transition-colors"
                 />
               </div>
               
@@ -92,7 +92,7 @@ const Footer = () => {
                 <input
                   type="tel"
                   placeholder="연락처"
-                  className="w-full px-4 py-2 rounded-lg bg-gray-50 border border-gray-300 text-mindstory-gray-text placeholder-gray-500 focus:border-mindstory-lime focus:outline-none transition-colors"
+                  className="w-full px-4 py-2 rounded-lg bg-gray-50 border border-gray-300 text-wizfore-text-primary placeholder-gray-500 focus:border-wizfore-warm-brown focus:outline-none transition-colors"
                 />
               </div>
               
@@ -100,12 +100,12 @@ const Footer = () => {
                 <input
                   type="text"
                   placeholder="연령대"
-                  className="w-full px-4 py-2 rounded-lg bg-gray-50 border border-gray-300 text-mindstory-gray-text placeholder-gray-500 focus:border-mindstory-lime focus:outline-none transition-colors"
+                  className="w-full px-4 py-2 rounded-lg bg-gray-50 border border-gray-300 text-wizfore-text-primary placeholder-gray-500 focus:border-wizfore-warm-brown focus:outline-none transition-colors"
                 />
               </div>
               
               <div>
-                <select className="w-full px-4 py-2 rounded-lg bg-gray-50 border border-gray-300 text-mindstory-gray-text focus:border-mindstory-lime focus:outline-none transition-colors">
+                <select className="w-full px-4 py-2 rounded-lg bg-gray-50 border border-gray-300 text-wizfore-text-primary focus:border-wizfore-warm-brown focus:outline-none transition-colors">
                   <option value="">통화가능시간 선택▼</option>
                   <option value="now">지금바로</option>
                   <option value="10">10시</option>
@@ -134,7 +134,7 @@ const Footer = () => {
               
               <button
                 type="submit"
-                className="w-full bg-mindstory-lime text-white py-3 rounded-lg font-semibold hover:bg-mindstory-lime-dark transition-colors"
+                className="w-full bg-wizfore-warm-brown text-white py-3 rounded-lg font-semibold hover:bg-wizfore-medium-brown transition-colors"
               >
                 상담 신청하기
               </button>
@@ -145,10 +145,10 @@ const Footer = () => {
         {/* Bottom Section - 마인드스토리 스타일 */}
         <div className="border-t border-gray-200 mt-8 pt-6">
           <div className="text-center space-y-2">
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-wizfore-text-light">
               © COPYRIGHT {currentYear} WIZFORE. ALL RIGHTS RESERVED.
             </p>
-            <p className="text-lg font-semibold text-mindstory-lime">
+            <p className="text-lg font-semibold text-wizfore-text-brand">
               예약상담 문의전화 051-123-4567, 010-1234-5678
             </p>
           </div>

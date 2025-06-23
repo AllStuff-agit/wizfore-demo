@@ -33,6 +33,19 @@
     --ring: 222.2 84% 4.9%;
  
     --radius: 0.5rem;
+
+    /* 위즈포레 브랜드 색상 변수 */
+    --wizfore-white: #FFFFFF;
+    --wizfore-warm-beige: rgb(254, 243, 239);
+    --wizfore-warm-brown: rgb(139, 69, 19);
+    --wizfore-medium-brown: rgb(160, 82, 45);
+    --wizfore-sandy-brown: rgb(205, 133, 63);
+    --wizfore-light-beige: rgb(245, 235, 220);
+    --wizfore-ivory-beige: rgb(250, 240, 230);
+    --wizfore-text-primary: #333333;
+    --wizfore-text-secondary: #666666;
+    --wizfore-text-light: #888888;
+    --wizfore-text-brand: rgb(139, 69, 19);
   }
  
   .dark {

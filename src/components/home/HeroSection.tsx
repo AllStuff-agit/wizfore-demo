@@ -69,10 +69,10 @@ const HeroSection: React.FC = () => {
 
   if (loading) {
     return (
-      <section className="relative h-screen overflow-hidden bg-gray-100 flex items-center justify-center">
+      <section className="relative h-screen overflow-hidden bg-wizfore-light-beige flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-mindstory-lime mx-auto mb-4"></div>
-          <p className="text-gray-600">슬라이드를 불러오는 중...</p>
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-wizfore-warm-brown mx-auto mb-4"></div>
+          <p className="text-wizfore-text-secondary">슬라이드를 불러오는 중...</p>
         </div>
       </section>
     )
@@ -82,15 +82,15 @@ const HeroSection: React.FC = () => {
     return (
       <section className="relative h-screen overflow-hidden bg-gradient-to-br from-blue-50 via-sky-50 to-cyan-50 flex items-center justify-center">
         <div className="container-custom mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-gray-800">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-wizfore-text-primary">
             위즈포레 사회서비스센터
           </h1>
-          <p className="text-lg md:text-xl mb-8 text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl mb-8 text-wizfore-text-secondary max-w-3xl mx-auto leading-relaxed">
             함께 어우러지는 지혜의 숲에서 전문적인 사회서비스를 제공합니다.
           </p>
           <Link
             href="/about"
-            className="inline-flex items-center bg-mindstory-lime hover:bg-mindstory-lime-dark text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            className="inline-flex items-center bg-wizfore-warm-brown hover:bg-wizfore-medium-brown text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
             센터 소개 보기
           </Link>
@@ -131,18 +131,18 @@ const HeroSection: React.FC = () => {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                <h2 className="text-2xl md:text-3xl mb-4 text-mindstory-gray-text font-medium">
+                <h2 className="text-2xl md:text-3xl mb-4 text-wizfore-text-secondary font-medium">
                   {currentSlideData.title}
                 </h2>
-                <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-gray-800">
+                <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-wizfore-text-primary">
                   {currentSlideData.subtitle}
                 </h1>
-                <p className="text-lg md:text-xl mb-8 text-mindstory-gray-text max-w-3xl mx-auto leading-relaxed">
+                <p className="text-lg md:text-xl mb-8 text-wizfore-text-secondary max-w-3xl mx-auto leading-relaxed">
                   {currentSlideData.description}
                 </p>
                 <Link
                   href={currentSlideData.buttonLink}
-                  className="inline-flex items-center bg-mindstory-lime hover:bg-mindstory-lime-dark text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                  className="inline-flex items-center bg-wizfore-warm-brown hover:bg-wizfore-medium-brown text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                 >
                   {currentSlideData.buttonText}
                 </Link>
@@ -157,7 +157,7 @@ const HeroSection: React.FC = () => {
         onClick={prevSlide}
         onMouseEnter={() => setIsAutoPlaying(false)}
         onMouseLeave={() => setIsAutoPlaying(true)}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 w-12 h-12 bg-white/80 hover:bg-white rounded-full flex items-center justify-center text-mindstory-gray-text transition-all duration-300 shadow-lg"
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 w-12 h-12 bg-white/80 hover:bg-white rounded-full flex items-center justify-center text-wizfore-text-primary transition-all duration-300 shadow-lg"
         aria-label="이전 슬라이드"
       >
         <ChevronLeft size={24} />
@@ -167,7 +167,7 @@ const HeroSection: React.FC = () => {
         onClick={nextSlide}
         onMouseEnter={() => setIsAutoPlaying(false)}
         onMouseLeave={() => setIsAutoPlaying(true)}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 w-12 h-12 bg-white/80 hover:bg-white rounded-full flex items-center justify-center text-mindstory-gray-text transition-all duration-300 shadow-lg"
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 w-12 h-12 bg-white/80 hover:bg-white rounded-full flex items-center justify-center text-wizfore-text-primary transition-all duration-300 shadow-lg"
         aria-label="다음 슬라이드"
       >
         <ChevronRight size={24} />
@@ -183,8 +183,8 @@ const HeroSection: React.FC = () => {
             onMouseLeave={() => setIsAutoPlaying(true)}
             className={`w-3 h-3 rounded-full transition-all duration-300 ${
               index === currentSlide 
-                ? 'bg-mindstory-lime scale-125' 
-                : 'bg-gray-400 hover:bg-gray-500'
+                ? 'bg-wizfore-warm-brown scale-125' 
+                : 'bg-wizfore-text-light hover:bg-wizfore-text-secondary'
             }`}
             aria-label={`슬라이드 ${index + 1}로 이동`}
           />
@@ -194,13 +194,13 @@ const HeroSection: React.FC = () => {
       {/* 자동재생 컨트롤 */}
       <button
         onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-        className="absolute bottom-8 right-8 z-20 w-10 h-10 bg-white/80 hover:bg-white rounded-full flex items-center justify-center text-mindstory-gray-text transition-all duration-300 shadow-lg"
+        className="absolute bottom-8 right-8 z-20 w-10 h-10 bg-white/80 hover:bg-white rounded-full flex items-center justify-center text-wizfore-text-primary transition-all duration-300 shadow-lg"
         aria-label={isAutoPlaying ? '자동재생 정지' : '자동재생 시작'}
       >
         {isAutoPlaying ? (
           <div className="flex space-x-1">
-            <div className="w-1 h-4 bg-mindstory-gray-text rounded-full" />
-            <div className="w-1 h-4 bg-mindstory-gray-text rounded-full" />
+            <div className="w-1 h-4 bg-wizfore-text-primary rounded-full" />
+            <div className="w-1 h-4 bg-wizfore-text-primary rounded-full" />
           </div>
         ) : (
           <Play size={16} className="ml-0.5" />

@@ -52,12 +52,34 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // 마인드스토리 스타일 컬러 팔레트
+        // 위즈포레 브랜드 컬러 팔레트
+        wizfore: {
+          // Primary Colors
+          white: '#FFFFFF',
+          'warm-beige': 'rgb(254, 243, 239)',
+          
+          // Brand Colors
+          'warm-brown': 'rgb(139, 69, 19)',
+          'medium-brown': 'rgb(160, 82, 45)',
+          'sandy-brown': 'rgb(205, 133, 63)',
+          
+          // Background Colors
+          'light-beige': 'rgb(245, 235, 220)',
+          'ivory-beige': 'rgb(250, 240, 230)',
+          
+          // Text Colors (안전한 그레이 계열)
+          'text-primary': '#333333',
+          'text-secondary': '#666666',
+          'text-light': '#888888',
+          'text-brand': 'rgb(139, 69, 19)',
+        },
+        
+        // 기존 마인드스토리 컬러 (하위 호환성)
         mindstory: {
-          // 메인 라임 그린 (버튼 색상)
-          lime: '#8BC34A',
-          'lime-dark': '#689F38',
-          'lime-light': '#AED581',
+          // 메인 라임 그린 (버튼 색상) - 위즈포레 브랜드 색상으로 교체 예정
+          lime: 'rgb(139, 69, 19)', // warm-brown으로 변경
+          'lime-dark': 'rgb(160, 82, 45)', // medium-brown으로 변경
+          'lime-light': 'rgb(205, 133, 63)', // sandy-brown으로 변경
           // 로고 컬러들
           blue: '#2196F3',
           green: '#4CAF50',
@@ -66,9 +88,9 @@ module.exports = {
           purple: '#9C27B0',
           teal: '#009688',
           // 중성 컬러
-          'gray-warm': '#F5F5F5',
-          'gray-text': '#424242',
-          'gray-light': '#FAFAFA',
+          'gray-warm': 'rgb(245, 235, 220)', // light-beige로 변경
+          'gray-text': '#333333', // text-primary로 변경
+          'gray-light': 'rgb(250, 240, 230)', // ivory-beige로 변경
         }
       },
       borderRadius: {
