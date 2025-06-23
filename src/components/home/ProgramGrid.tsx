@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { getAllProgramsFlattened } from '@/lib/services/defaultDataService'
 import Marquee from '@/components/ui/marquee'
@@ -17,14 +17,14 @@ import {
 
 // 프로그램 아이콘 및 색상 매핑
 const programIconsAndColors = [
-  { icon: Brain, bgColor: 'bg-blue-500', hoverColor: 'bg-blue-600' },      // 인지/학습
-  { icon: Heart, bgColor: 'bg-pink-500', hoverColor: 'bg-pink-600' },      // 정서/심리
-  { icon: Users, bgColor: 'bg-green-500', hoverColor: 'bg-green-600' },    // 사회성
-  { icon: Target, bgColor: 'bg-orange-500', hoverColor: 'bg-orange-600' }, // 목표달성
-  { icon: Lightbulb, bgColor: 'bg-yellow-500', hoverColor: 'bg-yellow-600' }, // 창의성
-  { icon: Star, bgColor: 'bg-purple-500', hoverColor: 'bg-purple-600' },   // 특성화
-  { icon: MessageCircle, bgColor: 'bg-teal-500', hoverColor: 'bg-teal-600' }, // 상담
-  { icon: Activity, bgColor: 'bg-red-500', hoverColor: 'bg-red-600' }      // 활동
+  { icon: Brain, bgColor: 'bg-[rgb(254,243,239)]', hoverColor: 'bg-[rgb(254,243,239)]' },      // 인지/학습
+  { icon: Heart, bgColor: 'bg-[rgb(254,243,239)]', hoverColor: 'bg-[rgb(254,243,239)]' },      // 정서/심리
+  { icon: Users, bgColor: 'bg-[rgb(254,243,239)]', hoverColor: 'bg-[rgb(254,243,239)]' },    // 사회성
+  { icon: Target, bgColor: 'bg-[rgb(254,243,239)]', hoverColor: 'bg-[rgb(254,243,239)]' }, // 목표달성
+  { icon: Lightbulb, bgColor: 'bg-[rgb(254,243,239)]', hoverColor: 'bg-[rgb(254,243,239)]' }, // 창의성
+  { icon: Star, bgColor: 'bg-[rgb(254,243,239)]', hoverColor: 'bg-[rgb(254,243,239)]' },   // 특성화
+  { icon: MessageCircle, bgColor: 'bg-[rgb(254,243,239)]', hoverColor: 'bg-[rgb(254,243,239)]' }, // 상담
+  { icon: Activity, bgColor: 'bg-[rgb(254,243,239)]', hoverColor: 'bg-[rgb(254,243,239)]' }      // 활동
 ]
 
 interface Program {
@@ -39,6 +39,16 @@ interface Program {
 const ProgramGrid = () => {
   const [programs, setPrograms] = useState<Program[]>([])
   const [loading, setLoading] = useState(true)
+  const [isDragging, setIsDragging] = useState({ row1: false, row2: false })
+  const [scrollPosition, setScrollPosition] = useState({ row1: 0, row2: 0 })
+  const [startX, setStartX] = useState({ row1: 0, row2: 0 })
+  const [startScrollLeft, setStartScrollLeft] = useState({ row1: 0, row2: 0 })
+  const [dragStarted, setDragStarted] = useState({ row1: false, row2: false })
+  const [isAnimationPaused, setIsAnimationPaused] = useState({ row1: false, row2: false })
+  const [resumeTimer, setResumeTimer] = useState<{ row1: NodeJS.Timeout | null, row2: NodeJS.Timeout | null }>({ row1: null, row2: null })
+  
+  const row1Ref = useRef<HTMLDivElement>(null)
+  const row2Ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const fetchPrograms = async () => {
@@ -53,6 +63,135 @@ const ProgramGrid = () => {
     }
 
     fetchPrograms()
+  }, [])
+
+  // 타이머 정리 함수
+  const clearResumeTimer = (row: 'row1' | 'row2') => {
+    if (resumeTimer[row]) {
+      clearTimeout(resumeTimer[row]!)
+      setResumeTimer(prev => ({ ...prev, [row]: null }))
+    }
+  }
+
+  // 애니메이션 재개 함수
+  const scheduleAnimationResume = (row: 'row1' | 'row2') => {
+    clearResumeTimer(row)
+    const timer = setTimeout(() => {
+      setIsAnimationPaused(prev => ({ ...prev, [row]: false }))
+    }, 1000)
+    setResumeTimer(prev => ({ ...prev, [row]: timer }))
+  }
+
+  // 드래그 이벤트 핸들러
+  const handleMouseDown = (e: React.MouseEvent, row: 'row1' | 'row2') => {
+    const containerRef = row === 'row1' ? row1Ref : row2Ref
+    if (!containerRef.current) return
+
+    setStartX(prev => ({ ...prev, [row]: e.clientX }))
+    setStartScrollLeft(prev => ({ ...prev, [row]: containerRef.current!.scrollLeft }))
+    setDragStarted(prev => ({ ...prev, [row]: false }))
+  }
+
+  const handleMouseMove = (e: React.MouseEvent, row: 'row1' | 'row2') => {
+    if (!startX[row]) return
+    
+    const containerRef = row === 'row1' ? row1Ref : row2Ref
+    if (!containerRef.current) return
+
+    const deltaX = Math.abs(e.clientX - startX[row])
+    
+    // 5px 이상 움직였을 때만 드래그로 인식
+    if (deltaX > 5 && !dragStarted[row]) {
+      setDragStarted(prev => ({ ...prev, [row]: true }))
+      setIsDragging(prev => ({ ...prev, [row]: true }))
+      setIsAnimationPaused(prev => ({ ...prev, [row]: true }))
+      clearResumeTimer(row)
+    }
+
+    if (dragStarted[row]) {
+      const moveX = e.clientX - startX[row]
+      let newScrollLeft = startScrollLeft[row] - moveX
+      
+      // 양방향 무한 스크롤을 위한 순환 처리
+      const maxScroll = containerRef.current.scrollWidth - containerRef.current.clientWidth
+      if (newScrollLeft < 0) {
+        newScrollLeft = maxScroll + newScrollLeft
+      } else if (newScrollLeft > maxScroll) {
+        newScrollLeft = newScrollLeft - maxScroll
+      }
+      
+      containerRef.current.scrollLeft = newScrollLeft
+      setScrollPosition(prev => ({ ...prev, [row]: containerRef.current!.scrollLeft }))
+    }
+  }
+
+  const handleMouseUp = (row: 'row1' | 'row2') => {
+    if (dragStarted[row]) {
+      setIsDragging(prev => ({ ...prev, [row]: false }))
+      scheduleAnimationResume(row)
+    }
+    setStartX(prev => ({ ...prev, [row]: 0 }))
+    setDragStarted(prev => ({ ...prev, [row]: false }))
+  }
+
+  // 터치 이벤트 핸들러
+  const handleTouchStart = (e: React.TouchEvent, row: 'row1' | 'row2') => {
+    const containerRef = row === 'row1' ? row1Ref : row2Ref
+    if (!containerRef.current) return
+
+    setStartX(prev => ({ ...prev, [row]: e.touches[0].clientX }))
+    setStartScrollLeft(prev => ({ ...prev, [row]: containerRef.current!.scrollLeft }))
+    setDragStarted(prev => ({ ...prev, [row]: false }))
+  }
+
+  const handleTouchMove = (e: React.TouchEvent, row: 'row1' | 'row2') => {
+    if (!startX[row]) return
+    
+    const containerRef = row === 'row1' ? row1Ref : row2Ref
+    if (!containerRef.current) return
+
+    const deltaX = Math.abs(e.touches[0].clientX - startX[row])
+    
+    // 5px 이상 움직였을 때만 드래그로 인식
+    if (deltaX > 5 && !dragStarted[row]) {
+      setDragStarted(prev => ({ ...prev, [row]: true }))
+      setIsDragging(prev => ({ ...prev, [row]: true }))
+      setIsAnimationPaused(prev => ({ ...prev, [row]: true }))
+      clearResumeTimer(row)
+    }
+
+    if (dragStarted[row]) {
+      const moveX = e.touches[0].clientX - startX[row]
+      let newScrollLeft = startScrollLeft[row] - moveX
+      
+      // 양방향 무한 스크롤을 위한 순환 처리
+      const maxScroll = containerRef.current.scrollWidth - containerRef.current.clientWidth
+      if (newScrollLeft < 0) {
+        newScrollLeft = maxScroll + newScrollLeft
+      } else if (newScrollLeft > maxScroll) {
+        newScrollLeft = newScrollLeft - maxScroll
+      }
+      
+      containerRef.current.scrollLeft = newScrollLeft
+      setScrollPosition(prev => ({ ...prev, [row]: containerRef.current!.scrollLeft }))
+    }
+  }
+
+  const handleTouchEnd = (row: 'row1' | 'row2') => {
+    if (dragStarted[row]) {
+      setIsDragging(prev => ({ ...prev, [row]: false }))
+      scheduleAnimationResume(row)
+    }
+    setStartX(prev => ({ ...prev, [row]: 0 }))
+    setDragStarted(prev => ({ ...prev, [row]: false }))
+  }
+
+  // 컴포넌트 언마운트 시 타이머 정리
+  useEffect(() => {
+    return () => {
+      clearResumeTimer('row1')
+      clearResumeTimer('row2')
+    }
   }, [])
 
   if (loading) {
@@ -99,141 +238,179 @@ const ProgramGrid = () => {
         {/* 프로그램 마키 레이아웃 */}
         <div className="relative w-full px-4 space-y-6 overflow-hidden">
           {/* 그라데이션 마스크 - 왼쪽과 오른쪽 가장자리 */}
-          <div className="absolute left-0 top-0 w-20 h-full bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none"></div>
-          <div className="absolute right-0 top-0 w-20 h-full bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute left-0 top-4 w-20 h-full bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute right-0 top-4 w-20 h-full bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none"></div>
           {/* 첫 번째 마키 - 정방향 */}
-          <motion.div
-            drag="x"
-            dragConstraints={{ left: -200, right: 200 }}
-            dragElastic={0.1}
-            whileDrag={{ scale: 1.02 }}
-            className="cursor-grab active:cursor-grabbing"
+          <div 
+            ref={row1Ref}
+            className="cursor-grab active:cursor-grabbing select-none overflow-x-auto overflow-y-visible scrollbar-hide"
+            style={{ 
+              scrollBehavior: isDragging.row1 ? 'auto' : 'smooth',
+              WebkitOverflowScrolling: 'touch'
+            }}
+            onMouseDown={(e) => handleMouseDown(e, 'row1')}
+            onMouseMove={(e) => handleMouseMove(e, 'row1')}
+            onMouseUp={() => handleMouseUp('row1')}
+            onMouseLeave={() => handleMouseUp('row1')}
+            onTouchStart={(e) => handleTouchStart(e, 'row1')}
+            onTouchMove={(e) => handleTouchMove(e, 'row1')}
+            onTouchEnd={() => handleTouchEnd('row1')}
           >
-            <Marquee pauseOnHover className="[--duration:60s]">
-            {programs.slice(0, Math.ceil(programs.length / 2)).map((program, index) => {
-              const iconData = programIconsAndColors[index % programIconsAndColors.length]
-              const IconComponent = iconData.icon
-            
-              // 설명 텍스트를 더 짧게 제한
-              const truncatedDescription = program.description.length > 80 
-                ? program.description.substring(0, 80) + '...'
-                : program.description
+            <div 
+              className={`flex gap-4 py-2 ${isAnimationPaused.row1 ? '' : 'animate-marquee-scroll'}`}
+              style={{ 
+                width: 'max-content',
+                animationDuration: '60s',
+                animationIterationCount: 'infinite',
+                animationTimingFunction: 'linear'
+              }}
+            >
+            {/* 카드들을 반복해서 렌더링 */}
+            {[...Array(15)].flatMap((_, repeatIndex) => 
+              programs.slice(0, Math.ceil(programs.length / 2)).map((program, index) => {
+                const iconData = programIconsAndColors[index % programIconsAndColors.length]
+                const IconComponent = iconData.icon
               
-              return (
-                <motion.div
-                  key={program.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ 
-                    duration: 0.5, 
-                    delay: index * 0.1
-                  }}
-                  viewport={{ once: true }}
-                  className="group cursor-pointer mx-3"
-                  style={{ flexShrink: 0 }}
-                >
-                  {/* 메인 카드 */}
+                // 설명 텍스트를 더 짧게 제한
+                const truncatedDescription = program.description.length > 80 
+                  ? program.description.substring(0, 80) + '...'
+                  : program.description
+                
+                return (
                   <motion.div
-                    whileHover={{ 
-                      scale: 1.02,
-                      y: -4
-                    }}
+                    key={`row1-${repeatIndex}-${program.id}`}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     transition={{ 
-                      duration: 0.2, 
-                      ease: "easeOut"
+                      duration: 0.5, 
+                      delay: index * 0.1
                     }}
-                    className="bg-white border border-gray-200 rounded-lg p-6 w-80 h-24 flex items-center gap-4 shadow-sm hover:shadow-md transition-all duration-300 select-none"
+                    viewport={{ once: true }}
+                    className="group cursor-pointer"
+                    style={{ flexShrink: 0 }}
                   >
-                    {/* 왼쪽 아이콘 영역 */}
-                    <div className={`flex-shrink-0 w-12 h-12 ${iconData.bgColor} group-hover:${iconData.hoverColor} rounded-lg flex items-center justify-center transition-colors duration-300`}>
-                      <IconComponent className="w-6 h-6 text-white" />
-                    </div>
+                    {/* 메인 카드 */}
+                    <motion.div
+                      whileHover={{ 
+                        scale: 1.02,
+                        y: -4
+                      }}
+                      transition={{ 
+                        duration: 0.2, 
+                        ease: "easeOut"
+                      }}
+                      className="bg-white border border-gray-200 rounded-lg p-6 w-80 h-24 flex items-center gap-4 shadow-sm hover:shadow-md transition-all duration-300 select-none"
+                    >
+                      {/* 왼쪽 아이콘 영역 */}
+                      <div className={`flex-shrink-0 w-12 h-12 ${iconData.bgColor} group-hover:${iconData.hoverColor} rounded-lg flex items-center justify-center transition-colors duration-300`}>
+                        <IconComponent className="w-6 h-6 text-black" />
+                      </div>
 
-                    {/* 오른쪽 텍스트 영역 */}
-                    <div className="flex-1 min-w-0">
-                      {/* 프로그램 제목 */}
-                      <h3 className="text-base font-semibold text-gray-900 group-hover:text-gray-800 transition-colors duration-300 mb-1 truncate">
-                        {program.title}
-                      </h3>
-                      
-                      {/* 프로그램 설명 */}
-                      <p className="text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300 line-clamp-1">
-                        {truncatedDescription}
-                      </p>
-                    </div>
+                      {/* 오른쪽 텍스트 영역 */}
+                      <div className="flex-1 min-w-0">
+                        {/* 프로그램 제목 */}
+                        <h3 className="text-base font-semibold text-gray-900 group-hover:text-gray-800 transition-colors duration-300 mb-1 truncate">
+                          {program.title}
+                        </h3>
+                        
+                        {/* 프로그램 설명 */}
+                        <p className="text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300 line-clamp-1">
+                          {truncatedDescription}
+                        </p>
+                      </div>
+                    </motion.div>
                   </motion.div>
-                </motion.div>
-              )
-            })}
-            </Marquee>
-          </motion.div>
+                )
+              })
+            )}
+            </div>
+          </div>
           
           {/* 두 번째 마키 - 역방향 */}
-          <motion.div
-            drag="x"
-            dragConstraints={{ left: -200, right: 200 }}
-            dragElastic={0.1}
-            whileDrag={{ scale: 1.02 }}
-            className="cursor-grab active:cursor-grabbing"
+          <div 
+            ref={row2Ref}
+            className="cursor-grab active:cursor-grabbing select-none overflow-x-auto overflow-y-visible scrollbar-hide"
+            style={{ 
+              scrollBehavior: isDragging.row2 ? 'auto' : 'smooth',
+              WebkitOverflowScrolling: 'touch'
+            }}
+            onMouseDown={(e) => handleMouseDown(e, 'row2')}
+            onMouseMove={(e) => handleMouseMove(e, 'row2')}
+            onMouseUp={() => handleMouseUp('row2')}
+            onMouseLeave={() => handleMouseUp('row2')}
+            onTouchStart={(e) => handleTouchStart(e, 'row2')}
+            onTouchMove={(e) => handleTouchMove(e, 'row2')}
+            onTouchEnd={() => handleTouchEnd('row2')}
           >
-            <Marquee reverse pauseOnHover className="[--duration:70s]">
-            {programs.slice(Math.ceil(programs.length / 2)).map((program, index) => {
-              const iconData = programIconsAndColors[(index + Math.ceil(programs.length / 2)) % programIconsAndColors.length]
-              const IconComponent = iconData.icon
-            
-              // 설명 텍스트를 더 짧게 제한
-              const truncatedDescription = program.description.length > 80 
-                ? program.description.substring(0, 80) + '...'
-                : program.description
+            <div 
+              className={`flex gap-4 py-2 ${isAnimationPaused.row2 ? '' : 'animate-marquee-scroll-reverse'}`}
+              style={{ 
+                width: 'max-content',
+                animationDuration: '70s',
+                animationIterationCount: 'infinite',
+                animationTimingFunction: 'linear'
+              }}
+            >
+            {/* 카드들을 반복해서 렌더링 */}
+            {[...Array(15)].flatMap((_, repeatIndex) => 
+              programs.slice(Math.ceil(programs.length / 2)).reverse().map((program, index) => {
+                const iconData = programIconsAndColors[(index + Math.ceil(programs.length / 2)) % programIconsAndColors.length]
+                const IconComponent = iconData.icon
               
-              return (
-                <motion.div
-                  key={program.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ 
-                    duration: 0.5, 
-                    delay: index * 0.1
-                  }}
-                  viewport={{ once: true }}
-                  className="group cursor-pointer mx-3"
-                  style={{ flexShrink: 0 }}
-                >
-                  {/* 메인 카드 */}
+                // 설명 텍스트를 더 짧게 제한
+                const truncatedDescription = program.description.length > 80 
+                  ? program.description.substring(0, 80) + '...'
+                  : program.description
+                
+                return (
                   <motion.div
-                    whileHover={{ 
-                      scale: 1.02,
-                      y: -4
-                    }}
+                    key={`row2-${repeatIndex}-${program.id}`}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     transition={{ 
-                      duration: 0.2, 
-                      ease: "easeOut"
+                      duration: 0.5, 
+                      delay: index * 0.1
                     }}
-                    className="bg-white border border-gray-200 rounded-lg p-6 w-80 h-24 flex items-center gap-4 shadow-sm hover:shadow-md transition-all duration-300 select-none"
+                    viewport={{ once: true }}
+                    className="group cursor-pointer"
+                    style={{ flexShrink: 0 }}
                   >
-                    {/* 왼쪽 아이콘 영역 */}
-                    <div className={`flex-shrink-0 w-12 h-12 ${iconData.bgColor} group-hover:${iconData.hoverColor} rounded-lg flex items-center justify-center transition-colors duration-300`}>
-                      <IconComponent className="w-6 h-6 text-white" />
-                    </div>
+                    {/* 메인 카드 */}
+                    <motion.div
+                      whileHover={{ 
+                        scale: 1.02,
+                        y: -4
+                      }}
+                      transition={{ 
+                        duration: 0.2, 
+                        ease: "easeOut"
+                      }}
+                      className="bg-white border border-gray-200 rounded-lg p-6 w-80 h-24 flex items-center gap-4 shadow-sm hover:shadow-md transition-all duration-300 select-none"
+                    >
+                      {/* 왼쪽 아이콘 영역 */}
+                      <div className={`flex-shrink-0 w-12 h-12 ${iconData.bgColor} group-hover:${iconData.hoverColor} rounded-lg flex items-center justify-center transition-colors duration-300`}>
+                        <IconComponent className="w-6 h-6 text-black" />
+                      </div>
 
-                    {/* 오른쪽 텍스트 영역 */}
-                    <div className="flex-1 min-w-0">
-                      {/* 프로그램 제목 */}
-                      <h3 className="text-base font-semibold text-gray-900 group-hover:text-gray-800 transition-colors duration-300 mb-1 truncate">
-                        {program.title}
-                      </h3>
-                      
-                      {/* 프로그램 설명 */}
-                      <p className="text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300 line-clamp-1">
-                        {truncatedDescription}
-                      </p>
-                    </div>
+                      {/* 오른쪽 텍스트 영역 */}
+                      <div className="flex-1 min-w-0">
+                        {/* 프로그램 제목 */}
+                        <h3 className="text-base font-semibold text-gray-900 group-hover:text-gray-800 transition-colors duration-300 mb-1 truncate">
+                          {program.title}
+                        </h3>
+                        
+                        {/* 프로그램 설명 */}
+                        <p className="text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300 line-clamp-1">
+                          {truncatedDescription}
+                        </p>
+                      </div>
+                    </motion.div>
                   </motion.div>
-                </motion.div>
-              )
-            })}
-            </Marquee>
-          </motion.div>
+                )
+              })
+            )}
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -302,3 +302,49 @@ html {
   background: linear-gradient(90deg, transparent 0%, #e5e7eb 50%, transparent 100%);
   margin: 60px 0;
 }
+
+/* 스크롤바 숨기기 유틸리티 */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
+
+/* 마키 스크롤 애니메이션 */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-6.67%);
+  }
+}
+
+@keyframes marquee-scroll-reverse {
+  0% {
+    transform: translateX(-6.67%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-marquee-scroll {
+  animation: marquee-scroll var(--duration, 40s) linear infinite;
+}
+
+.animate-marquee-scroll-reverse {
+  animation: marquee-scroll-reverse var(--duration, 40s) linear infinite;
+}
+
+/* 호버 시 애니메이션 일시 정지 */
+.animate-marquee-scroll:hover {
+  animation-play-state: paused;
+}
+
+.animate-marquee-scroll-reverse:hover {
+  animation-play-state: paused;
+}
