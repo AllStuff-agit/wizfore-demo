@@ -38,5 +38,17 @@ Thumbs.db
 # 9) Vercel CLI 로컬 설정 (생성된다면)
 /.vercel/
 
+# 10) ESLint 캐시
+.eslintcache
+
+# 11) 테스트 커버리지 보고서
+/coverage/
+
+# 12) 임시 파일들
+*.tmp
+*.temp
+*.log
+
+# 13) Claude AI 설정 파일
 CLAUDE.md
 .claude/
