@@ -296,7 +296,7 @@ const ProgramGrid = () => {
                         duration: 0.2, 
                         ease: "easeOut"
                       }}
-                      className="bg-white border border-gray-200 rounded-lg p-6 w-80 h-24 flex items-center gap-4 shadow-sm hover:shadow-md transition-all duration-300 select-none"
+                      className="bg-white border border-wizfore-coral-200 hover:border-wizfore-coral-300 rounded-lg p-6 w-80 h-24 flex items-center gap-4 shadow-sm hover:shadow-md transition-all duration-300 select-none"
                     >
                       {/* 왼쪽 아이콘 영역 */}
                       <div className={`flex-shrink-0 w-12 h-12 ${iconData.bgColor} group-hover:${iconData.hoverColor} rounded-lg flex items-center justify-center transition-colors duration-300`}>
@@ -382,7 +382,7 @@ const ProgramGrid = () => {
                         duration: 0.2, 
                         ease: "easeOut"
                       }}
-                      className="bg-white border border-gray-200 rounded-lg p-6 w-80 h-24 flex items-center gap-4 shadow-sm hover:shadow-md transition-all duration-300 select-none"
+                      className="bg-white border border-wizfore-coral-200 hover:border-wizfore-coral-300 rounded-lg p-6 w-80 h-24 flex items-center gap-4 shadow-sm hover:shadow-md transition-all duration-300 select-none"
                     >
                       {/* 왼쪽 아이콘 영역 */}
                       <div className={`flex-shrink-0 w-12 h-12 ${iconData.bgColor} group-hover:${iconData.hoverColor} rounded-lg flex items-center justify-center transition-colors duration-300`}>
