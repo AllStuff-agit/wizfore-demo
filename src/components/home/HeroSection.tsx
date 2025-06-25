@@ -131,7 +131,7 @@ const HeroSection: React.FC = () => {
                     minWidth: '180px'
                   }}
                 >
-                  <div className="ml-1 sm:ml-2 mt-12 sm:mt-16 md:mt-20 mb-3 sm:mb-4 md:mb-5 mr-12 sm:mr-16 md:mr-20">
+                  <div className="ml-1 sm:ml-2 mt-16 sm:mt-18 md:mt-20 mb-4 sm:mb-5 md:mb-5 mr-8 sm:mr-12 md:mr-16 lg:mr-20">
                     <AnimatePresence mode="wait">
                       <motion.div
                         key={`category-text-${currentSlide}`}
@@ -139,7 +139,7 @@ const HeroSection: React.FC = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.4, ease: "easeInOut" }}
-                        className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-wizfore-text-primary whitespace-nowrap"
+                        className="text-lg sm:text-2xl md:text-5xl lg:text-6xl font-bold text-wizfore-text-primary whitespace-nowrap"
                       >
                         {currentSlideData.categoryText}
                       </motion.div>
