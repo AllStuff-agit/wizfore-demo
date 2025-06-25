@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { Menu, X, MessageCircle } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -59,53 +59,39 @@ const Header = () => {
   ]
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
-      <div className="container-custom mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
-          {/* 로고 - 마인드스토리 스타일 */}
-          <Link href="/" className="flex items-center space-x-3">
-            <div className="flex space-x-1">
-              {/* 로고 이미지들 - 마인드스토리처럼 여러 개 */}
-              <div className="w-10 h-10 bg-wizfore-warm-brown rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">W</span>
-              </div>
-              <div className="w-10 h-10 bg-wizfore-medium-brown rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">I</span>
-              </div>
-              <div className="w-10 h-10 bg-wizfore-sandy-brown rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">Z</span>
-              </div>
-              <div className="w-10 h-10 bg-wizfore-warm-brown rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">F</span>
-              </div>
-            </div>
+    <header className="bg-white sticky top-0 z-50">
+      <div className="container-custom mx-auto px-4 pt-4">
+        <div className="relative flex items-center h-20">
+          {/* 로고 - 왼쪽 고정 */}
+          <Link href="/" className="flex items-center space-x-3 flex-shrink-0">
             <div className="hidden md:block">
-              <div className="text-xl font-bold text-wizfore-text-primary">위즈포레</div>
-              <div className="text-xs text-wizfore-text-secondary">사회서비스센터</div>
+              <div className="text-3xl font-bold text-wizfore-text-primary transform scale-x-110 tracking-wider">위즈포레</div>
             </div>
           </Link>
 
-          {/* 오른쪽 SNS 아이콘들 - 마인드스토리 스타일 */}
-          <div className="hidden md:flex items-center space-x-4">
-            <a 
-              href="#" 
-              className="w-8 h-8 bg-yellow-400 rounded flex items-center justify-center hover:bg-yellow-500 transition-colors"
-              aria-label="카카오톡"
-            >
-              <MessageCircle size={16} className="text-white" />
-            </a>
-            <a 
-              href="#" 
-              className="w-8 h-8 bg-wizfore-warm-brown rounded flex items-center justify-center hover:bg-wizfore-medium-brown transition-colors"
-              aria-label="네이버 블로그"
-            >
-              <span className="text-white font-bold text-xs">N</span>
-            </a>
-          </div>
+          {/* 데스크톱 네비게이션 - 절대적 중앙 배치 */}
+          <nav 
+            className="hidden md:flex absolute left-1/2 transform -translate-x-1/2"
+            onMouseEnter={() => setIsNavExpanded(true)}
+            onMouseLeave={() => setIsNavExpanded(false)}
+          >
+            <ul className="flex space-x-12">
+              {navigation.map((item) => (
+                <li key={item.name} className="relative">
+                  <Link
+                    href={item.href}
+                    className="block py-4 text-lg text-wizfore-text-primary hover:text-wizfore-text-brand font-semibold transition-colors border-b-2 border-transparent hover:border-wizfore-warm-brown"
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-          {/* 모바일 메뉴 버튼 */}
+          {/* 모바일 메뉴 버튼 - 오른쪽 */}
           <button
-            className="md:hidden"
+            className="md:hidden ml-auto"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="메뉴 토글"
           >
@@ -113,82 +99,34 @@ const Header = () => {
           </button>
         </div>
 
-        {/* 네비게이션 메뉴 */}
-        <nav 
-          className={`${isMenuOpen ? 'block' : 'hidden'} md:block border-t md:border-t-0 border-gray-200 transition-all duration-300`}
+        {/* 데스크톱 서브메뉴 드롭다운 - 별도 위치 */}
+        <div 
+          className={`hidden md:block bg-white border-gray-200 transition-all duration-300 overflow-hidden ${
+            isNavExpanded 
+              ? 'max-h-64 opacity-100 py-6' 
+              : 'max-h-0 opacity-0 py-0'
+          }`}
           onMouseEnter={() => setIsNavExpanded(true)}
           onMouseLeave={() => setIsNavExpanded(false)}
         >
-          {/* 메인 네비게이션 */}
-          <ul className="flex flex-col md:flex-row md:justify-center py-4 md:py-0 space-y-2 md:space-y-0 md:space-x-8">
-            {navigation.map((item) => (
-              <li key={item.name} className="relative">
-                <Link
-                  href={item.href}
-                  className="block px-4 py-2 md:px-0 md:py-4 text-wizfore-text-primary hover:text-wizfore-text-brand font-medium transition-colors border-b-2 border-transparent hover:border-wizfore-warm-brown"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-
-          {/* 전체 서브메뉴 드롭다운 */}
-          <div 
-            className={`md:block hidden bg-white border-t border-gray-200 transition-all duration-300 overflow-hidden ${
-              isNavExpanded 
-                ? 'max-h-64 opacity-100 py-6' 
-                : 'max-h-0 opacity-0 py-0'
-            }`}
-          >
-            <div className="container-custom mx-auto px-4">
-              <div className="grid grid-cols-5 gap-8">
-                {navigation.map((item) => (
-                  <div key={item.name} className="space-y-3">
-                    <h3 className="font-semibold text-wizfore-text-primary text-sm border-b border-wizfore-warm-brown pb-2">
-                      {item.name}
-                    </h3>
-                    {item.submenu && (
-                      <ul className="space-y-2">
-                        {item.submenu.map((subItem) => (
-                          <li key={subItem.name}>
-                            <Link
-                              href={subItem.href}
-                              className="text-sm text-wizfore-text-secondary hover:text-wizfore-text-brand transition-colors block py-1"
-                              onClick={() => {
-                                setIsMenuOpen(false)
-                                setIsNavExpanded(false)
-                              }}
-                            >
-                              {subItem.name}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* 모바일용 서브메뉴 */}
-          <div className="md:hidden">
-            {isMenuOpen && navigation.map((item) => (
-              <div key={`mobile-${item.name}`} className="border-t border-gray-100 py-3">
-                <div className="px-4">
-                  <h3 className="font-semibold text-wizfore-text-primary text-sm mb-2">
+          <div className="container-custom mx-auto px-4">
+            <div className="grid grid-cols-5 gap-0 justify-items-center">
+              {navigation.map((item) => (
+                <div key={item.name} className="space-y-1">
+                  <h3 className="font-semibold text-wizfore-text-primary text-base border-b border-wizfore-warm-brown pb-2">
                     {item.name}
                   </h3>
                   {item.submenu && (
-                    <ul className="space-y-1 pl-4">
+                    <ul className="space-y-2">
                       {item.submenu.map((subItem) => (
                         <li key={subItem.name}>
                           <Link
                             href={subItem.href}
-                            className="text-sm text-wizfore-text-secondary hover:text-wizfore-text-brand transition-colors block py-1"
-                            onClick={() => setIsMenuOpen(false)}
+                            className="text-base text-wizfore-text-secondary hover:text-wizfore-text-brand transition-colors block py-1"
+                            onClick={() => {
+                              setIsMenuOpen(false)
+                              setIsNavExpanded(false)
+                            }}
                           >
                             {subItem.name}
                           </Link>
@@ -197,9 +135,56 @@ const Header = () => {
                     </ul>
                   )}
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
+        </div>
+
+        {/* 모바일 네비게이션 메뉴 */}
+        <nav 
+          className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden border-t border-gray-200 transition-all duration-300`}
+        >
+          {/* 모바일 메인 네비게이션 */}
+          <ul className="flex flex-col py-4 space-y-2">
+            {navigation.map((item) => (
+              <li key={item.name} className="relative">
+                <Link
+                  href={item.href}
+                  className="block px-4 py-2 text-wizfore-text-primary hover:text-wizfore-text-brand font-medium transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+
+          {/* 모바일용 서브메뉴 */}
+          {isMenuOpen && navigation.map((item) => (
+            <div key={`mobile-${item.name}`} className="border-t border-gray-100 py-3">
+              <div className="px-4">
+                <h3 className="font-semibold text-wizfore-text-primary text-sm mb-2">
+                  {item.name}
+                </h3>
+                {item.submenu && (
+                  <ul className="space-y-1 pl-4">
+                    {item.submenu.map((subItem) => (
+                      <li key={subItem.name}>
+                        <Link
+                          href={subItem.href}
+                          className="text-sm text-wizfore-text-secondary hover:text-wizfore-text-brand transition-colors block py-1"
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          {subItem.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+          ))}
         </nav>
       </div>
     </header>
