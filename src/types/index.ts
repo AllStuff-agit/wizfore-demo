@@ -181,7 +181,6 @@ export interface SiteConfig {
 export interface HeroSlide {
   id: number
   title: string
-  subtitle: string
   description: string
   categoryText: string
   categoryLink: string
