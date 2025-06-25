@@ -183,8 +183,8 @@ export interface HeroSlide {
   title: string
   subtitle: string
   description: string
-  buttonText: string
-  buttonLink: string
+  categoryText: string
+  categoryLink: string
   backgroundImage: string
   backgroundColor: string
   order: number
