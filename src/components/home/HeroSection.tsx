@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronLeft, ChevronRight, Play } from 'lucide-react'
+import { Play } from 'lucide-react'
 import { doc, getDoc } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import type { HeroSlide } from '@/types'
@@ -51,14 +51,6 @@ const HeroSection: React.FC = () => {
     return () => clearInterval(interval)
   }, [isAutoPlaying, slides.length])
 
-  const nextSlide = (): void => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length)
-  }
-
-  const prevSlide = (): void => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
-  }
-
   const goToSlide = (index: number): void => {
     setCurrentSlide(index)
   }
@@ -66,7 +58,7 @@ const HeroSection: React.FC = () => {
 
   if (loading || slides.length === 0) {
     return (
-      <section className="relative h-screen overflow-hidden px-4 md:px-8 lg:px-16 py-8">
+      <section className="relative h-[60vh] md:h-[70vh] lg:h-[calc(100vh-5rem)] overflow-hidden px-4 md:px-8 lg:px-16 pb-16">
         <div 
           className="relative h-full w-full bg-wizfore-light-beige rounded-[3rem]"
         >
@@ -86,33 +78,29 @@ const HeroSection: React.FC = () => {
   }
 
   const currentSlideData = slides[currentSlide] || slides[0]
+  const backgroundImageUrl = currentSlideData?.backgroundImage || '/images/hero/defaultHero.jpg'
 
   return (
-    <section className="relative h-screen overflow-hidden px-4 md:px-8 lg:px-16 py-8">
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentSlide}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.8 }}
-          className="absolute inset-4 md:inset-8 lg:inset-16 inset-y-8 rounded-[3rem] overflow-hidden"
-        >
-            <div className={`absolute inset-0 bg-gradient-to-br ${currentSlideData.backgroundColor}`} />
+    <section className="relative h-[60vh] md:h-[70vh] lg:h-[calc(100vh-5rem)] overflow-hidden px-4 md:px-8 lg:px-16 pb-16">
+      <div className="absolute inset-x-4 md:inset-x-8 lg:inset-x-16 top-0 bottom-4 md:bottom-8 lg:bottom-16 rounded-[3rem] overflow-hidden">
             <div 
-              className="absolute inset-0 bg-cover bg-center opacity-30"
+              className="absolute inset-0 bg-cover bg-center transition-all duration-700 ease-in-out"
               style={{
-                backgroundImage: `url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1200 800\"><rect fill=\"%23f5f5f5\" width=\"1200\" height=\"800\"/><g fill-opacity=\".1\"><circle fill=\"%23${currentSlide === 0 ? 'ff9800' : currentSlide === 1 ? '2196f3' : '4caf50'}\" cx=\"200\" cy=\"200\" r=\"100\"/><circle fill=\"%23${currentSlide === 0 ? 'e91e63' : currentSlide === 1 ? '9c27b0' : '009688'}\" cx=\"1000\" cy=\"600\" r=\"120\"/></g></svg>')`
+                backgroundImage: `url('${backgroundImageUrl}')`
               }}
             />
+            <div className={`absolute inset-0 bg-gradient-to-br ${currentSlideData.backgroundColor} opacity-20`} />
             <div className="relative z-10 h-full flex items-center justify-center">
               <div className="max-w-4xl mx-auto px-4">
-                <motion.div
-                  initial={{ y: 30, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  className="text-center"
-                >
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={`text-${currentSlide}`}
+                    initial={{ y: 30, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -30, opacity: 0 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                    className="text-center"
+                  >
                   <h2 className="text-2xl md:text-3xl mb-4 text-wizfore-text-secondary font-medium">
                     {currentSlideData.title}
                   </h2>
@@ -122,31 +110,62 @@ const HeroSection: React.FC = () => {
                   <p className="text-lg md:text-xl text-wizfore-text-secondary leading-relaxed">
                     {currentSlideData.description}
                   </p>
-                </motion.div>
+                  </motion.div>
+                </AnimatePresence>
               </div>
+              
+              {/* 카테고리 텍스트 - 사진 영역 내부 왼쪽 아래 */}
+              <div className="absolute bottom-0 left-0 z-30">
+                <svg width="0" height="0">
+                  <defs>
+                    <clipPath id="category-clip" clipPathUnits="objectBoundingBox">
+                      <path d="M0, 0 Q0,0.25 0.15,0.25 L0.7, 0.25 Q0.85,0.25 0.85, 0.5 L0.85, 0.75 Q0.85,1 1,1 L0, 1 Z" />
+                    </clipPath>
+                  </defs> 
+                </svg>
+
+                <div
+                  className="bg-white px-8 md:px-12 pt-8 pr-8 md:py-8 transition-all duration-1000 ease-in-out"
+                  style={{ 
+                    clipPath: 'url(#category-clip)',
+                    width: 'fit-content',
+                    minWidth: '200px'
+                  }}
+                >
+                  <div className="ml-2 mt-20 mb-5 mr-20">
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={`category-text-${currentSlide}`}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.4, ease: "easeInOut" }}
+                        className="text-4xl md:text-6xl font-bold text-wizfore-text-primary whitespace-nowrap"
+                      >
+                        {currentSlideData.categoryText}
+                      </motion.div>
+                    </AnimatePresence>
+                  </div>
+                </div>
+              </div>
+
+              {/* 자동재생 버튼 - 사진 영역 내부 */}
+              <button
+                onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+                className="absolute bottom-4 md:bottom-6 lg:bottom-8 right-4 md:right-6 lg:right-8 z-30 w-10 h-10 bg-white/80 hover:bg-white rounded-full flex items-center justify-center text-wizfore-text-primary transition-all duration-300 shadow-lg"
+                aria-label={isAutoPlaying ? '자동재생 정지' : '자동재생 시작'}
+              >
+                {isAutoPlaying ? (
+                  <div className="flex space-x-1">
+                    <div className="w-1 h-4 bg-wizfore-text-primary rounded-full" />
+                    <div className="w-1 h-4 bg-wizfore-text-primary rounded-full" />
+                  </div>
+                ) : (
+                  <Play size={16} className="ml-0.5" />
+                )}
+              </button>
             </div>
-          </motion.div>
-        </AnimatePresence>
-
-        <button
-          onClick={prevSlide}
-          onMouseEnter={() => setIsAutoPlaying(false)}
-          onMouseLeave={() => setIsAutoPlaying(true)}
-          className="absolute left-8 md:left-12 lg:left-20 top-1/2 transform -translate-y-1/2 z-20 w-12 h-12 bg-white/80 hover:bg-white rounded-full flex items-center justify-center text-wizfore-text-primary transition-all duration-300 shadow-lg"
-          aria-label="이전 슬라이드"
-        >
-          <ChevronLeft size={24} />
-        </button>
-
-        <button
-          onClick={nextSlide}
-          onMouseEnter={() => setIsAutoPlaying(false)}
-          onMouseLeave={() => setIsAutoPlaying(true)}
-          className="absolute right-8 md:right-12 lg:right-20 top-1/2 transform -translate-y-1/2 z-20 w-12 h-12 bg-white/80 hover:bg-white rounded-full flex items-center justify-center text-wizfore-text-primary transition-all duration-300 shadow-lg"
-          aria-label="다음 슬라이드"
-        >
-          <ChevronRight size={24} />
-        </button>
+      </div>
 
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex space-x-3">
           {slides.map((_, index) => (
@@ -165,20 +184,6 @@ const HeroSection: React.FC = () => {
           ))}
         </div>
 
-        <button
-          onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-          className="absolute bottom-8 right-8 z-20 w-10 h-10 bg-white/80 hover:bg-white rounded-full flex items-center justify-center text-wizfore-text-primary transition-all duration-300 shadow-lg"
-          aria-label={isAutoPlaying ? '자동재생 정지' : '자동재생 시작'}
-        >
-          {isAutoPlaying ? (
-            <div className="flex space-x-1">
-              <div className="w-1 h-4 bg-wizfore-text-primary rounded-full" />
-              <div className="w-1 h-4 bg-wizfore-text-primary rounded-full" />
-            </div>
-          ) : (
-            <Play size={16} className="ml-0.5" />
-          )}
-        </button>
     </section>
   )
 }
