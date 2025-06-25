@@ -72,7 +72,7 @@ const MainServicesSection = () => {
   }
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-24 bg-gray-50">
       <div className="container-custom mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

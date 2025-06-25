@@ -193,7 +193,7 @@ const ProgramGrid = () => {
 
   if (loading) {
     return (
-      <section className="py-16 bg-wizfore-light-beige">
+      <section className="py-24 bg-wizfore-light-beige">
         <div className="container-custom mx-auto px-4">
           <div className="text-center mb-12">
             <div className="h-8 bg-gray-300 rounded w-64 mx-auto mb-4 animate-pulse"></div>
@@ -215,7 +215,7 @@ const ProgramGrid = () => {
   }
 
   return (
-    <section className="py-16 bg-wizfore-light-beige">
+    <section className="py-24 bg-wizfore-light-beige">
       <div className="container-custom mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -225,7 +225,7 @@ const ProgramGrid = () => {
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-wizfore-text-primary mb-4">
-            전문 치료 프로그램
+            세부 전문 프로그램
           </h2>
           <p className="text-lg text-wizfore-text-secondary max-w-2xl mx-auto">
             개별적 특성과 발달 단계에 맞춘 체계적이고 전문적인 치료 프로그램을 제공합니다

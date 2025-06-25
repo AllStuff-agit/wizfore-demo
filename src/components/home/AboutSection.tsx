@@ -31,7 +31,7 @@ const AboutSection = () => {
 
   if (loading) {
     return (
-      <section className="py-16 bg-gray-50">
+      <section className="py-24 bg-gray-50">
         <div className="container-custom mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <div className="animate-pulse space-y-6">
@@ -59,7 +59,7 @@ const AboutSection = () => {
   const siteName = data?.siteName || "위즈포레 사회서비스센터"
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-24 bg-gray-50">
       <div className="container-custom mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
