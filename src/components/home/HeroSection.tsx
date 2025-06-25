@@ -90,8 +90,10 @@ const HeroSection: React.FC = () => {
               }}
             />
             <div className={`absolute inset-0 bg-gradient-to-br ${currentSlideData.backgroundColor} opacity-20`} />
-            <div className="relative z-10 h-full flex items-center justify-center">
-              <div className="max-w-4xl mx-auto px-4">
+            <div className="relative z-10 h-full">
+              
+              {/* 메인 콘텐츠 텍스트 - 카테고리 박스 위 */}
+              <div className="absolute bottom-52 sm:bottom-56 md:bottom-60 left-4 sm:left-6 md:left-8 lg:left-10 right-4 sm:right-6 md:right-12 lg:right-16 z-20 px-2 sm:px-4">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={`text-${currentSlide}`}
@@ -99,15 +101,12 @@ const HeroSection: React.FC = () => {
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: -30, opacity: 0 }}
                     transition={{ duration: 0.5, ease: "easeInOut" }}
-                    className="text-center"
+                    className="text-left"
                   >
-                  <h2 className="text-2xl md:text-3xl mb-4 text-wizfore-text-secondary font-medium">
+                  <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-3 sm:mb-4 text-white font-bold drop-shadow-lg leading-tight">
                     {currentSlideData.title}
-                  </h2>
-                  <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-wizfore-text-primary">
-                    {currentSlideData.subtitle}
                   </h1>
-                  <p className="text-lg md:text-xl text-wizfore-text-secondary leading-relaxed">
+                  <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 leading-relaxed drop-shadow-lg">
                     {currentSlideData.description}
                   </p>
                   </motion.div>
@@ -125,14 +124,14 @@ const HeroSection: React.FC = () => {
                 </svg>
 
                 <div
-                  className="bg-white px-8 md:px-12 pt-8 pr-8 md:py-8 transition-all duration-1000 ease-in-out"
+                  className="bg-white px-4 sm:px-6 md:px-8 lg:px-12 pt-6 sm:pt-8 pr-6 sm:pr-8 md:py-8 transition-all duration-1000 ease-in-out"
                   style={{ 
                     clipPath: 'url(#category-clip)',
                     width: 'fit-content',
-                    minWidth: '200px'
+                    minWidth: '180px'
                   }}
                 >
-                  <div className="ml-2 mt-20 mb-5 mr-20">
+                  <div className="ml-1 sm:ml-2 mt-12 sm:mt-16 md:mt-20 mb-3 sm:mb-4 md:mb-5 mr-12 sm:mr-16 md:mr-20">
                     <AnimatePresence mode="wait">
                       <motion.div
                         key={`category-text-${currentSlide}`}
@@ -140,7 +139,7 @@ const HeroSection: React.FC = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.4, ease: "easeInOut" }}
-                        className="text-4xl md:text-6xl font-bold text-wizfore-text-primary whitespace-nowrap"
+                        className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-wizfore-text-primary whitespace-nowrap"
                       >
                         {currentSlideData.categoryText}
                       </motion.div>
