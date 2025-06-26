@@ -82,7 +82,7 @@ const HeroSection: React.FC = () => {
 
   return (
     <section className="relative h-[60vh] md:h-[70vh] lg:h-[calc(100vh-5rem)] overflow-hidden px-4 md:px-8 lg:px-16 pb-16">
-      <div className="absolute inset-x-4 md:inset-x-8 lg:inset-x-16 top-0 bottom-4 md:bottom-8 lg:bottom-16 rounded-[3rem] overflow-hidden">
+      <div className="absolute inset-x-4 md:inset-x-8 lg:inset-x-16 top-0 bottom-4 md:bottom-8 lg:bottom-16 rounded-[3rem] overflow-hidden border-2 border-white">
             <div 
               className="absolute inset-0 bg-cover bg-center transition-all duration-700 ease-in-out"
               style={{
@@ -93,7 +93,7 @@ const HeroSection: React.FC = () => {
             <div className="relative z-10 h-full">
               
               {/* 메인 콘텐츠 텍스트 - 카테고리 박스 위 */}
-              <div className="absolute bottom-52 sm:bottom-56 md:bottom-60 left-4 sm:left-6 md:left-8 lg:left-10 right-4 sm:right-6 md:right-12 lg:right-16 z-20 px-2 sm:px-4">
+              <div className="absolute bottom-24 sm:bottom-36 md:bottom-52 left-4 sm:left-6 md:left-8 lg:left-10 right-4 sm:right-6 md:right-12 lg:right-16 z-20 px-2 sm:px-4">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={`text-${currentSlide}`}
@@ -111,40 +111,6 @@ const HeroSection: React.FC = () => {
                   </p>
                   </motion.div>
                 </AnimatePresence>
-              </div>
-              
-              {/* 카테고리 텍스트 - 사진 영역 내부 왼쪽 아래 */}
-              <div className="absolute bottom-0 left-0 z-30">
-                <svg width="0" height="0">
-                  <defs>
-                    <clipPath id="category-clip" clipPathUnits="objectBoundingBox">
-                      <path d="M0, 0 Q0,0.25 0.15,0.25 L0.7, 0.25 Q0.85,0.25 0.85, 0.5 L0.85, 0.75 Q0.85,1 1,1 L0, 1 Z" />
-                    </clipPath>
-                  </defs> 
-                </svg>
-
-                <div
-                  className="bg-white px-3 py-3 sm:px-4 sm:py-5 md:px-5 md:py-6 lg:px-6 lg:py-6 transition-all duration-1000 ease-in-out min-w-[140px] sm:min-w-[180px] lg:min-w-[220px]"
-                  style={{ 
-                    clipPath: 'url(#category-clip)',
-                    width: 'fit-content'
-                  }}
-                >
-                  <div className="ml-2 sm:ml-3 md:ml-4 mt-8 sm:mt-14 md:mt-16 lg:mt-18 mb-2 sm:mb-4 md:mb-5 mr-6 sm:mr-8 md:mr-12 lg:mr-16">
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={`category-text-${currentSlide}`}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.4, ease: "easeInOut" }}
-                        className="text-base sm:text-2xl md:text-4xl lg:text-5xl font-bold text-wizfore-text-primary whitespace-nowrap"
-                      >
-                        {currentSlideData.categoryText}
-                      </motion.div>
-                    </AnimatePresence>
-                  </div>
-                </div>
               </div>
 
               {/* 자동재생 버튼 - 사진 영역 내부 */}
@@ -180,6 +146,40 @@ const HeroSection: React.FC = () => {
               aria-label={`슬라이드 ${index + 1}로 이동`}
             />
           ))}
+        </div>
+
+        {/* 카테고리 텍스트 - 히어로 섹션 위로 오버레이 배치 */}
+        <div className="absolute bottom-4 md:bottom-8 lg:bottom-16 left-4 md:left-8 lg:left-16 z-30">
+          <svg width="0" height="0">
+            <defs>
+              <clipPath id="category-clip" clipPathUnits="objectBoundingBox">
+                <path d="M0, 0 Q0,0.25 0.15,0.25 L0.7, 0.25 Q0.85,0.25 0.85, 0.5 L0.85, 0.75 Q0.85,1 1,1 L0, 1 Z" />
+              </clipPath>
+            </defs> 
+          </svg>
+
+          <div
+            className="bg-white px-3 py-3 sm:px-4 sm:py-5 md:px-5 md:py-6 lg:px-6 lg:py-6 transition-all duration-1000 ease-in-out min-w-[140px] sm:min-w-[180px] lg:min-w-[220px]"
+            style={{ 
+              clipPath: 'url(#category-clip)',
+              width: 'fit-content'
+            }}
+          >
+            <div className="ml-2 sm:ml-3 md:ml-4 mt-8 sm:mt-14 md:mt-16 lg:mt-18 mb-2 sm:mb-4 md:mb-5 mr-6 sm:mr-8 md:mr-12 lg:mr-16">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={`category-text-${currentSlide}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                  className="text-base sm:text-2xl md:text-4xl lg:text-5xl font-bold text-wizfore-text-primary whitespace-nowrap"
+                >
+                  {currentSlideData.categoryText}
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
         </div>
 
     </section>
