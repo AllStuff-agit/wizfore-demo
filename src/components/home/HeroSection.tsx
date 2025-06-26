@@ -124,14 +124,13 @@ const HeroSection: React.FC = () => {
                 </svg>
 
                 <div
-                  className="bg-white px-4 sm:px-6 md:px-8 lg:px-12 pt-6 sm:pt-8 pr-6 sm:pr-8 md:py-8 transition-all duration-1000 ease-in-out"
+                  className="bg-white px-3 py-3 sm:px-4 sm:py-5 md:px-5 md:py-6 lg:px-6 lg:py-6 transition-all duration-1000 ease-in-out min-w-[140px] sm:min-w-[180px] lg:min-w-[220px]"
                   style={{ 
                     clipPath: 'url(#category-clip)',
-                    width: 'fit-content',
-                    minWidth: '180px'
+                    width: 'fit-content'
                   }}
                 >
-                  <div className="ml-1 sm:ml-2 mt-16 sm:mt-18 md:mt-20 mb-4 sm:mb-5 md:mb-5 mr-8 sm:mr-12 md:mr-16 lg:mr-20">
+                  <div className="ml-2 sm:ml-3 md:ml-4 mt-8 sm:mt-14 md:mt-16 lg:mt-18 mb-2 sm:mb-4 md:mb-5 mr-6 sm:mr-8 md:mr-12 lg:mr-16">
                     <AnimatePresence mode="wait">
                       <motion.div
                         key={`category-text-${currentSlide}`}
@@ -139,7 +138,7 @@ const HeroSection: React.FC = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.4, ease: "easeInOut" }}
-                        className="text-lg sm:text-2xl md:text-5xl lg:text-6xl font-bold text-wizfore-text-primary whitespace-nowrap"
+                        className="text-base sm:text-2xl md:text-4xl lg:text-5xl font-bold text-wizfore-text-primary whitespace-nowrap"
                       >
                         {currentSlideData.categoryText}
                       </motion.div>
