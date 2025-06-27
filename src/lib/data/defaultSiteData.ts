@@ -271,7 +271,7 @@ export const defaultSiteData: DefaultSiteData = {
 
   programs: [
     {
-      id: "individual-therapy",
+      id: "therapy",
       title: "치료 프로그램",
       description: "개별적인 특성과 필요에 맞춘 전문적인 치료 서비스를 제공합니다.",
       imageUrl: "",
@@ -337,7 +337,7 @@ export const defaultSiteData: DefaultSiteData = {
     },
 
     {
-      id: "evaluation-counseling",
+      id: "counseling",
       title: "상담 프로그램",
       description: "정확한 진단과 개별화된 상담을 통해 최적의 치료 계획을 제공합니다.",
       imageUrl: "",

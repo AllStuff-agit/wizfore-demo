@@ -9,8 +9,8 @@ import type { ProgramCategory } from '@/types'
 
 // 각 카테고리별 fallback 그라데이션 매핑
 const fallbackGradients = {
-  'individual-therapy': 'bg-gradient-to-br from-wizfore-coral-primary to-wizfore-coral-secondary',
-  'evaluation-counseling': 'bg-gradient-to-br from-wizfore-coral-secondary to-wizfore-coral-light',
+  'therapy': 'bg-gradient-to-br from-wizfore-coral-primary to-wizfore-coral-secondary',
+  'counseling': 'bg-gradient-to-br from-wizfore-coral-secondary to-wizfore-coral-light',
   'afterschool-program': 'bg-gradient-to-br from-wizfore-coral-light to-wizfore-coral-accent',
   'adult-day-program': 'bg-gradient-to-br from-wizfore-coral-accent to-wizfore-soft-pink'
 }
@@ -125,7 +125,7 @@ const CategoryCards = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {programCategories.map((category, index) => {
-            const fallbackGradient = fallbackGradients[category.id as keyof typeof fallbackGradients] || fallbackGradients['individual-therapy']
+            const fallbackGradient = fallbackGradients[category.id as keyof typeof fallbackGradients] || fallbackGradients['therapy']
             
             return (
               <motion.div

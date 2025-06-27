@@ -24,9 +24,10 @@ const Header = () => {
       name: '프로그램', 
       href: '/programs',
       submenu: [
-        { name: '치료 프로그램', href: '/programs/individual' },
-        { name: '상담 프로그램', href: '/programs/assessment' },
+        { name: '치료 프로그램', href: '/programs/therapy' },
+        { name: '상담 프로그램', href: '/programs/counseling' },
         { name: '방과후 프로그램', href: '/programs/afterschool' },
+        { name: '특수 스포츠', href: '/programs/sports' },
         { name: '성인 주간활동 프로그램', href: '/programs/adult-day' },
       ]
     },
@@ -43,8 +44,7 @@ const Header = () => {
       href: '/community',
       submenu: [
         { name: '센터 소식', href: '/community/news' },
-        { name: '공지사항', href: '/community/notices' },
-        { name: '협력 기관', href: '/community/partners' },
+        { name: 'SNS', href: '/community/sns' },
       ]
     },
     { 
