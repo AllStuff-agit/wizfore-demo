@@ -1,3 +1,5 @@
+'use client'
+
 import { initializeApp, getApps } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getStorage } from 'firebase/storage';
@@ -28,7 +30,7 @@ const {
 
 const firebaseConfig = {
   
-  apiKey: NEXT_PUBLIC_FIREBASE_API_KEY || "AIzaSyDmuAmLG4o-gH6X3jFI1o5FG6HGiqpDX6M",
+  apiKey: NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "wizfore-demo.firebaseapp.com",
   projectId: NEXT_PUBLIC_FIREBASE_PROJECT_ID || "wizfore-demo",
   storageBucket: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || "wizfore-demo.firebasestorage.app",
