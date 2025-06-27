@@ -10,11 +10,11 @@ import {   enableIndexedDbPersistence } from 'firebase/firestore';
 
 export const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN! || "wizfore-demo.firebaseapp.com",
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID! || "wizfore-demo",
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET!  || "wizfore-demo.firebasestorage.app",
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID! || "12717939021",
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID! || "1:12717939021:web:261ce55355dd0cfdddff04"
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN!,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID!,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET!,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID!,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID!,
 };
 
 // const firebaseConfig = {
