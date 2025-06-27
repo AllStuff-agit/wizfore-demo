@@ -1,155 +1,102 @@
-import { Facebook, Instagram, Youtube, Clock } from 'lucide-react'
+'use client'
+
+import { useEffect, useState } from 'react'
+import { MapPin, Phone, Clock, Mail } from 'lucide-react'
+import { defaultSiteData } from '@/lib/data/defaultSiteData'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
+  const { contact } = defaultSiteData.siteInfo
 
   return (
-    <footer className="bg-white text-wizfore-text-primary border-t border-gray-200">
-      <div className="container-custom mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <footer className="bg-white text-wizfore-text-primary">
+      <div className="max-w-6xl mx-auto px-2 pt-16 pb-8">
+        <div className="flex flex-col lg:flex-row">
           
-          {/* Company Info */}
-          <div>
-            <h3 className="text-lg font-bold mb-4 text-wizfore-text-brand">Company Info</h3>
-            <div className="space-y-2 text-sm text-wizfore-text-secondary">
-              <p>
-                <strong>회사명:</strong> 위즈포레 사회서비스센터<br />
-                <strong>대표:</strong> 홍길동<br />
-                <strong>개인정보담당자:</strong> 홍길동<br />
-                <strong>사업자등록번호:</strong> 123-45-67890<br />
-                <strong>전화번호:</strong> 051-123-4567, 010-1234-5678<br />
-                <strong>팩스:</strong> 051-123-4568<br />
-                <strong>주소:</strong> 부산시 ...<br />
-                <strong>이메일:</strong> info@wizfore.com<br />
-                <strong>계좌번호:</strong> 농협 123-456-789012 위즈포레사회서비스센터
-              </p>
-            </div>
+          {/* Left Side - Map */}
+          <div className="lg:w-1/2 bg-gray-100 rounded-lg overflow-hidden">
+            <iframe
+              src={contact.mapUrl}
+              width="100%"
+              height="400"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="위즈포레 사회서비스센터 위치"
+            />
           </div>
 
-          {/* Working Hours */}
-          <div>
-            <h3 className="text-lg font-bold mb-4 text-wizfore-text-brand">Working Hour (예약제)</h3>
-            <div className="space-y-2 text-sm text-wizfore-text-secondary">
-              <div className="flex items-center space-x-2">
-                <Clock size={16} />
-                <span>월: 낮 12시 ~ 저녁 7시</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Clock size={16} />
-                <span>화~금: 오전 10시 ~ 저녁 8시</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Clock size={16} />
-                <span>토: 오전 10시 ~ 오후 4시</span>
-              </div>
-              <p className="mt-4 font-semibold text-wizfore-text-brand">
-                예약 시 야간 및 휴일 상담 가능
-              </p>
+          {/* Right Side - Company Info (Center Aligned) */}
+          <div className="lg:w-1/2 space-y-6 text-center lg:pl-0">
+            {/* Company Name */}
+            <div>
+              <h3 className="text-xl font-bold text-wizfore-coral-primary mb-2">
+                {defaultSiteData.siteInfo.name}
+              </h3>
             </div>
 
-            {/* Social Links */}
-            <div className="mt-6">
-              <h4 className="font-semibold mb-3 text-wizfore-text-primary">소셜 미디어</h4>
-              <div className="flex space-x-3">
-                <a 
-                  href="#" 
-                  className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center hover:bg-wizfore-warm-brown hover:text-white transition-colors"
-                  aria-label="Facebook"
-                >
-                  <Facebook size={16} />
-                </a>
-                <a 
-                  href="#" 
-                  className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center hover:bg-wizfore-medium-brown hover:text-white transition-colors"
-                  aria-label="Instagram"
-                >
-                  <Instagram size={16} />
-                </a>
-                <a 
-                  href="#" 
-                  className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center hover:bg-red-600 hover:text-white transition-colors"
-                  aria-label="YouTube"
-                >
-                  <Youtube size={16} />
-                </a>
+            {/* Address */}
+            <div className="space-y-2">
+              <h4 className="font-semibold text-wizfore-text-primary">주소</h4>
+              <div className="flex items-start justify-center space-x-2">
+                <MapPin size={16} className="text-wizfore-coral-secondary flex-shrink-0 mt-0.5" />
+                <p className="text-sm text-wizfore-text-secondary leading-relaxed max-w-xs break-words">
+                  {contact.address}
+                </p>
               </div>
             </div>
-          </div>
 
-          {/* Contact Form - 마인드스토리 스타일 */}
-          <div>
-            <h3 className="text-lg font-bold mb-4 text-wizfore-text-brand">Contact Us</h3>
-            <form className="space-y-4">
-              <div>
-                <input
-                  type="text"
-                  placeholder="이름"
-                  className="w-full px-4 py-2 rounded-lg bg-gray-50 border border-gray-300 text-wizfore-text-primary placeholder-gray-500 focus:border-wizfore-warm-brown focus:outline-none transition-colors"
-                />
+            {/* Contact Info */}
+            <div className="space-y-2">
+              <h4 className="font-semibold text-wizfore-text-primary">대표번호</h4>
+              <div className="flex items-center justify-center space-x-2">
+                <Phone size={16} className="text-wizfore-coral-secondary" />
+                <span className="text-lg font-bold text-wizfore-coral-primary">
+                  {contact.phone}
+                </span>
               </div>
-              
-              <div>
-                <input
-                  type="tel"
-                  placeholder="연락처"
-                  className="w-full px-4 py-2 rounded-lg bg-gray-50 border border-gray-300 text-wizfore-text-primary placeholder-gray-500 focus:border-wizfore-warm-brown focus:outline-none transition-colors"
-                />
+            </div>
+
+            {/* Business Hours */}
+            <div className="space-y-2">
+              <h4 className="font-semibold text-wizfore-text-primary">진료시간</h4>
+              <div className="space-y-1 text-sm text-wizfore-text-secondary">
+                <div className="flex items-center justify-center space-x-2">
+                  <Clock size={14} className="text-wizfore-coral-secondary" />
+                  <span>평일: {contact.operatingHours.weekday}</span>
+                </div>
+                <div className="flex items-center justify-center space-x-2">
+                  <Clock size={14} className="text-wizfore-coral-secondary" />
+                  <span>주말/공휴일: {contact.operatingHours.weekend}</span>
+                </div>
+                <p className="text-xs text-red-500 mt-2">
+                  토, 일, 공휴일 일요일 휴진
+                </p>
               </div>
-              
-              <div>
-                <input
-                  type="text"
-                  placeholder="연령대"
-                  className="w-full px-4 py-2 rounded-lg bg-gray-50 border border-gray-300 text-wizfore-text-primary placeholder-gray-500 focus:border-wizfore-warm-brown focus:outline-none transition-colors"
-                />
-              </div>
-              
-              <div>
-                <select className="w-full px-4 py-2 rounded-lg bg-gray-50 border border-gray-300 text-wizfore-text-primary focus:border-wizfore-warm-brown focus:outline-none transition-colors">
-                  <option value="">통화가능시간 선택▼</option>
-                  <option value="now">지금바로</option>
-                  <option value="10">10시</option>
-                  <option value="10:30">10시30분</option>
-                  <option value="11">11시</option>
-                  <option value="11:30">11시30분</option>
-                  <option value="12">12시</option>
-                  <option value="12:30">12시30분</option>
-                  <option value="13">13시</option>
-                  <option value="13:30">13시30분</option>
-                  <option value="14">14시</option>
-                  <option value="14:30">14시30분</option>
-                  <option value="15">15시</option>
-                  <option value="15:30">15시30분</option>
-                  <option value="16">16시</option>
-                  <option value="16:30">16시30분</option>
-                  <option value="17">17시</option>
-                  <option value="17:30">17시30분</option>
-                  <option value="18">18시</option>
-                  <option value="18:30">18시30분</option>
-                  <option value="19">19시</option>
-                  <option value="19:30">19시30분</option>
-                  <option value="20">20시</option>
-                </select>
-              </div>
-              
-              <button
-                type="submit"
-                className="w-full bg-wizfore-warm-brown text-white py-3 rounded-lg font-semibold hover:bg-wizfore-medium-brown transition-colors"
-              >
-                상담 신청하기
-              </button>
-            </form>
+            </div>
           </div>
         </div>
 
-        {/* Bottom Section - 마인드스토리 스타일 */}
-        <div className="border-t border-gray-200 mt-8 pt-6">
-          <div className="text-center space-y-2">
+        {/* Business Information Section */}
+        <div className="mt-40 text-center">
+          <div className="text-xs text-wizfore-text-light space-x-4">
+            <span>사업자등록번호: {contact.businessNumber}</span>
+            <span>|</span>
+            <span>계좌정보: {contact.accountInfo}</span>
+            <span>|</span>
+            <div className="inline-flex items-center space-x-1">
+              <Mail size={12} />
+              <span>{contact.email}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Section */}
+        <div className="pt-2">
+          <div className="text-center">
             <p className="text-sm text-wizfore-text-light">
-              © COPYRIGHT {currentYear} WIZFORE. ALL RIGHTS RESERVED.
-            </p>
-            <p className="text-lg font-semibold text-wizfore-text-brand">
-              예약상담 문의전화 051-123-4567, 010-1234-5678
+              © {currentYear} {defaultSiteData.siteInfo.name}. All rights reserved.
             </p>
           </div>
         </div>
