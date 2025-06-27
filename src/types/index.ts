@@ -378,6 +378,9 @@ export interface ContactInfo {
   }
   parking: string
   transportation: TransportationInfo[]
+  businessNumber: string
+  accountInfo: string
+  mapUrl: string
 }
 
 export interface MainService {

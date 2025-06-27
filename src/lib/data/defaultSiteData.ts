@@ -46,6 +46,9 @@ export const defaultSiteData: DefaultSiteData = {
         weekend: "09:00 ~ 18:00"
       },
       parking: "센터 입구 도로공용주차장 및 홈플러스 주차장 이용",
+      businessNumber: "123-45-67890",
+      accountInfo: "농협 123-456-789012 위즈포레사회서비스센터",
+      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.848873729402!2d128.98987061177746!3d35.18531905694215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3568ea9ea90ac5a9%3A0x170fb73b2e0fe64c!2z67aA7IKw6rSR7Jet7IucIOyCrOyDgeq1rCDrqqjrnbzroZwxMTDrsojquLggMjU!5e0!3m2!1sko!2skr!4v1751037173300!5m2!1sko!2skr",
       transportation: [
         {
           type: "지하철",
