@@ -8,14 +8,14 @@ import {
 } from 'firebase/firestore';
 import {   enableIndexedDbPersistence } from 'firebase/firestore';
 
-const {
-  NEXT_PUBLIC_FIREBASE_API_KEY,
-  NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  NEXT_PUBLIC_FIREBASE_APP_ID
-} = process.env;
+export const firebaseConfig = {
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN! || "wizfore-demo.firebaseapp.com",
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID! || "wizfore-demo",
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET!  || "wizfore-demo.firebasestorage.app",
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID! || "12717939021",
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID! || "1:12717939021:web:261ce55355dd0cfdddff04"
+};
 
 // const firebaseConfig = {
   
@@ -28,16 +28,6 @@ const {
 
 // };
 
-const firebaseConfig = {
-  
-  apiKey: NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "wizfore-demo.firebaseapp.com",
-  projectId: NEXT_PUBLIC_FIREBASE_PROJECT_ID || "wizfore-demo",
-  storageBucket: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || "wizfore-demo.firebasestorage.app",
-  messagingSenderId: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "12717939021",
-  appId: NEXT_PUBLIC_FIREBASE_APP_ID || "1:12717939021:web:261ce55355dd0cfdddff04"
-
-};
 
 // Initialize Firebase
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];
