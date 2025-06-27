@@ -185,7 +185,6 @@ export interface HeroSlide {
   categoryText: string
   categoryLink: string
   backgroundImage: string
-  backgroundColor: string
   order: number
   enabled: boolean
 }
@@ -287,6 +286,7 @@ export interface DirectorInfo {
   committees: string[]
   certifications: string[]
   imageUrl?: string
+  heroImageUrl?: string
   aboutMessage?: {
     title: string
     messages: string[]

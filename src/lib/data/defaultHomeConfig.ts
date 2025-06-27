@@ -12,7 +12,6 @@ export const defaultHomeConfig: HomeConfig = {
         categoryText: '전문가 소개 보기',
         categoryLink: '/team',
         backgroundImage: '',
-        backgroundColor: 'from-amber-100 via-orange-50 to-yellow-50',
         order: 1,
         enabled: true
       },
@@ -23,7 +22,6 @@ export const defaultHomeConfig: HomeConfig = {
         categoryText: '센터 소개 보기',
         categoryLink: '/about',
         backgroundImage: '',
-        backgroundColor: 'from-blue-50 via-sky-50 to-cyan-50',
         order: 2,
         enabled: true
       },
@@ -34,7 +32,6 @@ export const defaultHomeConfig: HomeConfig = {
         categoryText: '프로그램 보기',
         categoryLink: '/programs',
         backgroundImage: '',
-        backgroundColor: 'from-green-50 via-emerald-50 to-teal-50',
         order: 3,
         enabled: true
       }
