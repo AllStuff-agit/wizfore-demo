@@ -99,12 +99,12 @@ const Header = () => {
           </button>
         </div>
 
-        {/* 데스크톱 서브메뉴 드롭다운 - 별도 위치 */}
+        {/* 데스크톱 서브메뉴 드롭다운 - 오버레이 형태 */}
         <div 
-          className={`hidden md:block bg-white border-gray-200 transition-all duration-300 overflow-hidden ${
+          className={`hidden md:block absolute top-full left-0 right-0 z-40 bg-white shadow-lg border-gray-200 transition-all duration-300 overflow-hidden ${
             isNavExpanded 
-              ? 'max-h-64 opacity-100 py-6' 
-              : 'max-h-0 opacity-0 py-0'
+              ? 'max-h-64 opacity-100 pt-3 pb-6' 
+              : 'max-h-0 opacity-0 pt-0 pb-0'
           }`}
           onMouseEnter={() => setIsNavExpanded(true)}
           onMouseLeave={() => setIsNavExpanded(false)}

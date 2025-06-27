@@ -115,12 +115,12 @@ const CategoryCards = () => {
   }
 
   return (
-    <section className="py-24 bg-mindstory-gray-light">
+    <section className="py-24 md:py-32 lg:py-40">
       <div className="container-custom mx-auto px-4">
         {/* 섹션 제목 */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-wizfore-coral-primary">
-            위즈포레 프로그램
+          <h2 className="text-3xl md:text-4xl font-bold">
+            <span className="text-wizfore-text-primary">위즈포레</span> <span className="text-wizfore-coral-primary">프로그램</span>
           </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">

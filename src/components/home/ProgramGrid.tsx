@@ -215,7 +215,7 @@ const ProgramGrid = () => {
   }
 
   return (
-    <section className="py-24 bg-wizfore-light-beige">
+    <section className="py-24 md:py-32 lg:py-40 bg-wizfore-light-beige">
       <div className="container-custom mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

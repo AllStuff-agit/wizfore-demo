@@ -58,7 +58,7 @@ const HeroSection: React.FC = () => {
 
   if (loading || slides.length === 0) {
     return (
-      <section className="relative h-[60vh] md:h-[70vh] lg:h-[calc(100vh-5rem)] overflow-hidden px-4 md:px-8 lg:px-16 pb-16">
+      <section className="relative h-[60vh] md:h-[70vh] lg:h-[calc(100vh-5rem)] overflow-hidden px-4 md:px-8 lg:px-16 pb-24 md:pb-32 lg:pb-40">
         <div 
           className="relative h-full w-full bg-wizfore-light-beige rounded-[3rem]"
         >
@@ -81,7 +81,7 @@ const HeroSection: React.FC = () => {
   const backgroundImageUrl = currentSlideData?.backgroundImage || '/images/hero/defaultHero.jpg'
 
   return (
-    <section className="relative h-[60vh] md:h-[70vh] lg:h-[calc(100vh-5rem)] overflow-hidden px-4 md:px-8 lg:px-16 pb-16">
+    <section className="relative h-[60vh] md:h-[70vh] lg:h-[calc(100vh-5rem)] overflow-hidden px-4 md:px-8 lg:px-16 pb-24 md:pb-32 lg:pb-40">
       <div className="absolute inset-x-4 md:inset-x-8 lg:inset-x-16 top-0 bottom-4 md:bottom-8 lg:bottom-16 rounded-[3rem] overflow-hidden border-2 border-white">
             <div 
               className="absolute inset-0 bg-cover bg-center transition-all duration-700 ease-in-out"
@@ -89,7 +89,6 @@ const HeroSection: React.FC = () => {
                 backgroundImage: `url('${backgroundImageUrl}')`
               }}
             />
-            <div className={`absolute inset-0 bg-gradient-to-br ${currentSlideData.backgroundColor} opacity-20`} />
             <div className="relative z-10 h-full">
               
               {/* 메인 콘텐츠 텍스트 - 카테고리 박스 위 */}
