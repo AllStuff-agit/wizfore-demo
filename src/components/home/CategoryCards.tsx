@@ -97,8 +97,42 @@ const CategoryCards = () => {
 
   if (loading) {
     return (
-      <section className="py-16 bg-mindstory-gray-light">
-        <div className="container-custom mx-auto px-4">
+      <section className="relative overflow-hidden pt-48 pb-56 md:pt-64 md:pb-72">
+        {/* 메디모아 스타일 조약돌 모양 SVG 배경 (로딩 상태) */}
+        <div className="absolute inset-0">
+          <svg 
+            className="absolute inset-0 w-full h-full" 
+            preserveAspectRatio="none" 
+            viewBox="0 0 100 100"
+          >
+            <defs>
+              <linearGradient id="stoneGradientLoading" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="rgb(255, 224, 224)" />
+                <stop offset="40%" stopColor="rgb(248, 215, 218)" />
+                <stop offset="80%" stopColor="rgb(245, 198, 203)" />
+                <stop offset="100%" stopColor="rgb(240, 160, 168)" />
+              </linearGradient>
+            </defs>
+            <path 
+              d="M -15,16
+                  C 0,8 12,0 25,1.5
+                  C 25,1.5 30,2 35,3 
+                  C 40,4 50,8 60,10 
+                  C 70,11 80,10 90,9 
+                  C 100,8 110,8 115,8 
+                  C 118,18 115,35 112,50 
+                  C 115,65 108,80 95,85 
+                  C 80,92 60,95 35,92 
+                  C 15,89 -8,78 -12,65 
+                  C -15,52 -12,35 -10,20 
+                  C -15,15 -12,16 -15,16 Z"  
+              fill="url(#stoneGradientLoading)" 
+              opacity="0.75"
+            />
+          </svg>
+        </div>
+        
+        <div className="w-full relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {[...Array(4)].map((_, index) => (
               <div key={index} className="relative h-64 w-full shadow-md overflow-hidden rounded-2xl bg-gray-300 animate-pulse">
@@ -115,8 +149,42 @@ const CategoryCards = () => {
   }
 
   return (
-    <section className="py-24 md:py-32 lg:py-40">
-      <div className="container-custom mx-auto px-4">
+    <section className="relative overflow-hidden pt-48 pb-56 md:pt-64 md:pb-72">
+      {/* 메디모아 스타일 조약돌 모양 SVG 배경 */}
+      <div className="absolute inset-0">
+        <svg 
+          className="absolute inset-0 w-full h-full" 
+          preserveAspectRatio="none" 
+          viewBox="0 0 100 100"
+        >
+          <defs>
+            <linearGradient id="stoneGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="rgb(255, 224, 224)" />
+              <stop offset="40%" stopColor="rgb(248, 215, 218)" />
+              <stop offset="80%" stopColor="rgb(245, 198, 203)" />
+              <stop offset="100%" stopColor="rgb(240, 160, 168)" />
+            </linearGradient>
+          </defs>
+          <path 
+            d="M -15,16 
+               C 0,8 12,0 25,1.5
+               C 25,1.5 30,2 35,3 
+               C 40,4 50,8 60,10 
+               C 70,11 80,10 90,9 
+               C 100,8 110,8 115,8 
+               C 118,18 115,35 112,50 
+               C 115,65 108,80 95,85 
+               C 80,92 60,95 35,92 
+               C 15,89 -8,78 -12,65 
+               C -15,52 -12,35 -10,20 
+               C -15,15 -12,16 -15,16 Z" 
+            fill="url(#stoneGradient)" 
+            opacity="0.75"
+          />
+        </svg>
+      </div>
+      
+      <div className="w-full relative z-10">
         {/* 섹션 제목 */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold">
