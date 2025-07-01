@@ -179,7 +179,6 @@ export const defaultSiteData: DefaultSiteData = {
       },
       list: [
         {
-          id: "advisor-1",
           name: "윤치연",
           position: "교수(사)한국심리협회)",
           education: "특수교육학 박사",
@@ -190,7 +189,6 @@ export const defaultSiteData: DefaultSiteData = {
           order: 1
         },
         {
-          id: "advisor-2",
           name: "송영화",
           position: "원장(사회복지법세림복지재단)",
           education: "사회복지학 박사",
@@ -201,7 +199,6 @@ export const defaultSiteData: DefaultSiteData = {
           order: 2
         },
         {
-          id: "advisor-3",
           name: "허명진",
           position: "교수(부산가톨릭대학교)",
           education: "특수교육학 박사",
@@ -211,7 +208,6 @@ export const defaultSiteData: DefaultSiteData = {
           order: 3
         },
         {
-          id: "advisor-4",
           name: "정원철",
           position: "교수(신라대학교)",
           education: "사회복지학 박사",
@@ -222,7 +218,6 @@ export const defaultSiteData: DefaultSiteData = {
           order: 4
         },
         {
-          id: "advisor-5",
           name: "박소현",
           position: "약사(한마음약국)",
           education: "부산대학교 약학과 졸업",
@@ -232,7 +227,6 @@ export const defaultSiteData: DefaultSiteData = {
           order: 5
         },
         {
-          id: "advisor-6",
           name: "배제현",
           position: "교수(창원대학교)",
           education: "교육학 박사",
@@ -243,7 +237,6 @@ export const defaultSiteData: DefaultSiteData = {
           order: 6
         },
         {
-          id: "advisor-7",
           name: "공광석",
           position: "경감(금정경찰서)",
           education: "동의대 경찰행정학과 박사 수료",
@@ -254,7 +247,6 @@ export const defaultSiteData: DefaultSiteData = {
           order: 7
         },
         {
-          id: "advisor-8",
           name: "박정숙",
           position: "겸임교수(우석대학교)",
           education: "특수교육학 박사",
@@ -289,56 +281,48 @@ export const defaultSiteData: DefaultSiteData = {
       imageUrl: "",
       programs: [
         {
-          id: "speech-therapy",
           title: "언어치료",
           target: "언어발달장애, 조음음운장애, 유창성장애, 학령기 언어학습장애",
           goal: "의사소통 능력 향상 및 언어 발달 촉진",
           order: 1
         },
         {
-          id: "cognitive-therapy",
           title: "인지치료",
           goal: "인지기능 강화 및 학습능력 개발",
           content: ["기초인지프로그램", "기초학습프로그램", "학습능력향상프로그램"],
           order: 2
         },
         {
-          id: "play-therapy",
           title: "놀이치료",
           goal: "정서적 안정과 사회성 발달",
           types: ["발달놀이치료", "정서놀이치료", "사회성놀이치료", "모래놀이치료"],
           order: 3
         },
         {
-          id: "art-therapy",
           title: "미술치료",
           goal: "창의성 개발 및 심리적 치유",
           types: ["발달미술치료", "심리미술치료", "원예미술치료", "퍼포먼스미술치료"],
           order: 4
         },
         {
-          id: "music-therapy",
           title: "음악치료",
           goal: "감정 표현 및 사회적 상호작용 향상",
           types: ["발달음악치료", "심리음악치료", "동작치료", "사회성 집단치료"],
           order: 5
         },
         {
-          id: "sensory-integration",
           title: "감각통합치료",
           goal: "감각 처리 능력 향상 및 일상생활 기능 증진",
           content: ["전정각 발달치료", "고유각 발달치료", "촉각 발달치료"],
           order: 6
         },
         {
-          id: "special-physical",
           title: "특수체육(운동재활)",
           goal: "신체기능 향상 및 사회성 발달",
           content: ["맞춤형 탬포 트레이닝", "근력운동", "사회성 통합 스포츠"],
           order: 7
         },
         {
-          id: "psychomotor-therapy",
           title: "심리운동치료",
           goal: "전인적 발달 및 자아개념 형성",
           content: ["물질경험 프로그램", "신체경험 프로그램", "사회경험 프로그램"],
@@ -355,21 +339,18 @@ export const defaultSiteData: DefaultSiteData = {
       imageUrl: "",
       programs: [
         {
-          id: "developmental-assessment",
           title: "발달/심리검사",
           goal: "정확한 진단 및 개별화된 치료계획 수립",
           types: ["발달검사", "지능검사", "종합심리검사(풀뱃터리)", "부모심리검사"],
           order: 1
         },
         {
-          id: "social-group",
           title: "사회성 그룹치료",
           goal: "또래 관계 형성 및 사회적 기술 습득",
           content: ["사회성 & 사회적 기술훈련", "사회경험 심리운동프로그램", "사회정서 원예치료프로그램"],
           order: 2
         },
         {
-          id: "parent-counseling",
           title: "부모상담/부모코칭",
           goal: "가족 기능 강화 및 양육 역량 향상",
           content: ["개인상담/부부상담", "자녀양육코칭", "가족문화상담"],
@@ -380,20 +361,18 @@ export const defaultSiteData: DefaultSiteData = {
     },
 
     {
-      id: "afterschool-program",
+      id: "afterschool",
       title: "방과후 프로그램",
       description: "학령기 아동의 발달과 사회성 향상을 위한 집단 프로그램입니다.",
       imageUrl: "",
       programs: [
         {
-          id: "saturday-social",
           title: "토요방과후 (사회성교실)",
           goal: "사회성 발달 및 동료와의 상호작용 향상",
           content: ["사회지각/인지", "의사소통", "사회감성(배려,질서 등)", "사회적기술훈련", "문화예술체험"],
           order: 1
         },
         {
-          id: "weekday-learning",
           title: "평일방과후 (기초학습교실)",
           goal: "기초학습능력 배양 및 진로 탐색",
           content: ["생활/학습 기초인지", "진로적성/직업체험"],
@@ -409,14 +388,12 @@ export const defaultSiteData: DefaultSiteData = {
       description: "다양한 스포츠 활동을 통한 신체 기능 향상과 사회성 발달을 도모합니다.",
       programs: [
         {
-          id: "new-sports",
           title: "장애인 뉴스포츠",
           goal: "다양한 스포츠 경험 및 신체활동 증진",
           content: ["플라잉디스크", "츄크볼", "핸들러", "플로어볼", "라켓룬", "접시콘"],
           order: 1
         },
         {
-          id: "sports-rehabilitation",
           title: "특수체육 운동재활",
           goal: "신체기능 향상 및 사회성 발달",
           content: ["맞춤형 탬포 트레이닝", "근력운동", "사회성 통합 스포츠"],
@@ -427,48 +404,42 @@ export const defaultSiteData: DefaultSiteData = {
     },
 
     {
-      id: "adult-day-program",
+      id: "adult-day",
       title: "성인 주간활동 프로그램",
       description: "성인 발달장애인의 자립생활과 사회통합을 위한 종합적인 서비스를 제공합니다.",
       imageUrl: "",
       programs: [
         {
-          id: "daily-living",
           title: "일상생활기술훈련",
           goal: "독립적인 일상생활 능력 향상",
           content: ["신변자립생활", "자기관리생활", "청결/위생/안전/이동생활"],
           order: 1
         },
         {
-          id: "social-adaptation",
           title: "사회적응기술훈련",
           goal: "사회구성원으로서의 적응 능력 배양",
           content: ["사회정서생활", "공동체적응생활", "공감/협동/배려/질서 사회적기술"],
           order: 2
         },
         {
-          id: "healing-program",
           title: "쉼(힐링)프로그램",
           goal: "정서적 안정과 스트레스 해소",
           content: ["숲체험", "숲치유", "원예치료활동", "음악/영화/댄스 문화예술교육"],
           order: 3
         },
         {
-          id: "leisure-program",
           title: "재미(여가)프로그램",
           goal: "여가 활용 능력 및 삶의 질 향상",
           content: ["음악/미술/원예/레크레이션 여가활동", "보드게임/컴퓨터/요리/운동 취미활동"],
           order: 4
         },
         {
-          id: "community-training",
           title: "지역사회활용훈련",
           goal: "지역사회 통합 및 사회참여 확대",
           content: ["공공/편의시설/문화시설 이용", "바리스타/난타/체육시설 이용"],
           order: 5
         },
         {
-          id: "health-management",
           title: "건강생활관리",
           goal: "신체적·정신적 건강 증진",
           content: ["맞춤형 피트니스 신체운동활동", "뇌파프로그램 정신건강활동"],
