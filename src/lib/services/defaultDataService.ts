@@ -13,7 +13,6 @@ import { defaultSiteData } from '@/lib/data/defaultSiteData'
 import type { DefaultSiteData } from '@/types'
 
 type ProgramType = {
-  id: string
   title: string
   goal?: string
   order?: number
@@ -429,7 +428,6 @@ export async function getAllProgramsFlattened() {
   try {
     const categories = await getPrograms()
     const allPrograms: Array<{
-      id: string
       title: string
       description: string
       categoryTitle: string
@@ -441,7 +439,6 @@ export async function getAllProgramsFlattened() {
       if (category.programs && category.programs.length > 0) {
         category.programs.forEach((program: ProgramType) => {
           allPrograms.push({
-            id: program.id,
             title: program.title,
             description: program.goal || category.description,
             categoryTitle: category.title,
