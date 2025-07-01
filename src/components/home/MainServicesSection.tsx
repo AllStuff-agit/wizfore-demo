@@ -8,29 +8,29 @@ import { db } from '@/lib/firebase'
 import type { MainService } from '@/types'
 
 const serviceIcons = {
-  'developmental-intervention': Building2,
-  'family-support': Users,
-  'disability-day-afterschool': Heart,
-  'sports-voucher': Calendar
+  1: Building2,
+  2: Users,
+  3: Heart,
+  4: Calendar
 }
 
 const serviceColors = {
-  'developmental-intervention': {
+  1: {
     bgColor: 'bg-blue-50',
     borderColor: 'border-blue-200',
     iconColor: 'text-blue-600'
   },
-  'family-support': {
+  2: {
     bgColor: 'bg-green-50',
     borderColor: 'border-green-200',
     iconColor: 'text-green-600'
   },
-  'disability-day-afterschool': {
+  3: {
     bgColor: 'bg-purple-50',
     borderColor: 'border-purple-200',
     iconColor: 'text-purple-600'
   },
-  'sports-voucher': {
+  4: {
     bgColor: 'bg-orange-50',
     borderColor: 'border-orange-200',
     iconColor: 'text-orange-600'
@@ -110,12 +110,12 @@ const MainServicesSection = () => {
           {mainServices
             .sort((a, b) => a.order - b.order)
             .map((service, index) => {
-              const IconComponent = serviceIcons[service.id as keyof typeof serviceIcons] || Building2
-              const colors = serviceColors[service.id as keyof typeof serviceColors] || serviceColors['developmental-intervention']
+              const IconComponent = serviceIcons[service.order as keyof typeof serviceIcons] || Building2
+              const colors = serviceColors[service.order as keyof typeof serviceColors] || serviceColors[1]
               
               return (
                 <motion.div
-                  key={service.id}
+                  key={service.title}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
