@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 import { MapPin, Phone, Clock, Mail } from 'lucide-react'
 import { defaultSiteData } from '@/lib/data/defaultSiteData'
 
@@ -11,14 +12,19 @@ const Footer = () => {
   return (
     <footer className="bg-white text-wizfore-text-primary">
       <div className="max-w-6xl mx-auto px-2 pt-16 pb-8">
-        <div className="flex flex-col lg:flex-row">
-          
-          {/* Left Side - Map */}
+        <motion.div 
+          className="flex flex-col lg:flex-row gap-8"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          {/* 좌측: 지도 */}
           <div className="lg:w-1/2 bg-gray-100 rounded-lg overflow-hidden">
             <iframe
               src={contact.mapUrl}
               width="100%"
-              height="400"
+              height="500"
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
@@ -27,16 +33,16 @@ const Footer = () => {
             />
           </div>
 
-          {/* Right Side - Company Info (Center Aligned) */}
-          <div className="lg:w-1/2 space-y-6 text-center lg:pl-0">
-            {/* Company Name */}
+          {/* 우측: 센터 정보 */}
+          <div className="lg:w-1/2 space-y-6 text-center lg:pl-8">
+            {/* 센터명 */}
             <div>
               <h3 className="text-3xl font-bold text-wizfore-text-primary mb-2">
                 {defaultSiteData.siteInfo.name}
               </h3>
             </div>
 
-            {/* Address */}
+            {/* 주소 */}
             <div className="space-y-2">
               <h4 className="font-semibold text-wizfore-text-primary">주&nbsp;&nbsp;&nbsp;소</h4>
               <div className="flex items-start justify-center space-x-2">
@@ -47,7 +53,7 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* Contact Info */}
+            {/* 연락처 */}
             <div className="space-y-2">
               <h4 className="font-semibold text-wizfore-text-primary">대&nbsp;표&nbsp;번&nbsp;호</h4>
               <div className="flex items-center justify-center space-x-2">
@@ -58,7 +64,29 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* Business Hours */}
+            {/* 팩스 */}
+            <div className="space-y-2">
+              <h4 className="font-semibold text-wizfore-text-primary">팩&nbsp;&nbsp;&nbsp;스</h4>
+              <div className="flex items-center justify-center space-x-2">
+                <Phone size={16} className="text-wizfore-coral-secondary" />
+                <span className="text-sm text-wizfore-text-secondary">
+                  {contact.fax}
+                </span>
+              </div>
+            </div>
+
+            {/* 이메일 */}
+            <div className="space-y-2">
+              <h4 className="font-semibold text-wizfore-text-primary">이&nbsp;메&nbsp;일</h4>
+              <div className="flex items-center justify-center space-x-2">
+                <Mail size={16} className="text-wizfore-coral-secondary" />
+                <span className="text-sm text-wizfore-text-secondary">
+                  {contact.email}
+                </span>
+              </div>
+            </div>
+
+            {/* 운영시간 */}
             <div className="space-y-2">
               <h4 className="font-semibold text-wizfore-text-primary">운&nbsp;영&nbsp;시&nbsp;간</h4>
               <div className="space-y-1 text-sm text-wizfore-text-secondary">
@@ -70,13 +98,10 @@ const Footer = () => {
                   <Clock size={14} className="text-wizfore-coral-secondary" />
                   <span>주말/공휴일: {contact.operatingHours.weekend}</span>
                 </div>
-                <p className="text-xs text-red-500 mt-2">
-                  토, 일, 공휴일 일요일 휴업
-                </p>
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Business Information Section */}
         <div className="mt-40 text-center">
