@@ -9,125 +9,138 @@ interface DirectorProfileSectionProps {
 
 const DirectorProfileSection: React.FC<DirectorProfileSectionProps> = ({ director }) => {
   return (
-    <section className="relative py-24 bg-white overflow-hidden">
+    <section className="relative py-24 bg-gray-50 overflow-hidden">
       <div className="container-custom mx-auto px-4">
-        <div className="grid lg:grid-cols-5 gap-16 items-start max-w-7xl mx-auto">
-          {/* 프로필 이미지 영역 (40%) */}
-          <motion.div
-            className="lg:col-span-2"
-            initial={{ opacity: 0, x: -100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            viewport={{ once: true }}
-          >
-            <div className="relative">
-              {/* 장식적 프레임 */}
-              <div className="absolute -inset-8 bg-gradient-to-br from-wizfore-coral-primary/20 to-wizfore-soft-pink/20 rounded-3xl transform rotate-3" />
-              <div className="absolute -inset-4 bg-white rounded-2xl shadow-2xl transform -rotate-1" />
-              
-              {/* 프로필 이미지 */}
-              <div className="relative w-full aspect-square bg-wizfore-light-beige rounded-xl overflow-hidden">
-                <img 
-                  src={director.imageUrl || '/images/director/defaultDirector.png'} 
-                  alt={`${director.name} 센터장`}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
+        {/* 통합된 큰 박스 */}
+        <motion.div
+          className="bg-white rounded-2xl shadow-lg p-8 lg:p-12 max-w-7xl mx-auto"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          {/* 전체 구조: 위/아래로 분할 */}
+          <div className="flex flex-col space-y-8">
             
-            {/* 이름과 직책 */}
-            <div className="mt-8 text-center">
-              <h3 className="text-3xl md:text-4xl font-black text-wizfore-text-primary mb-2 leading-tight">
-                {director.name}
-              </h3>
-              <p className="text-xl md:text-2xl text-wizfore-coral-primary font-bold">
-                {director.position}
-              </p>
-            </div>
-          </motion.div>
+            {/* 위 영역: 프로필 사진 + 학력/경력/자격증 */}
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+              
+              {/* 위 왼쪽: 센터장 사진 */}
+              <motion.div
+                className="flex flex-col items-center justify-center h-full"
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                viewport={{ once: true }}
+              >
+                {/* 프로필 이미지 */}
+                <div className="relative w-80 h-80 lg:w-96 lg:h-96 mx-auto mb-4">
+                  <div className="absolute inset-0 bg-gradient-to-br from-wizfore-coral-primary/20 to-wizfore-soft-pink/20 rounded-full" />
+                  <div className="relative w-full h-full bg-wizfore-light-beige rounded-full overflow-hidden border-4 border-white shadow-lg">
+                    <img 
+                      src={director.imageUrl || '/images/director/defaultDirector.png'} 
+                      alt={`${director.name} 센터장`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+                
+                {/* 이름과 직책 */}
+                <h3 className="text-3xl lg:text-4xl font-black text-wizfore-text-primary mb-3">
+                  {director.name} 원장
+                </h3>
+                <p className="text-xl lg:text-2xl text-wizfore-coral-primary font-bold mb-2">
+                  {director.position}
+                </p>
+              </motion.div>
 
-          {/* 요약 정보 영역 (60%) */}
-          <motion.div
-            className="lg:col-span-3 space-y-12"
-            initial={{ opacity: 0, x: 100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            {/* 학력 */}
-            <div>
-              <h4 className="text-2xl font-bold text-wizfore-text-primary mb-6 border-b-2 border-wizfore-coral-primary pb-2">
-                학력
-              </h4>
-              <div className="space-y-3">
-                {director.education.map((edu, index) => (
-                  <motion.div
-                    key={index}
-                    className="p-4 bg-gray-50 rounded-lg hover:bg-wizfore-light-beige/30 transition-colors duration-300"
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                  >
-                    <p className="text-wizfore-text-primary font-medium">{edu}</p>
-                  </motion.div>
-                ))}
-              </div>
+              {/* 위 오른쪽: 학력, 경력, 자격증 */}
+              <motion.div
+                className="space-y-6"
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                {/* 학력 */}
+                <div>
+                  <h4 className="text-xl font-bold text-wizfore-text-primary mb-4 pb-2 border-b border-wizfore-coral-primary/30">
+                    학력
+                  </h4>
+                  <div className="space-y-2">
+                    {director.education.map((edu, index) => (
+                      <div key={index} className="flex items-center">
+                        <div className="w-1 h-1 bg-wizfore-coral-primary rounded-full mr-3 flex-shrink-0" />
+                        <p className="text-base text-wizfore-text-primary leading-relaxed">{edu}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 경력 */}
+                <div>
+                  <h4 className="text-xl font-bold text-wizfore-text-primary mb-4 pb-2 border-b border-wizfore-coral-primary/30">
+                    경력
+                  </h4>
+                  <div className="space-y-2">
+                    {director.career.map((career, index) => (
+                      <div key={index} className="flex items-center">
+                        <div className="w-1 h-1 bg-wizfore-coral-primary rounded-full mr-3 flex-shrink-0" />
+                        <p className="text-base text-wizfore-text-primary leading-relaxed">{career}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 자격증 */}
+                <div>
+                  <h4 className="text-xl font-bold text-wizfore-text-primary mb-4 pb-2 border-b border-wizfore-coral-primary/30">
+                    자격증
+                  </h4>
+                  <div className="space-y-2">
+                    {director.certifications.map((cert, index) => (
+                      <div key={index} className="flex items-center">
+                        <div className="w-1 h-1 bg-wizfore-coral-primary rounded-full mr-3 flex-shrink-0" />
+                        <p className="text-base text-wizfore-text-primary leading-relaxed">{cert}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
             </div>
 
-            {/* 주요 경력 */}
-            <div>
-              <h4 className="text-2xl font-bold text-wizfore-text-primary mb-6 border-b-2 border-wizfore-coral-primary pb-2">
-                주요 경력
-              </h4>
-              <div className="space-y-3">
-                {director.career.map((career, index) => (
-                  <motion.div
-                    key={index}
-                    className="p-4 bg-gray-50 rounded-lg hover:bg-wizfore-light-beige/30 transition-colors duration-300"
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                  >
-                    <p className="text-wizfore-text-primary font-medium">{career}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            {/* 위원회 활동 */}
-            <div>
-              <h4 className="text-2xl font-bold text-wizfore-text-primary mb-6 border-b-2 border-wizfore-coral-primary pb-2">
-                위원회 활동
-              </h4>
-              <div className="space-y-3">
-                {director.committees.map((committee, index) => (
-                  <motion.div
-                    key={index}
-                    className={`p-4 rounded-lg transition-colors duration-300 ${
-                      committee.includes('현)') 
-                        ? 'bg-wizfore-coral-primary/10 border border-wizfore-coral-primary/30' 
-                        : 'bg-gray-50 hover:bg-wizfore-light-beige/30'
-                    }`}
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                  >
-                    <p className={`font-medium ${
-                      committee.includes('현)') 
-                        ? 'text-wizfore-coral-primary' 
-                        : 'text-wizfore-text-primary'
-                    }`}>
-                      {committee}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        </div>
+            {/* 아래 영역: 위원회 활동 (전체 폭) */}
+            {director.committees.length > 0 && (
+              <motion.div
+                className="pt-6"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                viewport={{ once: true }}
+              >
+                <h4 className="text-xl font-bold text-wizfore-text-primary mb-6 pb-2 border-b border-wizfore-coral-primary/30">
+                  위원회 활동
+                </h4>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3">
+                  {director.committees.map((committee, index) => (
+                    <div key={index} className="flex items-center">
+                      <div className={`w-1 h-1 rounded-full mr-3 flex-shrink-0 ${
+                        committee.includes('현)') ? 'bg-red-500' : 'bg-wizfore-coral-primary'
+                      }`} />
+                      <p className={`text-base leading-relaxed ${
+                        committee.includes('현)') 
+                          ? 'text-red-600 font-medium' 
+                          : 'text-wizfore-text-primary'
+                      }`}>
+                        {committee}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </div>
+        </motion.div>
       </div>
     </section>
   )

@@ -7,7 +7,6 @@ import type { DirectorInfo } from '@/types'
 import DirectorHeroSection from '@/components/about/director/DirectorHeroSection'
 import DirectorMessageSection from '@/components/about/director/DirectorMessageSection'
 import DirectorProfileSection from '@/components/about/director/DirectorProfileSection'
-import DirectorCertificationsSection from '@/components/about/director/DirectorCertificationsSection'
 
 interface DirectorData {
   siteName: string
@@ -78,8 +77,6 @@ const DirectorPage = () => {
       {/* 프로필 및 요약 정보 섹션 */}
       <DirectorProfileSection director={director} />
       
-      {/* 전문 자격증 섹션 */}
-      <DirectorCertificationsSection director={director} />
     </div>
   )
 }
