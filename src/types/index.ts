@@ -379,7 +379,6 @@ export interface ContactInfo {
     weekday: string
     weekend: string
   }
-  parking: string
   transportation: TransportationInfo[]
   businessNumber: string
   accountInfo: string
