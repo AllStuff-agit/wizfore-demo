@@ -62,7 +62,6 @@ export const defaultSiteData: DefaultSiteData = {
     },
     mainServices: [
       {
-        id: "developmental-intervention",
         title: "발달중재서비스",
         description: "발달/심리검사, 언어/인지/미술/놀이/감각통합/심리운동/사회성 치료 서비스",
         details: [
@@ -73,21 +72,18 @@ export const defaultSiteData: DefaultSiteData = {
         order: 1
       },
       {
-        id: "family-support",
         title: "부모/가족지원서비스",
         description: "가족이음(학부모코칭)서비스",
         startYear: "2016",
         order: 2
       },
       {
-        id: "disability-day-afterschool",
         title: "발달장애인 주간활동 및 발달장애학생 방과후활동서비스",
         description: "발달장애인 평생교육프로그램(일상생활훈련/지역사회적응/문화예술체험 등)",
         startYear: "2020",
         order: 3
       },
       {
-        id: "sports-voucher",
         title: "문체부 장애인 스포츠이용권 서비스 제공기관",
         description: "장애인 스포츠 활동 지원 서비스",
         startYear: "2024",
@@ -451,321 +447,265 @@ export const defaultSiteData: DefaultSiteData = {
   ],
 
   team: [
-    // 치료·상담사 (4.1)
     {
-      id: "ma-jm",
-      name: "마*문",
-      category: "therapist",
-      specialization: ["감각통합", "심리운동"],
-      education: "특수교육 석사/사회복지 박사과정",
-      certifications: ["감각통합/심리운동/행동재활(국가)"],
+      id: "therapists",
+      title: "치료·상담사",
+      description: "전문 치료 및 상담 서비스를 제공하는 전문가들",
+      members: [
+        {
+          name: "마*문",
+          specialization: ["감각통합", "심리운동"],
+          education: "특수교육 석사/사회복지 박사과정",
+          certifications: ["감각통합/심리운동/행동재활(국가)"],
+          order: 1
+        },
+        {
+          name: "서*화",
+          specialization: ["놀이치료", "미술치료"],
+          education: "특수재활/미술치료학과 졸업",
+          certifications: ["놀이재활/미술재활사(국가)"],
+          order: 2
+        },
+        {
+          name: "심*연",
+          specialization: ["언어치료", "놀이치료"],
+          education: "언어치료/놀이치료학과 졸업, 언어치료 석사과정",
+          certifications: ["언어재활(1급)/놀이재활사(국가)"],
+          order: 3
+        },
+        {
+          name: "신*정",
+          specialization: ["언어치료"],
+          education: "언어치료 학사",
+          certifications: ["언어재활사(국가)"],
+          order: 4
+        },
+        {
+          name: "문*희",
+          specialization: ["미술치료", "부모상담"],
+          education: "상담심리 석사/상담심리 박사수료",
+          certifications: ["미술재활/심리상담전문가"],
+          order: 5
+        },
+        {
+          name: "한*영",
+          specialization: ["미술치료"],
+          education: "유아특수언어치료학과 졸업",
+          certifications: ["미술재활사/유아특수교사"],
+          order: 6
+        },
+        {
+          name: "정*정",
+          specialization: ["감각통합", "작업치료"],
+          education: "작업치료 학사/작업치료 석사과정",
+          certifications: ["감각재활사/작업치료사"],
+          order: 7
+        },
+        {
+          name: "하*솔",
+          specialization: ["감각통합", "작업치료"],
+          education: "작업치료 학사/작업치료 석사",
+          certifications: ["감각재활사/작업치료사"],
+          order: 8
+        },
+        {
+          name: "이*빈",
+          specialization: ["음악치료"],
+          education: "음악치료 석사 졸업",
+          certifications: ["음악재활사(국가)"],
+          order: 9
+        },
+        {
+          name: "박*혜",
+          specialization: ["미술치료"],
+          education: "미술치료 석사 졸업",
+          certifications: ["미술재활사/청소년상담사(국가)"],
+          order: 10
+        },
+        {
+          name: "강*진",
+          specialization: ["심리검사", "임상심리"],
+          education: "심리학 석사/상담학 박사과정",
+          certifications: ["임상심리사/인지치료사"],
+          order: 11
+        },
+        {
+          name: "박*호",
+          specialization: ["특수체육"],
+          education: "특수체육교육학과 졸업/심리운동학과",
+          certifications: ["특수체육교사/감각통합"],
+          order: 12
+        },
+        {
+          name: "주*희",
+          specialization: ["특수체육"],
+          education: "운동처방학과 졸업",
+          certifications: ["장애인스포츠지도사/감각통합"],
+          order: 13
+        },
+        {
+          name: "이*은",
+          specialization: ["언어치료"],
+          education: "언어치료학과 졸업",
+          certifications: ["언어재활사(국가)/미술치료사"],
+          order: 14
+        },
+        {
+          name: "박*현",
+          specialization: ["언어치료", "미술치료"],
+          education: "언어치료학과 졸업",
+          certifications: ["언어재활사(국가)/미술치료사"],
+          order: 15
+        },
+        {
+          name: "이*미",
+          specialization: ["음악치료"],
+          education: "음악치료 석사 졸업",
+          certifications: ["음악재활사(국가)"],
+          order: 16
+        },
+        {
+          name: "김*숙",
+          specialization: ["원예치료"],
+          education: "상담심리 석사 졸업",
+          certifications: ["재활심리사(국가)"],
+          order: 17
+        },
+        {
+          name: "정*미",
+          specialization: ["심리운동"],
+          education: "교육학과 졸업",
+          certifications: ["심리운동사"],
+          order: 18
+        },
+        {
+          name: "김*주",
+          specialization: ["특수체육"],
+          education: "특수체육교육학과 졸업",
+          certifications: ["특수체육교사/감각통합"],
+          order: 19
+        },
+        {
+          name: "김*림",
+          specialization: ["특수체육"],
+          education: "특수체육학과 졸업",
+          certifications: ["스포츠지도사/감각통합", "태권도 사범(4단)"],
+          order: 20
+        },
+        {
+          name: "지*채",
+          specialization: ["언어치료"],
+          education: "언어치료학과 졸업",
+          certifications: ["언어재활사(국가)"],
+          order: 21
+        },
+        {
+          name: "엄*웅",
+          specialization: ["감각통합", "작업치료"],
+          education: "작업치료학과 졸업",
+          certifications: ["감각재활사(국가)/작업치료사"],
+          order: 22
+        },
+        {
+          name: "이*훈",
+          specialization: ["놀이체육"],
+          education: "사회복지학과 졸업",
+          certifications: ["사회복지사(국가)", "놀이체육지도사"],
+          order: 23
+        },
+        {
+          name: "남*주",
+          specialization: ["감각통합", "작업치료"],
+          education: "작업치료 학사",
+          certifications: ["감각재활사(국가)/작업치료사"],
+          order: 24
+        },
+        {
+          name: "안*정",
+          specialization: ["특수체육"],
+          education: "특수체육학과 졸업",
+          certifications: ["유아체육/감각통합", "전)우슈 청소년 국가대표"],
+          order: 25
+        },
+        {
+          name: "강*성",
+          specialization: ["특수체육"],
+          education: "특수체육학과 졸업",
+          certifications: ["특수체육/감각통합"],
+          order: 26
+        },
+        {
+          name: "김*은",
+          specialization: ["음악치료"],
+          education: "음악치료학 석사 졸업",
+          certifications: ["음악치료/상담심리"],
+          order: 27
+        }
+      ],
       order: 1
     },
     {
-      id: "seo-hh",
-      name: "서*화",
-      category: "therapist",
-      specialization: ["놀이치료", "미술치료"],
-      education: "특수재활/미술치료학과 졸업",
-      certifications: ["놀이재활/미술재활사(국가)"],
+      id: "teachers",
+      title: "주간·방과후 교사",
+      description: "주간활동 및 방과후 프로그램을 담당하는 교육 전문가들",
+      members: [
+        {
+          name: "마*문",
+          specialization: ["시설장"],
+          education: "특수교육 석사졸업, 사회복지 박사과정",
+          certifications: ["감각재활/심리운동/행동재활사(국가)"],
+          order: 1
+        },
+        {
+          name: "서*화",
+          specialization: ["전담인력", "실장"],
+          education: "특수재활/미술치료학사 졸업",
+          certifications: ["놀이재활/미술재활사/사회복지사"],
+          order: 2
+        },
+        {
+          name: "조*은",
+          specialization: ["사회복지사"],
+          education: "사회복지학사 졸업",
+          certifications: ["사회복지사"],
+          order: 3
+        },
+        {
+          name: "유*은",
+          specialization: ["사회복지사", "팀장"],
+          education: "사회복지학과 졸업",
+          certifications: ["사회복지사/바리스타"],
+          order: 4
+        },
+        {
+          name: "안*혜",
+          specialization: ["간호교사"],
+          education: "의무행정학과 졸업",
+          certifications: ["간호조무사/사회복지사(국가)", "놀이심리상담사"],
+          order: 5
+        },
+        {
+          name: "안*현",
+          specialization: ["사회복지사"],
+          education: "사회복지학과 졸업",
+          certifications: ["사회복지사"],
+          order: 6
+        },
+        {
+          name: "강*영",
+          specialization: ["인지학습교사"],
+          education: "특수교육학과 졸업, 사회복지학 석사 졸업",
+          certifications: ["인지학습치료사"],
+          order: 7
+        }
+      ],
       order: 2
-    },
-    {
-      id: "sim-hy",
-      name: "심*연",
-      category: "therapist",
-      specialization: ["언어치료", "놀이치료"],
-      education: "언어치료/놀이치료학과 졸업, 언어치료 석사과정",
-      certifications: ["언어재활(1급)/놀이재활사(국가)"],
-      order: 3
-    },
-    {
-      id: "shin-mj",
-      name: "신*정",
-      category: "therapist",
-      specialization: ["언어치료"],
-      education: "언어치료 학사",
-      certifications: ["언어재활사(국가)"],
-      order: 4
-    },
-    {
-      id: "moon-jh",
-      name: "문*희",
-      category: "therapist",
-      specialization: ["미술치료", "부모상담"],
-      education: "상담심리 석사/상담심리 박사수료",
-      certifications: ["미술재활/심리상담전문가"],
-      order: 5
-    },
-    {
-      id: "han-my",
-      name: "한*영",
-      category: "therapist",
-      specialization: ["미술치료"],
-      education: "유아특수언어치료학과 졸업",
-      certifications: ["미술재활사/유아특수교사"],
-      order: 6
-    },
-    {
-      id: "jung-jj",
-      name: "정*정",
-      category: "therapist",
-      specialization: ["감각통합", "작업치료"],
-      education: "작업치료 학사/작업치료 석사과정",
-      certifications: ["감각재활사/작업치료사"],
-      order: 7
-    },
-    {
-      id: "ha-hs",
-      name: "하*솔",
-      category: "therapist",
-      specialization: ["감각통합", "작업치료"],
-      education: "작업치료 학사/작업치료 석사",
-      certifications: ["감각재활사/작업치료사"],
-      order: 8
-    },
-    {
-      id: "lee-yb",
-      name: "이*빈",
-      category: "therapist",
-      specialization: ["음악치료"],
-      education: "음악치료 석사 졸업",
-      certifications: ["음악재활사(국가)"],
-      order: 9
-    },
-    {
-      id: "park-jh",
-      name: "박*혜",
-      category: "therapist",
-      specialization: ["미술치료"],
-      education: "미술치료 석사 졸업",
-      certifications: ["미술재활사/청소년상담사(국가)"],
-      order: 10
-    },
-    {
-      id: "kang-yj",
-      name: "강*진",
-      category: "therapist",
-      specialization: ["심리검사", "임상심리"],
-      education: "심리학 석사/상담학 박사과정",
-      certifications: ["임상심리사/인지치료사"],
-      order: 11
-    },
-    {
-      id: "park-jh2",
-      name: "박*호",
-      category: "therapist",
-      specialization: ["특수체육"],
-      education: "특수체육교육학과 졸업/심리운동학과",
-      certifications: ["특수체육교사/감각통합"],
-      order: 12
-    },
-    {
-      id: "joo-sh",
-      name: "주*희",
-      category: "therapist",
-      specialization: ["특수체육"],
-      education: "운동처방학과 졸업",
-      certifications: ["장애인스포츠지도사/감각통합"],
-      order: 13
-    },
-    {
-      id: "lee-se",
-      name: "이*은",
-      category: "therapist",
-      specialization: ["언어치료"],
-      education: "언어치료학과 졸업",
-      certifications: ["언어재활사(국가)/미술치료사"],
-      order: 14
-    },
-    {
-      id: "park-jh3",
-      name: "박*현",
-      category: "therapist",
-      specialization: ["언어치료", "미술치료"],
-      education: "언어치료학과 졸업",
-      certifications: ["언어재활사(국가)/미술치료사"],
-      order: 15
-    },
-    {
-      id: "lee-sm",
-      name: "이*미",
-      category: "therapist",
-      specialization: ["음악치료"],
-      education: "음악치료 석사 졸업",
-      certifications: ["음악재활사(국가)"],
-      order: 16
-    },
-    {
-      id: "kim-js",
-      name: "김*숙",
-      category: "therapist",
-      specialization: ["원예치료"],
-      education: "상담심리 석사 졸업",
-      certifications: ["재활심리사(국가)"],
-      order: 17
-    },
-    {
-      id: "jung-jm",
-      name: "정*미",
-      category: "therapist",
-      specialization: ["심리운동"],
-      education: "교육학과 졸업",
-      certifications: ["심리운동사"],
-      order: 18
-    },
-    {
-      id: "kim-yj",
-      name: "김*주",
-      category: "therapist",
-      specialization: ["특수체육"],
-      education: "특수체육교육학과 졸업",
-      certifications: ["특수체육교사/감각통합"],
-      order: 19
-    },
-    {
-      id: "kim-yr",
-      name: "김*림",
-      category: "therapist",
-      specialization: ["특수체육"],
-      education: "특수체육학과 졸업",
-      certifications: ["스포츠지도사/감각통합", "태권도 사범(4단)"],
-      order: 20
-    },
-    {
-      id: "ji-yc",
-      name: "지*채",
-      category: "therapist",
-      specialization: ["언어치료"],
-      education: "언어치료학과 졸업",
-      certifications: ["언어재활사(국가)"],
-      order: 21
-    },
-    {
-      id: "eom-jw",
-      name: "엄*웅",
-      category: "therapist",
-      specialization: ["감각통합", "작업치료"],
-      education: "작업치료학과 졸업",
-      certifications: ["감각재활사(국가)/작업치료사"],
-      order: 22
-    },
-    {
-      id: "lee-jh",
-      name: "이*훈",
-      category: "therapist",
-      specialization: ["놀이체육"],
-      education: "사회복지학과 졸업",
-      certifications: ["사회복지사(국가)", "놀이체육지도사"],
-      order: 23
-    },
-    {
-      id: "nam-yj",
-      name: "남*주",
-      category: "therapist",
-      specialization: ["감각통합", "작업치료"],
-      education: "작업치료 학사",
-      certifications: ["감각재활사(국가)/작업치료사"],
-      order: 24
-    },
-    {
-      id: "ahn-jj",
-      name: "안*정",
-      category: "therapist",
-      specialization: ["특수체육"],
-      education: "특수체육학과 졸업",
-      certifications: ["유아체육/감각통합", "전)우슈 청소년 국가대표"],
-      order: 25
-    },
-    {
-      id: "kang-ys",
-      name: "강*성",
-      category: "therapist",
-      specialization: ["특수체육"],
-      education: "특수체육학과 졸업",
-      certifications: ["특수체육/감각통합"],
-      order: 26
-    },
-    {
-      id: "kim-ye",
-      name: "김*은",
-      category: "therapist",
-      specialization: ["음악치료"],
-      education: "음악치료학 석사 졸업",
-      certifications: ["음악치료/상담심리"],
-      order: 27
-    },
-
-    // 주간·방과후 교사 (4.2)
-    {
-      id: "ma-jm-teacher",
-      name: "마*문",
-      category: "teacher",
-      specialization: ["시설장"],
-      education: "특수교육 석사졸업, 사회복지 박사과정",
-      certifications: ["감각재활/심리운동/행동재활사(국가)"],
-      order: 101
-    },
-    {
-      id: "seo-hh-teacher",
-      name: "서*화",
-      category: "teacher",
-      specialization: ["전담인력", "실장"],
-      education: "특수재활/미술치료학사 졸업",
-      certifications: ["놀이재활/미술재활사/사회복지사"],
-      order: 102
-    },
-    {
-      id: "jo-je",
-      name: "조*은",
-      category: "teacher",
-      specialization: ["사회복지사"],
-      education: "사회복지학사 졸업",
-      certifications: ["사회복지사"],
-      order: 103
-    },
-    {
-      id: "yu-ye",
-      name: "유*은",
-      category: "teacher",
-      specialization: ["사회복지사", "팀장"],
-      education: "사회복지학과 졸업",
-      certifications: ["사회복지사/바리스타"],
-      order: 104
-    },
-    {
-      id: "ahn-jh",
-      name: "안*혜",
-      category: "teacher",
-      specialization: ["간호교사"],
-      education: "의무행정학과 졸업",
-      certifications: ["간호조무사/사회복지사(국가)", "놀이심리상담사"],
-      order: 105
-    },
-    {
-      id: "ahn-jh2",
-      name: "안*현",
-      category: "teacher",
-      specialization: ["사회복지사"],
-      education: "사회복지학과 졸업",
-      certifications: ["사회복지사"],
-      order: 106
-    },
-    {
-      id: "kang-yy",
-      name: "강*영",
-      category: "teacher",
-      specialization: ["인지학습교사"],
-      education: "특수교육학과 졸업, 사회복지학 석사 졸업",
-      certifications: ["인지학습치료사"],
-      order: 107
     }
   ],
 
   community: {
     news: [
       {
-        id: "news-1",
         title: "사)부산생명의숲 업무협약",
         content: "숲체험 전문기관인 사)부산생명의숲과 숲체험프로그램 운영합니다~",
         date: "2023-05-17",
@@ -773,7 +713,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 1
       },
       {
-        id: "news-2", 
         title: "미더덕협동조합 업무협약",
         content: "마을기업 미더덕협동조합, 가정식 영양식단 전문업체와 중식급식 운영합니다~",
         date: "2023-06-21",
@@ -781,7 +720,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 2
       },
       {
-        id: "news-3",
         title: "부산정보문화센터 업무협약",
         content: "부산시 유관기관 부산정보문화센터와 정보화 역기능지원사업 협력합니다~",
         date: "2021-09-07",
@@ -789,7 +727,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 3
       },
       {
-        id: "news-4",
         title: "부산여성가족개발원 협약",
         content: "부산시 유관기관 부산여성가족개발원 양성평등센터와 성인지,성평등교육 협력합니다~",
         date: "2021-10-28",
@@ -797,7 +734,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 4
       },
       {
-        id: "news-5",
         title: "사)한국원예치료복지협회 협약",
         content: "원예치료사 양성기관 사)한국원예치료복지협회 부산지회와 원예치료프로그램 협력합니다~",
         date: "2021-11-04",
@@ -805,7 +741,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 5
       },
       {
-        id: "news-6",
         title: "성평등 공동포럼 사례발표",
         content: "협력기관인 부산시여성가족개발원 주최 성평등 공동포럼(11.19)에 참여했어요~",
         date: "2021-11-19",
@@ -813,7 +748,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 6
       },
       {
-        id: "news-7",
         title: "부산솔빛학교 학부모설명회",
         content: "사상구 소재한 특수학교인 부산솔빛학교 학부모설명회(12.14)에 다녀왔어요~",
         date: "2021-12-14",
@@ -821,7 +755,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 7
       },
       {
-        id: "news-8",
         title: "2022년 발달재활서비스 단가표 안내",
         content: "위와 같이 본 기관의 2022년 발달재활서비스 단가표를 안내드립니다.",
         date: "2022-01-01",
@@ -829,7 +762,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 8
       },
       {
-        id: "news-9",
         title: "모라1동 주민자치위원 위촉",
         content: "2021.11.26일에 모라1동 주민센터에서 자치위원 위촉식이 있었습니다.",
         date: "2021-11-26",
@@ -837,7 +769,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 9
       },
       {
-        id: "news-10",
         title: "사상여성인력센터 업무협약",
         content: "부산시 온택트지원사업(청년채용) 참여기관으로 협약되었습니다(2022.2.18)",
         date: "2022-02-18",
@@ -845,7 +776,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 10
       },
       {
-        id: "news-11",
         title: "사회서비스 전자바우처 클린센터 안내",
         content: "사회서비스 전자바우처 클린센터 운영에 대해 안내드리오니 서비스 이에 참고바랍니다~",
         date: "2022-03-01",
@@ -853,7 +783,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 11
       },
       {
-        id: "news-12",
         title: "부산시 성평등 기사자료의 위즈포레",
         content: "여성신문(2022.5.18, 이세아 기자)에 위즈포레사회서비스센터도 소개되었어요~",
         date: "2022-05-18",
@@ -861,7 +790,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 12
       },
       {
-        id: "news-13",
         title: "부산가톨릭대학교 언어청각치료학과 협약",
         content: "부산가톨릭대학교 언어청각치료학과(허명진 교수님)와 업무협약(6.17) 하였습니다~",
         date: "2022-06-17",
@@ -869,7 +797,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 13
       },
       {
-        id: "news-14",
         title: "한국심리협회 윤치연교수님 자문위원위촉",
         content: "발달진단평가 전문교육기관 사)한국심리협회 윤치연교수님께서 자문위원 수락해주셨어요~",
         date: "2022-06-20",
@@ -877,7 +804,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 14
       },
       {
-        id: "news-15",
         title: "성인지 사례 공모전 우수상 수상",
         content: "부산여성가족개발원 성인지 사례 공모전에서 위즈포레가 우수상을 수상했어요~",
         date: "2022-07-19",
@@ -885,7 +811,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 15
       },
       {
-        id: "news-16",
         title: "햇살나무작은도서관 업무협약",
         content: "사)부산여성회에서 운영하는 모라동 햇살나무작은도서관과 업무협약했어요~",
         date: "2022-08-01",
@@ -893,7 +818,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 16
       },
       {
-        id: "news-17",
         title: "춘해보건대학교 언어치료학과 산학협력",
         content: "춘해보건대학교 언어치료학과 산학협력",
         date: "2022-11-29",
@@ -901,7 +825,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 17
       },
       {
-        id: "news-18",
         title: "한국사회복지상담학회 업무협약",
         content: "신라대학교 사회복지학과에 소재하는 한국사회복지상담학회와 업무협약되었어요~",
         date: "2023-04-27",
@@ -909,7 +832,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 18
       },
       {
-        id: "news-19",
         title: "숲체험 주)우리들 업무협약",
         content: "숲체험- 주)우리들 산림교육전문기관과 업무협약했어요~",
         date: "2023-05-01",
@@ -917,7 +839,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 19
       },
       {
-        id: "news-20",
         title: "2023 발달재활서비스 안내",
         content: "위와 같이 본 기관의 2023년 발달재활서비스 단가표를 안내드립니다.",
         date: "2023-01-01",
@@ -925,7 +846,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 20
       },
       {
-        id: "news-21",
         title: "보건복지부 품질평가위원 위촉",
         content: "2023년 6월초 보건복지부 품질평가위원으로 위촉되어서 전국 현장평가에 참여합니다",
         date: "2023-06-01",
@@ -933,7 +853,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 21
       },
       {
-        id: "news-22",
         title: "한마음약국 자문위원 위촉",
         content: "한마음약국(김소현 약사) 주간,방과후 위생교육자문위원 위촉되었어요(23.7.7)",
         date: "2023-07-07",
@@ -941,7 +860,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 22
       },
       {
-        id: "news-23",
         title: "경남통일교육센터 협약",
         content: "오늘 통일부 산하 경남통일교육센터와 업무협약통해서 북한 생활문화들을 체험해보았어요",
         date: "2023-07-14",
@@ -949,7 +867,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 23
       },
       {
-        id: "news-24",
         title: "배제현교수님 자문위원위촉",
         content: "배제현교수님(창신대 유아교육과)께서 부모상담 자문위원 위촉되었어요(23.10.14)",
         date: "2023-10-14",
@@ -957,7 +874,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 24
       },
       {
-        id: "news-25",
         title: "신라대 특수체육학과 협약",
         content: "신라대학교 특수체육학과와 산학협력이 체결되었어요(23.11.21)",
         date: "2023-11-21",
@@ -965,7 +881,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 25
       },
       {
-        id: "news-26",
         title: "경남정보대 작업치료과 협약",
         content: "경남정보대 작업치료과와 산학협력 체결(11.25)",
         date: "2023-11-25",
@@ -973,7 +888,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 26
       },
       {
-        id: "news-27",
         title: "춘해보건대 작업치료과 협약",
         content: "춘해보건대 작업치료과 산학협력 체결 및 예비졸업생 재능기부 봉사활동(11.25)",
         date: "2023-11-25",
@@ -981,7 +895,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 27
       },
       {
-        id: "news-28",
         title: "장애인스포츠 및 일반스포츠 이용권 제공기관 선정",
         content: "장애인스포츠 및 일반스포츠 이용권 제공기관 선정",
         date: "2023-11-28",
@@ -989,7 +902,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 28
       },
       {
-        id: "news-29",
         title: "사상구청장 표창장 수상",
         content: "주민자치활동 및 장애인 사회통합 기여로 사상구청장 표창장 수상(23.12.30)",
         date: "2023-12-30",
@@ -997,7 +909,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 29
       },
       {
-        id: "news-30",
         title: "건양사이버대학교 심리운동치료학과 산학협력",
         content: "건양사이버대학교 심리운동치료학과 산학협력",
         date: "2024-02-07",
@@ -1005,7 +916,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 30
       },
       {
-        id: "news-31",
         title: "부산여성폭력방지지원센터 협약",
         content: "부산광역시여성폭력방지종합지원센터 업무협약(2024.04.25) 폭력예방교육 추진",
         date: "2024-04-25",
@@ -1013,7 +923,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 31
       },
       {
-        id: "news-32",
         title: "공립 동원로얄듀어린이집 협약",
         content: "공립 동원로얄듀크어린이집 업무협약(2024.04.15) 영유아 발달진단평가 협력",
         date: "2024-04-15",
@@ -1021,7 +930,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 32
       },
       {
-        id: "news-33",
         title: "공립 덕포중흥어린이집 협약",
         content: "공립 덕포중흥어린이집 업무협약(2024.04.26) 영유아 발달진단평가 협력",
         date: "2024-04-26",
@@ -1029,7 +937,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 33
       },
       {
-        id: "news-34",
         title: "부산과학기술대학교 협약",
         content: "부산과학기술대학교 사회복지상담학과 가족회사 업무협약 체결(2024.5.27)",
         date: "2024-05-27",
@@ -1037,7 +944,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 34
       },
       {
-        id: "news-35",
         title: "사상구가족센터 협약",
         content: "사상구가족센터 업무협약(2024.06.10) 가족상담 지원사업 협력",
         date: "2024-06-10",
@@ -1045,7 +951,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 35
       },
       {
-        id: "news-36",
         title: "주)키드위즈 협약",
         content: "주)키드위즈 업무협약(2024.06.10) 영유아 발달진단평가시스템 현장 적용",
         date: "2024-06-10",
@@ -1053,7 +958,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 36
       },
       {
-        id: "news-37",
         title: "김천대 재활서비스학과 협약",
         content: "김천대학교 재활서비스학과 산학협력, 심리운동재활사 현장실습기관 협력",
         date: "2025-05-28",
@@ -1061,7 +965,6 @@ export const defaultSiteData: DefaultSiteData = {
         order: 37
       },
       {
-        id: "news-38",
         title: "부산과기대 사회복지상담과 탐방",
         content: "부산과학기술대학교 사회복지상담과(학생 50명, 교수 4명) 사회서비스 현장 탐방",
         date: "2024-06-04",

@@ -343,10 +343,8 @@ export interface ProgramDetail {
   order: number
 }
 
-export interface StaffMember {
-  id: string
+export interface TeamMember {
   name: string
-  category: 'therapist' | 'teacher'
   specialization: string[]
   education: string
   certifications: string[]
@@ -354,8 +352,15 @@ export interface StaffMember {
   order: number
 }
 
-export interface NewsItem {
+export interface TeamCategory {
   id: string
+  title: string
+  description: string
+  members: TeamMember[]
+  order: number
+}
+
+export interface NewsItem {
   title: string
   content: string
   date: string
@@ -382,7 +387,6 @@ export interface ContactInfo {
 }
 
 export interface MainService {
-  id: string
   title: string
   description: string
   details?: string[]
@@ -425,7 +429,7 @@ export interface DefaultSiteData {
     facilities: string[]
   }
   programs: ProgramCategory[]
-  team: StaffMember[]
+  team: TeamCategory[]
   community: {
     news: NewsItem[]
     snsLinks: {
