@@ -294,7 +294,6 @@ export interface DirectorInfo {
 }
 
 export interface AdvisorInfo {
-  id: string
   name: string
   position: string
   education: string
@@ -336,7 +335,6 @@ export interface ProgramCategory {
 }
 
 export interface ProgramDetail {
-  id: string
   title: string
   target?: string
   goal: string
