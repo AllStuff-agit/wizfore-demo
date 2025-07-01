@@ -97,7 +97,7 @@ export default function SportsPage() {
               .sort((a, b) => a.order - b.order)
               .map((program, index) => (
                 <motion.div
-                  key={program.id}
+                  key={program.title}
                   className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
