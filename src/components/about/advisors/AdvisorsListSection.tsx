@@ -1,167 +1,207 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { User, GraduationCap, Briefcase, Award } from 'lucide-react'
 import type { AdvisorInfo } from '@/types'
 
 interface AdvisorsListSectionProps {
   advisors: AdvisorInfo[]
+  aboutMessage?: {
+    title: string
+    messages: string[]
+  }
   loading?: boolean
 }
 
-const AdvisorsListSection: React.FC<AdvisorsListSectionProps> = ({ advisors = [], loading = false }) => {
-  // 자문위원 전문분야별 아이콘 결정
-  const getAdvisorIcon = (position: string = '') => {
+const AdvisorsListSection: React.FC<AdvisorsListSectionProps> = ({ advisors = [], aboutMessage, loading = false }) => {
+  // 자문위원 전문분야별 기본 이미지 결정
+  const getDefaultImage = (position: string = '') => {
     if (position.includes('교수')) {
-      return <GraduationCap className="w-8 h-8 text-wizfore-warm-brown" aria-label="교수" />
+      return '/images/advisors/defaultProfessorM.png'
     } else if (position.includes('원장') || position.includes('대표')) {
-      return <Briefcase className="w-8 h-8 text-wizfore-warm-brown" aria-label="기관장" />
-    } else if (position.includes('경감')) {
-      return <Award className="w-8 h-8 text-wizfore-warm-brown" aria-label="공무원" />
+      return '/images/advisors/defaultDirectorW.png'
+    } else if (position.includes('경찰')) {
+      return '/images/advisors/defaultPoliceM.png'
+    } else if (position.includes('약사')) {
+      return '/images/advisors/defaultPharmacistW.png'
     } else {
-      return <User className="w-8 h-8 text-wizfore-warm-brown" aria-label="전문가" />
+      return '/images/advisors/defaultProfessorM.png' // 기본값
     }
   }
 
-  const getAdvisorBadgeColor = (position: string = '') => {
-    if (position.includes('교수')) {
-      return 'bg-blue-100 text-blue-700 border-blue-200'
-    } else if (position.includes('원장') || position.includes('대표')) {
-      return 'bg-green-100 text-green-700 border-green-200'
-    } else if (position.includes('약사')) {
-      return 'bg-purple-100 text-purple-700 border-purple-200'
-    } else if (position.includes('경감')) {
-      return 'bg-orange-100 text-orange-700 border-orange-200'
-    } else {
-      return 'bg-gray-100 text-gray-700 border-gray-200'
-    }
+  const getAdvisorTitle = (position: string = '') => {
+    if (position.includes('교수')) return '교수'
+    if (position.includes('원장')) return '원장'
+    if (position.includes('대표')) return '대표'
+    if (position.includes('약사')) return '약사'
+    if (position.includes('경찰')) return '경찰'
+    return '전문가'
   }
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="relative py-24 bg-gray-50 overflow-hidden">
       <div className="container-custom mx-auto px-4">
+        {/* 섹션 헤더 */}
         <motion.div 
-          className="text-center mb-12"
+          className="max-w-4xl mx-auto text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl font-bold text-wizfore-text-primary mb-4">
-            자문위원 소개
-          </h2>
-          <p className="text-wizfore-text-secondary">
-            총 {advisors.length}분의 전문가가 자문위원으로 활동하고 계십니다
-          </p>
+          {aboutMessage?.title && (
+            <h2 className="text-3xl font-bold text-wizfore-text-primary mb-6">
+              {aboutMessage.title}
+            </h2>
+          )}
+          {aboutMessage?.messages && aboutMessage.messages.length > 0 && (
+            <div className="text-lg text-wizfore-text-secondary leading-relaxed mb-12">
+              {aboutMessage.messages.map((message, index) => (
+                <p key={index} className={index > 0 ? 'mt-4' : ''}>
+                  {message}
+                </p>
+              ))}
+            </div>
+          )}
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        {/* 자문위원 목록 */}
+        <div className="space-y-12 max-w-5xl mx-auto">
           {loading ? (
             // 로딩 스켈레톤
-            Array.from({ length: 6 }).map((_, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
-                <div className="bg-gray-200 p-6 text-center">
-                  <div className="w-8 h-8 bg-gray-300 rounded-full mx-auto mb-4" />
-                  <div className="h-6 bg-gray-300 rounded mx-auto mb-2 w-20" />
-                  <div className="h-4 bg-gray-300 rounded mx-auto w-16" />
-                </div>
-                <div className="p-6 space-y-4">
-                  <div className="space-y-2">
-                    <div className="h-4 bg-gray-200 rounded w-20" />
-                    <div className="h-3 bg-gray-200 rounded w-full" />
+            Array.from({ length: 3 }).map((_, index) => (
+              <div key={index} className="bg-white rounded-2xl shadow-lg p-6 lg:p-10 animate-pulse">
+                <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
+                  <div className="flex flex-col items-center justify-center lg:col-span-1">
+                    <div className="w-40 h-40 lg:w-48 lg:h-48 bg-gray-200 rounded-full mb-4" />
+                    <div className="h-8 bg-gray-200 rounded w-32 mb-2" />
+                    <div className="h-6 bg-gray-200 rounded w-24" />
                   </div>
-                  <div className="space-y-2">
-                    <div className="h-4 bg-gray-200 rounded w-16" />
-                    <div className="h-3 bg-gray-200 rounded w-full" />
-                  </div>
-                  <div className="space-y-2">
-                    <div className="h-4 bg-gray-200 rounded w-20" />
-                    <div className="space-y-1">
-                      <div className="h-3 bg-gray-200 rounded w-full" />
-                      <div className="h-3 bg-gray-200 rounded w-3/4" />
+                  <div className="space-y-6 lg:col-span-2">
+                    <div className="space-y-2">
+                      <div className="h-6 bg-gray-200 rounded w-16" />
+                      <div className="h-4 bg-gray-200 rounded w-full" />
+                    </div>
+                    <div className="space-y-2">
+                      <div className="h-6 bg-gray-200 rounded w-16" />
+                      <div className="h-4 bg-gray-200 rounded w-full" />
+                      <div className="h-4 bg-gray-200 rounded w-3/4" />
                     </div>
                   </div>
                 </div>
               </div>
             ))
           ) : advisors.length === 0 ? (
-            <div className="col-span-full text-center py-12">
+            <div className="text-center py-16">
               <p className="text-wizfore-text-secondary text-lg">자문위원 정보가 없습니다.</p>
             </div>
           ) : (
-            advisors.map((advisor, index) => (
-            <motion.div
-              key={`${advisor.name}-${advisor.order || index}`}
-              className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              {/* 카드 헤더 */}
-              <div className="bg-gradient-to-r from-wizfore-warm-brown/10 to-wizfore-warm-brown/5 p-6 text-center">
-                <div className="flex justify-center mb-4">
-                  {getAdvisorIcon(advisor.position)}
-                </div>
-                <h3 className="text-xl font-bold text-wizfore-text-primary mb-2 truncate" title={advisor.name || '이름 없음'}>
-                  {advisor.name || '이름 없음'}
-                </h3>
-                <div className={`inline-block px-3 py-1 rounded-full text-sm border truncate max-w-full ${getAdvisorBadgeColor(advisor.position)}`}>
-                  {(advisor.position || '').includes('교수') ? '교수' :
-                   (advisor.position || '').includes('원장') ? '원장' :
-                   (advisor.position || '').includes('대표') ? '대표' :
-                   (advisor.position || '').includes('약사') ? '약사' :
-                   (advisor.position || '').includes('경감') ? '경감' : '전문가'}
-                </div>
-              </div>
+            advisors
+              .sort((a, b) => (a.order || 0) - (b.order || 0))
+              .map((advisor, index) => (
+                <motion.div
+                  key={`${advisor.name}-${advisor.order || index}`}
+                  className="bg-white rounded-2xl shadow-lg p-6 lg:p-10"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  {/* 전체 구조: 좌우로 분할 (1:2 비율) */}
+                  <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
+                    
+                    {/* 좌측: 프로필 아이콘 및 기본 정보 */}
+                    <motion.div
+                      className="flex flex-col items-center justify-center text-center lg:col-span-1"
+                      initial={{ opacity: 0, x: -30 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.6, delay: 0.1 }}
+                      viewport={{ once: true }}
+                    >
+                      {/* 프로필 이미지 */}
+                      <div className="relative w-40 h-40 lg:w-48 lg:h-48 mb-6">
+                        <div className="absolute inset-0 bg-gradient-to-br from-wizfore-coral-primary/20 to-wizfore-soft-pink/20 rounded-full" />
+                        <div className="relative w-full h-full bg-wizfore-light-beige rounded-full overflow-hidden border-4 border-white shadow-lg">
+                          <img 
+                            src={advisor.imageUrl || getDefaultImage(advisor.position)} 
+                            alt={`${advisor.name} 자문위원`}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement
+                              target.src = getDefaultImage(advisor.position)
+                            }}
+                          />
+                        </div>
+                      </div>
+                      
+                      {/* 이름과 직책 */}
+                      <h3 className="text-2xl lg:text-3xl font-black text-wizfore-text-primary mb-2">
+                        {advisor.name || '이름 없음'}
+                      </h3>
+                      <p className="text-lg lg:text-xl text-wizfore-coral-primary font-bold mb-4">
+                        {getAdvisorTitle(advisor.position)}
+                      </p>
+                    </motion.div>
 
-              {/* 카드 본문 */}
-              <div className="p-6">
-                {/* 직책 */}
-                {advisor.position && (
-                  <div className="mb-4">
-                    <div className="flex items-center mb-2">
-                      <Briefcase className="w-4 h-4 text-wizfore-warm-brown mr-2" aria-label="직책" />
-                      <span className="text-sm font-medium text-wizfore-text-primary">현재 직책</span>
-                    </div>
-                    <p className="text-wizfore-text-secondary text-sm leading-relaxed pl-6 break-words">
-                      {advisor.position}
-                    </p>
-                  </div>
-                )}
+                    {/* 우측: 상세 정보 */}
+                    <motion.div
+                      className="space-y-6 lg:col-span-2"
+                      initial={{ opacity: 0, x: 30 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.6, delay: 0.2 }}
+                      viewport={{ once: true }}
+                    >
+                      {/* 현재 직책 */}
+                      {advisor.position && (
+                        <div>
+                          <h4 className="text-xl font-bold text-wizfore-text-primary mb-4 pb-2 border-b border-wizfore-coral-primary/30">
+                            현재 직책
+                          </h4>
+                          <div className="flex items-center">
+                            <div className="w-1 h-1 bg-wizfore-coral-primary rounded-full mr-3 flex-shrink-0" />
+                            <p className="text-base text-wizfore-text-primary leading-relaxed break-words">
+                              {advisor.position}
+                            </p>
+                          </div>
+                        </div>
+                      )}
 
-                {/* 학력 */}
-                {advisor.education && (
-                  <div className="mb-4">
-                    <div className="flex items-center mb-2">
-                      <GraduationCap className="w-4 h-4 text-wizfore-warm-brown mr-2" aria-label="학력" />
-                      <span className="text-sm font-medium text-wizfore-text-primary">학력</span>
-                    </div>
-                    <p className="text-wizfore-text-secondary text-sm leading-relaxed pl-6 break-words">
-                      {advisor.education}
-                    </p>
-                  </div>
-                )}
+                      {/* 학력 */}
+                      {advisor.education && (
+                        <div>
+                          <h4 className="text-xl font-bold text-wizfore-text-primary mb-4 pb-2 border-b border-wizfore-coral-primary/30">
+                            학력
+                          </h4>
+                          <div className="flex items-center">
+                            <div className="w-1 h-1 bg-wizfore-coral-primary rounded-full mr-3 flex-shrink-0" />
+                            <p className="text-base text-wizfore-text-primary leading-relaxed break-words">
+                              {advisor.education}
+                            </p>
+                          </div>
+                        </div>
+                      )}
 
-                {/* 주요 경력 */}
-                {advisor.career && advisor.career.length > 0 && (
-                  <div>
-                    <div className="flex items-center mb-2">
-                      <Award className="w-4 h-4 text-wizfore-warm-brown mr-2" aria-label="경력" />
-                      <span className="text-sm font-medium text-wizfore-text-primary">주요 경력</span>
-                    </div>
-                    <div className="pl-6 space-y-1">
-                      {advisor.career.map((career, careerIndex) => (
-                        <p key={careerIndex} className="text-wizfore-text-secondary text-sm leading-relaxed break-words">
-                          • {career}
-                        </p>
-                      ))}
-                    </div>
+                      {/* 주요 경력 */}
+                      {advisor.career && advisor.career.length > 0 && (
+                        <div>
+                          <h4 className="text-xl font-bold text-wizfore-text-primary mb-4 pb-2 border-b border-wizfore-coral-primary/30">
+                            주요 경력
+                          </h4>
+                          <div className="space-y-2">
+                            {advisor.career.map((career, careerIndex) => (
+                              <div key={careerIndex} className="flex items-center">
+                                <div className="w-1 h-1 bg-wizfore-coral-primary rounded-full mr-3 flex-shrink-0" />
+                                <p className="text-base text-wizfore-text-primary leading-relaxed break-words">
+                                  {career}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </motion.div>
                   </div>
-                )}
-              </div>
-            </motion.div>
-            ))
+                </motion.div>
+              ))
           )}
         </div>
       </div>

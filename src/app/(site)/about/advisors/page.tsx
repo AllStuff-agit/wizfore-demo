@@ -5,7 +5,6 @@ import { motion } from 'framer-motion'
 import { getAdvisors, getAdvisorsAboutMessage } from '@/lib/services/defaultDataService'
 import type { AdvisorInfo } from '@/types'
 import AdvisorsHeroSection from '@/components/about/advisors/AdvisorsHeroSection'
-import AdvisorsOverviewSection from '@/components/about/advisors/AdvisorsOverviewSection'
 import AdvisorsListSection from '@/components/about/advisors/AdvisorsListSection'
 
 export default function AdvisorsPage() {
@@ -82,15 +81,12 @@ export default function AdvisorsPage() {
       {/* 히어로 섹션 */}
       <AdvisorsHeroSection />
       
-      {/* 개요 섹션 */}
-      <AdvisorsOverviewSection 
+      {/* 자문위원 목록 섹션 */}
+      <AdvisorsListSection 
         advisors={advisors} 
         aboutMessage={aboutMessage || undefined}
         loading={loading} 
       />
-      
-      {/* 자문위원 목록 섹션 */}
-      <AdvisorsListSection advisors={advisors} loading={loading} />
     </div>
   )
 }

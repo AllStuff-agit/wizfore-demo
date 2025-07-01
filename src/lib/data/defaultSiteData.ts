@@ -45,7 +45,6 @@ export const defaultSiteData: DefaultSiteData = {
         weekday: "09:00 ~ 19:00",
         weekend: "09:00 ~ 18:00"
       },
-      parking: "센터 입구 도로공용주차장 및 홈플러스 주차장 이용",
       businessNumber: "123-45-67890",
       accountInfo: "농협 123-456-789012 위즈포레사회서비스센터",
       mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.848873729402!2d128.98987061177746!3d35.18531905694215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3568ea9ea90ac5a9%3A0x170fb73b2e0fe64c!2z67aA7IKw6rSR7Jet7IucIOyCrOyDgeq1rCDrqqjrnbzroZwxMTDrsojquLggMjU!5e0!3m2!1sko!2skr!4v1751037173300!5m2!1sko!2skr",
@@ -57,6 +56,10 @@ export const defaultSiteData: DefaultSiteData = {
         {
           type: "버스",
           description: "모라주공아파트 정류장 하차"
+        },
+        {
+          type: "차",
+          description: "센터 입구 도로공용주차장 및 홈플러스 주차장 이용"
         }
       ]
     },
@@ -182,6 +185,7 @@ export const defaultSiteData: DefaultSiteData = {
             "전)국립재활원 임상심리실장",
             "전)춘해보건대학교 언어치료학과 정교수"
           ],
+          imageUrl: "",
           order: 1
         },
         {
@@ -192,6 +196,7 @@ export const defaultSiteData: DefaultSiteData = {
             "현)사회복지법인 세림복지재단 이사",
             "현)세림어르신의집 원장"
           ],
+          imageUrl: "",
           order: 2
         },
         {
@@ -201,6 +206,7 @@ export const defaultSiteData: DefaultSiteData = {
           career: [
             "현)부산가톨릭대학교 언어청각치료학과 정교수"
           ],
+          imageUrl: "",
           order: 3
         },
         {
@@ -211,6 +217,7 @@ export const defaultSiteData: DefaultSiteData = {
             "현)신라대학교 사회복지학과 정교수",
             "현)한국사회복지상담학회장"
           ],
+          imageUrl: "",
           order: 4
         },
         {
@@ -220,6 +227,7 @@ export const defaultSiteData: DefaultSiteData = {
           career: [
             "현)한마음약국 대표"
           ],
+          imageUrl: "",
           order: 5
         },
         {
@@ -230,16 +238,18 @@ export const defaultSiteData: DefaultSiteData = {
             "전)창신대학교 유아교육학과 정교수",
             "창원시육아종합지원센터 인성교육 강사"
           ],
+          imageUrl: "",
           order: 6
         },
         {
           name: "공광석",
-          position: "경감(금정경찰서)",
+          position: "경감(금정경찰서 경찰)",
           education: "동의대 경찰행정학과 박사 수료",
           career: [
             "금정경찰서 부곡지구대",
             "중앙경찰학교 교수요원"
           ],
+          imageUrl: "",
           order: 7
         },
         {
@@ -250,6 +260,7 @@ export const defaultSiteData: DefaultSiteData = {
             "한국심리운동연구소 전문강사",
             "심리운동사1급"
           ],
+          imageUrl: "",
           order: 8
         }
       ]
