@@ -9,21 +9,21 @@ interface AdvisorsListSectionProps {
   loading?: boolean
 }
 
-const AdvisorsListSection: React.FC<AdvisorsListSectionProps> = ({ advisors, loading = false }) => {
+const AdvisorsListSection: React.FC<AdvisorsListSectionProps> = ({ advisors = [], loading = false }) => {
   // 자문위원 전문분야별 아이콘 결정
-  const getAdvisorIcon = (position: string) => {
+  const getAdvisorIcon = (position: string = '') => {
     if (position.includes('교수')) {
-      return <GraduationCap className="w-8 h-8 text-wizfore-warm-brown" />
+      return <GraduationCap className="w-8 h-8 text-wizfore-warm-brown" aria-label="교수" />
     } else if (position.includes('원장') || position.includes('대표')) {
-      return <Briefcase className="w-8 h-8 text-wizfore-warm-brown" />
+      return <Briefcase className="w-8 h-8 text-wizfore-warm-brown" aria-label="기관장" />
     } else if (position.includes('경감')) {
-      return <Award className="w-8 h-8 text-wizfore-warm-brown" />
+      return <Award className="w-8 h-8 text-wizfore-warm-brown" aria-label="공무원" />
     } else {
-      return <User className="w-8 h-8 text-wizfore-warm-brown" />
+      return <User className="w-8 h-8 text-wizfore-warm-brown" aria-label="전문가" />
     }
   }
 
-  const getAdvisorBadgeColor = (position: string) => {
+  const getAdvisorBadgeColor = (position: string = '') => {
     if (position.includes('교수')) {
       return 'bg-blue-100 text-blue-700 border-blue-200'
     } else if (position.includes('원장') || position.includes('대표')) {
@@ -91,7 +91,7 @@ const AdvisorsListSection: React.FC<AdvisorsListSectionProps> = ({ advisors, loa
           ) : (
             advisors.map((advisor, index) => (
             <motion.div
-              key={advisor.id}
+              key={`${advisor.name}-${advisor.order || index}`}
               className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -103,56 +103,62 @@ const AdvisorsListSection: React.FC<AdvisorsListSectionProps> = ({ advisors, loa
                 <div className="flex justify-center mb-4">
                   {getAdvisorIcon(advisor.position)}
                 </div>
-                <h3 className="text-xl font-bold text-wizfore-text-primary mb-2">
-                  {advisor.name}
+                <h3 className="text-xl font-bold text-wizfore-text-primary mb-2 truncate" title={advisor.name || '이름 없음'}>
+                  {advisor.name || '이름 없음'}
                 </h3>
-                <div className={`inline-block px-3 py-1 rounded-full text-sm border ${getAdvisorBadgeColor(advisor.position)}`}>
-                  {advisor.position.includes('교수') ? '교수' :
-                   advisor.position.includes('원장') ? '원장' :
-                   advisor.position.includes('대표') ? '대표' :
-                   advisor.position.includes('약사') ? '약사' :
-                   advisor.position.includes('경감') ? '경감' : '전문가'}
+                <div className={`inline-block px-3 py-1 rounded-full text-sm border truncate max-w-full ${getAdvisorBadgeColor(advisor.position)}`}>
+                  {(advisor.position || '').includes('교수') ? '교수' :
+                   (advisor.position || '').includes('원장') ? '원장' :
+                   (advisor.position || '').includes('대표') ? '대표' :
+                   (advisor.position || '').includes('약사') ? '약사' :
+                   (advisor.position || '').includes('경감') ? '경감' : '전문가'}
                 </div>
               </div>
 
               {/* 카드 본문 */}
               <div className="p-6">
                 {/* 직책 */}
-                <div className="mb-4">
-                  <div className="flex items-center mb-2">
-                    <Briefcase className="w-4 h-4 text-wizfore-warm-brown mr-2" />
-                    <span className="text-sm font-medium text-wizfore-text-primary">현재 직책</span>
+                {advisor.position && (
+                  <div className="mb-4">
+                    <div className="flex items-center mb-2">
+                      <Briefcase className="w-4 h-4 text-wizfore-warm-brown mr-2" aria-label="직책" />
+                      <span className="text-sm font-medium text-wizfore-text-primary">현재 직책</span>
+                    </div>
+                    <p className="text-wizfore-text-secondary text-sm leading-relaxed pl-6 break-words">
+                      {advisor.position}
+                    </p>
                   </div>
-                  <p className="text-wizfore-text-secondary text-sm leading-relaxed pl-6">
-                    {advisor.position}
-                  </p>
-                </div>
+                )}
 
                 {/* 학력 */}
-                <div className="mb-4">
-                  <div className="flex items-center mb-2">
-                    <GraduationCap className="w-4 h-4 text-wizfore-warm-brown mr-2" />
-                    <span className="text-sm font-medium text-wizfore-text-primary">학력</span>
+                {advisor.education && (
+                  <div className="mb-4">
+                    <div className="flex items-center mb-2">
+                      <GraduationCap className="w-4 h-4 text-wizfore-warm-brown mr-2" aria-label="학력" />
+                      <span className="text-sm font-medium text-wizfore-text-primary">학력</span>
+                    </div>
+                    <p className="text-wizfore-text-secondary text-sm leading-relaxed pl-6 break-words">
+                      {advisor.education}
+                    </p>
                   </div>
-                  <p className="text-wizfore-text-secondary text-sm leading-relaxed pl-6">
-                    {advisor.education}
-                  </p>
-                </div>
+                )}
 
                 {/* 주요 경력 */}
-                <div>
-                  <div className="flex items-center mb-2">
-                    <Award className="w-4 h-4 text-wizfore-warm-brown mr-2" />
-                    <span className="text-sm font-medium text-wizfore-text-primary">주요 경력</span>
+                {advisor.career && advisor.career.length > 0 && (
+                  <div>
+                    <div className="flex items-center mb-2">
+                      <Award className="w-4 h-4 text-wizfore-warm-brown mr-2" aria-label="경력" />
+                      <span className="text-sm font-medium text-wizfore-text-primary">주요 경력</span>
+                    </div>
+                    <div className="pl-6 space-y-1">
+                      {advisor.career.map((career, careerIndex) => (
+                        <p key={careerIndex} className="text-wizfore-text-secondary text-sm leading-relaxed break-words">
+                          • {career}
+                        </p>
+                      ))}
+                    </div>
                   </div>
-                  <div className="pl-6 space-y-1">
-                    {advisor.career.map((career, careerIndex) => (
-                      <p key={careerIndex} className="text-wizfore-text-secondary text-sm leading-relaxed">
-                        • {career}
-                      </p>
-                    ))}
-                  </div>
-                </div>
+                )}
               </div>
             </motion.div>
             ))
