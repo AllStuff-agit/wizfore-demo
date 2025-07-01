@@ -135,7 +135,7 @@ async function addTeamData() {
   
   // 통합된 팀 데이터 추가
   await setDoc(doc(db, 'team', 'main'), {
-    members: team,
+    categories: team,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString()
   })
@@ -502,7 +502,7 @@ export async function getTeam() {
     
     if (docSnap.exists()) {
       const data = docSnap.data()
-      return data.members || defaultSiteData.team
+      return data.categories || defaultSiteData.team
     } else {
       console.warn('Team data not found, returning default data')
       return defaultSiteData.team

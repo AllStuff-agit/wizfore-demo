@@ -5,7 +5,8 @@ import { defaultSiteData } from '@/lib/data/defaultSiteData'
 import { Users, GraduationCap, Award, Heart, Shield, BookOpen, Stethoscope, Building } from 'lucide-react'
 
 export default function TeachersPage() {
-  const teachers = defaultSiteData.team.filter(member => member.category === 'teacher')
+  const teacherCategory = defaultSiteData.team.find(category => category.id === 'teachers')
+  const teachers = teacherCategory?.members || []
   
   // 역할별 아이콘 매핑
   const getRoleIcon = (specialization: string[]) => {
@@ -156,7 +157,7 @@ export default function TeachersPage() {
               .sort((a, b) => a.order - b.order)
               .map((teacher, index) => (
                 <motion.div
-                  key={teacher.id}
+                  key={teacher.name}
                   className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden border border-gray-100"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}

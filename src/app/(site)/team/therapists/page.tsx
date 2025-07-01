@@ -5,7 +5,8 @@ import { defaultSiteData } from '@/lib/data/defaultSiteData'
 import { Users, GraduationCap, Award, Heart, Brain, Palette, Music, Activity, Target } from 'lucide-react'
 
 export default function TherapistsPage() {
-  const therapists = defaultSiteData.team.filter(member => member.category === 'therapist')
+  const therapistCategory = defaultSiteData.team.find(category => category.id === 'therapists')
+  const therapists = therapistCategory?.members || []
   
   // 전문분야별 그룹화
   const groupedTherapists = therapists.reduce((acc, therapist) => {
@@ -172,7 +173,7 @@ export default function TherapistsPage() {
               .sort((a, b) => a.order - b.order)
               .map((therapist, index) => (
                 <motion.div
-                  key={therapist.id}
+                  key={therapist.name}
                   className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden border border-gray-100"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
