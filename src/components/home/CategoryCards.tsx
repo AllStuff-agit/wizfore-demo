@@ -11,8 +11,8 @@ import type { ProgramCategory } from '@/types'
 const fallbackGradients = {
   'therapy': 'bg-gradient-to-br from-wizfore-coral-primary to-wizfore-coral-secondary',
   'counseling': 'bg-gradient-to-br from-wizfore-coral-secondary to-wizfore-coral-light',
-  'afterschool-program': 'bg-gradient-to-br from-wizfore-coral-light to-wizfore-coral-accent',
-  'adult-day-program': 'bg-gradient-to-br from-wizfore-coral-accent to-wizfore-soft-pink'
+  'afterschool': 'bg-gradient-to-br from-wizfore-coral-light to-wizfore-coral-accent',
+  'adult-day': 'bg-gradient-to-br from-wizfore-coral-accent to-wizfore-soft-pink'
 }
 
 // 이미지 fallback을 처리하는 컴포넌트

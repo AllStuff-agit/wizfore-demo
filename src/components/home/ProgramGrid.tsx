@@ -28,7 +28,6 @@ const programIconsAndColors = [
 ]
 
 interface Program {
-  id: string
   title: string
   description: string
   categoryTitle: string
@@ -275,7 +274,7 @@ const ProgramGrid = () => {
                 
                 return (
                   <motion.div
-                    key={`row1-${repeatIndex}-${program.id}`}
+                    key={`row1-${repeatIndex}-${program.title}`}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ 
@@ -361,7 +360,7 @@ const ProgramGrid = () => {
                 
                 return (
                   <motion.div
-                    key={`row2-${repeatIndex}-${program.id}`}
+                    key={`row2-${repeatIndex}-${program.title}`}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ 
