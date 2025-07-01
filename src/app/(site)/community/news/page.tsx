@@ -256,7 +256,7 @@ export default function NewsPage() {
                     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
                     .map((item, index) => (
                       <motion.div
-                        key={item.id}
+                        key={item.title + item.date}
                         className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden border border-gray-100"
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
