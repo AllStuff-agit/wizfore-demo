@@ -40,7 +40,6 @@ const menuItems = [
     href: '/admin/about',
     icon: Building2,
     subItems: [
-      { title: '센터 개요', href: '/admin/about/overview' },
       { title: '센터장 소개', href: '/admin/about/director' },
       { title: '센터 발자취', href: '/admin/about/history' },
       { title: '전문 자문위원', href: '/admin/about/advisors' },
@@ -87,7 +86,6 @@ const menuItems = [
     subItems: [
       { title: '상담 예약 관리', href: '/admin/contact/reservations' },
       { title: '문의 관리', href: '/admin/contact/inquiries' },
-      { title: '연락처 정보', href: '/admin/contact/info' },
       { title: '문의 통계', href: '/admin/contact/statistics' }
     ]
   },

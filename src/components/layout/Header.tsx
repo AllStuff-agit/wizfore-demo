@@ -13,7 +13,6 @@ const Header = () => {
       name: '센터소개', 
       href: '/about',
       submenu: [
-        { name: '센터 개요', href: '/about' },
         { name: '센터장 소개', href: '/about/director' },
         { name: '센터 발자취', href: '/about/history' },
         { name: '자문위원', href: '/about/advisors' },
@@ -53,7 +52,6 @@ const Header = () => {
       submenu: [
         { name: '상담 예약', href: '/contact/reservation' },
         { name: '온라인 문의', href: '/contact/inquiry' },
-        { name: '연락처 정보', href: '/contact' },
       ]
     },
   ]
@@ -78,12 +76,11 @@ const Header = () => {
             <ul className="flex space-x-12">
               {navigation.map((item) => (
                 <li key={item.name} className="relative">
-                  <Link
-                    href={item.href}
-                    className="block py-4 text-lg text-wizfore-text-primary hover:text-wizfore-text-brand font-semibold transition-colors border-b-2 border-transparent hover:border-wizfore-warm-brown"
+                  <div
+                    className="block py-4 text-lg text-wizfore-text-primary hover:text-wizfore-text-brand font-semibold transition-colors border-b-2 border-transparent hover:border-wizfore-warm-brown cursor-default"
                   >
                     {item.name}
-                  </Link>
+                  </div>
                 </li>
               ))}
             </ul>
@@ -148,13 +145,11 @@ const Header = () => {
           <ul className="flex flex-col py-4 space-y-2">
             {navigation.map((item) => (
               <li key={item.name} className="relative">
-                <Link
-                  href={item.href}
-                  className="block px-4 py-2 text-wizfore-text-primary hover:text-wizfore-text-brand font-medium transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
+                <div
+                  className="block px-4 py-2 text-wizfore-text-primary hover:text-wizfore-text-brand font-medium transition-colors cursor-default"
                 >
                   {item.name}
-                </Link>
+                </div>
               </li>
             ))}
           </ul>

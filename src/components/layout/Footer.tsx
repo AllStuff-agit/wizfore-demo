@@ -23,7 +23,7 @@ const Footer = () => {
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="위즈포레 사회서비스센터 위치"
+              title="위즈포레 위치"
             />
           </div>
 
@@ -31,14 +31,14 @@ const Footer = () => {
           <div className="lg:w-1/2 space-y-6 text-center lg:pl-0">
             {/* Company Name */}
             <div>
-              <h3 className="text-xl font-bold text-wizfore-coral-primary mb-2">
+              <h3 className="text-3xl font-bold text-wizfore-text-primary mb-2">
                 {defaultSiteData.siteInfo.name}
               </h3>
             </div>
 
             {/* Address */}
             <div className="space-y-2">
-              <h4 className="font-semibold text-wizfore-text-primary">주소</h4>
+              <h4 className="font-semibold text-wizfore-text-primary">주&nbsp;&nbsp;&nbsp;소</h4>
               <div className="flex items-start justify-center space-x-2">
                 <MapPin size={16} className="text-wizfore-coral-secondary flex-shrink-0 mt-0.5" />
                 <p className="text-sm text-wizfore-text-secondary leading-relaxed max-w-xs break-words">
@@ -49,7 +49,7 @@ const Footer = () => {
 
             {/* Contact Info */}
             <div className="space-y-2">
-              <h4 className="font-semibold text-wizfore-text-primary">대표번호</h4>
+              <h4 className="font-semibold text-wizfore-text-primary">대&nbsp;표&nbsp;번&nbsp;호</h4>
               <div className="flex items-center justify-center space-x-2">
                 <Phone size={16} className="text-wizfore-coral-secondary" />
                 <span className="text-lg font-bold text-wizfore-coral-primary">
@@ -60,7 +60,7 @@ const Footer = () => {
 
             {/* Business Hours */}
             <div className="space-y-2">
-              <h4 className="font-semibold text-wizfore-text-primary">진료시간</h4>
+              <h4 className="font-semibold text-wizfore-text-primary">운&nbsp;영&nbsp;시&nbsp;간</h4>
               <div className="space-y-1 text-sm text-wizfore-text-secondary">
                 <div className="flex items-center justify-center space-x-2">
                   <Clock size={14} className="text-wizfore-coral-secondary" />
@@ -71,7 +71,7 @@ const Footer = () => {
                   <span>주말/공휴일: {contact.operatingHours.weekend}</span>
                 </div>
                 <p className="text-xs text-red-500 mt-2">
-                  토, 일, 공휴일 일요일 휴진
+                  토, 일, 공휴일 일요일 휴업
                 </p>
               </div>
             </div>
