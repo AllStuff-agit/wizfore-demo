@@ -4,7 +4,7 @@ import { defaultSiteAssets } from './defaultSiteAssets'
 
 export const defaultSiteData: DefaultSiteData = {
   siteInfo: {
-    name: "위즈포레 사회서비스센터",
+    name: "위즈포레",
     establishedDate: "2016년 1월 1일",
     purpose: "위즈포레는 \"함께 어우러지는 지혜의 숲(WIZ FORE)\"라는 의미를 담고 있으며, 장애인을 포함한 모든 사람들이 어우러져 더불어 살아가는 힘을 키우는데 필요한 사회서비스를 제공하는 전문기관입니다.",
     coreValues: {
@@ -99,7 +99,7 @@ export const defaultSiteData: DefaultSiteData = {
   aboutInfo: {
     director: {
       name: "마종문",
-      position: "원장/감각통합&심리운동사",
+      position: "감각통합 & 심리운동사",
       education: [
         "아동학/스포츠건강학 학사 졸업",
         "부산대학교 특수교육 석사 졸업",
@@ -169,94 +169,103 @@ export const defaultSiteData: DefaultSiteData = {
       { year: "2025", month: "5", event: "김천대학교 건강재활서비스학과 산학협력" }
     ],
 
-    advisors: [
-      {
-        id: "advisor-1",
-        name: "윤치연",
-        position: "교수(사)한국심리협회)",
-        education: "특수교육학 박사",
-        career: [
-          "전)국립재활원 임상심리실장",
-          "전)춘해보건대학교 언어치료학과 정교수"
-        ],
-        order: 1
+    advisors: {
+      aboutMessage: {
+        title: "전문 자문위원단",
+        messages: [
+          "위즈포레 사회서비스센터는 다양한 분야의 전문가들로 구성된 자문위원단을 운영하고 있습니다.",
+          "각 분야의 전문성을 바탕으로 센터의 서비스 질 향상과 운영 개선에 도움을 주고 계십니다."
+        ]
       },
-      {
-        id: "advisor-2",
-        name: "송영화",
-        position: "원장(사회복지법세림복지재단)",
-        education: "사회복지학 박사",
-        career: [
-          "현)사회복지법인 세림복지재단 이사",
-          "현)세림어르신의집 원장"
-        ],
-        order: 2
-      },
-      {
-        id: "advisor-3",
-        name: "허명진",
-        position: "교수(부산가톨릭대학교)",
-        education: "특수교육학 박사",
-        career: [
-          "현)부산가톨릭대학교 언어청각치료학과 정교수"
-        ],
-        order: 3
-      },
-      {
-        id: "advisor-4",
-        name: "정원철",
-        position: "교수(신라대학교)",
-        education: "사회복지학 박사",
-        career: [
-          "현)신라대학교 사회복지학과 정교수",
-          "현)한국사회복지상담학회장"
-        ],
-        order: 4
-      },
-      {
-        id: "advisor-5",
-        name: "박소현",
-        position: "약사(한마음약국)",
-        education: "부산대학교 약학과 졸업",
-        career: [
-          "현)한마음약국 대표"
-        ],
-        order: 5
-      },
-      {
-        id: "advisor-6",
-        name: "배제현",
-        position: "교수(창원대학교)",
-        education: "교육학 박사",
-        career: [
-          "전)창신대학교 유아교육학과 정교수",
-          "창원시육아종합지원센터 인성교육 강사"
-        ],
-        order: 6
-      },
-      {
-        id: "advisor-7",
-        name: "공광석",
-        position: "경감(금정경찰서)",
-        education: "동의대 경찰행정학과 박사 수료",
-        career: [
-          "금정경찰서 부곡지구대",
-          "중앙경찰학교 교수요원"
-        ],
-        order: 7
-      },
-      {
-        id: "advisor-8",
-        name: "박정숙",
-        position: "겸임교수(우석대학교)",
-        education: "특수교육학 박사",
-        career: [
-          "한국심리운동연구소 전문강사",
-          "심리운동사1급"
-        ],
-        order: 8
-      }
-    ],
+      list: [
+        {
+          id: "advisor-1",
+          name: "윤치연",
+          position: "교수(사)한국심리협회)",
+          education: "특수교육학 박사",
+          career: [
+            "전)국립재활원 임상심리실장",
+            "전)춘해보건대학교 언어치료학과 정교수"
+          ],
+          order: 1
+        },
+        {
+          id: "advisor-2",
+          name: "송영화",
+          position: "원장(사회복지법세림복지재단)",
+          education: "사회복지학 박사",
+          career: [
+            "현)사회복지법인 세림복지재단 이사",
+            "현)세림어르신의집 원장"
+          ],
+          order: 2
+        },
+        {
+          id: "advisor-3",
+          name: "허명진",
+          position: "교수(부산가톨릭대학교)",
+          education: "특수교육학 박사",
+          career: [
+            "현)부산가톨릭대학교 언어청각치료학과 정교수"
+          ],
+          order: 3
+        },
+        {
+          id: "advisor-4",
+          name: "정원철",
+          position: "교수(신라대학교)",
+          education: "사회복지학 박사",
+          career: [
+            "현)신라대학교 사회복지학과 정교수",
+            "현)한국사회복지상담학회장"
+          ],
+          order: 4
+        },
+        {
+          id: "advisor-5",
+          name: "박소현",
+          position: "약사(한마음약국)",
+          education: "부산대학교 약학과 졸업",
+          career: [
+            "현)한마음약국 대표"
+          ],
+          order: 5
+        },
+        {
+          id: "advisor-6",
+          name: "배제현",
+          position: "교수(창원대학교)",
+          education: "교육학 박사",
+          career: [
+            "전)창신대학교 유아교육학과 정교수",
+            "창원시육아종합지원센터 인성교육 강사"
+          ],
+          order: 6
+        },
+        {
+          id: "advisor-7",
+          name: "공광석",
+          position: "경감(금정경찰서)",
+          education: "동의대 경찰행정학과 박사 수료",
+          career: [
+            "금정경찰서 부곡지구대",
+            "중앙경찰학교 교수요원"
+          ],
+          order: 7
+        },
+        {
+          id: "advisor-8",
+          name: "박정숙",
+          position: "겸임교수(우석대학교)",
+          education: "특수교육학 박사",
+          career: [
+            "한국심리운동연구소 전문강사",
+            "심리운동사1급"
+          ],
+          order: 8
+        }
+      ]
+    },
 
     facilities: [
       "언어치료실",

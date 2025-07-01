@@ -417,7 +417,13 @@ export interface DefaultSiteData {
   aboutInfo: {
     director: DirectorInfo
     milestones: Milestone[]
-    advisors: AdvisorInfo[]
+    advisors: {
+      aboutMessage: {
+        title: string
+        messages: string[]
+      }
+      list: AdvisorInfo[]
+    }
     facilities: string[]
   }
   programs: ProgramCategory[]

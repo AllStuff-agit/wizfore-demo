@@ -468,3 +468,90 @@ export async function getAllProgramsFlattened() {
     return []
   }
 }
+
+/**
+ * 자문위원 정보 조회
+ */
+export async function getAdvisors() {
+  try {
+    const aboutInfo = await getAboutInfo()
+    return aboutInfo.advisors?.list || defaultSiteData.aboutInfo.advisors.list
+  } catch (error) {
+    console.error('Error fetching advisors:', error)
+    return defaultSiteData.aboutInfo.advisors.list
+  }
+}
+
+/**
+ * 자문위원 소개 메시지 조회
+ */
+export async function getAdvisorsAboutMessage() {
+  try {
+    const aboutInfo = await getAboutInfo()
+    return aboutInfo.advisors?.aboutMessage || defaultSiteData.aboutInfo.advisors.aboutMessage
+  } catch (error) {
+    console.error('Error fetching advisors about message:', error)
+    return defaultSiteData.aboutInfo.advisors.aboutMessage
+  }
+}
+
+/**
+ * 팀(직원) 정보 조회
+ */
+export async function getTeam() {
+  try {
+    const docRef = doc(db, 'team', 'main')
+    const docSnap = await getDoc(docRef)
+    
+    if (docSnap.exists()) {
+      const data = docSnap.data()
+      return data.members || defaultSiteData.team
+    } else {
+      console.warn('Team data not found, returning default data')
+      return defaultSiteData.team
+    }
+  } catch (error) {
+    console.error('Error fetching team data:', error)
+    return defaultSiteData.team
+  }
+}
+
+/**
+ * 커뮤니티 정보 조회
+ */
+export async function getCommunity() {
+  try {
+    const docRef = doc(db, 'community', 'main')
+    const docSnap = await getDoc(docRef)
+    
+    if (docSnap.exists()) {
+      return docSnap.data()
+    } else {
+      console.warn('Community data not found, returning default data')
+      return defaultSiteData.community
+    }
+  } catch (error) {
+    console.error('Error fetching community data:', error)
+    return defaultSiteData.community
+  }
+}
+
+/**
+ * 홈 설정 정보 조회
+ */
+export async function getHomeConfig() {
+  try {
+    const docRef = doc(db, 'homeConfig', 'main')
+    const docSnap = await getDoc(docRef)
+    
+    if (docSnap.exists()) {
+      return docSnap.data()
+    } else {
+      console.warn('Home config not found, returning default data')
+      return defaultSiteData.homeConfig
+    }
+  } catch (error) {
+    console.error('Error fetching home config:', error)
+    return defaultSiteData.homeConfig
+  }
+}
