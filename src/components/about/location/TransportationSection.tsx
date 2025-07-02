@@ -5,7 +5,7 @@ import { defaultSiteData } from '@/lib/data/defaultSiteData'
 import Image from 'next/image'
 
 const TransportationSection = () => {
-  const { contact } = defaultSiteData.siteInfo
+  const { contact, name } = defaultSiteData.siteInfo
 
   // 교통수단별 아이콘 가져오기
   const getTransportIcon = (type: string) => {
@@ -31,7 +31,7 @@ const TransportationSection = () => {
         viewport={{ once: true }}
       >
         <h2 className="text-3xl font-bold text-wizfore-text-primary mb-4">
-          교통편 안내
+          {name}로 오시는 길을 확인하세요
         </h2>
       </motion.div>
 
