@@ -50,7 +50,6 @@ const Header = () => {
       name: '문의', 
       href: '/contact',
       submenu: [
-        { name: '상담 예약', href: '/contact/reservation' },
         { name: '온라인 문의', href: '/contact/inquiry' },
       ]
     },
