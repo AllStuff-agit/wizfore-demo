@@ -18,8 +18,8 @@ export default function NewsPage() {
       try {
         setLoading(true)
         const communityData = await getCommunity()
-        setNews(communityData.news || [])
-        setCategories(communityData.categories || [])
+        setNews(communityData.news.articles || [])
+        setCategories(communityData.news.categories || [])
       } catch (err) {
         console.error('Error fetching community data:', err)
         setError('뉴스 데이터를 불러오는데 실패했습니다.')
