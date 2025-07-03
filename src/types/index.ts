@@ -368,7 +368,7 @@ export interface NewsItem {
   title: string
   content: string
   date: string
-  category: 'news' | 'partnership' | 'award' | 'event'
+  category: string
   imageUrl?: string
   order: number
 }
@@ -454,11 +454,7 @@ export interface DefaultSiteData {
         title: string
         messages: string[]
       }
-      categories: {
-        value: string
-        label: string
-        order: number
-      }[]
+      categories: string[]
     }
     facilities: string[]
   }
@@ -466,6 +462,7 @@ export interface DefaultSiteData {
   team: TeamCategory[]
   community: {
     news: NewsItem[]
+    categories: string[]
     snsLinks: {
       youtube?: string
       instagram?: string
