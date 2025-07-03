@@ -60,11 +60,7 @@ interface OnlineInquirySectionProps {
     title: string
     messages: string[]
   }
-  categories?: {
-    value: string
-    label: string
-    order: number
-  }[]
+  categories?: string[]
 }
 
 const OnlineInquirySection: React.FC<OnlineInquirySectionProps> = ({ aboutMessage, categories }) => {
@@ -81,11 +77,11 @@ const OnlineInquirySection: React.FC<OnlineInquirySectionProps> = ({ aboutMessag
   })
 
   const inquiryCategories = categories || [
-    { value: 'program', label: '프로그램 문의', order: 1 },
-    { value: 'consultation', label: '상담 문의', order: 2 },
-    { value: 'facility', label: '시설 이용 문의', order: 3 },
-    { value: 'general', label: '일반 문의', order: 4 },
-    { value: 'other', label: '기타', order: 5 },
+    '프로그램 문의',
+    '상담 문의', 
+    '시설 이용 문의',
+    '일반 문의',
+    '기타'
   ]
 
   const onSubmit = async (data: InquiryFormData) => {
@@ -235,9 +231,9 @@ const OnlineInquirySection: React.FC<OnlineInquirySectionProps> = ({ aboutMessag
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-wizfore-coral-primary focus:border-transparent outline-none transition-all"
                     >
                       <option value="">문의 분류를 선택해주세요</option>
-                      {inquiryCategories.map((category) => (
-                        <option key={category.value} value={category.value}>
-                          {category.label}
+                      {inquiryCategories.map((category, index) => (
+                        <option key={category} value={category}>
+                          {category}
                         </option>
                       ))}
                     </select>

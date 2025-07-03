@@ -14,11 +14,7 @@ export default function OnlineInquiryPage() {
     title: string
     messages: string[]
   } | null>(null)
-  const [categories, setCategories] = useState<{
-    value: string
-    label: string
-    order: number
-  }[] | null>(null)
+  const [categories, setCategories] = useState<string[] | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
