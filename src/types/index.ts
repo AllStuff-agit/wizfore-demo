@@ -463,8 +463,14 @@ export interface DefaultSiteData {
   community: {
     news: NewsItem[]
     categories: string[]
-    snsLinks: {
-      youtube?: string
+    sns: {
+      youtube?: {
+        link?: string
+        message?: {
+          title?: string
+          description?: string
+        }
+      }
       instagram?: string
       facebook?: string
       blog?: string
