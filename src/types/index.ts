@@ -291,6 +291,10 @@ export interface DirectorInfo {
     title: string
     messages: string[]
   }
+  heroMessage?: {
+    title: string
+    description: string
+  }
 }
 
 export interface AdvisorInfo {
@@ -379,7 +383,6 @@ export interface ContactInfo {
     weekday: string
     weekend: string
   }
-  transportation: TransportationInfo[]
   businessNumber: string
   accountInfo: string
   mapUrl: string
@@ -417,13 +420,45 @@ export interface DefaultSiteData {
   }
   aboutInfo: {
     director: DirectorInfo
-    milestones: Milestone[]
+    history: {
+      heroMessage: {
+        title: string
+        description: string
+      }
+      milestones: Milestone[]
+    }
     advisors: {
       aboutMessage: {
         title: string
         messages: string[]
       }
+      heroMessage: {
+        title: string
+        description: string
+      }
       list: AdvisorInfo[]
+    }
+    location: {
+      heroMessage: {
+        title: string
+        description: string
+      }
+      transportation: TransportationInfo[]
+    }
+    inquiry: {
+      heroMessage: {
+        title: string
+        description: string
+      }
+      aboutMessage: {
+        title: string
+        messages: string[]
+      }
+      categories: {
+        value: string
+        label: string
+        order: number
+      }[]
     }
     facilities: string[]
   }

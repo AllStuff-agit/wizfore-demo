@@ -48,20 +48,6 @@ export const defaultSiteData: DefaultSiteData = {
       businessNumber: "123-45-67890",
       accountInfo: "농협 123-456-789012 위즈포레사회서비스센터",
       mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3260.848873729402!2d128.98987061177746!3d35.18531905694215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3568ea9ea90ac5a9%3A0x170fb73b2e0fe64c!2z67aA7IKw6rSR7Jet7IucIOyCrOyDgeq1rCDrqqjrnbzroZwxMTDrsojquLggMjU!5e0!3m2!1sko!2skr!4v1751037173300!5m2!1sko!2skr",
-      transportation: [
-        {
-          type: "지하철",
-          description: "모라역 하차 후 도보 5분"
-        },
-        {
-          type: "버스",
-          description: "모라주공아파트 정류장 하차"
-        },
-        {
-          type: "차",
-          description: "센터 입구 도로공용주차장 및 홈플러스 주차장 이용"
-        }
-      ]
     },
     mainServices: [
       {
@@ -137,36 +123,46 @@ export const defaultSiteData: DefaultSiteData = {
           "이렇게 아이와 가족 모두의 행복한 일상을 함께 만들어갑니다."
         ]
       },
+      heroMessage: {
+        title: "센터장 소개",
+        description: "위즈포레를 이끌어가는 센터장을 소개합니다"
+      },
       imageUrl: "",
       heroImageUrl: ""
     },
     
-    milestones: [
-      { year: "2016", month: "1", event: "위즈포레사회서비스센터 설립" },
-      { year: "2016", month: "2", event: "아동청소년 심리치유서비스 제공기관 등록" },
-      { year: "2016", month: "2", event: "학부모코칭서비스 제공기관 등록" },
-      { year: "2016", month: "2", event: "아동 동화구연서비스 제공기관 등록" },
-      { year: "2020", month: "12", event: "발달장애인 주간활동서비스 제공기관 지정" },
-      { year: "2020", month: "12", event: "발달장애학생 방과후활동서비스 제공기관 지정" },
-      { year: "2021", month: "7", event: "교육청 특수교육대상자 치료지원 서비스 제공기관 지정" },
-      { year: "2021", month: "9", event: "부산정보문화센터(정보산업진흥원) 업무협약" },
-      { year: "2021", month: "10", event: "사상구드림스타트센터 업무협약 (아동 심리치료 전문기관)" },
-      { year: "2021", month: "10", event: "부산시여성가족개발원 업무협약 (성인지 교육 협력기관)" },
-      { year: "2021", month: "11", event: "장애아동 발달재활서비스 제공기관 지정" },
-      { year: "2022", month: "2", event: "사상여성인력센터 청년채용 업무협약" },
-      { year: "2022", month: "6", event: "부산가톨릭대학교 언어청각치료학과 산학협력" },
-      { year: "2022", month: "7", event: "성평등 사례뱅크 공모전 우수상 수상 (부산여성가족개발원)" },
-      { year: "2022", month: "11", event: "춘해보건대학교 언어치료학과 산학협력" },
-      { year: "2023", month: "3", event: "사상구장애인체육회 업무협약 (생활체육지원사업)" },
-      { year: "2023", month: "3", event: "사상구장애인복지관 업무협약" },
-      { year: "2023", month: "4", event: "한국사회복지상담학회 산학협력 (신라대 사회복지학과)" },
-      { year: "2023", month: "7", event: "경남통일교육지원센터(통일부) 업무협약" },
-      { year: "2023", month: "11", event: "신라대학교 특수체육교육학과 산학협력" },
-      { year: "2023", month: "11", event: "경남정보대학교 작업치료학과 산학협력" },
-      { year: "2023", month: "11", event: "장애인스포츠 및 일반스포츠 이용권 제공기관 선정" },
-      { year: "2024", month: "2", event: "건양사이버대학교 심리운동치료학과 산학협력" },
-      { year: "2025", month: "5", event: "김천대학교 건강재활서비스학과 산학협력" }
-    ],
+    history: {
+      heroMessage: {
+        title: "센터 발자취",
+        description: "위즈포레의 성장과 발전 과정을 시간순으로 소개합니다"
+      },
+      milestones: [
+        { year: "2016", month: "1", event: "위즈포레사회서비스센터 설립" },
+        { year: "2016", month: "2", event: "아동청소년 심리치유서비스 제공기관 등록" },
+        { year: "2016", month: "2", event: "학부모코칭서비스 제공기관 등록" },
+        { year: "2016", month: "2", event: "아동 동화구연서비스 제공기관 등록" },
+        { year: "2020", month: "12", event: "발달장애인 주간활동서비스 제공기관 지정" },
+        { year: "2020", month: "12", event: "발달장애학생 방과후활동서비스 제공기관 지정" },
+        { year: "2021", month: "7", event: "교육청 특수교육대상자 치료지원 서비스 제공기관 지정" },
+        { year: "2021", month: "9", event: "부산정보문화센터(정보산업진흥원) 업무협약" },
+        { year: "2021", month: "10", event: "사상구드림스타트센터 업무협약 (아동 심리치료 전문기관)" },
+        { year: "2021", month: "10", event: "부산시여성가족개발원 업무협약 (성인지 교육 협력기관)" },
+        { year: "2021", month: "11", event: "장애아동 발달재활서비스 제공기관 지정" },
+        { year: "2022", month: "2", event: "사상여성인력센터 청년채용 업무협약" },
+        { year: "2022", month: "6", event: "부산가톨릭대학교 언어청각치료학과 산학협력" },
+        { year: "2022", month: "7", event: "성평등 사례뱅크 공모전 우수상 수상 (부산여성가족개발원)" },
+        { year: "2022", month: "11", event: "춘해보건대학교 언어치료학과 산학협력" },
+        { year: "2023", month: "3", event: "사상구장애인체육회 업무협약 (생활체육지원사업)" },
+        { year: "2023", month: "3", event: "사상구장애인복지관 업무협약" },
+        { year: "2023", month: "4", event: "한국사회복지상담학회 산학협력 (신라대 사회복지학과)" },
+        { year: "2023", month: "7", event: "경남통일교육지원센터(통일부) 업무협약" },
+        { year: "2023", month: "11", event: "신라대학교 특수체육교육학과 산학협력" },
+        { year: "2023", month: "11", event: "경남정보대학교 작업치료학과 산학협력" },
+        { year: "2023", month: "11", event: "장애인스포츠 및 일반스포츠 이용권 제공기관 선정" },
+        { year: "2024", month: "2", event: "건양사이버대학교 심리운동치료학과 산학협력" },
+        { year: "2025", month: "5", event: "김천대학교 건강재활서비스학과 산학협력" }
+      ]
+    },
 
     advisors: {
       aboutMessage: {
@@ -175,6 +171,10 @@ export const defaultSiteData: DefaultSiteData = {
           "위즈포레 사회서비스센터는 다양한 분야의 전문가들로 구성된 자문위원단을 운영하고 있습니다.",
           "각 분야의 전문성을 바탕으로 센터의 서비스 질 향상과 운영 개선에 도움을 주고 계십니다."
         ]
+      },
+      heroMessage: {
+        title: "자문위원",
+        description: "위즈포레의 전문성 향상을 위해 도움을 주시는 분들을 소개합니다"
       },
       list: [
         {
@@ -263,6 +263,47 @@ export const defaultSiteData: DefaultSiteData = {
           imageUrl: "",
           order: 8
         }
+      ]
+    },
+
+    location: {
+      heroMessage: {
+        title: "오시는길",
+        description: "위즈포레 사회서비스센터 위치 및 교통 안내"
+      },
+      transportation: [
+        {
+          type: "지하철",
+          description: "모라역 하차 후 도보 5분"
+        },
+        {
+          type: "버스",
+          description: "모라주공아파트 정류장 하차"
+        },
+        {
+          type: "차",
+          description: "센터 입구 도로공용주차장 및 홈플러스 주차장 이용"
+        }
+      ]
+    },
+
+    inquiry: {
+      heroMessage: {
+        title: "온라인 문의",
+        description: "궁금한 사항이나 문의사항을 언제든지 남겨주세요"
+      },
+      aboutMessage: {
+        title: "문의하기",
+        messages: [
+          "궁금한 사항이나 상담을 원하시는 내용을 자세히 적어주시면, 방문 시일 내에 답변드리겠습니다."
+        ]
+      },
+      categories: [
+        { value: "program", label: "프로그램 문의", order: 1 },
+        { value: "consultation", label: "상담 문의", order: 2 },
+        { value: "facility", label: "시설 이용 문의", order: 3 },
+        { value: "general", label: "일반 문의", order: 4 },
+        { value: "other", label: "기타", order: 5 }
       ]
     },
 
