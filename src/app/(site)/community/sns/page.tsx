@@ -6,8 +6,14 @@ import { getCommunity } from '@/lib/services/dataService'
 import { Play, Youtube, MessageCircle, Share2, Heart } from 'lucide-react'
 
 export default function SNSPage() {
-  const [snsLinks, setSnsLinks] = useState<{
-    youtube?: string
+  const [snsData, setSnsData] = useState<{
+    youtube?: {
+      link?: string
+      message?: {
+        title?: string
+        description?: string
+      }
+    }
     instagram?: string
     facebook?: string
     blog?: string
@@ -20,7 +26,7 @@ export default function SNSPage() {
       try {
         setLoading(true)
         const communityData = await getCommunity()
-        setSnsLinks(communityData.snsLinks || {})
+        setSnsData(communityData.sns || {})
       } catch (err) {
         console.error('Error fetching community data:', err)
         setError('SNS 데이터를 불러오는데 실패했습니다.')
@@ -115,12 +121,12 @@ export default function SNSPage() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            {snsLinks.youtube ? (
+            {snsData.youtube?.link ? (
               /* YouTube 비디오 임베드 */
               <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
                 <div className="relative aspect-video">
                   <iframe
-                    src={snsLinks.youtube}
+                    src={snsData.youtube.link}
                     title="위즈포레 소개 영상"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -134,12 +140,10 @@ export default function SNSPage() {
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <h3 className="text-xl font-bold text-wizfore-text-primary mb-2">
-                      위즈포레 사회서비스센터 소개
+                      {snsData.youtube?.message?.title || "위즈포레 사회서비스센터 소개"}
                     </h3>
                     <p className="text-wizfore-text-secondary mb-4">
-                      위즈포레에서 제공하는 다양한 치료 프로그램과 서비스를 소개하는 영상입니다. 
-                      센터의 시설과 전문가들, 그리고 이용자들의 모습을 통해 
-                      위즈포레가 추구하는 가치를 확인해보세요.
+                      {snsData.youtube?.message?.description || "위즈포레에서 제공하는 다양한 치료 프로그램과 서비스를 소개하는 영상입니다. 센터의 시설과 전문가들, 그리고 이용자들의 모습을 통해 위즈포레가 추구하는 가치를 확인해보세요."}
                     </p>
                   </div>
                 </div>
