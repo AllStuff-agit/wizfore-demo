@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { getAboutSectionData } from '@/lib/services/defaultDataService'
+import { getAboutSectionData } from '@/lib/services/dataService'
 import type { DefaultSiteData } from '@/types'
 
 interface AboutSectionData {

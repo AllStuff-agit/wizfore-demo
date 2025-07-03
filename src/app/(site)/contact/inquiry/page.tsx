@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { getInquiryHeroMessage, getInquiryAboutMessage, getInquiryCategories } from '@/lib/services/defaultDataService'
+import { getInquiryHeroMessage, getInquiryAboutMessage, getInquiryCategories } from '@/lib/services/dataService'
 import InquiryHeroSection from '@/components/contact/InquiryHeroSection'
 import OnlineInquirySection from '@/components/contact/OnlineInquirySection'
 

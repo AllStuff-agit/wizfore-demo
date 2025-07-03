@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { getHistoryData, getHistoryHeroMessage } from '@/lib/services/defaultDataService'
+import { getHistoryData, getHistoryHeroMessage } from '@/lib/services/dataService'
 import type { Milestone } from '@/types'
 import HistoryHeroSection from '@/components/about/history/HistoryHeroSection'
 import StatsSection from '@/components/about/history/StatsSection'

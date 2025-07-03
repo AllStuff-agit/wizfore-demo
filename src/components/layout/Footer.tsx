@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { MapPin, Phone, Clock, Mail } from 'lucide-react'
-import { getSiteInfo } from '@/lib/services/defaultDataService'
+import { getSiteInfo } from '@/lib/services/dataService'
 import type { ContactInfo } from '@/types'
 
 interface FooterData {

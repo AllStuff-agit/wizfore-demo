@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { getAdvisors, getAdvisorsAboutMessage, getAdvisorsHeroMessage } from '@/lib/services/defaultDataService'
+import { getAdvisors, getAdvisorsAboutMessage, getAdvisorsHeroMessage } from '@/lib/services/dataService'
 import type { AdvisorInfo } from '@/types'
 import AdvisorsHeroSection from '@/components/about/advisors/AdvisorsHeroSection'
 import AdvisorsListSection from '@/components/about/advisors/AdvisorsListSection'

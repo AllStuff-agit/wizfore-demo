@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { getLocationData, getLocationHeroMessage } from '@/lib/services/defaultDataService'
+import { getLocationData, getLocationHeroMessage } from '@/lib/services/dataService'
 import type { ContactInfo, TransportationInfo } from '@/types'
 import LocationHeroSection from '@/components/about/location/LocationHeroSection'
 import TransportationSection from '@/components/about/location/TransportationSection'

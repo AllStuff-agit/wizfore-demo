@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { getAllProgramsFlattened } from '@/lib/services/defaultDataService'
+import { getAllProgramsFlattened } from '@/lib/services/dataService'
 import Marquee from '@/components/ui/marquee'
 import { 
   Brain, 

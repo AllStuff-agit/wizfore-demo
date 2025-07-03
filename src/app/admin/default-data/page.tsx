@@ -21,7 +21,7 @@ import {
   checkAllCategoriesDataStatus,
   deleteAllDefaultData,
   addAllDefaultData
-} from '@/lib/services/defaultDataService'
+} from '@/lib/services/seedService'
 import ConfirmDialog from '@/components/ui/ConfirmDialog'
 import ProgressDialog from '@/components/ui/ProgressDialog'
 
