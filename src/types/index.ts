@@ -461,9 +461,27 @@ export interface DefaultSiteData {
   programs: ProgramCategory[]
   team: TeamCategory[]
   community: {
-    news: NewsItem[]
-    categories: string[]
+    news: {
+      categories: string[]
+      heroMessage?: {
+        title?: string
+        description?: string
+      }
+      aboutMessage?: {
+        title?: string
+        description?: string
+      }
+      articles: NewsItem[]
+    }
     sns: {
+      heroMessage?: {
+        title?: string
+        description?: string
+      }
+      aboutMessage?: {
+        title?: string
+        description?: string
+      }
       youtube?: {
         link?: string
         message?: {
