@@ -55,7 +55,19 @@ const inquirySchema = z.object({
 
 type InquiryFormData = z.infer<typeof inquirySchema>
 
-const OnlineInquirySection: React.FC = () => {
+interface OnlineInquirySectionProps {
+  aboutMessage?: {
+    title: string
+    messages: string[]
+  }
+  categories?: {
+    value: string
+    label: string
+    order: number
+  }[]
+}
+
+const OnlineInquirySection: React.FC<OnlineInquirySectionProps> = ({ aboutMessage, categories }) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
 
@@ -68,12 +80,12 @@ const OnlineInquirySection: React.FC = () => {
     resolver: zodResolver(inquirySchema),
   })
 
-  const inquiryCategories = [
-    { value: 'program', label: '프로그램 문의' },
-    { value: 'consultation', label: '상담 문의' },
-    { value: 'facility', label: '시설 이용 문의' },
-    { value: 'general', label: '일반 문의' },
-    { value: 'other', label: '기타' },
+  const inquiryCategories = categories || [
+    { value: 'program', label: '프로그램 문의', order: 1 },
+    { value: 'consultation', label: '상담 문의', order: 2 },
+    { value: 'facility', label: '시설 이용 문의', order: 3 },
+    { value: 'general', label: '일반 문의', order: 4 },
+    { value: 'other', label: '기타', order: 5 },
   ]
 
   const onSubmit = async (data: InquiryFormData) => {
@@ -110,12 +122,22 @@ const OnlineInquirySection: React.FC = () => {
           viewport={{ once: true }}
         >
           <h2 className="text-4xl font-bold text-wizfore-text-primary mb-4">
-            문의하기
+            {aboutMessage?.title || "문의하기"}
           </h2>
-          <p className="text-lg text-wizfore-text-secondary max-w-2xl mx-auto">
-            궁금한 사항이나 상담을 원하시는 내용을 자세히 적어주시면, 
-            빠른 시일 내에 답변드리겠습니다.
-          </p>
+          <div className="text-lg text-wizfore-text-secondary max-w-2xl mx-auto">
+            {aboutMessage?.messages ? (
+              aboutMessage.messages.map((message, index) => (
+                <p key={index} className={index > 0 ? "mt-2" : ""}>
+                  {message}
+                </p>
+              ))
+            ) : (
+              <p>
+                궁금한 사항이나 상담을 원하시는 내용을 자세히 적어주시면, 
+                빠른 시일 내에 답변드리겠습니다.
+              </p>
+            )}
+          </div>
         </motion.div>
 
         <div className="max-w-4xl mx-auto">
@@ -269,45 +291,6 @@ const OnlineInquirySection: React.FC = () => {
                 </form>
               )}
             </MagicCard>
-          </motion.div>
-
-          {/* 안내 정보 */}
-          <motion.div
-            className="mt-12 grid md:grid-cols-3 gap-6"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            <div className="text-center p-6 bg-white rounded-xl shadow-sm">
-              <div className="w-12 h-12 bg-wizfore-coral-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <div className="w-6 h-6 bg-wizfore-coral-primary rounded-full" />
-              </div>
-              <h3 className="font-semibold text-wizfore-text-primary mb-2">빠른 답변</h3>
-              <p className="text-sm text-wizfore-text-secondary">
-                평일 기준 24시간 이내<br />답변을 드립니다
-              </p>
-            </div>
-
-            <div className="text-center p-6 bg-white rounded-xl shadow-sm">
-              <div className="w-12 h-12 bg-wizfore-coral-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <div className="w-6 h-6 bg-wizfore-coral-primary rounded-full" />
-              </div>
-              <h3 className="font-semibold text-wizfore-text-primary mb-2">개인정보 보호</h3>
-              <p className="text-sm text-wizfore-text-secondary">
-                문의 목적 외에는<br />사용하지 않습니다
-              </p>
-            </div>
-
-            <div className="text-center p-6 bg-white rounded-xl shadow-sm">
-              <div className="w-12 h-12 bg-wizfore-coral-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <div className="w-6 h-6 bg-wizfore-coral-primary rounded-full" />
-              </div>
-              <h3 className="font-semibold text-wizfore-text-primary mb-2">전문 상담</h3>
-              <p className="text-sm text-wizfore-text-secondary">
-                전문 상담사가<br />직접 답변해드립니다
-              </p>
-            </div>
           </motion.div>
         </div>
       </div>
