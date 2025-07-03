@@ -26,6 +26,12 @@ type CategoryType = {
   programs?: ProgramType[]
 }
 
+type InquiryCategory = {
+  value: string
+  label: string
+  order: number
+}
+
 /**
  * Firebase 컬렉션에 데이터가 존재하는지 확인
  */
@@ -345,12 +351,11 @@ export async function getSiteInfo() {
     if (docSnap.exists()) {
       return docSnap.data()
     } else {
-      console.warn('Site info not found, returning default data')
-      return defaultSiteData.siteInfo
+      throw new Error('Site info not found in database')
     }
   } catch (error) {
     console.error('Error fetching site info:', error)
-    return defaultSiteData.siteInfo
+    throw error
   }
 }
 
@@ -365,12 +370,11 @@ export async function getAboutInfo() {
     if (docSnap.exists()) {
       return docSnap.data()
     } else {
-      console.warn('About info not found, returning default data')
-      return defaultSiteData.aboutInfo
+      throw new Error('About info not found in database')
     }
   } catch (error) {
     console.error('Error fetching about info:', error)
-    return defaultSiteData.aboutInfo
+    throw error
   }
 }
 
@@ -383,8 +387,8 @@ export async function getAboutSectionData(): Promise<{
 }> {
   try {
     const [siteInfo, aboutInfo] = await Promise.all([
-      getSiteInfo(),
-      getAboutInfo()
+      getSiteInfo().catch(() => defaultSiteData.siteInfo),
+      getAboutInfo().catch(() => defaultSiteData.aboutInfo)
     ])
     
     return {
@@ -493,6 +497,96 @@ export async function getAdvisorsAboutMessage() {
 }
 
 /**
+ * 자문위원 히어로 메시지 조회
+ */
+export async function getAdvisorsHeroMessage() {
+  try {
+    const aboutInfo = await getAboutInfo()
+    return aboutInfo.advisors?.heroMessage || defaultSiteData.aboutInfo.advisors.heroMessage
+  } catch (error) {
+    console.error('Error fetching advisors hero message:', error)
+    return defaultSiteData.aboutInfo.advisors.heroMessage
+  }
+}
+
+/**
+ * 히스토리 히어로 메시지 조회
+ */
+export async function getHistoryHeroMessage() {
+  try {
+    const aboutInfo = await getAboutInfo()
+    return aboutInfo.history?.heroMessage || defaultSiteData.aboutInfo.history.heroMessage
+  } catch (error) {
+    console.error('Error fetching history hero message:', error)
+    return defaultSiteData.aboutInfo.history.heroMessage
+  }
+}
+
+/**
+ * 위치 히어로 메시지 조회
+ */
+export async function getLocationHeroMessage() {
+  try {
+    const aboutInfo = await getAboutInfo()
+    return aboutInfo.location?.heroMessage || defaultSiteData.aboutInfo.location.heroMessage
+  } catch (error) {
+    console.error('Error fetching location hero message:', error)
+    return defaultSiteData.aboutInfo.location.heroMessage
+  }
+}
+
+/**
+ * 문의 히어로 메시지 조회
+ */
+export async function getInquiryHeroMessage() {
+  try {
+    const aboutInfo = await getAboutInfo()
+    return aboutInfo.inquiry?.heroMessage || defaultSiteData.aboutInfo.inquiry.heroMessage
+  } catch (error) {
+    console.error('Error fetching inquiry hero message:', error)
+    return defaultSiteData.aboutInfo.inquiry.heroMessage
+  }
+}
+
+/**
+ * 문의 소개 메시지 조회
+ */
+export async function getInquiryAboutMessage() {
+  try {
+    const aboutInfo = await getAboutInfo()
+    return aboutInfo.inquiry?.aboutMessage || defaultSiteData.aboutInfo.inquiry.aboutMessage
+  } catch (error) {
+    console.error('Error fetching inquiry about message:', error)
+    return defaultSiteData.aboutInfo.inquiry.aboutMessage
+  }
+}
+
+/**
+ * 문의 카테고리 조회
+ */
+export async function getInquiryCategories(): Promise<InquiryCategory[]> {
+  try {
+    const aboutInfo = await getAboutInfo()
+    const categories = aboutInfo.inquiry?.categories || defaultSiteData.aboutInfo.inquiry.categories
+    // 타입 안전성을 위해 명시적으로 타입 체크
+    const validCategories = Array.isArray(categories) ? categories : defaultSiteData.aboutInfo.inquiry.categories
+    // 타입 가드를 통한 안전한 정렬
+    const typedCategories = validCategories.filter((item): item is InquiryCategory => 
+      typeof item === 'object' && 
+      item !== null && 
+      'value' in item && 
+      'label' in item && 
+      'order' in item &&
+      typeof item.order === 'number'
+    )
+    return typedCategories.sort((a, b) => a.order - b.order)
+  } catch (error) {
+    console.error('Error fetching inquiry categories:', error)
+    return defaultSiteData.aboutInfo.inquiry.categories.sort((a, b) => a.order - b.order)
+  }
+}
+
+/**
  * 팀(직원) 정보 조회
  */
 export async function getTeam() {
@@ -550,5 +644,46 @@ export async function getHomeConfig() {
   } catch (error) {
     console.error('Error fetching home config:', error)
     return defaultSiteData.homeConfig
+  }
+}
+
+/**
+ * History 페이지용 데이터 조회 (DB에서만)
+ */
+export async function getHistoryData() {
+  try {
+    const aboutInfoData = await getAboutInfo()
+    const siteInfoData = await getSiteInfo()
+    
+    return {
+      milestones: aboutInfoData.history?.milestones || [],
+      siteName: siteInfoData.name || ''
+    }
+  } catch (error) {
+    console.error('Error fetching history data:', error)
+    throw error
+  }
+}
+
+/**
+ * Location 페이지용 데이터 조회 (DB에서만)
+ */
+export async function getLocationData() {
+  try {
+    const [aboutInfoData, siteInfoData] = await Promise.all([
+      getAboutInfo(),
+      getSiteInfo()
+    ])
+    
+    return {
+      contact: siteInfoData.contact,
+      transportation: aboutInfoData.location?.transportation || [],
+      siteName: siteInfoData.name,
+      address: aboutInfoData.address,
+      coordinates: aboutInfoData.coordinates
+    }
+  } catch (error) {
+    console.error('Error fetching location data:', error)
+    throw error
   }
 }
