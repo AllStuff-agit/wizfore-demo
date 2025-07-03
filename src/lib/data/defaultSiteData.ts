@@ -1019,8 +1019,14 @@ export const defaultSiteData: DefaultSiteData = {
         order: 38
       }
     ],
-    snsLinks: {
-      youtube: "https://www.youtube.com/embed/XX7Z-iCsMfU"
+    sns: {
+      youtube: {
+        link: "https://www.youtube.com/embed/XX7Z-iCsMfU",
+        message: {
+          title: "위즈포레 사회서비스센터 소개",
+          description: "위즈포레에서 제공하는 다양한 치료 프로그램과 서비스를 소개하는 영상입니다. 센터의 시설과 전문가들, 그리고 이용자들의 모습을 통해 위즈포레가 추구하는 가치를 확인해보세요."
+        }
+      }
     }
   },
 
