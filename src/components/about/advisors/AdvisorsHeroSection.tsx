@@ -2,7 +2,14 @@
 
 import { motion } from 'framer-motion'
 
-const AdvisorsHeroSection = () => {
+interface AdvisorsHeroSectionProps {
+  heroMessage?: {
+    title: string
+    description: string
+  }
+}
+
+const AdvisorsHeroSection: React.FC<AdvisorsHeroSectionProps> = ({ heroMessage }) => {
   return (
     <section 
       className="relative h-96 bg-cover bg-center flex items-center justify-center"
@@ -18,7 +25,7 @@ const AdvisorsHeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          자문위원
+          {heroMessage?.title || "자문위원"}
         </motion.h1>
         <motion.p 
           className="text-xl"
@@ -26,7 +33,7 @@ const AdvisorsHeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          위즈포레의 전문성 향상을 위해 도움을 주시는 분들을 소개합니다
+          {heroMessage?.description || "위즈포레의 전문성 향상을 위해 도움을 주시는 분들을 소개합니다"}
         </motion.p>
       </div>
     </section>

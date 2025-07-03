@@ -3,11 +3,67 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { MapPin, Phone, Clock, Mail } from 'lucide-react'
-import { defaultSiteData } from '@/lib/data/defaultSiteData'
+import { getSiteInfo } from '@/lib/services/defaultDataService'
+import type { ContactInfo } from '@/types'
+
+interface FooterData {
+  contact: ContactInfo
+  siteName: string
+}
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
-  const { contact } = defaultSiteData.siteInfo
+  const [data, setData] = useState<FooterData | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const siteInfo = await getSiteInfo()
+        setData({
+          contact: siteInfo.contact,
+          siteName: siteInfo.name
+        })
+      } catch (error) {
+        console.error('Error fetching footer data:', error)
+        // 에러 시에도 기본 구조는 유지
+        setData(null)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchData()
+  }, [])
+
+  // 로딩 중이거나 데이터가 없을 때는 기본 구조만 표시
+  if (loading || !data) {
+    return (
+      <footer className="bg-white text-wizfore-text-primary">
+        <div className="max-w-6xl mx-auto px-2 pt-16 pb-8">
+          <div className="flex flex-col lg:flex-row gap-8">
+            <div className="lg:w-1/2 bg-gray-100 rounded-lg h-[500px] flex items-center justify-center">
+              <p className="text-wizfore-text-secondary">지도를 불러오는 중...</p>
+            </div>
+            <div className="lg:w-1/2 space-y-6 text-center lg:pl-8">
+              <div className="animate-pulse space-y-4">
+                <div className="h-8 bg-gray-200 rounded w-3/4 mx-auto"></div>
+                <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto"></div>
+                <div className="h-4 bg-gray-200 rounded w-2/3 mx-auto"></div>
+              </div>
+            </div>
+          </div>
+          <div className="pt-2 mt-40 text-center">
+            <p className="text-sm text-wizfore-text-light">
+              © {currentYear} 센터. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
+    )
+  }
+
+  const { contact, siteName } = data
 
   return (
     <footer className="bg-white text-wizfore-text-primary">
@@ -38,7 +94,7 @@ const Footer = () => {
             {/* 센터명 */}
             <div>
               <h3 className="text-3xl font-bold text-wizfore-text-primary mb-2">
-                {defaultSiteData.siteInfo.name}
+                {siteName}
               </h3>
             </div>
 
@@ -121,7 +177,7 @@ const Footer = () => {
         <div className="pt-2">
           <div className="text-center">
             <p className="text-sm text-wizfore-text-light">
-              © {currentYear} {defaultSiteData.siteInfo.name}. All rights reserved.
+              © {currentYear} {siteName}. All rights reserved.
             </p>
           </div>
         </div>

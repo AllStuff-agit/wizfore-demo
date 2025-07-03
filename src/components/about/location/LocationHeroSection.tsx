@@ -2,7 +2,14 @@
 
 import { motion } from 'framer-motion'
 
-const LocationHeroSection = () => {
+interface LocationHeroSectionProps {
+  heroMessage?: {
+    title: string
+    description: string
+  }
+}
+
+const LocationHeroSection: React.FC<LocationHeroSectionProps> = ({ heroMessage }) => {
   return (
     <section 
       className="relative h-96 bg-cover bg-center flex items-center justify-center"
@@ -18,7 +25,7 @@ const LocationHeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          오시는길
+          {heroMessage?.title || "오시는길"}
         </motion.h1>
         <motion.p 
           className="text-xl"
@@ -26,7 +33,7 @@ const LocationHeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          위즈포레 사회서비스센터 위치 및 교통 안내
+          {heroMessage?.description || "위즈포레 사회서비스센터 위치 및 교통 안내"}
         </motion.p>
       </div>
     </section>

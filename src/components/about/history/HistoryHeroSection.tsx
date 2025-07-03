@@ -2,7 +2,14 @@
 
 import { motion } from 'framer-motion'
 
-const HeroSection = () => {
+interface HistoryHeroSectionProps {
+  heroMessage?: {
+    title: string
+    description: string
+  }
+}
+
+const HistoryHeroSection: React.FC<HistoryHeroSectionProps> = ({ heroMessage }) => {
   return (
     <section 
       className="relative h-96 bg-cover bg-center flex items-center justify-center"
@@ -18,7 +25,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          센터 발자취
+          {heroMessage?.title || "센터 발자취"}
         </motion.h1>
         <motion.p 
           className="text-xl"
@@ -26,11 +33,11 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          위즈포레의 성장과 발전 과정을 시간순으로 소개합니다
+          {heroMessage?.description || "센터의 성장과 발전 과정을 시간순으로 소개합니다"}
         </motion.p>
       </div>
     </section>
   )
 }
 
-export default HeroSection
+export default HistoryHeroSection

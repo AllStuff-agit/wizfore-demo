@@ -1,11 +1,20 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { defaultSiteData } from '@/lib/data/defaultSiteData'
 import Image from 'next/image'
+import type { ContactInfo, TransportationInfo } from '@/types'
 
-const TransportationSection = () => {
-  const { contact, name } = defaultSiteData.siteInfo
+interface TransportationSectionProps {
+  contact?: ContactInfo
+  transportation?: TransportationInfo[]
+  siteName?: string
+}
+
+const TransportationSection: React.FC<TransportationSectionProps> = ({ 
+  contact,
+  transportation,
+  siteName = '센터'
+}) => {
 
   // 교통수단별 아이콘 가져오기
   const getTransportIcon = (type: string) => {
@@ -31,7 +40,7 @@ const TransportationSection = () => {
         viewport={{ once: true }}
       >
         <h2 className="text-3xl font-bold text-wizfore-text-primary mb-4">
-          {name}로 오시는 길을 확인하세요
+          {siteName}로 오시는 길을 확인하세요
         </h2>
       </motion.div>
 
@@ -43,7 +52,7 @@ const TransportationSection = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          {contact.transportation.map((transport, index) => (
+          {transportation ? transportation.map((transport, index) => (
             <motion.div
               key={transport.type}
               className="bg-gray-50 p-8 rounded-lg"
@@ -70,7 +79,11 @@ const TransportationSection = () => {
                 {transport.description}
               </p>
             </motion.div>
-          ))}
+          )) : (
+            <div className="col-span-full text-center py-12">
+              <p className="text-wizfore-text-secondary">교통편 정보를 불러올 수 없습니다.</p>
+            </div>
+          )}
         </motion.div>
       </div>
     </section>

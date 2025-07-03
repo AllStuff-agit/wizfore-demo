@@ -102,7 +102,7 @@ export default function NewsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            센터 소식
+            공지사항
           </motion.h1>
           <motion.p 
             className="text-xl"

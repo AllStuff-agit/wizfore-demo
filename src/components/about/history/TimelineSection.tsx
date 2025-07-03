@@ -1,11 +1,13 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { defaultSiteData } from '@/lib/data/defaultSiteData'
+import type { Milestone } from '@/types'
 
-const TimelineSection = () => {
-  const { aboutInfo } = defaultSiteData
-  const { milestones } = aboutInfo
+interface TimelineSectionProps {
+  milestones?: Milestone[]
+}
+
+const TimelineSection: React.FC<TimelineSectionProps> = ({ milestones = [] }) => {
 
   // 마일스톤을 연도별로 그룹화
   const groupedMilestones = milestones.reduce((acc, milestone) => {

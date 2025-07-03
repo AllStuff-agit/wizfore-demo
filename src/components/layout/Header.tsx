@@ -42,7 +42,7 @@ const Header = () => {
       name: '커뮤니티', 
       href: '/community',
       submenu: [
-        { name: '센터 소식', href: '/community/news' },
+        { name: '공지사항', href: '/community/news' },
         { name: 'SNS', href: '/community/sns' },
       ]
     },

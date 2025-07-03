@@ -1,26 +1,33 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { defaultSiteData } from '@/lib/data/defaultSiteData'
 import Image from 'next/image'
 import { useMemo } from 'react'
+import type { Milestone } from '@/types'
 
-const StatsSection = () => {
-  const { aboutInfo, siteInfo } = defaultSiteData
-  const { milestones } = aboutInfo
+interface StatsSectionProps {
+  milestones?: Milestone[]
+}
+
+const StatsSection: React.FC<StatsSectionProps> = ({ milestones = [] }) => {
+
+  // milestones에서 가장 이른 연도를 설립연도로 사용
+  const establishedYear = useMemo(() => {
+    if (milestones.length === 0) return 2016
+    
+    const years = milestones.map(milestone => {
+      const yearMatch = milestone.year.match(/(\d{4})/)
+      return yearMatch ? parseInt(yearMatch[1]) : 2016
+    })
+    
+    return Math.min(...years)
+  }, [milestones])
 
   // 설립연도에서 현재까지의 운영연수 계산
   const operatingYears = useMemo(() => {
-    const establishedDateStr = siteInfo.establishedDate // "2016년 1월 1일"
-    const establishedYear = parseInt(establishedDateStr.match(/(\d{4})/)?.[1] || '2016')
     const currentYear = new Date().getFullYear()
     return currentYear - establishedYear + 1
-  }, [siteInfo.establishedDate])
-
-  // 설립연도 추출
-  const establishedYear = useMemo(() => {
-    return parseInt(siteInfo.establishedDate.match(/(\d{4})/)?.[1] || '2016')
-  }, [siteInfo.establishedDate])
+  }, [establishedYear])
 
   return (
     <section className="py-16 bg-gray-50">

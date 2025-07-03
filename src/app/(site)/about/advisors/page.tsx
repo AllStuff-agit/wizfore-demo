@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { getAdvisors, getAdvisorsAboutMessage } from '@/lib/services/defaultDataService'
+import { getAdvisors, getAdvisorsAboutMessage, getAdvisorsHeroMessage } from '@/lib/services/defaultDataService'
 import type { AdvisorInfo } from '@/types'
 import AdvisorsHeroSection from '@/components/about/advisors/AdvisorsHeroSection'
 import AdvisorsListSection from '@/components/about/advisors/AdvisorsListSection'
@@ -13,6 +13,10 @@ export default function AdvisorsPage() {
     title: string
     messages: string[]
   } | null>(null)
+  const [heroMessage, setHeroMessage] = useState<{
+    title: string
+    description: string
+  } | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -20,12 +24,14 @@ export default function AdvisorsPage() {
     const fetchData = async () => {
       try {
         setLoading(true)
-        const [advisorsData, aboutMessageData] = await Promise.all([
+        const [advisorsData, aboutMessageData, heroMessageData] = await Promise.all([
           getAdvisors(),
-          getAdvisorsAboutMessage()
+          getAdvisorsAboutMessage(),
+          getAdvisorsHeroMessage()
         ])
         setAdvisors(advisorsData)
         setAboutMessage(aboutMessageData)
+        setHeroMessage(heroMessageData)
         setError(null)
       } catch (err) {
         console.error('Error fetching advisors data:', err)
@@ -79,7 +85,7 @@ export default function AdvisorsPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* 히어로 섹션 */}
-      <AdvisorsHeroSection />
+      <AdvisorsHeroSection heroMessage={heroMessage || undefined} />
       
       {/* 자문위원 목록 섹션 */}
       <AdvisorsListSection 
