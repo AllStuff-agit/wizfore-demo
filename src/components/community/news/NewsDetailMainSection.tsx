@@ -6,6 +6,11 @@ import { ArrowLeft, Calendar, Tag } from 'lucide-react'
 import { getCategoryByEnglish } from '@/lib/utils/newsUtils'
 import { TextAnimate } from '@/components/magicui/text-animate'
 import { MagicCard } from '@/components/magicui/magic-card'
+import { ShimmerButton } from '@/components/magicui/shimmer-button'
+import { BorderBeam } from '@/components/magicui/border-beam'
+import { DotPattern } from '@/components/magicui/dot-pattern'
+import { TextReveal } from '@/components/magicui/text-reveal'
+import { cn } from '@/lib/utils'
 import type { NewsItem, CategoryItem } from '@/types'
 
 interface NewsDetailMainSectionProps {
@@ -19,21 +24,42 @@ const NewsDetailMainSection = ({ newsItem, categories }: NewsDetailMainSectionPr
   // 영어 카테고리를 한글로 변환
   const categoryKorean = getCategoryByEnglish(categories, newsItem.category)?.korean || newsItem.category
 
+  // 본문이 긴 경우(200자 이상)를 체크
+  const isLongContent = newsItem.content.length > 200
+
   return (
-    <div className="bg-gray-50">
+    <div className="relative bg-gray-50">
+      {/* 배경 패턴 */}
+      <DotPattern
+        className={cn(
+          "[mask-image:radial-gradient(400px_circle_at_center,white,transparent)]",
+          "absolute inset-0 opacity-20"
+        )}
+        width={20}
+        height={20}
+        cx={1}
+        cy={1}
+        cr={1}
+      />
       {/* 헤더 섹션 */}
-      <div className="bg-white border-b border-gray-200">
+      <div className="relative bg-white border-b border-gray-200 z-10">
         <div className="container-custom mx-auto px-4 py-6">
-          <motion.button
-            onClick={() => router.push('/community/news')}
-            className="inline-flex items-center text-wizfore-text-secondary hover:text-wizfore-coral-primary transition-colors mb-4"
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
+            className="mb-4"
           >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            목록으로 돌아가기
-          </motion.button>
+            <ShimmerButton 
+              onClick={() => router.push('/community/news')}
+              className="bg-white border border-gray-200 text-wizfore-text-secondary hover:text-wizfore-coral-primary transition-colors"
+              shimmerColor="#FF6B6B"
+              shimmerSize="sm"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              목록으로 돌아가기
+            </ShimmerButton>
+          </motion.div>
           
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -103,7 +129,7 @@ const NewsDetailMainSection = ({ newsItem, categories }: NewsDetailMainSectionPr
       </div>
 
       {/* 본문 섹션 */}
-      <div className="container-custom mx-auto px-4 py-8">
+      <div className="relative container-custom mx-auto px-4 py-8 z-10">
         <motion.div
           className="max-w-4xl mx-auto"
           initial={{ opacity: 0, y: 30 }}
@@ -111,12 +137,19 @@ const NewsDetailMainSection = ({ newsItem, categories }: NewsDetailMainSectionPr
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           <MagicCard
-            className="bg-white rounded-lg shadow-sm border border-gray-200 p-8"
+            className="relative bg-white rounded-lg shadow-sm border border-gray-200 p-8 overflow-hidden"
             gradientColor="#f1f5f9"
             gradientFrom="#f97316"
             gradientTo="#fb7185"
             gradientOpacity={0.1}
           >
+            <BorderBeam 
+              size={250}
+              duration={12}
+              borderWidth={1.5}
+              colorFrom="#FF6B6B"
+              colorTo="#FF8A80"
+            />
             {newsItem.imageUrl && (
               <motion.div 
                 className="mb-8"
@@ -133,16 +166,22 @@ const NewsDetailMainSection = ({ newsItem, categories }: NewsDetailMainSectionPr
             )}
             
             <div className="prose max-w-none">
-              <TextAnimate
-                animation="fadeIn"
-                by="word"
-                delay={0.7}
-                duration={2}
-                className="text-lg leading-relaxed text-wizfore-text-primary whitespace-pre-wrap"
-                as="p"
-              >
-                {newsItem.content}
-              </TextAnimate>
+              {isLongContent ? (
+                <TextReveal className="text-lg leading-relaxed text-wizfore-text-primary">
+                  {newsItem.content}
+                </TextReveal>
+              ) : (
+                <TextAnimate
+                  animation="fadeIn"
+                  by="word"
+                  delay={0.7}
+                  duration={2}
+                  className="text-lg leading-relaxed text-wizfore-text-primary whitespace-pre-wrap"
+                  as="p"
+                >
+                  {newsItem.content}
+                </TextAnimate>
+              )}
             </div>
           </MagicCard>
         </motion.div>
