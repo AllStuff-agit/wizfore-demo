@@ -2,7 +2,14 @@
 
 import { motion } from 'framer-motion'
 
-const NewsHeroSection = () => {
+interface NewsHeroSectionProps {
+  heroMessage?: {
+    title?: string
+    description?: string
+  }
+}
+
+const NewsHeroSection = ({ heroMessage }: NewsHeroSectionProps) => {
   return (
     <section 
       className="relative h-96 bg-cover bg-center flex items-center justify-center"
@@ -18,7 +25,7 @@ const NewsHeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          공지사항
+          {heroMessage?.title || "공지사항"}
         </motion.h1>
         <motion.p 
           className="text-xl"
@@ -26,7 +33,7 @@ const NewsHeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          위즈포레의 다양한 활동과 성과를 확인해보세요
+          {heroMessage?.description || "위즈포레의 다양한 활동과 성과를 확인해보세요"}
         </motion.p>
       </div>
     </section>

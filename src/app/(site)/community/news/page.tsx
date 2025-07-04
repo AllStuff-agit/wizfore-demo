@@ -4,22 +4,34 @@ import { useState, useEffect } from 'react'
 import { getCommunity } from '@/lib/services/dataService'
 import NewsHeroSection from '@/components/community/news/NewsHeroSection'
 import NewsContentSection from '@/components/community/news/NewsContentSection'
-import type { NewsItem } from '@/types'
+import { getAllNewsWithCategory, getNewsByCategory, separateNoticeAndNews, getEnglishCategory } from '@/lib/utils/newsUtils'
+import type { NewsItem, CategoryItem } from '@/types'
 
 export default function NewsPage() {
-  const [news, setNews] = useState<NewsItem[]>([])
-  const [categories, setCategories] = useState<string[]>([])
+  const [newsData, setNewsData] = useState<Record<string, NewsItem[]>>({})
+  const [categories, setCategories] = useState<CategoryItem[]>([])
+  const [newsMessages, setNewsMessages] = useState<{
+    heroMessage?: { title?: string; description?: string }
+    aboutMessage?: { title?: string; description?: string }
+  }>({})
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
+  const [currentPage, setCurrentPage] = useState<number>(1)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  
+  const itemsPerPage = 10 // 페이지당 아이템 수
 
   useEffect(() => {
     const fetchCommunityData = async () => {
       try {
         setLoading(true)
         const communityData = await getCommunity()
-        setNews(communityData.news.articles || [])
+        setNewsData(communityData.news.articles || {})
         setCategories(communityData.news.categories || [])
+        setNewsMessages({
+          heroMessage: communityData.news.heroMessage,
+          aboutMessage: communityData.news.aboutMessage
+        })
       } catch (err) {
         console.error('Error fetching community data:', err)
         setError('뉴스 데이터를 불러오는데 실패했습니다.')
@@ -33,10 +45,29 @@ export default function NewsPage() {
   
   // 필터링된 뉴스
   const filteredNews = selectedCategory === 'all' 
-    ? news 
-    : news.filter(item => item.category === selectedCategory)
+    ? getAllNewsWithCategory(newsData) 
+    : getNewsByCategory(newsData, selectedCategory)
 
-  // 연도별 그룹화
+  // 페이지네이션 계산 (공지사항 제외)
+  const { noticeItems, regularNews } = separateNoticeAndNews(newsData)
+  const paginationTargetNews = selectedCategory === 'all' ? regularNews : filteredNews
+  const totalPages = Math.ceil(paginationTargetNews.length / itemsPerPage)
+  
+  // 전체 뉴스 개수 (카테고리 필터 수치에 사용)
+  const allNews = getAllNewsWithCategory(newsData)
+
+  // 카테고리 변경 핸들러 (페이지를 1로 리셋)
+  const handleCategoryChange = (categoryEnglish: string) => {
+    setSelectedCategory(categoryEnglish)
+    setCurrentPage(1)
+  }
+
+  // 페이지 변경 핸들러
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page)
+  }
+
+  // 연도별 그룹화 (기존 로직 유지)
   const newsByYear = filteredNews.reduce((acc, item) => {
     const year = item.date.substring(0, 4)
     if (!acc[year]) {
@@ -44,7 +75,7 @@ export default function NewsPage() {
     }
     acc[year].push(item)
     return acc
-  }, {} as Record<string, typeof news>)
+  }, {} as Record<string, typeof filteredNews>)
 
   const years = Object.keys(newsByYear).sort((a, b) => parseInt(b) - parseInt(a))
 
@@ -77,15 +108,21 @@ export default function NewsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <NewsHeroSection />
+      <NewsHeroSection heroMessage={newsMessages.heroMessage} />
       <NewsContentSection 
-        news={news}
+        aboutMessage={newsMessages.aboutMessage}
+        newsData={newsData}
+        allNews={allNews}
         categories={categories}
         selectedCategory={selectedCategory}
-        onCategoryChange={setSelectedCategory}
+        onCategoryChange={handleCategoryChange}
         filteredNews={filteredNews}
         newsByYear={newsByYear}
         years={years}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+        itemsPerPage={itemsPerPage}
       />
     </div>
   )

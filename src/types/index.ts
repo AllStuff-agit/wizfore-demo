@@ -364,13 +364,17 @@ export interface TeamCategory {
   order: number
 }
 
+export interface CategoryItem {
+  korean: string
+  english: string
+}
+
 export interface NewsItem {
+  id: number
   title: string
   content: string
   date: string
-  category: string
   imageUrl?: string
-  order: number
 }
 
 export interface ContactInfo {
@@ -462,7 +466,7 @@ export interface DefaultSiteData {
   team: TeamCategory[]
   community: {
     news: {
-      categories: string[]
+      categories: CategoryItem[]
       heroMessage?: {
         title?: string
         description?: string
@@ -471,7 +475,7 @@ export interface DefaultSiteData {
         title?: string
         description?: string
       }
-      articles: NewsItem[]
+      articles: Record<string, NewsItem[]>
     }
     sns: {
       heroMessage?: {
